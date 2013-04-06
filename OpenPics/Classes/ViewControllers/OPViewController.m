@@ -13,6 +13,7 @@
 #import "OPSingleImageLayout.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
+#import "OPHeaderReusableView.h"
 
 @interface OPViewController () {
     OPSingleImageLayout *_singleImageLayout;
@@ -40,13 +41,15 @@
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
-    
+    self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 110.0f);
+
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
     
     _singleImageLayout = [[OPSingleImageLayout alloc] init];
     _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
     
     [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
+    [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,6 +125,14 @@
     return [_items count];
 }
 
+- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
+    header.delegate = self;
+    
+    return header;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -180,14 +191,12 @@
     return cell;
 }
 
-#pragma mark - Actions
+#pragma mark - OPHeaderDelegate
 
-- (IBAction)searchTapped:(id)sender {
-    [self.searchTextField resignFirstResponder];
-
+- (void) doSearchWithQuery:(NSString *)queryString {
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
-    _currentQueryString = self.searchTextField.text;
+    _currentQueryString = queryString;
     _items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     

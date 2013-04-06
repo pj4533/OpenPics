@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OPHeaderReusableView.h"
 
-@interface OPViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface OPViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, OPHeaderDelegate>
 
-@property (strong, nonatomic) IBOutlet UITextField *searchTextField;
 @property (strong, nonatomic) IBOutlet UICollectionView *internalCollectionView;
 @property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;
-
-- (IBAction)searchTapped:(id)sender;
 
 @end
