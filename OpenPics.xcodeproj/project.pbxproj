@@ -32,6 +32,8 @@
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */; };
 		0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
+		0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E441710A01700C29E84 /* OPLOCProvider.m */; };
+		0ABF9E481710A02100C29E84 /* AFLOCAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E461710A02100C29E84 /* AFLOCAPIClient.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,10 @@
 		0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLAPIClient.m; sourceTree = "<group>"; };
 		0ABF9E3E171097E500C29E84 /* OPNYPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNYPLProvider.h; sourceTree = "<group>"; };
 		0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNYPLProvider.m; sourceTree = "<group>"; };
+		0ABF9E431710A01700C29E84 /* OPLOCProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPLOCProvider.h; sourceTree = "<group>"; };
+		0ABF9E441710A01700C29E84 /* OPLOCProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPLOCProvider.m; sourceTree = "<group>"; };
+		0ABF9E461710A02100C29E84 /* AFLOCAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLOCAPIClient.m; sourceTree = "<group>"; };
+		0ABF9E471710A02100C29E84 /* AFLOCAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLOCAPIClient.h; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +104,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0ABF9E4217109FB700C29E84 /* LOC */,
 				0ABF9E3B171097E500C29E84 /* NYPL */,
 				0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */,
 				0A1EF47D17108B5400AB8B62 /* OPProvider.h */,
@@ -263,6 +270,17 @@
 			path = NYPL;
 			sourceTree = "<group>";
 		};
+		0ABF9E4217109FB700C29E84 /* LOC */ = {
+			isa = PBXGroup;
+			children = (
+				0ABF9E471710A02100C29E84 /* AFLOCAPIClient.h */,
+				0ABF9E461710A02100C29E84 /* AFLOCAPIClient.m */,
+				0ABF9E431710A01700C29E84 /* OPLOCProvider.h */,
+				0ABF9E441710A01700C29E84 /* OPLOCProvider.m */,
+			);
+			path = LOC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,6 +383,8 @@
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */,
 				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
+				0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */,
+				0ABF9E481710A02100C29E84 /* AFLOCAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

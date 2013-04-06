@@ -12,6 +12,7 @@
 #import "OPProviderController.h"
 
 #import "OPNYPLProvider.h"
+#import "OPLOCProvider.h"
 
 @implementation OPAppDelegate
 
@@ -21,6 +22,7 @@
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+//    [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
