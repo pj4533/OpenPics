@@ -34,6 +34,7 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 ## To do
 
 * Better design / icon / Default screen
+* Support showing more metadata (Title, notes, etc)
 * Support iPad portait orientation
 * Support iPhone
 * Support sharing (have a nice class for Tumblr, need to add it)
