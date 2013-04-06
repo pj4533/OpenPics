@@ -9,6 +9,8 @@
 #endif
 
 #ifdef __OBJC__
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
