@@ -8,15 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class OPProvider;
+
 @protocol OPHeaderDelegate <NSObject>
 - (void) doSearchWithQuery:(NSString*) queryString;
+- (void) providerTappedFromRect:(CGRect) rect;
 @end
 
 @interface OPHeaderReusableView : UICollectionReusableView
 
 @property (strong, nonatomic) IBOutlet UITextField *internalTextField;
-@property (strong,nonatomic) id delegate;
+@property (strong, nonatomic) id delegate;
+@property (strong, nonatomic) IBOutlet UIButton *providerButton;
 
 - (IBAction)searchTapped:(id)sender;
+- (IBAction)providerTapped:(id)sender;
 
 @end

@@ -16,6 +16,14 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
 
 @implementation OPNYPLProvider
 
+- (id) initWithProviderType:(NSString*) providerType {
+    self = [super initWithProviderType:providerType];
+    if (self) {
+        self.providerName = @"New York Public Library";
+    }
+    return self;
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {

@@ -15,6 +15,14 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
 
 @implementation OPLOCProvider
 
+- (id) initWithProviderType:(NSString*) providerType {
+    self = [super initWithProviderType:providerType];
+    if (self) {
+        self.providerName = @"Library of Congress";
+    }
+    return self;
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {

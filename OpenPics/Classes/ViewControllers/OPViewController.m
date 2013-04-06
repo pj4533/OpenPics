@@ -14,6 +14,7 @@
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPHeaderReusableView.h"
+#import "OPProviderListViewController.h"
 
 @interface OPViewController () {
     OPSingleImageLayout *_singleImageLayout;
@@ -26,6 +27,8 @@
     NSString* _currentQueryString;
 
     OPProvider* _currentProvider;
+    
+    UIPopoverController* _popover;
 }
 @end
 
@@ -41,7 +44,7 @@
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
-    self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 110.0f);
+    self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
     
@@ -129,7 +132,8 @@
     
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
     header.delegate = self;
-    
+    [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
+
     return header;
 }
 
@@ -193,6 +197,18 @@
 
 #pragma mark - OPHeaderDelegate
 
+- (void) providerTappedFromRect:(CGRect) rect {
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
+    providerListViewController.delegate = self;
+    
+    _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+    [_popover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 - (void) doSearchWithQuery:(NSString *)queryString {
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
@@ -201,6 +217,19 @@
     [self.internalCollectionView reloadData];
     
     [self getMoreItems];
+}
+
+#pragma mark - OPProviderListDelegate
+
+- (void) tappedProvider:(OPProvider *)provider {
+    [_popover dismissPopoverAnimated:YES];
+    
+    _currentProvider = provider;
+    _canLoadMore = NO;
+    _currentPage = [NSNumber numberWithInteger:1];
+    _currentQueryString = @"";
+    _items = [@[] mutableCopy];
+    [self.internalCollectionView reloadData];
 }
 
 @end

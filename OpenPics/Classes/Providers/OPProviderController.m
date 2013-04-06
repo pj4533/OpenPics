@@ -45,5 +45,8 @@
     return nil;
 }
 
+- (NSArray*) getProviders {
+    return _providers;
+}
 
 @end

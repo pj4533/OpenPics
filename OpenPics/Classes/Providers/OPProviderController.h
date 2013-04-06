@@ -17,5 +17,6 @@
 
 - (OPProvider*) getFirstProvider;
 - (OPProvider*) getProviderWithType:(NSString*) providerType;
+- (NSArray*) getProviders;
 
 @end

@@ -11,6 +11,7 @@
 @interface OPProvider : NSObject
 
 @property (strong, nonatomic) NSString* providerType;
+@property (strong, nonatomic) NSString* providerName;
 
 - (id) initWithProviderType:(NSString*) providerType;
 

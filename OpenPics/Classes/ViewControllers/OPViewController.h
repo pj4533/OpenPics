@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "OPHeaderReusableView.h"
+#import "OPProviderListViewController.h"
 
-@interface OPViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, OPHeaderDelegate>
+@interface OPViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, OPHeaderDelegate, OPProviderListDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *internalCollectionView;
 @property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;

@@ -7,6 +7,7 @@
 //
 
 #import "OPHeaderReusableView.h"
+#import "OPProvider.h"
 
 @implementation OPHeaderReusableView
 
@@ -33,6 +34,14 @@
 
     if (self.delegate) {
         [self.delegate doSearchWithQuery:self.internalTextField.text];
+    }
+}
+
+- (IBAction)providerTapped:(id)sender {
+    if (self.delegate) {
+        self.internalTextField.text = @"";
+        
+        [self.delegate providerTappedFromRect:self.providerButton.frame];
     }
 }
 
