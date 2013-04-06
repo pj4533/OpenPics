@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
+		0A1EF48217108BE100AB8B62 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */; };
+		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
 		0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD8171074EF00D7C1B6 /* Default@2x.png */; };
@@ -34,6 +37,12 @@
 
 /* Begin PBXFileReference section */
 		0A1EF47B1710879E00AB8B62 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
+		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
+		0A1EF47E17108B5400AB8B62 /* OPProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProvider.m; sourceTree = "<group>"; };
+		0A1EF48017108BE100AB8B62 /* OPNYPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNYPLProvider.h; sourceTree = "<group>"; };
+		0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNYPLProvider.m; sourceTree = "<group>"; };
+		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
+		0A1EF48417108D6D00AB8B62 /* OPProviderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderController.m; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A44CBD7171074EF00D7C1B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A44CBD8171074EF00D7C1B6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -86,6 +95,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				0A1EF47D17108B5400AB8B62 /* OPProvider.h */,
+				0A1EF47E17108B5400AB8B62 /* OPProvider.m */,
+				0A1EF48017108BE100AB8B62 /* OPNYPLProvider.h */,
+				0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */,
+				0A1EF48317108D6D00AB8B62 /* OPProviderController.h */,
+				0A1EF48417108D6D00AB8B62 /* OPProviderController.m */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		0A44CBD4171074EF00D7C1B6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +149,7 @@
 		0A44CBDF171074EF00D7C1B6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0A1EF47C17108B3A00AB8B62 /* Providers */,
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
 				0A44CBE9171074EF00D7C1B6 /* Model */,
@@ -339,6 +362,9 @@
 				0A44CC01171074EF00D7C1B6 /* AFNYPLAPIClient.m in Sources */,
 				0A44CC02171074EF00D7C1B6 /* OPViewController.m in Sources */,
 				0A44CC04171074EF00D7C1B6 /* OPSingleImageLayout.m in Sources */,
+				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
+				0A1EF48217108BE100AB8B62 /* OPNYPLProvider.m in Sources */,
+				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

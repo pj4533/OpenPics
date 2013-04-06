@@ -7,17 +7,24 @@
 //
 
 #import "OPViewController.h"
-#import "AFNYPLAPIClient.h"
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
 #import "OPContentCell.h"
 #import "OPSingleImageLayout.h"
 
+#import "OPNYPLProvider.h"
+
 @interface OPViewController () {
     OPSingleImageLayout *_singleImageLayout;
+
     NSMutableArray* _items;
     NSInteger _numberFetchedLast;
-    NSMutableDictionary* _currentParameters;
+    
+    NSNumber* _currentPage;
+    NSString* _currentQueryString;
+    
+    
+    OPNYPLProvider* _tempNYPLProvider;
 }
 @end
 
@@ -26,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _tempNYPLProvider = [[OPNYPLProvider alloc] init];
     
     _items = [NSMutableArray array];
     
@@ -50,28 +59,13 @@
 #pragma mark - Helpers
 
 - (void) doSearchForString:(NSString*) searchString {
-    _numberFetchedLast = 0;
     
-    _items = [@[] mutableCopy];
-    [self.internalCollectionView reloadData];
-    
-    _currentParameters = [@{
-                          @"q":searchString,
-                          @"per_page" : @"50",
-                          @"page":[NSNumber numberWithInteger:1]
-                          } mutableCopy];
-    
-    [self getItemsWithParameters:_currentParameters completion:^{
-        
-        
-    }];
 }
 
-- (void) getItemsWithParameters:(NSDictionary*) parameters completion:(void (^)())completion {
-    
-    [[AFNYPLAPIClient sharedClient] getItemsWithParameters:parameters success:^(NSArray *items) {
+- (void) getMoreItems {
+    [_tempNYPLProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items) {
         _numberFetchedLast = items.count;
-        if ([parameters[@"page"] integerValue] == 1) {
+        if ([_currentPage isEqual:@1]) {
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
             _items = [items mutableCopy];
             [self.internalCollectionView reloadData];
@@ -90,13 +84,6 @@
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
             }
             [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
-        }
-        if (completion) {
-            completion();
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (completion) {
-            completion();
         }
     }];
 }
@@ -146,15 +133,12 @@
     
     cell.internalScrollView.imageView.image = nil;
     
+    // TODO: Change this to return a IS MORE ITEMS rather than this _numberFetchedLast crap
     if ( (indexPath.item == [_items count]) && (_numberFetchedLast >= 50)){
-        NSNumber* currentPage = _currentParameters[@"page"];
-        NSInteger currentPageInt = [currentPage integerValue];
-        currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-        _currentParameters[@"page"] = currentPage;
-        
-        [self getItemsWithParameters:_currentParameters completion:^{
-            
-        }];
+        NSInteger currentPageInt = [_currentPage integerValue];
+        _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+
+        [self getMoreItems];
         
         cell.internalScrollView.userInteractionEnabled = NO;
         cell.internalScrollView.imageView.image = nil;
@@ -207,7 +191,13 @@
 - (IBAction)searchTapped:(id)sender {
     [self.searchTextField resignFirstResponder];
     
-    [self doSearchForString:self.searchTextField.text];
+    _numberFetchedLast = 0;
+    _currentPage = [NSNumber numberWithInteger:1];
+    _currentQueryString = self.searchTextField.text;
+    _items = [@[] mutableCopy];
+    [self.internalCollectionView reloadData];
+    
+    [self getMoreItems];
 }
 
 @end

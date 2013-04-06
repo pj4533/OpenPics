@@ -13,7 +13,6 @@
 @interface OPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) OPViewController *viewController;
 
 @end
