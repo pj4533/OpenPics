@@ -9,10 +9,7 @@
 
 @interface OPImageItem : NSObject
 
-@property (strong, nonatomic) NSString* imageID;
-@property (strong, nonatomic) NSString* itemLink;
-@property (strong, nonatomic) NSString* title;
-@property (strong, nonatomic) NSString* uuid;
+@property (strong, nonatomic) NSURL* imageUrl;
 
 - (id) initWithDictionary:(NSDictionary*) dict;
 

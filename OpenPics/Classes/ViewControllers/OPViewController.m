@@ -11,20 +11,20 @@
 #import "AFImageRequestOperation.h"
 #import "OPContentCell.h"
 #import "OPSingleImageLayout.h"
-
-#import "OPNYPLProvider.h"
+#import "OPProvider.h"
+#import "OPProviderController.h"
 
 @interface OPViewController () {
     OPSingleImageLayout *_singleImageLayout;
 
     NSMutableArray* _items;
-    NSInteger _numberFetchedLast;
+
+    BOOL _canLoadMore;
     
     NSNumber* _currentPage;
     NSString* _currentQueryString;
-    
-    
-    OPNYPLProvider* _tempNYPLProvider;
+
+    OPProvider* _currentProvider;
 }
 @end
 
@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     
-    _tempNYPLProvider = [[OPNYPLProvider alloc] init];
+    _currentProvider = [[OPProviderController shared] getFirstProvider];
     
     _items = [NSMutableArray array];
     
@@ -58,27 +58,24 @@
 
 #pragma mark - Helpers
 
-- (void) doSearchForString:(NSString*) searchString {
-    
-}
-
 - (void) getMoreItems {
-    [_tempNYPLProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items) {
-        _numberFetchedLast = items.count;
+    [_currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
+        _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
             _items = [items mutableCopy];
             [self.internalCollectionView reloadData];
         } else {
-            
-            if (_numberFetchedLast < 50) {
+
+            // this is getting rid of the extra cell that holds the 'Load More...' spinner
+            if (!_canLoadMore) {
                 [self.internalCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:_items.count inSection:0]]];
             }
             
             NSInteger offset = [_items count];
             [_items addObjectsFromArray:items];
             
-            // TODO:  use performBatch when bug is fixed in UICollectionViews with headers
+            // TODO: use performBatch when bug is fixed in UICollectionViews with headers
             NSMutableArray* indexPaths = [NSMutableArray array];
             for (int i = offset; i < [_items count]; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -119,7 +116,7 @@
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
     
-    if (_numberFetchedLast >= 50)
+    if (_canLoadMore)
         return [_items count] + 1;
     
     return [_items count];
@@ -133,8 +130,7 @@
     
     cell.internalScrollView.imageView.image = nil;
     
-    // TODO: Change this to return a IS MORE ITEMS rather than this _numberFetchedLast crap
-    if ( (indexPath.item == [_items count]) && (_numberFetchedLast >= 50)){
+    if ( (indexPath.item == [_items count]) && _canLoadMore){
         NSInteger currentPageInt = [_currentPage integerValue];
         _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
 
@@ -153,9 +149,7 @@
     cell.internalScrollView.userInteractionEnabled = NO;
     
     __weak UIImageView* imageView = cell.internalScrollView.imageView;
-    NSString* urlString = [NSString stringWithFormat:@"http://images.nypl.org/index.php?id=%@&t=w", item.imageID];
-    NSURL* url = [NSURL URLWithString:urlString];
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
     imageView.contentMode = UIViewContentModeCenter;
     imageView.alpha = 0.0f;
     imageView.image = [UIImage imageNamed:@"hourglass_white"];
@@ -190,8 +184,8 @@
 
 - (IBAction)searchTapped:(id)sender {
     [self.searchTextField resignFirstResponder];
-    
-    _numberFetchedLast = 0;
+
+    _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = self.searchTextField.text;
     _items = [@[] mutableCopy];

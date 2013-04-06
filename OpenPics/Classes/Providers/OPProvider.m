@@ -10,4 +10,18 @@
 
 @implementation OPProvider
 
+- (id) initWithProviderType:(NSString*) providerType {
+    self = [super init];
+    if (self) {
+        self.providerType = providerType;
+    }
+    return self;
+}
+
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    
+}
+
 @end

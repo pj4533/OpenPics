@@ -15,4 +15,7 @@
 
 - (void) addProvider:(OPProvider*) provider;
 
+- (OPProvider*) getFirstProvider;
+- (OPProvider*) getProviderWithType:(NSString*) providerType;
+
 @end

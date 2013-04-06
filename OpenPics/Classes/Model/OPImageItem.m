@@ -6,17 +6,13 @@
 //
 
 #import "OPImageItem.h"
-#import "NSDictionary+SafeObjectForKey.h"
 
 @implementation OPImageItem
 
 - (id) initWithDictionary:(NSDictionary*) dict {
     self = [super init];
     if (self) {
-        self.imageID =  [dict safeObjectForKey:@"imageID"];
-        self.itemLink =  [dict safeObjectForKey:@"itemLink"];
-        self.title =  [dict safeObjectForKey:@"title"];
-        self.uuid =  [dict safeObjectForKey:@"uuid"];
+        self.imageUrl = dict[@"imageUrl"];
     }
     
     return self;

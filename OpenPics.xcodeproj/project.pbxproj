@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
-		0A1EF48217108BE100AB8B62 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
@@ -22,7 +21,6 @@
 		0A44CBFE171074EF00D7C1B6 /* NSDictionary+SafeObjectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE6171074EF00D7C1B6 /* NSDictionary+SafeObjectForKey.m */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
-		0A44CC01171074EF00D7C1B6 /* AFNYPLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEE171074EF00D7C1B6 /* AFNYPLAPIClient.m */; };
 		0A44CC02171074EF00D7C1B6 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBF1171074EF00D7C1B6 /* OPViewController.m */; };
 		0A44CC03171074EF00D7C1B6 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBF2171074EF00D7C1B6 /* OPViewController.xib */; };
 		0A44CC04171074EF00D7C1B6 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBF4171074EF00D7C1B6 /* OPSingleImageLayout.m */; };
@@ -32,15 +30,14 @@
 		0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A609EC6171072BD0084735B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
+		0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */; };
+		0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A1EF47B1710879E00AB8B62 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
 		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
 		0A1EF47E17108B5400AB8B62 /* OPProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProvider.m; sourceTree = "<group>"; };
-		0A1EF48017108BE100AB8B62 /* OPNYPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNYPLProvider.h; sourceTree = "<group>"; };
-		0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNYPLProvider.m; sourceTree = "<group>"; };
 		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
 		0A1EF48417108D6D00AB8B62 /* OPProviderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderController.m; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -59,8 +56,6 @@
 		0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPScrollView.m; sourceTree = "<group>"; };
 		0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
-		0A44CBED171074EF00D7C1B6 /* AFNYPLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNYPLAPIClient.h; sourceTree = "<group>"; };
-		0A44CBEE171074EF00D7C1B6 /* AFNYPLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLAPIClient.m; sourceTree = "<group>"; };
 		0A44CBF0171074EF00D7C1B6 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
 		0A44CBF1171074EF00D7C1B6 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
 		0A44CBF2171074EF00D7C1B6 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
@@ -76,6 +71,11 @@
 		0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Prefix.pch"; sourceTree = "<group>"; };
 		0A609EC8171072BD0084735B /* OPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OPAppDelegate.h; sourceTree = "<group>"; };
 		0A609EC9171072BD0084735B /* OPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OPAppDelegate.m; sourceTree = "<group>"; };
+		0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
+		0ABF9E3C171097E500C29E84 /* AFNYPLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNYPLAPIClient.h; sourceTree = "<group>"; };
+		0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLAPIClient.m; sourceTree = "<group>"; };
+		0ABF9E3E171097E500C29E84 /* OPNYPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNYPLProvider.h; sourceTree = "<group>"; };
+		0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNYPLProvider.m; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,10 +98,10 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0ABF9E3B171097E500C29E84 /* NYPL */,
+				0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */,
 				0A1EF47D17108B5400AB8B62 /* OPProvider.h */,
 				0A1EF47E17108B5400AB8B62 /* OPProvider.m */,
-				0A1EF48017108BE100AB8B62 /* OPNYPLProvider.h */,
-				0A1EF48117108BE100AB8B62 /* OPNYPLProvider.m */,
 				0A1EF48317108D6D00AB8B62 /* OPProviderController.h */,
 				0A1EF48417108D6D00AB8B62 /* OPProviderController.m */,
 			);
@@ -153,7 +153,6 @@
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
 				0A44CBE9171074EF00D7C1B6 /* Model */,
-				0A44CBEC171074EF00D7C1B6 /* Networking */,
 				0A44CBEF171074EF00D7C1B6 /* ViewControllers */,
 			);
 			path = Classes;
@@ -187,16 +186,6 @@
 				0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0A44CBEC171074EF00D7C1B6 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				0A1EF47B1710879E00AB8B62 /* OPProviderTokens.h */,
-				0A44CBED171074EF00D7C1B6 /* AFNYPLAPIClient.h */,
-				0A44CBEE171074EF00D7C1B6 /* AFNYPLAPIClient.m */,
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		0A44CBEF171074EF00D7C1B6 /* ViewControllers */ = {
@@ -261,6 +250,17 @@
 				0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0ABF9E3B171097E500C29E84 /* NYPL */ = {
+			isa = PBXGroup;
+			children = (
+				0ABF9E3C171097E500C29E84 /* AFNYPLAPIClient.h */,
+				0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */,
+				0ABF9E3E171097E500C29E84 /* OPNYPLProvider.h */,
+				0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */,
+			);
+			path = NYPL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,12 +359,12 @@
 				0A44CBFE171074EF00D7C1B6 /* NSDictionary+SafeObjectForKey.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
-				0A44CC01171074EF00D7C1B6 /* AFNYPLAPIClient.m in Sources */,
 				0A44CC02171074EF00D7C1B6 /* OPViewController.m in Sources */,
 				0A44CC04171074EF00D7C1B6 /* OPSingleImageLayout.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
-				0A1EF48217108BE100AB8B62 /* OPNYPLProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
+				0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */,
+				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

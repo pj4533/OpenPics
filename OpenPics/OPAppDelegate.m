@@ -9,6 +9,9 @@
 #import "OPAppDelegate.h"
 #import "AFNetworking.h"
 #import "OPViewController.h"
+#import "OPProviderController.h"
+
+#import "OPNYPLProvider.h"
 
 @implementation OPAppDelegate
 
@@ -18,6 +21,7 @@
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+    [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

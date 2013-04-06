@@ -10,4 +10,12 @@
 
 @interface OPProvider : NSObject
 
+@property (strong, nonatomic) NSString* providerType;
+
+- (id) initWithProviderType:(NSString*) providerType;
+
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+
 @end

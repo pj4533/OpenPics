@@ -26,7 +26,23 @@
 }
 
 - (void) addProvider:(OPProvider*) provider {
+    if (!_providers) {
+        _providers = [NSMutableArray array];
+    }
+    
     [_providers addObject:provider];
+}
+
+- (OPProvider*) getFirstProvider {
+    if (_providers.count) {
+        return _providers[0];
+    }
+    
+    return nil;
+}
+
+- (OPProvider*) getProviderWithType:(NSString*) providerType {
+    return nil;
 }
 
 
