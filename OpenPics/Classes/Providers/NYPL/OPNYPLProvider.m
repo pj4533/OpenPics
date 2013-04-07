@@ -28,16 +28,16 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
 
-    NSDictionary* parameters = @{
-                          @"q":queryString,
-                          @"per_page" : @"50",
-                          @"page":pageNumber
-                          };
     
 #ifndef kOPPROVIDERTOKEN_NYPL
-#error Make sure you have added your NYPL token to OPProviderTokens.h!
-#endif
-
+#warning *** WARNING: Make sure you have added your NYPL token to OPProviderTokens.h!
+#else
+    NSDictionary* parameters = @{
+                                 @"q":queryString,
+                                 @"per_page" : @"50",
+                                 @"page":pageNumber
+                                 };
+    
     AFNYPLAPIClient* nyplClient = [AFNYPLAPIClient sharedClientWithToken:kOPPROVIDERTOKEN_NYPL];
     NSLog(@"GET items/search.json %@", parameters);
     
@@ -71,6 +71,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
+#endif
 }
 
 @end

@@ -303,6 +303,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A609ED9171072BE0084735B /* Build configuration list for PBXNativeTarget "OpenPics" */;
 			buildPhases = (
+				0A5C19371711BB5D00979A7C /* ShellScript */,
 				0A609EB2171072BD0084735B /* Sources */,
 				0A609EB3171072BD0084735B /* Frameworks */,
 				0A609EB4171072BD0084735B /* Resources */,
@@ -371,6 +372,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A5C19371711BB5D00979A7C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h";
+		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
