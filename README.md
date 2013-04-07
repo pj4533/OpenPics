@@ -40,7 +40,6 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 * Support showing information about results (current page, total pages)
 * Support iPad portait orientation
 * Support iPhone
-* Support sharing (have a nice class for Tumblr, need to add it)
 * Support loading higher res images, if the Provider supports it
 
 ## How To Run
