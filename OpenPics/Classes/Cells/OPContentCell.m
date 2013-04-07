@@ -9,8 +9,10 @@
 #import "AFNetworking.h"
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
+#import "OPShareToTumblrActivity.h"
 
 @interface OPContentCell () {
+    UIPopoverController* _popover;
 }
 
 @end
@@ -20,13 +22,15 @@
 - (void) awakeFromNib {
     [super awakeFromNib];
     
-    self.menusBackgroundView.alpha = 0.0f;
+    self.backBackgroundView.alpha = 0.0f;
+    self.shareBackgroundView.alpha = 0.0f;
     
     self.completedView.alpha = 0.0f;
     self.completedView.layer.masksToBounds = NO;
     self.completedView.layer.cornerRadius = 8.0f;
     
-    self.menusBackgroundView.layer.cornerRadius = 7.0f;
+    self.backBackgroundView.layer.cornerRadius = 7.0f;
+    self.shareBackgroundView.layer.cornerRadius = 7.0f;
     
     UITapGestureRecognizer* doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
     doubleTapGesture.numberOfTapsRequired = 2;
@@ -46,8 +50,51 @@
 }
 */
 
+#pragma mark - Actions
 
-- (IBAction)menusTapped:(id)sender {
+- (IBAction)shareTapped:(id)sender {
+    
+    NSArray* appActivities = @[];
+
+#ifndef kOPACTIVITYTOKEN_TUMBLR
+#warning *** WARNING: Make sure you have added your Tumblr token to OPActivityTokens.h
+#else
+    OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
+    appActivities = @[shareToTumblr];
+#endif
+    
+    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
+                                                                             applicationActivities:appActivities];
+    
+    [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            NSString* completedString;
+            if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+                completedString = @"Posted!";
+            } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+                completedString = @"Posted!";
+            } else if ([activityType isEqualToString:UIActivityTypeMail]) {
+                completedString = @"Sent!";
+            } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
+                completedString = @"Saved!";
+            } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
+                completedString = @"Posted!";
+            }
+            [self showCompletedViewWithText:completedString];
+        }
+    }];
+    
+    shareSheet.excludedActivityTypes = @[UIActivityTypeMail,UIActivityTypeCopyToPasteboard,UIActivityTypePostToWeibo,UIActivityTypeAssignToContact, UIActivityTypeMessage, UIActivityTypePrint];
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
+    [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];    
+}
+
+- (IBAction)backTapped:(id)sender {
     
     if (self.internalScrollView.zoomScale != 1.0f) {
         [self.internalScrollView setZoomScale:1.0f animated:YES];
@@ -81,7 +128,8 @@
     self.showingUI = NO;
 
     [UIView animateWithDuration:0.7f animations:^{
-        self.menusBackgroundView.alpha = 0.0f;
+        self.backBackgroundView.alpha = 0.0f;
+        self.shareBackgroundView.alpha = 0.0f;
     } completion:^(BOOL finished) {
         if (completion) {
             completion(finished);
@@ -91,7 +139,8 @@
 
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion {
     [UIView animateWithDuration:0.7f animations:^{
-        self.menusBackgroundView.alpha = 1.0f;
+        self.backBackgroundView.alpha = 1.0f;
+        self.shareBackgroundView.alpha = 1.0f;
     } completion:^(BOOL finished) {
         self.showingUI = YES;
         if (completion) {
@@ -150,5 +199,30 @@
     }
     
 }
+
+#pragma mark - UIActivityDataSource
+
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
+    return self.internalScrollView.imageView.image;
+}
+
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
+    
+    if (self.internalScrollView.zoomScale == 1.0)
+        return self.internalScrollView.imageView.image;
+    
+    CGRect rect = CGRectMake(0, 0, self.internalScrollView.frame.size.width, self.internalScrollView.frame.size.height);
+    CGSize pageSize = rect.size;
+    UIGraphicsBeginImageContext(pageSize);
+    
+    CGContextRef resizedContext = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(resizedContext, -self.internalScrollView.contentOffset.x, -self.internalScrollView.contentOffset.y);
+    [self.internalScrollView.layer renderInContext:resizedContext];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 
 @end

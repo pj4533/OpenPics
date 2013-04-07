@@ -25,6 +25,17 @@
 		0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A609EC6171072BD0084735B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
+		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
+		0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B21711C647004CF7A5 /* share@2x.png */; };
+		0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B31711C647004CF7A5 /* tumblr.png */; };
+		0AB6B8BA1711C647004CF7A5 /* tumblr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B41711C647004CF7A5 /* tumblr@2x.png */; };
+		0AB6B8BB1711C647004CF7A5 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B51711C647004CF7A5 /* checkmark@2x.png */; };
+		0AB6B8BC1711C647004CF7A5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B61711C647004CF7A5 /* checkmark.png */; };
+		0AB6B8C71711C7FF004CF7A5 /* OPTumblrBlogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */; };
+		0AB6B8C81711C7FF004CF7A5 /* OPTumblrBlogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */; };
+		0AB6B8C91711C7FF004CF7A5 /* OPTumblrPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */; };
+		0AB6B8CA1711C7FF004CF7A5 /* OPTumblrPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */; };
+		0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */; };
 		0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */; };
 		0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
 		0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E441710A01700C29E84 /* OPLOCProvider.m */; };
@@ -74,6 +85,21 @@
 		0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Prefix.pch"; sourceTree = "<group>"; };
 		0A609EC8171072BD0084735B /* OPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OPAppDelegate.h; sourceTree = "<group>"; };
 		0A609EC9171072BD0084735B /* OPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OPAppDelegate.m; sourceTree = "<group>"; };
+		0AB6B8B11711C647004CF7A5 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		0AB6B8B21711C647004CF7A5 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		0AB6B8B31711C647004CF7A5 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr.png; sourceTree = "<group>"; };
+		0AB6B8B41711C647004CF7A5 /* tumblr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr@2x.png"; sourceTree = "<group>"; };
+		0AB6B8B51711C647004CF7A5 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
+		0AB6B8B61711C647004CF7A5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		0AB6B8BF1711C7FF004CF7A5 /* OPTumblrBlogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTumblrBlogViewController.h; sourceTree = "<group>"; };
+		0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTumblrBlogViewController.m; sourceTree = "<group>"; };
+		0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPTumblrBlogViewController.xib; sourceTree = "<group>"; };
+		0AB6B8C21711C7FF004CF7A5 /* OPTumblrPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTumblrPostViewController.h; sourceTree = "<group>"; };
+		0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTumblrPostViewController.m; sourceTree = "<group>"; };
+		0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPTumblrPostViewController.xib; sourceTree = "<group>"; };
+		0AB6B8C51711C7FF004CF7A5 /* OPShareToTumblrActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPShareToTumblrActivity.h; sourceTree = "<group>"; };
+		0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPShareToTumblrActivity.m; sourceTree = "<group>"; };
+		0AB6B8CC1711C8CB004CF7A5 /* OPActivityTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPActivityTokens.h; sourceTree = "<group>"; };
 		0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
 		0ABF9E3C171097E500C29E84 /* AFNYPLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNYPLAPIClient.h; sourceTree = "<group>"; };
 		0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLAPIClient.m; sourceTree = "<group>"; };
@@ -152,6 +178,7 @@
 		0A44CBDF171074EF00D7C1B6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0AB6B8BD1711C7FF004CF7A5 /* Activity */,
 				0A1EF47C17108B3A00AB8B62 /* Providers */,
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
@@ -259,6 +286,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0AB6B8BD1711C7FF004CF7A5 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				0AB6B8BE1711C7FF004CF7A5 /* Tumblr */,
+				0AB6B8CC1711C8CB004CF7A5 /* OPActivityTokens.h */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		0AB6B8BE1711C7FF004CF7A5 /* Tumblr */ = {
+			isa = PBXGroup;
+			children = (
+				0AB6B8BF1711C7FF004CF7A5 /* OPTumblrBlogViewController.h */,
+				0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */,
+				0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */,
+				0AB6B8C21711C7FF004CF7A5 /* OPTumblrPostViewController.h */,
+				0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */,
+				0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */,
+				0AB6B8C51711C7FF004CF7A5 /* OPShareToTumblrActivity.h */,
+				0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */,
+			);
+			path = Tumblr;
+			sourceTree = "<group>";
+		};
 		0ABF9E3B171097E500C29E84 /* NYPL */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +335,12 @@
 		0ABF9E541710C11A00C29E84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				0AB6B8B11711C647004CF7A5 /* share.png */,
+				0AB6B8B21711C647004CF7A5 /* share@2x.png */,
+				0AB6B8B31711C647004CF7A5 /* tumblr.png */,
+				0AB6B8B41711C647004CF7A5 /* tumblr@2x.png */,
+				0AB6B8B51711C647004CF7A5 /* checkmark@2x.png */,
+				0AB6B8B61711C647004CF7A5 /* checkmark.png */,
 				0ABF9E611710C6A800C29E84 /* disclose.png */,
 				0ABF9E621710C6A800C29E84 /* disclose@2x.png */,
 				0ABF9E551710C11A00C29E84 /* grid.png */,
@@ -366,6 +423,14 @@
 				0ABF9E631710C6A800C29E84 /* disclose.png in Resources */,
 				0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */,
 				0ABF9E691710D22E00C29E84 /* OPProviderListViewController.xib in Resources */,
+				0AB6B8B71711C647004CF7A5 /* share.png in Resources */,
+				0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */,
+				0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */,
+				0AB6B8BA1711C647004CF7A5 /* tumblr@2x.png in Resources */,
+				0AB6B8BB1711C647004CF7A5 /* checkmark@2x.png in Resources */,
+				0AB6B8BC1711C647004CF7A5 /* checkmark.png in Resources */,
+				0AB6B8C81711C7FF004CF7A5 /* OPTumblrBlogViewController.xib in Resources */,
+				0AB6B8CA1711C7FF004CF7A5 /* OPTumblrPostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/Classes/Activity/OPActivityTokens.h\n";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -421,6 +486,9 @@
 				0ABF9E481710A02100C29E84 /* AFLOCAPIClient.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
 				0ABF9E681710D22E00C29E84 /* OPProviderListViewController.m in Sources */,
+				0AB6B8C71711C7FF004CF7A5 /* OPTumblrBlogViewController.m in Sources */,
+				0AB6B8C91711C7FF004CF7A5 /* OPTumblrPostViewController.m in Sources */,
+				0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

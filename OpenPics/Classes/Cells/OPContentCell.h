@@ -12,12 +12,13 @@
 
 
 
-@interface OPContentCell : UICollectionViewCell
+@interface OPContentCell : UICollectionViewCell <UIActivityItemSource>
 
 @property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;
 @property (strong, nonatomic) OPImageItem* item;
 
-@property (strong, nonatomic) IBOutlet UIView *menusBackgroundView;
+@property (strong, nonatomic) IBOutlet UIView *backBackgroundView;
+@property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
 
 
 @property (strong, nonatomic) OPViewController* mainViewController;
@@ -28,7 +29,8 @@
 
 @property BOOL showingUI;
 
-- (IBAction)menusTapped:(id)sender;
+- (IBAction)backTapped:(id)sender;
+- (IBAction)shareTapped:(id)sender;
 
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion;
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion;

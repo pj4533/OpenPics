@@ -16,3 +16,4 @@ profile
 *.moved-aside
 Pods
 OPProviderTokens.h
+OPActivityTokens.h
