@@ -31,6 +31,12 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     
 #ifndef kOPPROVIDERTOKEN_NYPL
 #warning *** WARNING: Make sure you have added your NYPL token to OPProviderTokens.h!
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Token!"
+                                                    message:@"No NYPL Token found. Add it to OPProviderTokens.h or use another image source."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 #else
     NSDictionary* parameters = @{
                                  @"q":queryString,
