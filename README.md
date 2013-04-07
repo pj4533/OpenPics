@@ -40,7 +40,7 @@ Sharing (Tumblr, Twitter & Facebook) uses UIActivitys from iOS6.  The Twitter an
 * Make Icon!
 * Make Default screen
 * Submit v1 to App Store
-* Support showing more metadata (Title, notes, etc)
+* Support showing more metadata (Date, notes, etc)
 * Support showing information about results (current page, total pages)
 * Support iPad portait orientation
 * Support iPhone
