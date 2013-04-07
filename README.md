@@ -25,6 +25,10 @@ For APIs like NYPL, which require a token, it should go into the file OPProvider
 
 This header file is in the .gitignore, so as to not add tokens to the GitHub repository.  So either only use non-token providers (like Library of Congress), or create the above file in your local repository.   If anyone has a better way of managing this, I am all ears!
 
+## Sharing
+
+Sharing (Tumblr, Twitter & Facebook) uses UIActivitys from iOS6.  The Twitter and Facebook are the built in implementations, however the Tumblr is custom.  The tokens for Tumblr are handled the same way as Providers above.  The tokens go in the OPActivityTokens.h file as a define.  I have ifdef'd out that stuff, so you should still be able to run without Tumblr tokens.  (Tumblr just won't show up as a Activity choice)
+
 ## Dependencies
 
 * AFNetworking
