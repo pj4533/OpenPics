@@ -43,6 +43,14 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 * Support sharing (have a nice class for Tumblr, need to add it)
 * Support loading higher res images, if the Provider supports it
 
+## How To Run
+
+1. Clone the repo:    git clone git@github.com:pj4533/OpenPics.git
+2. Init CocoaPods:    pod install
+3. Open OpenPics.xcworkspace
+4. Run in simulator:  CMD-R
+5. Search for sweet old timey pics.
+
 ## Contribute
 
 If you wish to contribute, send some pull requests!  I'll update the app in the App Store whenever we get awesome pull requests merged in.
