@@ -57,7 +57,11 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
             if (imageId) {
                 NSString* urlString = [NSString stringWithFormat:@"http://images.nypl.org/index.php?id=%@&t=w", imageId];
                 NSURL* imageUrl = [NSURL URLWithString:urlString];
-                NSDictionary* opImageDict = @{@"imageUrl": imageUrl};
+                NSString* titleString = @"";
+                if (itemDict[@"title"]) {
+                    titleString = itemDict[@"title"];
+                }
+                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];
             }

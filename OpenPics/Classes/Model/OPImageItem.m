@@ -13,6 +13,7 @@
     self = [super init];
     if (self) {
         self.imageUrl = dict[@"imageUrl"];
+        self.title = dict[@"title"];
     }
     
     return self;

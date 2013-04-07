@@ -27,6 +27,9 @@
 @property (strong, nonatomic) IBOutlet UIView *completedView;
 @property (strong, nonatomic) IBOutlet UILabel *completedViewLabel;
 
+@property (strong, nonatomic) IBOutlet UIView *descriptionView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property BOOL showingUI;
 
 - (IBAction)backTapped:(id)sender;

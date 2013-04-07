@@ -29,6 +29,8 @@
     self.completedView.layer.masksToBounds = NO;
     self.completedView.layer.cornerRadius = 8.0f;
     
+    self.descriptionView.alpha = 0.0f;
+
     self.backBackgroundView.layer.cornerRadius = 7.0f;
     self.shareBackgroundView.layer.cornerRadius = 7.0f;
     
@@ -113,6 +115,10 @@
 
 #pragma mark - Utility Functions
 
+- (void) setupLabels {
+    self.titleLabel.text = self.item.title;
+}
+
 - (void) showCompletedViewWithText:(NSString*) completedString {
     self.completedViewLabel.text = completedString;
     [UIView animateWithDuration:0.25 animations:^{
@@ -130,6 +136,7 @@
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 0.0f;
         self.shareBackgroundView.alpha = 0.0f;
+        self.descriptionView.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (completion) {
             completion(finished);
@@ -141,6 +148,7 @@
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 1.0f;
         self.shareBackgroundView.alpha = 1.0f;
+        self.descriptionView.alpha = 1.0;
     } completion:^(BOOL finished) {
         self.showingUI = YES;
         if (completion) {
@@ -150,6 +158,8 @@
 }
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
+    [self setupLabels];
+
     self.internalScrollView.userInteractionEnabled = YES;
     [self fadeInUIWithCompletion:nil];
     

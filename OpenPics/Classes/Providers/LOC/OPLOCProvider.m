@@ -44,7 +44,11 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
             NSDictionary* imageDict = itemDict[@"image"];
             if (imageDict) {
                 NSURL* imageUrl = [NSURL URLWithString:imageDict[@"full"]];
-                NSDictionary* opImageDict = @{@"imageUrl": imageUrl};
+                NSString* titleString = @"";
+                if (itemDict[@"title"]) {
+                    titleString = itemDict[@"title"];
+                }
+                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];                
             }
