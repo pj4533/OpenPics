@@ -33,7 +33,9 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 ## To do
 
-* Better design / icon / Default screen
+* Make Icon!
+* Make Default screen
+* Submit v1 to App Store
 * Support showing more metadata (Title, notes, etc)
 * Support showing information about results (current page, total pages)
 * Support iPad portait orientation
