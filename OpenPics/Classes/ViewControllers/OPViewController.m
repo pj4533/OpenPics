@@ -131,7 +131,6 @@
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-    header.internalTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     header.delegate = self;
     [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
 
