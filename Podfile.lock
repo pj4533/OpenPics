@@ -1,18 +1,17 @@
-
 PODS:
-- AFNetworking (1.2.0)
-- AFOAuth1Client (0.1.1):
-  - AFNetworking (>= 0.9)
-- AFTumblrAPIClient (0.0.2):
-  - AFOAuth1Client (>= 0.1.1)
+  - AFNetworking (1.2.0)
+  - AFOAuth1Client (0.1.1):
+    - AFNetworking (>= 0.9)
+  - AFTumblrAPIClient (0.0.2):
+    - AFOAuth1Client (>= 0.1.1)
 
 DEPENDENCIES:
-- AFNetworking
-- AFTumblrAPIClient
+  - AFNetworking
+  - AFTumblrAPIClient
 
 SPEC CHECKSUMS:
   AFNetworking: 3cbae45f61a9f995cdbd56bd571223910d7f4e44
   AFOAuth1Client: 037044e341e897e0742920404f0c54ffd51dc776
   AFTumblrAPIClient: b764e8417d8a38eb467c6e85728c4a6bde2c8d21
 
-COCOAPODS: 0.16.1
+COCOAPODS: 0.17.1
