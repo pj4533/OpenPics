@@ -71,7 +71,7 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
     [self activityDidFinish:NO];
 }
 
-- (void) didPostTumblrWithTitle:(NSString *)titleString withTags:(NSString*) tags intoBlogHostName:(NSString*) blogHostName {
+- (void) didPostTumblrWithTitle:(NSString *)titleString withTags:(NSString*) tags withState:(NSString *)state intoBlogHostName:(NSString *)blogHostName {
 
 #ifdef kOPACTIVITYTOKEN_TUMBLR
     AFTumblrAPIClient* tumblrClient = [[AFTumblrAPIClient alloc] initWithKey:kOPACTIVITYTOKEN_TUMBLR
@@ -79,6 +79,7 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
                                                            callbackUrlString:kTumblrCallbackURLString];
     [tumblrClient postPhotoWithData:UIImageJPEGRepresentation([_item objectForKey:@"image"], 0.8)
                            withTags:tags
+                          withState:state
                    withClickThruUrl:@""
                         withCaption:titleString
                    intoBlogHostName:blogHostName
