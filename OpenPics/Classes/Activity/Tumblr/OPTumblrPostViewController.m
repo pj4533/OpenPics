@@ -98,7 +98,8 @@
 }
 
 - (IBAction)postTapped:(id)sender {
-    [self.delegate didPostTumblrWithTitle:self.captionTextView.text withTags:self.tagsTextField.text intoBlogHostName:self.blogNameLabel.text];
+    NSString* stateString = [self.stateControl titleForSegmentAtIndex:self.stateControl.selectedSegmentIndex];
+    [self.delegate didPostTumblrWithTitle:self.captionTextView.text withTags:self.tagsTextField.text withState:stateString.lowercaseString intoBlogHostName:self.blogNameLabel.text];
 }
 
 - (void) didSelectBlogWithHostName:(NSString *)blogHostName {

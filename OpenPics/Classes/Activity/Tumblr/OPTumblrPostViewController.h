@@ -9,7 +9,7 @@
 #import "OPTumblrBlogViewController.h"
 
 @protocol LPTumblrPostDelegate <NSObject>
-- (void) didPostTumblrWithTitle:(NSString*) titleString withTags:(NSString*) tags intoBlogHostName:(NSString*) blogHostName;
+- (void) didPostTumblrWithTitle:(NSString*) titleString withTags:(NSString*) tags withState:(NSString*) state intoBlogHostName:(NSString*) blogHostName;
 - (void) didCancel;
 @end
 
@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *tagsTextField;
 @property (strong, nonatomic) IBOutlet UIView *postBackgroundView;
 @property (strong, nonatomic) IBOutlet UILabel *blogNameLabel;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *stateControl;
 
 @property (strong, nonatomic) UIImage* image;
 @property (strong, nonatomic) NSString* captionText;
