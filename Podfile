@@ -1,3 +1,3 @@
 platform :ios, '6.0'
 pod 'AFNetworking'
-pod 'AFTumblrAPIClient'
+pod 'AFTumblrAPIClient', '~> 0.0.3'
