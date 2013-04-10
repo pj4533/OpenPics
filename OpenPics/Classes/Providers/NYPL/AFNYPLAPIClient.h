@@ -7,7 +7,6 @@
 
 #import "AFHTTPClient.h"
 
-@class Menu;
 @interface AFNYPLAPIClient : AFHTTPClient
 
 + (AFNYPLAPIClient *)sharedClientWithToken:(NSString*) token;
