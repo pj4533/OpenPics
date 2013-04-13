@@ -28,7 +28,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* parameters = @{
                                  @"q":queryString,
-//                                 @"hasView" : @"http",
+                                 @"hasView" : @"http",
                                  @"page_size" : @"50",
                                  @"page":pageNumber
                                  };
@@ -98,7 +98,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                         [retArray addObject:item];
                     }
                 }
-                
             }
         }
         
