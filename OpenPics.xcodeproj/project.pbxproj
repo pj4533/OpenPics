@@ -27,6 +27,8 @@
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0A612D261715ED61008B6311 /* AFCDLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D251715ED61008B6311 /* AFCDLClient.m */; };
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
+		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
+		0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C281719BB35000790A0 /* AFDPLAClient.m */; };
 		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
 		0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B21711C647004CF7A5 /* share@2x.png */; };
 		0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B31711C647004CF7A5 /* tumblr.png */; };
@@ -99,6 +101,10 @@
 		0A612D251715ED61008B6311 /* AFCDLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCDLClient.m; sourceTree = "<group>"; };
 		0A612D271715ED75008B6311 /* OPCDLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCDLProvider.h; sourceTree = "<group>"; };
 		0A612D281715ED75008B6311 /* OPCDLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCDLProvider.m; sourceTree = "<group>"; };
+		0AAB0C241719B9FD000790A0 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
+		0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPDPLAProvider.m; sourceTree = "<group>"; };
+		0AAB0C271719BB35000790A0 /* AFDPLAClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLAClient.h; sourceTree = "<group>"; };
+		0AAB0C281719BB35000790A0 /* AFDPLAClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLAClient.m; sourceTree = "<group>"; };
 		0AB6B8B11711C647004CF7A5 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		0AB6B8B21711C647004CF7A5 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B31711C647004CF7A5 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr.png; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AAB0C231719B9DF000790A0 /* DPLA */,
 				0A612D231715ED35008B6311 /* CDL */,
 				0ABF9E4217109FB700C29E84 /* LOC */,
 				0ABF9E3B171097E500C29E84 /* NYPL */,
@@ -326,6 +333,17 @@
 				0A612D281715ED75008B6311 /* OPCDLProvider.m */,
 			);
 			path = CDL;
+			sourceTree = "<group>";
+		};
+		0AAB0C231719B9DF000790A0 /* DPLA */ = {
+			isa = PBXGroup;
+			children = (
+				0AAB0C241719B9FD000790A0 /* OPDPLAProvider.h */,
+				0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */,
+				0AAB0C271719BB35000790A0 /* AFDPLAClient.h */,
+				0AAB0C281719BB35000790A0 /* AFDPLAClient.m */,
+			);
+			path = DPLA;
 			sourceTree = "<group>";
 		};
 		0AB6B8BD1711C7FF004CF7A5 /* Activity */ = {
@@ -541,6 +559,8 @@
 				0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */,
 				0A612D261715ED61008B6311 /* AFCDLClient.m in Sources */,
 				0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */,
+				0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */,
+				0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
