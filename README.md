@@ -17,6 +17,7 @@ Each remote image source gets a OPProvider class.  Providers can be easily added
 * Library of Congress (http://www.loc.gov/pictures/api)
 * New York Public Library (http://api.repo.nypl.org)
 * California Digital Library - XTF (http://www.cdlib.org/services/publishing/tools/xtf/)
+* Digital Public Library of America (https://github.com/dpla/platform)
 
 For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:
 
