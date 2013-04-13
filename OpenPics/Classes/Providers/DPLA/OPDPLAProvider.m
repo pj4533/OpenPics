@@ -28,6 +28,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* parameters = @{
                                  @"q":queryString,
+                                 @"sourceResource.format" : @"*mage*",
                                  @"page_size" : @"50",
                                  @"page":pageNumber
                                  };
@@ -61,9 +62,10 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         }
         
         BOOL returnCanLoadMore = NO;
-        NSInteger thisPage = [responseObject[@"start"] integerValue];
-        NSInteger totalPages = [responseObject[@"limit"] integerValue];
-        if (thisPage < totalPages) {
+        NSInteger startItem = [responseObject[@"start"] integerValue];
+        NSInteger lastItem = startItem + retArray.count;
+        NSInteger totalItems = [responseObject[@"count"] integerValue];
+        if (lastItem < totalItems) {
             returnCanLoadMore = YES;
         }
         
