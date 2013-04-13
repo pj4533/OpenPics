@@ -28,7 +28,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* parameters = @{
                                  @"q":queryString,
-                                 @"sourceResource.format" : @"*mage*",
+//                                 @"hasView" : @"http",
                                  @"page_size" : @"50",
                                  @"page":pageNumber
                                  };
@@ -42,48 +42,75 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         for (NSDictionary* itemDict in resultArray) {
             
             
-            NSString* urlString = itemDict[@"object"];
-            if (urlString) {
-                //            NSDictionary* providerDict = itemDict[@"provider"];
-                //            NSString* providerName = providerDict[@"name"];
-                //            if ([providerName isEqualToString:@"Digital Library of Georgia"]) {
-                //                NSArray* colonSepComponents = [urlString componentsSeparatedByString:@":"];
-                //                NSString* objectId = colonSepComponents.lastObject;
-                //                NSString* objectIdFilename = [NSString stringWithFormat:@"%d", objectId.integerValue + 1];
-                //                urlString = [NSString stringWithFormat:@"http://digitalcollections.library.gsu.edu/utils/getdownloaditem/collection/lane/id/%@/type/singleitem/filename/%@.jp2", objectId, objectIdFilename];
-                //            }
-                
-                NSURL* imageUrl = [NSURL URLWithString:urlString];
-                NSString* titleString = @"";
-                
-                NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
-                if (sourceResourceDict) {
-                    id title = sourceResourceDict[@"title"];
-                    
-                    if (title) {
-                        if ([title isKindOfClass:[NSArray class]]) {
-                            titleString = [title componentsJoinedByString:@", "];
-                        } else if ([title isKindOfClass:[NSString class]])
-                            titleString = title;
-                        else
-                            NSLog(@"ERROR TITLE IS: %@", [title class]);
-                    }
-                    
-                    NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
-                    OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                    [retArray addObject:item];
+            id hasView = itemDict[@"hasView"];
+            if (hasView) {
+                NSString* urlString = nil;
+                if ([hasView isKindOfClass:[NSDictionary class]] ) {
+                    urlString = hasView[@"@id:"];
+                } else if ([hasView isKindOfClass:[NSArray class]]) {
+                    NSDictionary* firstObject = hasView[0];
+                    urlString = firstObject[@"url"];
                 }
+                
+                if (urlString) {
+                    NSURL* imageUrl = [NSURL URLWithString:urlString];
+                    NSString* titleString = @"";
+                    
+                    NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+                    if (sourceResourceDict) {
+                        id title = sourceResourceDict[@"title"];
+                        
+                        if (title) {
+                            if ([title isKindOfClass:[NSArray class]]) {
+                                titleString = [title componentsJoinedByString:@", "];
+                            } else if ([title isKindOfClass:[NSString class]])
+                                titleString = title;
+                            else
+                                NSLog(@"ERROR TITLE IS: %@", [title class]);
+                        }
+                        
+                        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                        [retArray addObject:item];
+                    }
+                }
+            } else {
+                NSString* urlString = itemDict[@"object"];
+                if (urlString) {
+                    NSURL* imageUrl = [NSURL URLWithString:urlString];
+                    NSString* titleString = @"";
+                    
+                    NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+                    if (sourceResourceDict) {
+                        id title = sourceResourceDict[@"title"];
+                        
+                        if (title) {
+                            if ([title isKindOfClass:[NSArray class]]) {
+                                titleString = [title componentsJoinedByString:@", "];
+                            } else if ([title isKindOfClass:[NSString class]])
+                                titleString = title;
+                            else
+                                NSLog(@"ERROR TITLE IS: %@", [title class]);
+                        }
+                        
+                        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                        [retArray addObject:item];
+                    }
+                }
+                
             }
         }
         
         BOOL returnCanLoadMore = NO;
         NSInteger startItem = [responseObject[@"start"] integerValue];
-        NSInteger lastItem = startItem + retArray.count;
+        NSInteger lastItem = startItem + resultArray.count;
         NSInteger totalItems = [responseObject[@"count"] integerValue];
         if (lastItem < totalItems) {
             returnCanLoadMore = YES;
         }
         
+        NSLog(@"LAST: %d   TOTAL: %d", lastItem, totalItems);
         if (completion) {
             completion(retArray, returnCanLoadMore);
         }
