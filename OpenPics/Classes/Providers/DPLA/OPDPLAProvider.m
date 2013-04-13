@@ -9,6 +9,7 @@
 #import "OPDPLAProvider.h"
 #import "OPImageItem.h"
 #import "AFDPLAClient.h"
+#import "TTTURLRequestFormatter.h"
 
 NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
@@ -28,7 +29,8 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* parameters = @{
                                  @"q":queryString,
-                                 @"hasView" : @"http",
+//                                 @"sourceResource.date.before": @"1980",
+//                                 @"hasView" : @"*image*",
                                  @"page_size" : @"50",
                                  @"page":pageNumber
                                  };
@@ -41,63 +43,97 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         NSMutableArray* retArray = [NSMutableArray array];
         for (NSDictionary* itemDict in resultArray) {
             
+            NSURL* imageUrl = nil;
+            NSString* urlString = itemDict[@"object"];
             
+            // if we 'hasView' then we already have high res image
             id hasView = itemDict[@"hasView"];
             if (hasView) {
-                NSString* urlString = nil;
                 if ([hasView isKindOfClass:[NSDictionary class]] ) {
-                    urlString = hasView[@"@id:"];
+                    NSString* mimeType = hasView[@"format"];
+                    if (mimeType && [mimeType isEqualToString:@"application/pdf"]) {
+                        urlString = nil;
+                    } else
+                        urlString = hasView[@"@id"];
                 } else if ([hasView isKindOfClass:[NSArray class]]) {
                     NSDictionary* firstObject = hasView[0];
-                    urlString = firstObject[@"url"];
+                    NSString* mimeType = firstObject[@"format"];
+                    NSRange textRange;
+                    textRange =[mimeType rangeOfString:@"image"];
+                    if(textRange.location != NSNotFound) {
+                        urlString = firstObject[@"url"];
+                    }
                 }
                 
-                if (urlString) {
-                    NSURL* imageUrl = [NSURL URLWithString:urlString];
-                    NSString* titleString = @"";
-                    
-                    NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
-                    if (sourceResourceDict) {
-                        id title = sourceResourceDict[@"title"];
-                        
-                        if (title) {
-                            if ([title isKindOfClass:[NSArray class]]) {
-                                titleString = [title componentsJoinedByString:@", "];
-                            } else if ([title isKindOfClass:[NSString class]])
-                                titleString = title;
-                            else
-                                NSLog(@"ERROR TITLE IS: %@", [title class]);
-                        }
-                        
-                        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
-                        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                        [retArray addObject:item];
-                    }
+            }
+//            else {
+//                NSString* urlString = itemDict[@"object"];
+//                if (urlString) {
+//                    // otherwise if we get here we have a thumbnail at least
+//                    
+//                    // check the provider
+//                    NSDictionary* providerDict = itemDict[@"provider"];
+//                    NSString* providerName = providerDict[@"name"];
+//                    if ([providerName isEqualToString:@"Minnesota Digital Library"]) {
+//                        urlString = [urlString stringByReplacingOccurrencesOfString:@"cgi-bin/thumbnail.exe" withString:@"utils/ajaxhelper/"];
+//                        urlString = [urlString stringByAppendingString:@"&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048"];
+//                    } else if ([providerName isEqualToString:@"Digital Commonwealth"]) {
+//                        NSString* isShownAt = itemDict[@"isShownAt"];
+//                        NSString* lastPathComponent = [isShownAt lastPathComponent];
+//                        NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
+//                        NSString* collectionString = itemComponents[0];
+//                        NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
+//                        urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
+//                    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {
+//                        NSDictionary* originalRecord = itemDict[@"originalRecord"];
+//                        NSDictionary* originalLinks = originalRecord[@"LINKS"];
+//                        NSString* linkToRSRC = originalLinks[@"linktorsrc"];
+//                        NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+//                        if (sourceResourceDict) {
+//                            NSString* type = sourceResourceDict[@"type"];
+//                            if (!(type && [type isEqualToString:@"text"])) {
+//                                NSURL* itemLinkUrl = [NSURL URLWithString:linkToRSRC];
+//                                NSString* lastPathComponent = [linkToRSRC lastPathComponent];
+//                                NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
+//                                NSString* collectionString = itemComponents[0];
+//                                NSString* idString = itemComponents[1];
+//                                NSString* hostName = itemLinkUrl.host;
+//                                
+//                                urlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048", hostName, collectionString,idString];
+//                            }
+//                        }
+//                    } else if ([providerName isEqualToString:@"University of Illinois at Urbana-Champaign"]) {
+//                        urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
+//                        urlString = [urlString stringByAppendingString:@"&action=2&DMWIDTH=2048&DMHEIGHT=2048"];
+//                    }
+//                    else {
+//                        
+//                     NSLog(@"%@", itemDict);
+//                    }
+//                }
+//            }
+
+            if (urlString) {
+                imageUrl = [NSURL URLWithString:urlString];
+            }
+            NSString* titleString = @"";
+            NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+            if (sourceResourceDict) {
+                id title = sourceResourceDict[@"title"];
+                
+                if (title) {
+                    if ([title isKindOfClass:[NSArray class]]) {
+                        titleString = [title componentsJoinedByString:@", "];
+                    } else if ([title isKindOfClass:[NSString class]])
+                        titleString = title;
+                    else
+                        NSLog(@"ERROR TITLE IS: %@", [title class]);
                 }
-            } else {
-                NSString* urlString = itemDict[@"object"];
-                if (urlString) {
-                    NSURL* imageUrl = [NSURL URLWithString:urlString];
-                    NSString* titleString = @"";
-                    
-                    NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
-                    if (sourceResourceDict) {
-                        id title = sourceResourceDict[@"title"];
-                        
-                        if (title) {
-                            if ([title isKindOfClass:[NSArray class]]) {
-                                titleString = [title componentsJoinedByString:@", "];
-                            } else if ([title isKindOfClass:[NSString class]])
-                                titleString = title;
-                            else
-                                NSLog(@"ERROR TITLE IS: %@", [title class]);
-                        }
-                        
-                        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
-                        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                        [retArray addObject:item];
-                    }
-                }
+            }
+            if (imageUrl) {
+                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                [retArray addObject:item];
             }
         }
         

@@ -7,18 +7,35 @@ PODS:
     - AFNetworking (>= 0.9)
   - AFTumblrAPIClient (0.0.3):
     - AFOAuth1Client (>= 0.1.1)
+  - FormatterKit (1.1.1):
+    - FormatterKit/AddressFormatter
+    - FormatterKit/ArrayFormatter
+    - FormatterKit/LocationFormatter
+    - FormatterKit/OrdinalNumberFormatter
+    - FormatterKit/TimeIntervalFormatter
+    - FormatterKit/UnitOfInformationFormatter
+    - FormatterKit/URLRequestFormatter
+  - FormatterKit/AddressFormatter (1.1.1)
+  - FormatterKit/ArrayFormatter (1.1.1)
+  - FormatterKit/LocationFormatter (1.1.1)
+  - FormatterKit/OrdinalNumberFormatter (1.1.1)
+  - FormatterKit/TimeIntervalFormatter (1.1.1)
+  - FormatterKit/UnitOfInformationFormatter (1.1.1)
+  - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
   - AFNetworking
   - AFTumblrAPIClient (~> 0.0.3)
+  - FormatterKit (= 1.1.1)
 
 SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 3504a91dde7554a587fd73d369c9954aeb8f2ecb
   AFNetworking: 3cbae45f61a9f995cdbd56bd571223910d7f4e44
   AFOAuth1Client: 037044e341e897e0742920404f0c54ffd51dc776
   AFTumblrAPIClient: 20831738306ce58f85a7ae60c12db7f39fa6c93a
+  FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
 
 COCOAPODS: 0.18.0
