@@ -55,9 +55,24 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                 
                 NSURL* imageUrl = [NSURL URLWithString:urlString];
                 NSString* titleString = @"";
-                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                [retArray addObject:item];                
+                
+                NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+                if (sourceResourceDict) {
+                    id title = sourceResourceDict[@"title"];
+                    
+                    if (title) {
+                        if ([title isKindOfClass:[NSArray class]]) {
+                            titleString = [title componentsJoinedByString:@", "];
+                        } else if ([title isKindOfClass:[NSString class]])
+                            titleString = title;
+                        else
+                            NSLog(@"ERROR TITLE IS: %@", [title class]);
+                    }
+                    
+                    NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                    OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                    [retArray addObject:item];
+                }
             }
         }
         
