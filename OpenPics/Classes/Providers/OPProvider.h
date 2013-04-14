@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class OPImageItem;
 @interface OPProvider : NSObject
 
 @property (strong, nonatomic) NSString* providerType;
@@ -18,5 +19,7 @@
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+
+- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion;
 
 @end

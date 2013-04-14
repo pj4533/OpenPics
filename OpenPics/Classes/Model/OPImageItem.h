@@ -11,6 +11,7 @@
 
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* title;
+@property (strong, nonatomic) NSDictionary* providerSpecific;
 
 - (id) initWithDictionary:(NSDictionary*) dict;
 

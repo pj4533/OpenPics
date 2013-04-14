@@ -11,11 +11,12 @@
 #import "OPViewController.h"
 
 
-
+@class OPProvider;
 @interface OPContentCell : UICollectionViewCell <UIActivityItemSource>
 
 @property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;
 @property (strong, nonatomic) OPImageItem* item;
+@property (strong, nonatomic) OPProvider* provider;
 
 @property (strong, nonatomic) IBOutlet UIView *backBackgroundView;
 @property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
