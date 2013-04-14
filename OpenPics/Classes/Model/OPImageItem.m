@@ -14,6 +14,7 @@
     if (self) {
         self.imageUrl = dict[@"imageUrl"];
         self.title = dict[@"title"];
+        self.providerSpecific = dict[@"providerSpecific"];
     }
     
     return self;

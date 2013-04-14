@@ -10,9 +10,11 @@
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OPShareToTumblrActivity.h"
+#import "OPProvider.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
+    AFImageRequestOperation* _upRezOperation;
 }
 
 @end
@@ -161,6 +163,11 @@
     [self setupLabels];
 
     self.internalScrollView.userInteractionEnabled = YES;
+//    [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
+//        NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
+//        [self upRezToImageWithUrl:uprezImageUrl];
+//    }];
+    
     [self fadeInUIWithCompletion:nil];
     
     if (animated) {
@@ -176,6 +183,23 @@
 
     self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
     [self fadeOutUIWithCompletion:nil];
+}
+
+- (void) upRezToImageWithUrl:(NSURL*) url {
+    
+    if (_upRezOperation) {
+        [_upRezOperation cancel];
+        _upRezOperation = nil;
+    }
+    
+    __weak UIImageView* imageView = self.internalScrollView.imageView;
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+    
+    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        imageView.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    }];
+    [_upRezOperation start];
 }
 
 #pragma mark - gesture stuff
