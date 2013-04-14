@@ -12,8 +12,4 @@ extern NSString* const OPProviderTypeDPLA;
 
 @interface OPDPLAProvider : OPProvider
 
-- (void) getItemsWithQuery:(NSString*) queryString
-            withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
-
 @end

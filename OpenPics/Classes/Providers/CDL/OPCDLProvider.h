@@ -12,8 +12,4 @@ extern NSString* const OPProviderTypeCDL;
 
 @interface OPCDLProvider : OPProvider
 
-- (void) getItemsWithQuery:(NSString*) queryString
-            withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
-
 @end

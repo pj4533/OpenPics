@@ -159,6 +159,7 @@
     OPImageItem* item = _items[indexPath.item];
     
     cell.mainViewController = self;
+    cell.provider = _currentProvider;
     cell.item = item;
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
