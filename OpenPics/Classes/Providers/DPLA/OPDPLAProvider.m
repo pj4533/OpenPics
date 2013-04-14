@@ -29,7 +29,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* parameters = @{
                                  @"q":queryString,
-//                                 @"sourceResource.date.before": @"1980",
+                                 @"sourceResource.date.before": @"1980",
 //                                 @"hasView" : @"*image*",
                                  @"page_size" : @"50",
                                  @"page":pageNumber
@@ -67,7 +67,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                 
             }
 //            else {
-//                NSString* urlString = itemDict[@"object"];
 //                if (urlString) {
 //                    // otherwise if we get here we have a thumbnail at least
 //                    
@@ -85,6 +84,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 //                        NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
 //                        urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
 //                    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {
+//                        
 //                        NSDictionary* originalRecord = itemDict[@"originalRecord"];
 //                        NSDictionary* originalLinks = originalRecord[@"LINKS"];
 //                        NSString* linkToRSRC = originalLinks[@"linktorsrc"];
@@ -99,7 +99,12 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 //                                NSString* idString = itemComponents[1];
 //                                NSString* hostName = itemLinkUrl.host;
 //                                
-//                                urlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048", hostName, collectionString,idString];
+//                                if ([hostName isEqualToString:@"digital.library.unlv.edu"]) {
+//                                    urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
+//                                    urlString = [urlString stringByAppendingString:@"&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048"];
+//                                } else {
+//                                    urlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048", hostName, collectionString,idString];
+//                                }
 //                            }
 //                        }
 //                    } else if ([providerName isEqualToString:@"University of Illinois at Urbana-Champaign"]) {
