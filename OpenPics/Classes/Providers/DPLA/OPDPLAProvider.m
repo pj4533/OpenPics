@@ -90,20 +90,26 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 //                        NSString* linkToRSRC = originalLinks[@"linktorsrc"];
 //                        NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
 //                        if (sourceResourceDict) {
-//                            NSString* type = sourceResourceDict[@"type"];
-//                            if (!(type && [type isEqualToString:@"text"])) {
-//                                NSURL* itemLinkUrl = [NSURL URLWithString:linkToRSRC];
-//                                NSString* lastPathComponent = [linkToRSRC lastPathComponent];
-//                                NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
-//                                NSString* collectionString = itemComponents[0];
-//                                NSString* idString = itemComponents[1];
-//                                NSString* hostName = itemLinkUrl.host;
-//                                
-//                                if ([hostName isEqualToString:@"digital.library.unlv.edu"]) {
-//                                    urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
-//                                    urlString = [urlString stringByAppendingString:@"&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048"];
+//                            id type = sourceResourceDict[@"type"];
+//                            if (type) {
+//                                if ([type isKindOfClass:[NSString class]] && [type isEqualToString:@"text"]) {
+//                                    
 //                                } else {
-//                                    urlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048", hostName, collectionString,idString];
+//                                    NSURL* itemLinkUrl = [NSURL URLWithString:linkToRSRC];
+//                                    NSString* lastPathComponent = [linkToRSRC lastPathComponent];
+//                                    NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
+//                                    if (itemComponents.count == 2) {
+//                                        NSString* collectionString = itemComponents[0];
+//                                        NSString* idString = itemComponents[1];
+//                                        NSString* hostName = itemLinkUrl.host;
+//                                        
+//                                        if ([hostName isEqualToString:@"digital.library.unlv.edu"]) {
+//                                            urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
+//                                            urlString = [urlString stringByAppendingString:@"&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048"];
+//                                        } else {
+//                                            urlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048", hostName, collectionString,idString];
+//                                        }
+//                                    }
 //                                }
 //                            }
 //                        }
@@ -119,6 +125,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 //            }
 
             if (urlString) {
+                NSLog(@"%@", urlString);
                 imageUrl = [NSURL URLWithString:urlString];
             }
             NSString* titleString = @"";
