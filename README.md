@@ -44,7 +44,6 @@ Sharing (Tumblr, Twitter & Facebook) uses UIActivitys from iOS6.  The Twitter an
 * Support showing information about results (current page, total pages)
 * Support iPad portait orientation
 * Support iPhone
-* Support loading higher res images, if the Provider supports it (have code that does this, need to integrate)
 
 ## How To Run
 
