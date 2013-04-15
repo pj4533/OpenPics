@@ -27,6 +27,8 @@
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0A612D261715ED61008B6311 /* AFCDLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D251715ED61008B6311 /* AFCDLClient.m */; };
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
+		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
+		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
 		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
 		0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C281719BB35000790A0 /* AFDPLAClient.m */; };
 		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
@@ -101,6 +103,8 @@
 		0A612D251715ED61008B6311 /* AFCDLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCDLClient.m; sourceTree = "<group>"; };
 		0A612D271715ED75008B6311 /* OPCDLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCDLProvider.h; sourceTree = "<group>"; };
 		0A612D281715ED75008B6311 /* OPCDLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCDLProvider.m; sourceTree = "<group>"; };
+		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
+		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
 		0AAB0C241719B9FD000790A0 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
 		0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPDPLAProvider.m; sourceTree = "<group>"; };
 		0AAB0C271719BB35000790A0 /* AFDPLAClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLAClient.h; sourceTree = "<group>"; };
@@ -231,9 +235,11 @@
 			children = (
 				0A44CBE1171074EF00D7C1B6 /* OPContentCell.h */,
 				0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */,
+				0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */,
 				0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */,
 				0ABF9E4F1710AF5800C29E84 /* OPHeaderReusableView.h */,
 				0ABF9E501710AF5800C29E84 /* OPHeaderReusableView.m */,
+				0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */,
 				0ABF9E521710AF7E00C29E84 /* OPHeaderReusableView.xib */,
 			);
 			path = Cells;
@@ -499,6 +505,8 @@
 				0AFC2313171319DD006FFF45 /* Icon-Small@2x.png in Resources */,
 				0AFC2314171319DD006FFF45 /* Icon.png in Resources */,
 				0AFC2315171319DD006FFF45 /* Icon@2x.png in Resources */,
+				0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */,
+				0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +655,7 @@
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -659,6 +668,7 @@
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

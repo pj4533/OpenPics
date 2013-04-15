@@ -43,16 +43,31 @@
     _items = [NSMutableArray array];
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
-    self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
+        self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 88.0f);
+    } else {
+        self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
+        self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+    }
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
     
     _singleImageLayout = [[OPSingleImageLayout alloc] init];
-    _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
     
-    [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
-    [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
+        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView_iPhone" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    } else {
+        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
+        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+    NSLog(@"SIZE: %@", NSStringFromCGSize(_singleImageLayout.itemSize));
 }
 
 - (void)didReceiveMemoryWarning
@@ -206,8 +221,12 @@
     OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
     providerListViewController.delegate = self;
     
-    _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
-    [_popover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:providerListViewController animated:YES completion:nil];
+    } else {
+        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+        [_popover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void) doSearchWithQuery:(NSString *)queryString {
@@ -223,7 +242,11 @@
 #pragma mark - OPProviderListDelegate
 
 - (void) tappedProvider:(OPProvider *)provider {
-    [_popover dismissPopoverAnimated:YES];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [_popover dismissPopoverAnimated:YES];
+    }
     
     _currentProvider = provider;
     _canLoadMore = NO;
