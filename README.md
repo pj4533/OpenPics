@@ -1,5 +1,7 @@
 # OpenPics
 
+[![Build Status](https://travis-ci.org/pj4533/OpenPics.png)](https://travis-ci.org/pj4533/OpenPics)
+
 An open source iOS application for viewing images from multiple remote sources.
 
 ![Screenshot](Screenshots/openpics.png "Screenshot")
