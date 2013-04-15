@@ -46,7 +46,7 @@
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
-        self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 88.0f);
+        self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
     } else {
         self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
         self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
