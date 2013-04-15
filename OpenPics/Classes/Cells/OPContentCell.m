@@ -94,8 +94,12 @@
         [_popover dismissPopoverAnimated:YES];
     }
     
-    _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
-    [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.mainViewController presentViewController:shareSheet animated:YES completion:nil];
+    } else {
+        _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
+        [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (IBAction)backTapped:(id)sender {
