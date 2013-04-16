@@ -114,6 +114,8 @@
     
     collectionView.scrollEnabled = YES;
 
+    [self.mainViewController.flowLayout invalidateLayout];
+    
     [collectionView setCollectionViewLayout:(UICollectionViewLayout*)self.mainViewController.flowLayout animated:YES];
     [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
 }
@@ -176,7 +178,7 @@
     
     if (animated) {
     } else {
-        self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
+//        self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
         self.showingUI = YES;
     }
 }
@@ -185,7 +187,7 @@
     
     self.internalScrollView.userInteractionEnabled = NO;
 
-    self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
+//    self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
     [self fadeOutUIWithCompletion:nil];
 }
 

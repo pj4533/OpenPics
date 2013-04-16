@@ -22,6 +22,8 @@
     NSMutableArray* _items;
 
     BOOL _canLoadMore;
+
+    NSInteger _visibleItemAtStartOfRotate;
     
     NSNumber* _currentPage;
     NSString* _currentQueryString;
@@ -65,9 +67,26 @@
     }
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    
+
+}
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    NSLog(@"WILL ANIMATE ROTATE");
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+
+    [_flowLayout invalidateLayout];
+    [self.internalCollectionView.collectionViewLayout invalidateLayout];
     _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-    NSLog(@"SIZE: %@", NSStringFromCGSize(_singleImageLayout.itemSize));
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,6 +139,8 @@
         
         [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
     } else {
+        _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+
         self.internalCollectionView.scrollEnabled = NO;
         [_singleImageLayout invalidateLayout];
         [self.internalCollectionView setCollectionViewLayout:_singleImageLayout animated:YES];
