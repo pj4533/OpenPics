@@ -22,6 +22,8 @@
     NSMutableArray* _items;
 
     BOOL _canLoadMore;
+
+    NSInteger _visibleItemAtStartOfRotate;
     
     NSNumber* _currentPage;
     NSString* _currentQueryString;
@@ -43,18 +45,19 @@
     _items = [NSMutableArray array];
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    _singleImageLayout = [[OPSingleImageLayout alloc] init];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
         self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
+        _singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
     } else {
         self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
         self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+        _singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
     }
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
-    
-    _singleImageLayout = [[OPSingleImageLayout alloc] init];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
@@ -65,9 +68,18 @@
     }
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    [self.internalCollectionView.collectionViewLayout invalidateLayout];
     _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-    NSLog(@"SIZE: %@", NSStringFromCGSize(_singleImageLayout.itemSize));
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,6 +132,8 @@
         
         [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
     } else {
+        _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+
         self.internalCollectionView.scrollEnabled = NO;
         [_singleImageLayout invalidateLayout];
         [self.internalCollectionView setCollectionViewLayout:_singleImageLayout animated:YES];
@@ -146,6 +160,7 @@
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
+    
     header.delegate = self;
     [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
 
