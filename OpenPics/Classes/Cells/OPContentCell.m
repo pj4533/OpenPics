@@ -164,13 +164,21 @@
 }
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
+    [self becomeFirstResponder];
+    
     [self setupLabels];
 
     self.internalScrollView.userInteractionEnabled = YES;
-//    [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
-//        NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
-//        [self upRezToImageWithUrl:uprezImageUrl];
-//    }];
+
+    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+    if (uprezMode && uprezMode.boolValue) {
+        [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
+            NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
+            [self upRezToImageWithUrl:uprezImageUrl];
+        }];
+    }
+
     
     [self fadeInUIWithCompletion:nil];
     
@@ -262,5 +270,35 @@
     return image;
 }
 
+#pragma mark - derp
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake ) {
+        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+        NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+        if (uprezMode && uprezMode.boolValue) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Exiting up rez mode."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Entering up rez mode."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
+        }
+        [currentDefaults synchronize];
+    }
+}
 
 @end
