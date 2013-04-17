@@ -45,18 +45,19 @@
     _items = [NSMutableArray array];
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    _singleImageLayout = [[OPSingleImageLayout alloc] init];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
         self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
+        _singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
     } else {
         self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
         self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+        _singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
     }
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
-    
-    _singleImageLayout = [[OPSingleImageLayout alloc] init];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
@@ -71,20 +72,12 @@
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
     
-
-}
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    NSLog(@"WILL ANIMATE ROTATE");
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-
-    [_flowLayout invalidateLayout];
+    
     [self.internalCollectionView.collectionViewLayout invalidateLayout];
     _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
 }
@@ -167,6 +160,7 @@
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
+    
     header.delegate = self;
     [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
 
