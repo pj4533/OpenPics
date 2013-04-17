@@ -1,6 +1,6 @@
 # OpenPics
 
-An open source iOS application for viewing images from multiple remote sources.
+An open source iOS application for viewing images from multiple remote sources. Get it on the [app store](https://itunes.apple.com/us/app/openpics/id633423505?ls=1&mt=8).
 
 ![Screenshot](Screenshots/openpics.png "Screenshot")
 
