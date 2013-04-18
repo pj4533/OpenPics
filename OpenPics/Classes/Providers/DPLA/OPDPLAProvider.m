@@ -150,6 +150,8 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSString* providerName = providerSpecific[@"dplaProviderName"];
     NSLog(@"%@", providerName);
+//    NSLog(@"%@", item.imageUrl.absoluteString);
+//    NSLog(@"%@", providerSpecific);
     
     if ([providerName isEqualToString:@"Minnesota Digital Library"]) {
         NSURL* itemLinkUrl = [NSURL URLWithString:providerSpecific[@"dplaIsShownAt"]];
@@ -165,7 +167,26 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048";
             [self contentDMImageInfoWithURL:url withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
         }
-
+    } else if ([providerName isEqualToString:@"Digital Library of Georgia"]) {
+        NSDictionary* originalRecord = providerSpecific[@"dplaOriginalRecord"];
+        NSString* originalId = originalRecord[@"id"];
+        NSArray* colonComponents = [originalId componentsSeparatedByString:@":"];
+        NSString* idComponent = colonComponents[2];
+        NSArray* underscoreComponents = [idComponent componentsSeparatedByString:@"_"];
+        
+        NSString* collectionCode = underscoreComponents[1];
+        NSString* idCode = underscoreComponents[2];
+        
+        // this 'lev' thing appears to control the size of the image 1 being highest rez
+        if ([collectionCode isEqualToString:@"vang"]) {
+            NSString* vanCollection = [idCode substringToIndex:3];
+            urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=vanga&item=/%@/sid/%@.sid&lev=2",vanCollection,idCode];
+        } else if ( [collectionCode isEqualToString:@"anac"]) {
+            urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=%@&item=/sids/%@.sid&lev=2", underscoreComponents[0],idCode];
+        } else {
+            urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=%@&item=%@.sid&lev=2", collectionCode, idCode];
+        }
+        
     } else if ([providerName isEqualToString:@"Digital Commonwealth"]) {
         NSString* isShownAt = providerSpecific[@"dplaIsShownAt"];
         NSString* lastPathComponent = [isShownAt lastPathComponent];
