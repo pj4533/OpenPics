@@ -199,7 +199,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                         
                         NSString* imageInfoUrlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=1", hostName, collectionString,idString];
                         NSURL *url = [NSURL URLWithString:imageInfoUrlString];
-                        NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048";
+                        NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048&DMX=0&DMY=0&DMROTATE=0&DMTEXT=";
                         [self contentDMImageInfoWithURL:url withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
                     }
                 }
