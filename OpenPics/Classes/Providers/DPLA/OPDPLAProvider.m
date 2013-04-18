@@ -183,6 +183,8 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=vanga&item=/%@/sid/%@.sid&lev=2",vanCollection,idCode];
         } else if ( [collectionCode isEqualToString:@"anac"]) {
             urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=%@&item=/sids/%@.sid&lev=2", underscoreComponents[0],idCode];
+        } else if ([collectionCode isEqualToString:@"larc"]) {
+            urlString = [NSString stringWithFormat:@"http://dbs.galib.uga.edu/larc/photos/%@.jpg",idCode];
         } else {
             urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=%@&item=%@.sid&lev=2", collectionCode, idCode];
         }
