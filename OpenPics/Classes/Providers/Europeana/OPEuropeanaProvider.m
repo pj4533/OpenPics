@@ -162,6 +162,16 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                         } else {
                             NSLog(@"%@", objectDict);
                         }
+                    } else if ([dataProviderString isEqualToString:@"Fundación Albéniz"]) {
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcIdentifier = [proxyDict defObjectForKey:@"dcIdentifier"];
+                            if (dcIdentifier) {
+                                urlString = [NSString stringWithFormat:@"http://www.classicalplanet.com/documentViewer.xhtml?id=2&tipo=3&archivo=%@&ruta=",dcIdentifier];
+                            }
+                        }
+
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //                            NSLog(@"%@", JSON);
