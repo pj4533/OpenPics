@@ -16,6 +16,7 @@
 #import "OPLOCProvider.h"
 #import "OPCDLProvider.h"
 #import "OPDPLAProvider.h"
+#import "OPEuropeanaProvider.h"
 
 @implementation OPAppDelegate
 
@@ -29,6 +30,7 @@
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];
     [[OPProviderController shared] addProvider:[[OPDPLAProvider alloc] initWithProviderType:OPProviderTypeDPLA]];
+    [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
