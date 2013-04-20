@@ -72,6 +72,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
             returnCanLoadMore = YES;
         }
 
+        NSLog(@"COUNT: %@   TOTAL: %@", itemsCount, totalResults);
         if (completion) {
             completion(retArray, returnCanLoadMore);
         }
