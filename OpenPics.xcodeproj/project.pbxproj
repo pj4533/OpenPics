@@ -27,6 +27,8 @@
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0A612D261715ED61008B6311 /* AFCDLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D251715ED61008B6311 /* AFCDLClient.m */; };
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
+		0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */; };
+		0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */; };
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
 		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
@@ -103,6 +105,10 @@
 		0A612D251715ED61008B6311 /* AFCDLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCDLClient.m; sourceTree = "<group>"; };
 		0A612D271715ED75008B6311 /* OPCDLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCDLProvider.h; sourceTree = "<group>"; };
 		0A612D281715ED75008B6311 /* OPCDLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCDLProvider.m; sourceTree = "<group>"; };
+		0A629F2E17223B5C00E0FAD5 /* OPEuropeanaProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPEuropeanaProvider.h; sourceTree = "<group>"; };
+		0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
+		0A629F3117223B7B00E0FAD5 /* AFEuropeanaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaClient.h; sourceTree = "<group>"; };
+		0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaClient.m; sourceTree = "<group>"; };
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
 		0AAB0C241719B9FD000790A0 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A629F2D17223B4300E0FAD5 /* Europeana */,
 				0AAB0C231719B9DF000790A0 /* DPLA */,
 				0A612D231715ED35008B6311 /* CDL */,
 				0ABF9E4217109FB700C29E84 /* LOC */,
@@ -339,6 +346,17 @@
 				0A612D281715ED75008B6311 /* OPCDLProvider.m */,
 			);
 			path = CDL;
+			sourceTree = "<group>";
+		};
+		0A629F2D17223B4300E0FAD5 /* Europeana */ = {
+			isa = PBXGroup;
+			children = (
+				0A629F2E17223B5C00E0FAD5 /* OPEuropeanaProvider.h */,
+				0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */,
+				0A629F3117223B7B00E0FAD5 /* AFEuropeanaClient.h */,
+				0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */,
+			);
+			path = Europeana;
 			sourceTree = "<group>";
 		};
 		0AAB0C231719B9DF000790A0 /* DPLA */ = {
@@ -569,6 +587,8 @@
 				0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */,
 				0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */,
 				0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */,
+				0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */,
+				0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
