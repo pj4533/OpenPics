@@ -11,6 +11,7 @@
 #import "AFEuropeanaClient.h"
 #import "OPImageItem.h"
 #import "AFJSONRequestOperation.h"
+#import "NSDictionary+DefObject.h"
 
 NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 
@@ -97,102 +98,78 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
             NSArray* aggregationsArray = objectDict[@"aggregations"];
             if (aggregationsArray && aggregationsArray.count) {
                 NSDictionary* aggregationDict = aggregationsArray[0];
-                NSDictionary* edmDataProviderDict = aggregationDict[@"edmDataProvider"];
+                NSString* dataProviderString = [aggregationDict defObjectForKey:@"edmDataProvider"];
 
-                
-                // Using edm DATA provider
-                if (edmDataProviderDict) {
-                    NSArray* defArray = edmDataProviderDict[@"def"];
-                    if (defArray && defArray.count) {
-                        NSString* dataProviderString = defArray[0];
-                        
-                        //
-                        if (
-                            ([dataProviderString isEqualToString:@"Kirklees Image Archive OAI Feed"]) ||
-                            ([dataProviderString isEqualToString:@"Sheffield Images"])
-                            )
-                        {
-                            NSLog(@"KNOWN: %@", dataProviderString);
-                            NSArray* proxiesArray = objectDict[@"proxies"];
-                            if (proxiesArray && proxiesArray.count) {
-                                NSDictionary* proxyDict = proxiesArray[0];
-                                NSDictionary* identifierDict = proxyDict[@"dcIdentifier"];
-                                NSArray* defArray = identifierDict[@"def"];
-                                if (defArray && defArray.count) {
-                                    NSString* dcIdentifier = defArray[0];
-                                    NSArray* semiComponents = [dcIdentifier componentsSeparatedByString:@";"];
-                                    NSArray* ampComponents = [semiComponents.lastObject componentsSeparatedByString:@"&"];
-                                    NSString* itemId = ampComponents[0];
-                                    NSDictionary* identifierDict = proxyDict[@"dcSubject"];
-                                    NSArray* defArray = identifierDict[@"def"];
-                                    if (defArray && defArray.count) {
-                                        NSString* dcSubject = defArray[0];
-                                        if ([dataProviderString isEqualToString:@"Kirklees Image Archive OAI Feed"]) {
-                                            if ([dcSubject isEqualToString:@"Kirklees"]) {
-                                                urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/kirklees/jpgh_kirklees/%@.jpg", itemId];
-                                            } else if ([dcSubject isEqualToString:@"Bamforth"]) {
-                                                urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/kirklees/jpgh_bamforth/%@.jpg", itemId];
-                                            } else {
-                                                NSLog(@"(Kirklees Image Archive OAI Feed) UNKNOWN SUBJECT: %@", dcSubject);
-                                            }
-                                        } else if ([dataProviderString isEqualToString:@"Sheffield Images"]) {
-                                            if ([dcSubject isEqualToString:@"Sheffield"]) {
-                                                urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/picturesheffield/jpgh_sheffield/%@.jpg", itemId];
-                                            } else {
-                                                NSLog(@"(Sheffield Images) UNKNOWN SUBJECT: %@", dcSubject);
-                                            }
-                                        }
-                                    }
+
+                if (dataProviderString) {
+                    //
+                    if (
+                        ([dataProviderString isEqualToString:@"Kirklees Image Archive OAI Feed"]) ||
+                        ([dataProviderString isEqualToString:@"Sheffield Images"])
+                        )
+                    {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcIdentifier = [proxyDict defObjectForKey:@"dcIdentifier"];
+                            NSArray* semiComponents = [dcIdentifier componentsSeparatedByString:@";"];
+                            NSArray* ampComponents = [semiComponents.lastObject componentsSeparatedByString:@"&"];
+                            NSString* itemId = ampComponents[0];
+                            NSString* dcSubject = [proxyDict defObjectForKey:@"dcSubject"];
+                            if ([dataProviderString isEqualToString:@"Kirklees Image Archive OAI Feed"]) {
+                                if ([dcSubject isEqualToString:@"Kirklees"]) {
+                                    urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/kirklees/jpgh_kirklees/%@.jpg", itemId];
+                                } else if ([dcSubject isEqualToString:@"Bamforth"]) {
+                                    urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/kirklees/jpgh_bamforth/%@.jpg", itemId];
+                                } else {
+                                    NSLog(@"(Kirklees Image Archive OAI Feed) UNKNOWN SUBJECT: %@", dcSubject);
+                                }
+                            } else if ([dataProviderString isEqualToString:@"Sheffield Images"]) {
+                                if ([dcSubject isEqualToString:@"Sheffield"]) {
+                                    urlString = [NSString stringWithFormat:@"https://www.hpacde.org.uk/picturesheffield/jpgh_sheffield/%@.jpg", itemId];
+                                } else {
+                                    NSLog(@"(Sheffield Images) UNKNOWN SUBJECT: %@", dcSubject);
                                 }
                             }
-                        } else if ([dataProviderString isEqualToString:@"National Library of Wales"]) {
-                            NSLog(@"KNOWN: %@", dataProviderString);
-                            NSString* edmObject = aggregationDict[@"edmObject"];
-                            if (edmObject) {
-                                urlString = [edmObject stringByReplacingOccurrencesOfString:@"-13" withString:@"-11"];
-                            } else {
-                                NSLog(@"%@", objectDict);
-                            }
-                        
-                        } else if ([dataProviderString isEqualToString:@"Leodis - A photographic archive of Leeds"]) {
-                            NSLog(@"KNOWN: %@", dataProviderString);
-                            NSArray* proxiesArray = objectDict[@"proxies"];
-                            if (proxiesArray && proxiesArray.count) {
-                                NSDictionary* proxyDict = proxiesArray[0];
-                                NSDictionary* identifierDict = proxyDict[@"dcIdentifier"];
-                                NSArray* defArray = identifierDict[@"def"];
-                                if (defArray && defArray.count) {
-                                    NSString* dcIdentifier = defArray[0];
-                                    NSArray* equalsComponents = [dcIdentifier componentsSeparatedByString:@"="];
-                                    NSString* itemId = equalsComponents[1];
-                                    NSString* collectionId = [itemId substringFromIndex:itemId.length - 2];
-                                    urlString = [NSString stringWithFormat:@"http://www.leodis.net/imagesLeodis/screen/%@/%@.jpg", collectionId, itemId];
-                                }
-                            }
-                            
-                        } else if ([dataProviderString isEqualToString:@"National Library of the Netherlands - Koninklijke Bibliotheek"]) {
-                            NSLog(@"KNOWN: %@", dataProviderString);
-                            NSString* edmObject = aggregationDict[@"edmObject"];
-                            if (edmObject) {
-                                urlString = [edmObject stringByReplacingOccurrencesOfString:@"role=thumbnail" withString:@"size=large"];
-                            } else {
-                                NSLog(@"%@", objectDict);
-                            }
+                        }
+                    } else if ([dataProviderString isEqualToString:@"National Library of Wales"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        NSString* edmObject = aggregationDict[@"edmObject"];
+                        if (edmObject) {
+                            urlString = [edmObject stringByReplacingOccurrencesOfString:@"-13" withString:@"-11"];
                         } else {
-                            NSLog(@"UNKNOWN: %@", dataProviderString);
-//                            NSLog(@"%@", JSON);
+                            NSLog(@"%@", objectDict);
                         }
+                        
+                    } else if ([dataProviderString isEqualToString:@"Leodis - A photographic archive of Leeds"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcIdentifier = [proxyDict defObjectForKey:@"dcIdentifier"];
+                            NSArray* equalsComponents = [dcIdentifier componentsSeparatedByString:@"="];
+                            NSString* itemId = equalsComponents[1];
+                            NSString* collectionId = [itemId substringFromIndex:itemId.length - 2];
+                            urlString = [NSString stringWithFormat:@"http://www.leodis.net/imagesLeodis/screen/%@/%@.jpg", collectionId, itemId];
+                        }
+                        
+                    } else if ([dataProviderString isEqualToString:@"National Library of the Netherlands - Koninklijke Bibliotheek"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        NSString* edmObject = aggregationDict[@"edmObject"];
+                        if (edmObject) {
+                            urlString = [edmObject stringByReplacingOccurrencesOfString:@"role=thumbnail" withString:@"size=large"];
+                        } else {
+                            NSLog(@"%@", objectDict);
+                        }
+                    } else {
+                        NSLog(@"UNKNOWN: %@", dataProviderString);
+                        //                            NSLog(@"%@", JSON);
                     }
+
                 } else {
-                    NSDictionary* edmProviderDict = aggregationDict[@"edmProvider"];
-                    if (edmProviderDict) {
-                        NSArray* defArray = edmProviderDict[@"def"];
-                        if (defArray && defArray.count) {
-                            NSString* providerString = defArray[0];
-                            
-                            NSLog(@"UNKNOWN PROVIDER: %@", providerString);
-                        }
-                    }
+                    NSString* edmProvider = [aggregationDict defObjectForKey:@"edmProvider"];
+                    NSLog(@"UNKNOWN PROVIDER: %@", edmProvider);
                 }
             }
         }
