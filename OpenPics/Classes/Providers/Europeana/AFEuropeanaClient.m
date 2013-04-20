@@ -45,7 +45,7 @@ static NSString * const kEuropeanaBaseURLString = @"http://europeana.eu/api/v2/"
     
 #ifndef kOPPROVIDERTOKEN_EUROPEANA
     
-#warning *** WARNING: Make sure you have added your DPLA token to OPProviderTokens.h!
+#warning *** WARNING: Make sure you have added your Europeana token to OPProviderTokens.h!
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Token!"
                                                     message:@"No Europeana Token found. Add it to OPProviderTokens.h or use another image source."
                                                    delegate:nil
