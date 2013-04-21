@@ -172,9 +172,35 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                             }
                         }
 
+                    } else if ([dataProviderString isEqualToString:@"Nationaal Archief"]) {
+                        // EWWWWWWWWWWW scrape-a-delic
+                        NSString* edmIsShownAt = aggregationDict[@"edmIsShownAt"];
+                        NSURL* url = [NSURL URLWithString:edmIsShownAt];
+                        NSURLRequest *subrequest = [NSURLRequest requestWithURL:url];
+                        AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:subrequest];
+                        [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                            
+                            NSArray* bigpicComponents = [webpageHTML componentsSeparatedByString:@"\" class=\"bigPicture\""];
+                            if (bigpicComponents && bigpicComponents.count) {
+                                NSArray* quotesComponents = [bigpicComponents[0] componentsSeparatedByString:@"\""];
+                                if (quotesComponents && quotesComponents.count) {
+                                    if (completion) {
+                                        
+                                        NSString* bigpicUrlString = quotesComponents.lastObject;
+                                        bigpicUrlString = [bigpicUrlString stringByReplacingOccurrencesOfString:@"1280x1280" withString:@"800x600"];
+                                        completion([NSURL URLWithString:bigpicUrlString]);
+                                    }
+                                }
+                            }
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"%@", error);
+                        }];
+                        [httpOperation start];
+                        
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
-                        //                            NSLog(@"%@", JSON);
+                        //NSLog(@"%@", JSON);
                     }
 
                 } else {
