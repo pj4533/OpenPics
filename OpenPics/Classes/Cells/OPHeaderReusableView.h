@@ -15,7 +15,7 @@
 - (void) providerTappedFromRect:(CGRect) rect;
 @end
 
-@interface OPHeaderReusableView : UICollectionReusableView
+@interface OPHeaderReusableView : UICollectionReusableView <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *internalTextField;
 @property (strong, nonatomic) id delegate;
