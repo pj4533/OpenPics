@@ -230,6 +230,35 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                             }];
                             [httpOperation start];
                         }
+                    } else if ([dataProviderString isEqualToString:@"Durham county council"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        // EWWWWWWWWWWW more scrape-a-delic
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcIdentifier = [proxyDict defObjectForKey:@"dcIdentifier"];
+                            NSString* htmlURLString = [NSString stringWithFormat:@"%@&PIC=Y", dcIdentifier];
+                            
+                            NSURL* url = [NSURL URLWithString:htmlURLString];
+                            NSURLRequest *subrequest = [NSURLRequest requestWithURL:url];
+                            AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:subrequest];
+                            [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                NSString* separatorString = [NSString stringWithFormat:@"\" alt=\"%@", item.title];
+                                NSArray* components = [webpageHTML componentsSeparatedByString:separatorString];
+                                if (components && components.count) {
+                                    NSArray* quotesComponents = [components[0] componentsSeparatedByString:@"\""];
+                                    if (quotesComponents && quotesComponents.count) {
+                                        if (completion) {
+                                            completion([NSURL URLWithString:quotesComponents.lastObject]);
+                                        }
+                                    }
+                                }
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                            }];
+                            [httpOperation start];
+                        }
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //NSLog(@"%@", JSON);
