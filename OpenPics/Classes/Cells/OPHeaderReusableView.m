@@ -45,4 +45,12 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.internalTextField) {
+        [self searchTapped:textField];
+        return NO;
+    }
+    return YES;
+}
+
 @end
