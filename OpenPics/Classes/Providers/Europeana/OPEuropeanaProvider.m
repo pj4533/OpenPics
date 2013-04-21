@@ -259,6 +259,34 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                             }];
                             [httpOperation start];
                         }
+                    } else if ([dataProviderString isEqualToString:@"English Heritage - Viewfinder"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        // EWWWWWWWWWWW more scrape-a-delic
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcIdentifier = [proxyDict defObjectForKey:@"dcIdentifier"];
+                            
+                            NSURL* url = [NSURL URLWithString:dcIdentifier];
+                            NSURLRequest *subrequest = [NSURLRequest requestWithURL:url];
+                            AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:subrequest];
+                            [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                NSString* separatorString = @"\" border='0' class='vfImage' alt=\"";
+                                NSArray* components = [webpageHTML componentsSeparatedByString:separatorString];
+                                if (components && components.count) {
+                                    NSArray* quotesComponents = [components[0] componentsSeparatedByString:@"\""];
+                                    if (quotesComponents && quotesComponents.count) {
+                                        if (completion) {
+                                            completion([NSURL URLWithString:quotesComponents.lastObject]);
+                                        }
+                                    }
+                                }
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                            }];
+                            [httpOperation start];
+                        }
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //NSLog(@"%@", JSON);
