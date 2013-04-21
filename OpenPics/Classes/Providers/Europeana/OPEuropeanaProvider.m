@@ -287,6 +287,9 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                             }];
                             [httpOperation start];
                         }
+                    } else if ([dataProviderString isEqualToString:@"Deutsches Filminstitut - DIF"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        urlString = aggregationDict[@"edmIsShownBy"];
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //NSLog(@"%@", JSON);
