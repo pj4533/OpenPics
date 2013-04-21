@@ -163,6 +163,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                             NSLog(@"%@", objectDict);
                         }
                     } else if ([dataProviderString isEqualToString:@"Fundación Albéniz"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
                         NSArray* proxiesArray = objectDict[@"proxies"];
                         if (proxiesArray && proxiesArray.count) {
                             NSDictionary* proxyDict = proxiesArray[0];
@@ -173,6 +174,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                         }
 
                     } else if ([dataProviderString isEqualToString:@"Nationaal Archief"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
                         // EWWWWWWWWWWW scrape-a-delic
                         NSString* edmIsShownAt = aggregationDict[@"edmIsShownAt"];
                         NSURL* url = [NSURL URLWithString:edmIsShownAt];
@@ -198,6 +200,36 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                         }];
                         [httpOperation start];
                         
+                    } else if ([dataProviderString isEqualToString:@"The Wellcome Library"]) {
+                        NSLog(@"KNOWN: %@", dataProviderString);
+                        // EWWWWWWWWWWW more scrape-a-delic
+                        NSArray* proxiesArray = objectDict[@"proxies"];
+                        if (proxiesArray && proxiesArray.count) {
+                            NSDictionary* proxyDict = proxiesArray[0];
+                            NSString* dcSource = [proxyDict defObjectForKey:@"dcSource"];
+                            NSString* htmlFrameUrlString = [NSString stringWithFormat:@"http://wellcomeimages.org/indexplus/image/result.html?*sform=wellcome-images&_IXACTION_=query&_IXFIRST_=1&%%3did_ref=%@&_IXSPFX_=templates/t&_IXFPFX_=templates/t&_IXMAXHITS_=1&", dcSource];
+                            
+                            NSURL* url = [NSURL URLWithString:htmlFrameUrlString];
+                            NSURLRequest *subrequest = [NSURLRequest requestWithURL:url];
+                            AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:subrequest];
+                            [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                NSString* separatorString = [NSString stringWithFormat:@"\" border=\"0\" alt=\"%@", item.title];
+                                NSArray* components = [webpageHTML componentsSeparatedByString:separatorString];
+                                if (components && components.count) {
+                                    NSArray* quotesComponents = [components[0] componentsSeparatedByString:@"\""];
+                                    if (quotesComponents && quotesComponents.count) {
+                                        NSString* finalUprezedUrlString = [NSString stringWithFormat:@"http://wellcomeimages.org/indexplus/%@", quotesComponents.lastObject];
+                                        if (completion) {
+                                            completion([NSURL URLWithString:finalUprezedUrlString]);
+                                        }
+                                    }
+                                }
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                            }];
+                            [httpOperation start];
+                        }
                     } else {
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //NSLog(@"%@", JSON);
