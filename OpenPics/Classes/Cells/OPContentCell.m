@@ -43,6 +43,9 @@
     UITapGestureRecognizer* singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [singleTapGesture requireGestureRecognizerToFail:doubleTapGesture];
     [self.internalScrollView addGestureRecognizer:singleTapGesture];
+    
+    UILongPressGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self.internalScrollView addGestureRecognizer:longPressGesture];
 }
 
 /*
@@ -207,7 +210,7 @@
     __weak UIImageView* imageView = self.internalScrollView.imageView;
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
     
-    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {        
         imageView.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
     }];
@@ -225,7 +228,6 @@
 }
 
 - (IBAction)doubleTapped:(id)sender {
-    
     UIGestureRecognizer* theTap = (UIGestureRecognizer*) sender;
     
     OPScrollView* thisScrollView = (OPScrollView*) theTap.view;
@@ -244,6 +246,16 @@
         [thisScrollView setZoomScale:1.0f animated:YES];
     }
     
+}
+
+-  (void)longPress:(UILongPressGestureRecognizer*)sender {
+    if ( (sender.state == UIGestureRecognizerStateEnded) || (sender.state == UIGestureRecognizerStateBegan)){
+        if (self.internalScrollView.imageView.contentMode == UIViewContentModeCenter) {
+            self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        } else {
+            self.internalScrollView.imageView.contentMode = UIViewContentModeCenter;
+        }
+    }
 }
 
 #pragma mark - UIActivityDataSource
