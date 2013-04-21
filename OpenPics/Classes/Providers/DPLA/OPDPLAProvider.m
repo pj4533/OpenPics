@@ -149,11 +149,11 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     NSString* urlString = item.imageUrl.absoluteString;
     
     NSString* providerName = providerSpecific[@"dplaProviderName"];
-    NSLog(@"%@", providerName);
 //    NSLog(@"%@", item.imageUrl.absoluteString);
 //    NSLog(@"%@", providerSpecific);
     
     if ([providerName isEqualToString:@"Minnesota Digital Library"]) {
+        NSLog(@"KNOWN: %@", providerName);
         NSURL* itemLinkUrl = [NSURL URLWithString:providerSpecific[@"dplaIsShownAt"]];
         NSArray* paramsComponents = [providerSpecific[@"dplaIsShownAt"] componentsSeparatedByString:@"?/"];
         NSArray* itemComponents = [paramsComponents[1] componentsSeparatedByString:@","];
@@ -168,6 +168,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             [self contentDMImageInfoWithURL:url withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
         }
     } else if ([providerName isEqualToString:@"Digital Library of Georgia"]) {
+        NSLog(@"KNOWN: %@", providerName);
         NSDictionary* originalRecord = providerSpecific[@"dplaOriginalRecord"];
         NSString* originalId = originalRecord[@"id"];
         NSArray* colonComponents = [originalId componentsSeparatedByString:@":"];
@@ -190,14 +191,15 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         }
         
     } else if ([providerName isEqualToString:@"Digital Commonwealth"]) {
+        NSLog(@"KNOWN: %@", providerName);
         NSString* isShownAt = providerSpecific[@"dplaIsShownAt"];
         NSString* lastPathComponent = [isShownAt lastPathComponent];
         NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
         NSString* collectionString = itemComponents[0];
         NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
         urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
-    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {
-        
+    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {        
+        NSLog(@"KNOWN: %@", providerName);
         NSDictionary* originalRecord = providerSpecific[@"dplaOriginalRecord"];
         NSDictionary* originalLinks = originalRecord[@"LINKS"];
         NSString* linkToRSRC = originalLinks[@"linktorsrc"];
@@ -229,8 +231,13 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             }
         }
     } else if ([providerName isEqualToString:@"University of Illinois at Urbana-Champaign"]) {
+        NSLog(@"KNOWN: %@", providerName);
         urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
         urlString = [urlString stringByAppendingString:@"&DMSCALE=50&DMWIDTH=2048&DMHEIGHT=2048"];
+    } else if ([providerName isEqualToString:@"National Archives and Records Administration"]) {
+        NSLog(@"KNOWN: %@ (no uprez)", providerName);
+    } else {
+        NSLog(@"UNKNOWN: %@", providerName);        
     }
     
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
