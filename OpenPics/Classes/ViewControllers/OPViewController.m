@@ -201,15 +201,17 @@
     imageView.image = [UIImage imageNamed:@"hourglass_white"];
     
     AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [UIView animateWithDuration:0.25 animations:^{
-            imageView.alpha = 0.0;
-        } completion:^(BOOL finished) {
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.image = image;
-            [UIView animateWithDuration:0.5 animations:^{
-                imageView.alpha = 1.0;
+        if ([cell.item.imageUrl isEqual:request.URL]) {
+            [UIView animateWithDuration:0.25 animations:^{
+                imageView.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                imageView.image = image;
+                [UIView animateWithDuration:0.5 animations:^{
+                    imageView.alpha = 1.0;
+                }];
             }];
-        }];
+        }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"error getting image");
     }];
