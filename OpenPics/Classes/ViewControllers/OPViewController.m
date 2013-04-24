@@ -275,7 +275,7 @@
         NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
         if (uprezMode && uprezMode.boolValue) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Exiting up rez mode."
+                                                            message:@"Exiting full uprez mode."
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -283,7 +283,7 @@
             [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Entering up rez mode."
+                                                            message:@"Entering full uprez mode."
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
