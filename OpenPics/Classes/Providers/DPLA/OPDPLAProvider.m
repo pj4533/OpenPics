@@ -72,7 +72,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             }
 
             NSString* urlString = itemDict[@"object"];
-            
+
             // if we 'hasView' then we already have high res image
             id hasView = itemDict[@"hasView"];
             if (hasView) {
@@ -81,8 +81,9 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                     if (mimeType && ![mimeType isKindOfClass:[NSNull class]]) {
                         if ([mimeType isEqualToString:@"application/pdf"]) {
                             urlString = nil;
-                        } else
-                            urlString = hasView[@"@id"];                        
+                        } else {
+                            providerSpecific[@"dplaHasView"] = hasView[@"@id"];                            
+                        }
                     }
                 } else if ([hasView isKindOfClass:[NSArray class]]) {
                     NSDictionary* firstObject = hasView[0];
@@ -90,16 +91,16 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                     NSRange textRange;
                     textRange =[mimeType rangeOfString:@"image"];
                     if(textRange.location != NSNotFound) {
-                        urlString = firstObject[@"url"];
+                        providerSpecific[@"dplaHasView"] = firstObject[@"url"];
                     }
                 }
                 
             }
 
             if (urlString) {
-//                NSLog(@"%@", urlString);
                 imageUrl = [NSURL URLWithString:urlString];
             }
+            
             NSString* titleString = @"";
             if (sourceResourceDict) {
                 id title = sourceResourceDict[@"title"];
@@ -147,6 +148,11 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
+    
+
+    if (providerSpecific[@"dplaHasView"]) {
+        urlString = providerSpecific[@"dplaHasView"];
+    }
     
     NSString* providerName = providerSpecific[@"dplaProviderName"];
 //    NSLog(@"%@", item.imageUrl.absoluteString);
