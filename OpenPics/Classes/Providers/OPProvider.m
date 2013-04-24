@@ -28,5 +28,8 @@
     
 }
 
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+    
+}
 
 @end

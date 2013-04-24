@@ -144,19 +144,19 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
 
 // Nothing to see here....please move along
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
-    
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
     
-
+    
     if (providerSpecific[@"dplaHasView"]) {
         urlString = providerSpecific[@"dplaHasView"];
     }
-    
+
     NSString* providerName = providerSpecific[@"dplaProviderName"];
-//    NSLog(@"%@", item.imageUrl.absoluteString);
-//    NSLog(@"%@", providerSpecific);
+    //    NSLog(@"%@", item.imageUrl.absoluteString);
+    //    NSLog(@"%@", providerSpecific);
     
     if ([providerName isEqualToString:@"Minnesota Digital Library"]) {
         NSLog(@"KNOWN: %@", providerName);
@@ -167,7 +167,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             NSString* collectionString = itemComponents[0];
             NSString* idString = itemComponents[1];
             NSString* hostName = itemLinkUrl.host;
-
+            
             NSString* imageInfoUrlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=1", hostName, collectionString,idString];
             NSURL *url = [NSURL URLWithString:imageInfoUrlString];
             NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048";
@@ -204,7 +204,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         NSString* collectionString = itemComponents[0];
         NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
         urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
-    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {        
+    } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {
         NSLog(@"KNOWN: %@", providerName);
         NSDictionary* originalRecord = providerSpecific[@"dplaOriginalRecord"];
         NSDictionary* originalLinks = originalRecord[@"LINKS"];
@@ -243,7 +243,24 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     } else if ([providerName isEqualToString:@"National Archives and Records Administration"]) {
         NSLog(@"KNOWN: %@ (no uprez)", providerName);
     } else {
-        NSLog(@"UNKNOWN: %@", providerName);        
+        NSLog(@"UNKNOWN: %@", providerName);
+    }
+
+    if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
+        if (completion) {
+            completion([NSURL URLWithString:urlString]);
+        }
+    }
+
+}
+
+- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+    
+    NSDictionary* providerSpecific = item.providerSpecific;
+    NSString* urlString = item.imageUrl.absoluteString;
+    
+    if (providerSpecific[@"dplaHasView"]) {
+        urlString = providerSpecific[@"dplaHasView"];
     }
     
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
