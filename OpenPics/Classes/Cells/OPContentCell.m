@@ -176,6 +176,11 @@
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
     if (uprezMode && uprezMode.boolValue) {
+        [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
+            NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
+            [self upRezToImageWithUrl:uprezImageUrl];
+        }];
+    } else {
         [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
             [self upRezToImageWithUrl:uprezImageUrl];

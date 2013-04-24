@@ -85,7 +85,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     }];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* europeanaItem = providerSpecific[@"europeanaItem"];
     NSURL* url = [NSURL URLWithString:europeanaItem];
@@ -99,8 +99,8 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
             if (aggregationsArray && aggregationsArray.count) {
                 NSDictionary* aggregationDict = aggregationsArray[0];
                 NSString* dataProviderString = [aggregationDict defObjectForKey:@"edmDataProvider"];
-
-
+                
+                
                 if (dataProviderString) {
                     //
                     if (
@@ -172,7 +172,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                                 urlString = [NSString stringWithFormat:@"http://www.classicalplanet.com/documentViewer.xhtml?id=2&tipo=3&archivo=%@&ruta=",dcIdentifier];
                             }
                         }
-
+                        
                     } else if ([dataProviderString isEqualToString:@"Nationaal Archief"]) {
                         NSLog(@"KNOWN: %@", dataProviderString);
                         // EWWWWWWWWWWW scrape-a-delic
@@ -294,7 +294,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                         NSLog(@"UNKNOWN: %@", dataProviderString);
                         //NSLog(@"%@", JSON);
                     }
-
+                    
                 } else {
                     NSString* edmProvider = [aggregationDict defObjectForKey:@"edmProvider"];
                     NSLog(@"UNKNOWN PROVIDER: %@", edmProvider);
@@ -307,7 +307,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                 completion([NSURL URLWithString:urlString]);
             }
         }
-
+        
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"image info error: %@", error);
     }];
