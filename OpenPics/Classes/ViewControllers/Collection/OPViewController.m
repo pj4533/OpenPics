@@ -15,6 +15,8 @@
 #import "OPProviderController.h"
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
+#import "OPMapViewController.h"
+
 
 @interface OPViewController () {
     OPSingleImageLayout *_singleImageLayout;
@@ -162,6 +164,13 @@
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
     
     header.delegate = self;
+
+    if (_currentProvider.supportsLocationSearching) {
+        header.mapButton.hidden = NO;
+    } else {
+        header.mapButton.hidden = YES;
+    }
+    
     [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
 
     return header;
@@ -225,6 +234,13 @@
 }
 
 #pragma mark - OPHeaderDelegate
+
+- (void) flipToMap {
+    OPMapViewController* mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
+    mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    mapViewController.provider = _currentProvider;
+    [self presentViewController:mapViewController animated:YES completion:nil];
+}
 
 - (void) providerTappedFromRect:(CGRect) rect {
     if (_popover) {

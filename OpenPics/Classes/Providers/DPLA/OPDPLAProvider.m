@@ -20,8 +20,41 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Digital Public Library of America";
+        self.supportsLocationSearching = YES;
     }
     return self;
+}
+
+- (void) getItemsWithRegion:(MKCoordinateRegion) region
+                 completion:(void (^)(NSArray* items))completion {
+    
+    CLLocationCoordinate2D center = region.center;
+    CLLocationCoordinate2D topLeft, bottomRight;
+    topLeft.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
+    topLeft.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
+    bottomRight.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
+    bottomRight.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
+    
+    NSString* boundingBoxString = [NSString stringWithFormat:@"%f,%f:%f,%f", topLeft.latitude,topLeft.longitude,bottomRight.latitude,bottomRight.longitude];
+
+    NSDictionary* parameters = @{
+                                 @"sourceResource.spatial.coordinates" : boundingBoxString,
+                                 @"sourceResource.type" : @"*image* OR *Image*",
+                                 @"page_size" : @"100"
+                                 };
+    
+    NSLog(@"(DPLA GET) %@", parameters);
+    
+    [[AFDPLAClient sharedClient] getPath:@"items" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* resultArray = responseObject[@"docs"];
+        NSArray* retArray = [self parseDocs:resultArray];
+        
+        if (completion) {
+            completion(retArray);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
+    }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -42,88 +75,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     [[AFDPLAClient sharedClient] getPath:@"items" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSArray* resultArray = responseObject[@"docs"];
-        NSMutableArray* retArray = [NSMutableArray array];
-        for (NSDictionary* itemDict in resultArray) {
-        
-            NSURL* imageUrl = nil;
-            NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
-            
-            // Maybe by default put entire record inside here?
-            
-            // DPLA provider name
-            NSDictionary* providerDict = itemDict[@"provider"];
-            NSString* providerName = providerDict[@"name"];
-            providerSpecific[@"dplaProviderName"] = providerName;
-
-            // DPLA is shown at
-            NSString* isShownAt = itemDict[@"isShownAt"];
-            providerSpecific[@"dplaIsShownAt"] = isShownAt;
-
-            // DPLA original record dict
-            NSDictionary* originalRecord = itemDict[@"originalRecord"];
-            providerSpecific[@"dplaOriginalRecord"] = originalRecord;
-
-            // DPLA source resource
-            NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
-            if (sourceResourceDict) {
-                id type = sourceResourceDict[@"type"];
-                if (type)
-                    providerSpecific[@"dplaSourceResourceType"] = type;
-            }
-
-            NSString* urlString = itemDict[@"object"];
-
-            // if we 'hasView' then we already have high res image
-            id hasView = itemDict[@"hasView"];
-            if (hasView) {
-                if ([hasView isKindOfClass:[NSDictionary class]] ) {
-                    NSString* mimeType = hasView[@"format"];
-                    if (mimeType && ![mimeType isKindOfClass:[NSNull class]]) {
-                        if ([mimeType isEqualToString:@"application/pdf"]) {
-                            urlString = nil;
-                        } else {
-                            providerSpecific[@"dplaHasView"] = hasView[@"@id"];                            
-                        }
-                    }
-                } else if ([hasView isKindOfClass:[NSArray class]]) {
-                    NSDictionary* firstObject = hasView[0];
-                    NSString* mimeType = firstObject[@"format"];
-                    NSRange textRange;
-                    textRange =[mimeType rangeOfString:@"image"];
-                    if(textRange.location != NSNotFound) {
-                        providerSpecific[@"dplaHasView"] = firstObject[@"url"];
-                    }
-                }
-                
-            }
-
-            if (urlString) {
-                imageUrl = [NSURL URLWithString:urlString];
-            }
-            
-            NSString* titleString = @"";
-            if (sourceResourceDict) {
-                id title = sourceResourceDict[@"title"];
-                
-                if (title) {
-                    if ([title isKindOfClass:[NSArray class]]) {
-                        titleString = [title componentsJoinedByString:@", "];
-                    } else if ([title isKindOfClass:[NSString class]])
-                        titleString = title;
-                    else
-                        NSLog(@"ERROR TITLE IS: %@", [title class]);
-                }
-            }
-            if (imageUrl) {
-                NSDictionary* opImageDict = @{
-                                              @"imageUrl": imageUrl,
-                                              @"title" : titleString,
-                                              @"providerSpecific" : providerSpecific
-                                              };
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                [retArray addObject:item];
-            }
-        }
+        NSArray* retArray = [self parseDocs:resultArray];
         
         BOOL returnCanLoadMore = NO;
         NSInteger startItem = [responseObject[@"start"] integerValue];
@@ -271,6 +223,123 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 }
 
 #pragma mark - Utilities
+
+- (NSArray*) parseDocs:(NSArray*) resultArray {
+    NSMutableArray* retArray = [NSMutableArray array];
+    for (NSDictionary* itemDict in resultArray) {
+        
+        NSURL* imageUrl = nil;
+        NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
+        
+        // Maybe by default put entire record inside here?
+        
+        // DPLA provider name
+        NSDictionary* providerDict = itemDict[@"provider"];
+        NSString* providerName = providerDict[@"name"];
+        providerSpecific[@"dplaProviderName"] = providerName;
+        
+        // DPLA is shown at
+        NSString* isShownAt = itemDict[@"isShownAt"];
+        providerSpecific[@"dplaIsShownAt"] = isShownAt;
+        
+        // DPLA original record dict
+        NSDictionary* originalRecord = itemDict[@"originalRecord"];
+        providerSpecific[@"dplaOriginalRecord"] = originalRecord;
+        
+        // DPLA source resource
+        NSDictionary* sourceResourceDict = itemDict[@"sourceResource"];
+        if (sourceResourceDict) {
+            id type = sourceResourceDict[@"type"];
+            if (type)
+                providerSpecific[@"dplaSourceResourceType"] = type;
+        }
+        
+        NSString* urlString = itemDict[@"object"];
+        
+        // if we 'hasView' then we already have high res image
+        id hasView = itemDict[@"hasView"];
+        if (hasView) {
+            if ([hasView isKindOfClass:[NSDictionary class]] ) {
+                NSString* mimeType = hasView[@"format"];
+                if (mimeType && ![mimeType isKindOfClass:[NSNull class]]) {
+                    if ([mimeType isEqualToString:@"application/pdf"]) {
+                        urlString = nil;
+                    } else {
+                        providerSpecific[@"dplaHasView"] = hasView[@"@id"];
+                    }
+                }
+            } else if ([hasView isKindOfClass:[NSArray class]]) {
+                NSDictionary* firstObject = hasView[0];
+                NSString* mimeType = firstObject[@"format"];
+                NSRange textRange;
+                textRange =[mimeType rangeOfString:@"image"];
+                if(textRange.location != NSNotFound) {
+                    providerSpecific[@"dplaHasView"] = firstObject[@"url"];
+                }
+            }
+            
+        }
+        
+        if (urlString) {
+            imageUrl = [NSURL URLWithString:urlString];
+        }
+        
+        NSString* titleString = @"";
+        NSString* latitude = nil;
+        NSString* longitude = nil;
+        if (sourceResourceDict) {
+            id title = sourceResourceDict[@"title"];
+            
+            if (title) {
+                if ([title isKindOfClass:[NSArray class]]) {
+                    titleString = [title componentsJoinedByString:@", "];
+                } else if ([title isKindOfClass:[NSString class]])
+                    titleString = title;
+                else
+                    NSLog(@"ERROR TITLE IS: %@", [title class]);
+            }
+            
+            id spatial = sourceResourceDict[@"spatial"];
+            
+            if (spatial) {
+                if ([spatial isKindOfClass:[NSArray class]]) {
+                    NSString* coordinates = spatial[0][@"coordinates"];
+                    if (coordinates) {
+                        NSArray* commaComponents = [coordinates componentsSeparatedByString:@", "];
+                        latitude = commaComponents[0];
+                        longitude = commaComponents[1];
+                    }
+                } else if ([spatial isKindOfClass:[NSDictionary class]]) {
+                    NSString* coordinates = spatial[@"coordinates"];
+                    if (coordinates) {
+                        NSArray* commaComponents = [coordinates componentsSeparatedByString:@", "];
+                        latitude = commaComponents[0];
+                        longitude = commaComponents[1];
+                    }
+                } else
+                    NSLog(@"ERROR SPATIAL IS: %@", [spatial class]);
+            }
+        }
+        if (imageUrl) {
+            NSMutableDictionary* opImageDict = [@{
+                                          @"imageUrl": imageUrl,
+                                          @"title" : titleString,
+                                          @"providerSpecific" : providerSpecific,
+                                          } mutableCopy];
+            
+            if (latitude && longitude) {
+                opImageDict[@"latitude"] = latitude;
+                opImageDict[@"longitude"] = longitude;
+            }
+            
+            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            [retArray addObject:item];
+        }
+    }
+    
+    return retArray;
+}
+
 - (void) contentDMImageInfoWithURL:(NSURL*) url
                       withHostName:(NSString*) hostName
                     withCollection:(NSString*) collectionString

@@ -45,6 +45,12 @@
     }
 }
 
+- (IBAction)mapTapped:(id)sender {
+    if (self.delegate) {
+        [self.delegate flipToMap];
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.internalTextField) {
         [self searchTapped:textField];
