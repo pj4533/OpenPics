@@ -13,10 +13,12 @@
 #import "AFNetworking.h"
 #import "OPProvider.h"
 #import "OPImageItem.h"
+#import "OPImageViewController.h"
 
 @interface OPMapViewController () {
     BOOL _firstUpdate;
     NSTimer* _updateTimer;
+    NSArray* _items;
 }
 
 @end
@@ -73,6 +75,8 @@
         
         NSLog(@"%d ITEMS", items.count);
         
+        _items = items;
+        
         [self.internalMapView removeAnnotations:self.internalMapView.annotations];
         
         NSMutableArray* mapAnnotations = [[NSMutableArray alloc] init];
@@ -100,23 +104,14 @@
 }
 
 - (IBAction) gotoImage:(id)sender {
-//	int index = ((UIButton *)sender).tag;
-//    if (index < [_feedData count]) {
-//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//            ISInstagramPhotoVC* detailViewController = [[ISInstagramPhotoVC alloc] initWithNibName:@"ISInstagramPhotoVC" bundle:nil];
-//            detailViewController.feedData = _feedData;
-//            detailViewController.index = index;
-//            [self.navigationController pushViewController:detailViewController animated:YES];
-//        } else {
-//            ISInstagramPhotoVC* detailViewController = [[ISInstagramPhotoVC alloc] initWithNibName:@"ISInstagramPhotoVC" bundle:nil];
-//            detailViewController.feedData = _feedData;
-//            detailViewController.index = index;
-//            
-//            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-//            navController.modalPresentationStyle = UIModalPresentationFullScreen;
-//            [self presentModalViewController:navController animated:YES];
-//        }
-//    }
+	int index = ((UIButton *)sender).tag;
+    if (index < [_items count]) {
+        OPImageViewController* imageViewController = [[OPImageViewController alloc] initWithNibName:@"OPImageViewController" bundle:nil];
+        imageViewController.item = _items[index];
+        imageViewController.provider = self.provider;
+        imageViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:imageViewController animated:YES completion:nil];
+    }
 }
 
 - (void) updateMap {

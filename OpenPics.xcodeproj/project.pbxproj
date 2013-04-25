@@ -21,6 +21,8 @@
 		0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F1A172890AA007378D0 /* OPAnnotationView.m */; };
 		0A310F1F17289181007378D0 /* photo_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F1D17289181007378D0 /* photo_pin.png */; };
 		0A310F2017289181007378D0 /* photo_pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F1E17289181007378D0 /* photo_pin@2x.png */; };
+		0A310F271728B93A007378D0 /* OPImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F251728B939007378D0 /* OPImageViewController.m */; };
+		0A310F281728B93A007378D0 /* OPImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F261728B939007378D0 /* OPImageViewController.xib */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
 		0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD8171074EF00D7C1B6 /* Default@2x.png */; };
@@ -102,6 +104,9 @@
 		0A310F1A172890AA007378D0 /* OPAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAnnotationView.m; sourceTree = "<group>"; };
 		0A310F1D17289181007378D0 /* photo_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_pin.png; sourceTree = "<group>"; };
 		0A310F1E17289181007378D0 /* photo_pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_pin@2x.png"; sourceTree = "<group>"; };
+		0A310F241728B939007378D0 /* OPImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageViewController.h; sourceTree = "<group>"; };
+		0A310F251728B939007378D0 /* OPImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageViewController.m; sourceTree = "<group>"; };
+		0A310F261728B939007378D0 /* OPImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPImageViewController.xib; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A44CBD7171074EF00D7C1B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A44CBD8171074EF00D7C1B6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -252,6 +257,9 @@
 				0A310F1717289091007378D0 /* OPAnnotation.m */,
 				0A310F19172890AA007378D0 /* OPAnnotationView.h */,
 				0A310F1A172890AA007378D0 /* OPAnnotationView.m */,
+				0A310F241728B939007378D0 /* OPImageViewController.h */,
+				0A310F251728B939007378D0 /* OPImageViewController.m */,
+				0A310F261728B939007378D0 /* OPImageViewController.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -585,6 +593,7 @@
 				0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */,
 				0A310F1F17289181007378D0 /* photo_pin.png in Resources */,
 				0A310F2017289181007378D0 /* photo_pin@2x.png in Resources */,
+				0A310F281728B93A007378D0 /* OPImageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +662,7 @@
 				0A310F121728901C007378D0 /* OPMapViewController.m in Sources */,
 				0A310F1817289091007378D0 /* OPAnnotation.m in Sources */,
 				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
+				0A310F271728B93A007378D0 /* OPImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
