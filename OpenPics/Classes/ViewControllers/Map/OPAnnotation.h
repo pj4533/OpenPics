@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class OPImageItem;
 @interface OPAnnotation : NSObject <MKAnnotation>
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property (strong, nonatomic) NSURL* imageUrl;
-@property NSInteger index;
 @property (nonatomic,copy) NSString *title;
+
+@property (strong, nonatomic) OPImageItem* item;
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location;
 

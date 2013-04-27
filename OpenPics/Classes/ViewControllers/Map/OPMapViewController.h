@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OPAnnotationView.h"
 
 @class OPProvider;
-@interface OPMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate>
+@interface OPMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate,OPAnnotationDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *internalMapView;
 @property (strong, nonatomic) IBOutlet UIView *activityIndicatorView;

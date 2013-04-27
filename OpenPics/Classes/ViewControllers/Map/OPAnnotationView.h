@@ -6,6 +6,14 @@
 //  Copyright (c) 2013 Say Goodnight Software. All rights reserved.
 //
 
+#import "OPAnnotation.h"
+
+@protocol OPAnnotationDelegate <NSObject>
+    -(void)annotationButtonTapped:(OPAnnotation*) annotation;
+@end
+
 @interface OPAnnotationView : MKAnnotationView
+
+@property (strong, nonatomic) id delegate;
 
 @end
