@@ -62,4 +62,18 @@ static NSString * const kEuropeanaBaseURLString = @"http://europeana.eu/api/v2/"
     
 }
 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+                                      path:(NSString *)path
+                                parameters:(NSDictionary *)parameters
+{
+    NSMutableURLRequest* returnRequest = [super requestWithMethod:method path:path parameters:parameters];
+    NSURL* requestUrl = returnRequest.URL;
+    
+    NSString* urlString = [requestUrl.absoluteString stringByReplacingOccurrencesOfString:@"%5B%5D" withString:@""];
+    
+    [returnRequest setURL:[NSURL URLWithString:urlString]];
+    
+    return returnRequest;
+}
+
 @end
