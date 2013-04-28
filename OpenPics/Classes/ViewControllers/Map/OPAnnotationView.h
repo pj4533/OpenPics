@@ -12,7 +12,7 @@
     -(void)annotationButtonTapped:(OPAnnotation*) annotation;
 @end
 
-@interface OPAnnotationView : MKAnnotationView
+@interface OPAnnotationView : MKPinAnnotationView
 
 @property (strong, nonatomic) id delegate;
 

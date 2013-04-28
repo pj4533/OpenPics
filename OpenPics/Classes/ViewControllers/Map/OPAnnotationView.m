@@ -15,9 +15,7 @@
 
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.image = [UIImage imageNamed:@"photo_pin"];
-        
+    if (self) {        
         OPAnnotation* opAnnotation = (OPAnnotation*) annotation;
 
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];

@@ -12,7 +12,6 @@
 #import "AFNetworking.h"
 #import "OPProvider.h"
 #import "OPImageItem.h"
-#import "OPImageViewController.h"
 #import "OPViewController.h"
 
 @interface OPMapViewController () {
@@ -20,6 +19,9 @@
     NSTimer* _updateTimer;
     NSArray* _items;
     NSMutableDictionary* _pins;
+    
+    BOOL _centeringMap;
+    BOOL _selectedAnnotation;
 }
 
 @end
@@ -31,6 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _firstUpdate = YES;
+        _centeringMap = NO;
     }
     return self;
 }
@@ -81,23 +84,26 @@
         
         [self.internalMapView removeAnnotations:self.internalMapView.annotations];
         
-        NSMutableArray* mapAnnotations = [[NSMutableArray alloc] init];
+        NSMutableDictionary* annotations = [NSMutableDictionary dictionary];
         
         for (NSInteger i=0; i < [items count]; i++) {
             OPImageItem* thisItem = items[i];
             OPAnnotation* newAnno = [[OPAnnotation alloc] initWithCoordinates:thisItem.location];
+            newAnno.subtitle = [NSString stringWithFormat:@"%f,%f", thisItem.location.latitude,thisItem.location.longitude];
             newAnno.item = thisItem;
             NSValue* locationValue = [NSValue valueWithMKCoordinate:thisItem.location];
             if (_pins[locationValue]) {
                 NSArray* itemsHereAlready = _pins[locationValue];
                 _pins[locationValue] = [itemsHereAlready arrayByAddingObject:thisItem];
+                newAnno.title = [NSString stringWithFormat:@"%d Photos Here", itemsHereAlready.count+1];
+                annotations[locationValue] = newAnno;
             } else {
                 _pins[locationValue] = @[thisItem];
-                [mapAnnotations addObject:newAnno];
+                newAnno.title = [NSString stringWithFormat:@"1 Photo Here"];
+                annotations[locationValue] = newAnno;
             }
         }
-        
-        [self.internalMapView addAnnotations:mapAnnotations];
+        [self.internalMapView addAnnotations:annotations.allValues];
     }];
     [self.activityIndicator startAnimating];
     [UIView animateWithDuration:0.5 animations:^{
@@ -114,22 +120,6 @@
 - (IBAction)flipToGrid:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-//- (IBAction) gotoImage:(id)sender {
-//    OPAnnotationButton* button = (OPAnnotationButton*) sender;
-//    NSValue* locationValue = [NSValue valueWithMKCoordinate:button.item.location];
-//    OPViewController* viewController = [[OPViewController alloc] initWithNibName:@"OPViewController" bundle:nil];
-//    viewController.items = _pins[locationValue];
-//    viewController.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
-//    viewController.flowLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
-//    viewController.singleImageLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
-//    viewController.currentProvider = self.provider;
-//    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTapped)];
-//    
-//    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-//    [self presentViewController:navController animated:YES completion:nil];
-//}
 
 - (void) updateMap {
     [self updateMapFromAPI];
@@ -168,7 +158,31 @@
         
 }
 
+- (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    // This smellyness has to do with when an annotation is near the edge of the map.  If you select it,
+    // before showing the callout, it moves the map slightly.   For some reason if you CENTER the map while
+    // this is happening, it flips the annotation to a 'selected' state, but doesn't show the callout. Hack
+    // around it by putting in a delay before centering.  Details here:
+    //          http://stackoverflow.com/questions/10047596/showing-callout-after-moving-mapview
+    //
+    // All ears for a better workaround.
+    
+    _selectedAnnotation = YES;
+    dispatch_time_t dt = dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC);
+    dispatch_after(dt, dispatch_get_main_queue(), ^(void)
+    {
+        [mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
+        _centeringMap = YES;
+        _selectedAnnotation = NO;
+    });
+}
+
 - (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    if (_centeringMap || _selectedAnnotation) {
+        _centeringMap = NO;
+        return;
+    }
+
     if (_firstUpdate) {
         if (_updateTimer)
             [_updateTimer invalidate];

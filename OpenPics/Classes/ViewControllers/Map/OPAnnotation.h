@@ -13,6 +13,7 @@
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *subtitle;
 
 @property (strong, nonatomic) OPImageItem* item;
 
