@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.providerType = providerType;
+        self.supportsLocationSearching = NO;
     }
     return self;
 }
@@ -21,6 +22,11 @@
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    
+}
+
+- (void) getItemsWithRegion:(MKCoordinateRegion) region
+                 completion:(void (^)(NSArray* items))completion {
     
 }
 

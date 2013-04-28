@@ -10,17 +10,14 @@
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
 #import "OPContentCell.h"
-#import "OPSingleImageLayout.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
+#import "OPMapViewController.h"
+
 
 @interface OPViewController () {
-    OPSingleImageLayout *_singleImageLayout;
-
-    NSMutableArray* _items;
-
     BOOL _canLoadMore;
 
     NSInteger _visibleItemAtStartOfRotate;
@@ -28,43 +25,56 @@
     NSNumber* _currentPage;
     NSString* _currentQueryString;
 
-    OPProvider* _currentProvider;
-    
     UIPopoverController* _popover;
 }
 @end
 
 @implementation OPViewController
 
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.items = [NSMutableArray array];
+        self.currentProvider = [[OPProviderController shared] getFirstProvider];
+
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.singleImageLayout = [[OPSingleImageLayout alloc] init];
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
+        } else {
+            self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+        }    
+
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _currentProvider = [[OPProviderController shared] getFirstProvider];
-    
-    _items = [NSMutableArray array];
-    
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    _singleImageLayout = [[OPSingleImageLayout alloc] init];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
-        self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
-        _singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
-    } else {
-        self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
-        self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
-        _singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
-    }
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
-    
+
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView_iPhone" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     } else {
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    }
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    if (self.items.count == 1) {
+        [self switchToSingleImageWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     }
 }
 
@@ -79,7 +89,7 @@
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     [self.internalCollectionView.collectionViewLayout invalidateLayout];
-    _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,25 +102,25 @@
 #pragma mark - Helpers
 
 - (void) getMoreItems {
-    [_currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
+    [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            _items = [items mutableCopy];
+            self.items = [items mutableCopy];
             [self.internalCollectionView reloadData];
         } else {
 
             // this is getting rid of the extra cell that holds the 'Load More...' spinner
             if (!_canLoadMore) {
-                [self.internalCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:_items.count inSection:0]]];
+                [self.internalCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.items.count inSection:0]]];
             }
             
-            NSInteger offset = [_items count];
-            [_items addObjectsFromArray:items];
+            NSInteger offset = [self.items count];
+            [self.items addObjectsFromArray:items];
             
             // TODO: use performBatch when bug is fixed in UICollectionViews with headers
             NSMutableArray* indexPaths = [NSMutableArray array];
-            for (int i = offset; i < [_items count]; i++) {
+            for (int i = offset; i < [self.items count]; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
             }
             [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
@@ -118,27 +128,35 @@
     }];
 }
 
+- (void) switchToGridWithIndexPath:(NSIndexPath*) indexPath {
+    self.internalCollectionView.scrollEnabled = YES;
+    
+    [self.flowLayout invalidateLayout];
+    [self.internalCollectionView setCollectionViewLayout:self.flowLayout animated:YES];
+    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
+    [cell setupForGridLayout];
+    
+    [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+}
+
+- (void) switchToSingleImageWithIndexPath:(NSIndexPath*) indexPath {
+    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+    
+    self.internalCollectionView.scrollEnabled = NO;
+    [self.singleImageLayout invalidateLayout];
+    [self.internalCollectionView setCollectionViewLayout:self.singleImageLayout animated:YES];
+    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
+    [cell setupForSingleImageLayoutAnimated:NO];
+}
+
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.internalCollectionView.collectionViewLayout == _singleImageLayout) {
-        self.internalCollectionView.scrollEnabled = YES;
-        
-        [self.flowLayout invalidateLayout];
-        [self.internalCollectionView setCollectionViewLayout:self.flowLayout animated:YES];
-        OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-        [cell setupForGridLayout];
-        
-        [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
+        [self switchToGridWithIndexPath:indexPath];
     } else {
-        _singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-
-        self.internalCollectionView.scrollEnabled = NO;
-        [_singleImageLayout invalidateLayout];
-        [self.internalCollectionView setCollectionViewLayout:_singleImageLayout animated:YES];
-        OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-        [cell setupForSingleImageLayoutAnimated:NO];
+        [self switchToSingleImageWithIndexPath:indexPath];
     }
 }
 
@@ -152,9 +170,9 @@
 {
     
     if (_canLoadMore)
-        return [_items count] + 1;
+        return [self.items count] + 1;
     
-    return [_items count];
+    return [self.items count];
 }
 
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +180,14 @@
     OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
     
     header.delegate = self;
-    [header.providerButton setTitle:_currentProvider.providerName forState:UIControlStateNormal];
+
+    if (self.currentProvider.supportsLocationSearching) {
+        header.mapButton.hidden = NO;
+    } else {
+        header.mapButton.hidden = YES;
+    }
+    
+    [header.providerButton setTitle:self.currentProvider.providerName forState:UIControlStateNormal];
 
     return header;
 }
@@ -175,7 +200,7 @@
     
     cell.internalScrollView.imageView.image = nil;
     
-    if ( (indexPath.item == [_items count]) && _canLoadMore){
+    if ( (indexPath.item == [self.items count]) && _canLoadMore){
         NSInteger currentPageInt = [_currentPage integerValue];
         _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
 
@@ -186,10 +211,10 @@
         return cell;
     }
     
-    OPImageItem* item = _items[indexPath.item];
+    OPImageItem* item = self.items[indexPath.item];
     
     cell.mainViewController = self;
-    cell.provider = _currentProvider;
+    cell.provider = self.currentProvider;
     cell.item = item;
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
@@ -226,6 +251,20 @@
 
 #pragma mark - OPHeaderDelegate
 
+- (void) flipToMap {
+    OPMapViewController* mapViewController;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController_iPhone" bundle:nil];
+    } else {
+        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
+    }
+    
+    mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    mapViewController.provider = self.currentProvider;
+    [self presentViewController:mapViewController animated:YES completion:nil];
+}
+
 - (void) providerTappedFromRect:(CGRect) rect {
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
@@ -246,7 +285,7 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
-    _items = [@[] mutableCopy];
+    self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     
     [self getMoreItems];
@@ -261,11 +300,11 @@
         [_popover dismissPopoverAnimated:YES];
     }
     
-    _currentProvider = provider;
+    self.currentProvider = provider;
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _items = [@[] mutableCopy];
+    self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
 }
 

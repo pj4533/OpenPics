@@ -7,8 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A127BF2172D987900F6966A /* done_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127BF0172D987900F6966A /* done_btn.png */; };
+		0A127BF3172D987900F6966A /* done_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127BF1172D987900F6966A /* done_btn@2x.png */; };
+		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
+		0A127C02172D9AF500F6966A /* cancel_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C00172D9AF500F6966A /* cancel_btn.png */; };
+		0A127C03172D9AF500F6966A /* cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C01172D9AF500F6966A /* cancel_btn@2x.png */; };
+		0A127C05172D9E7A00F6966A /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C04172D9E7A00F6966A /* transparent.png */; };
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
+		0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F021728901C007378D0 /* OPProviderListViewController.m */; };
+		0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F031728901C007378D0 /* OPProviderListViewController.xib */; };
+		0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F051728901C007378D0 /* OPSingleImageLayout.m */; };
+		0A310F101728901C007378D0 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F071728901C007378D0 /* OPViewController.m */; };
+		0A310F111728901C007378D0 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F081728901C007378D0 /* OPViewController.xib */; };
+		0A310F121728901C007378D0 /* OPMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F0B1728901C007378D0 /* OPMapViewController.m */; };
+		0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F0C1728901C007378D0 /* OPMapViewController.xib */; };
+		0A310F1517289038007378D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A310F1417289038007378D0 /* MapKit.framework */; };
+		0A310F1817289091007378D0 /* OPAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F1717289091007378D0 /* OPAnnotation.m */; };
+		0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F1A172890AA007378D0 /* OPAnnotationView.m */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
 		0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD8171074EF00D7C1B6 /* Default@2x.png */; };
@@ -16,9 +32,6 @@
 		0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
-		0A44CC02171074EF00D7C1B6 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBF1171074EF00D7C1B6 /* OPViewController.m */; };
-		0A44CC03171074EF00D7C1B6 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBF2171074EF00D7C1B6 /* OPViewController.xib */; };
-		0A44CC04171074EF00D7C1B6 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBF4171074EF00D7C1B6 /* OPSingleImageLayout.m */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -29,6 +42,11 @@
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
 		0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */; };
 		0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */; };
+		0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */; };
+		0A864E0F172D8CFD00BE00C6 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0B172D8CFD00BE00C6 /* map.png */; };
+		0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0C172D8CFD00BE00C6 /* mapsearch.png */; };
+		0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */; };
+		0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0E172D8CFD00BE00C6 /* map@2x.png */; };
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
 		0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */; };
@@ -59,8 +77,6 @@
 		0ABF9E601710C11A00C29E84 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E5A1710C11A00C29E84 /* search@2x.png */; };
 		0ABF9E631710C6A800C29E84 /* disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E611710C6A800C29E84 /* disclose.png */; };
 		0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E621710C6A800C29E84 /* disclose@2x.png */; };
-		0ABF9E681710D22E00C29E84 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E661710D22E00C29E84 /* OPProviderListViewController.m */; };
-		0ABF9E691710D22E00C29E84 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E671710D22E00C29E84 /* OPProviderListViewController.xib */; };
 		0AFC230E171319DD006FFF45 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2306171319DD006FFF45 /* Icon-72.png */; };
 		0AFC230F171319DD006FFF45 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2307171319DD006FFF45 /* Icon-72@2x.png */; };
 		0AFC2310171319DD006FFF45 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2308171319DD006FFF45 /* Icon-Small-50.png */; };
@@ -73,10 +89,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A127BF0172D987900F6966A /* done_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done_btn.png; sourceTree = "<group>"; };
+		0A127BF1172D987900F6966A /* done_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_btn@2x.png"; sourceTree = "<group>"; };
+		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
+		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
+		0A127C00172D9AF500F6966A /* cancel_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_btn.png; sourceTree = "<group>"; };
+		0A127C01172D9AF500F6966A /* cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_btn@2x.png"; sourceTree = "<group>"; };
+		0A127C04172D9E7A00F6966A /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
 		0A1EF47E17108B5400AB8B62 /* OPProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProvider.m; sourceTree = "<group>"; };
 		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
 		0A1EF48417108D6D00AB8B62 /* OPProviderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderController.m; sourceTree = "<group>"; };
+		0A310F011728901C007378D0 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
+		0A310F021728901C007378D0 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
+		0A310F031728901C007378D0 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
+		0A310F041728901C007378D0 /* OPSingleImageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageLayout.h; sourceTree = "<group>"; };
+		0A310F051728901C007378D0 /* OPSingleImageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageLayout.m; sourceTree = "<group>"; };
+		0A310F061728901C007378D0 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
+		0A310F071728901C007378D0 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
+		0A310F081728901C007378D0 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
+		0A310F0A1728901C007378D0 /* OPMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPMapViewController.h; sourceTree = "<group>"; };
+		0A310F0B1728901C007378D0 /* OPMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMapViewController.m; sourceTree = "<group>"; };
+		0A310F0C1728901C007378D0 /* OPMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController.xib; sourceTree = "<group>"; };
+		0A310F1417289038007378D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0A310F1617289091007378D0 /* OPAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAnnotation.h; sourceTree = "<group>"; };
+		0A310F1717289091007378D0 /* OPAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAnnotation.m; sourceTree = "<group>"; };
+		0A310F19172890AA007378D0 /* OPAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAnnotationView.h; sourceTree = "<group>"; };
+		0A310F1A172890AA007378D0 /* OPAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAnnotationView.m; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A44CBD7171074EF00D7C1B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A44CBD8171074EF00D7C1B6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -87,11 +126,6 @@
 		0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPScrollView.m; sourceTree = "<group>"; };
 		0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
-		0A44CBF0171074EF00D7C1B6 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
-		0A44CBF1171074EF00D7C1B6 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
-		0A44CBF2171074EF00D7C1B6 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
-		0A44CBF3171074EF00D7C1B6 /* OPSingleImageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageLayout.h; sourceTree = "<group>"; };
-		0A44CBF4171074EF00D7C1B6 /* OPSingleImageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageLayout.m; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A609EBB171072BD0084735B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +144,11 @@
 		0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
 		0A629F3117223B7B00E0FAD5 /* AFEuropeanaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaClient.h; sourceTree = "<group>"; };
 		0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaClient.m; sourceTree = "<group>"; };
+		0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController_iPhone.xib; sourceTree = "<group>"; };
+		0A864E0B172D8CFD00BE00C6 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		0A864E0C172D8CFD00BE00C6 /* mapsearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapsearch.png; sourceTree = "<group>"; };
+		0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mapsearch@2x.png"; sourceTree = "<group>"; };
+		0A864E0E172D8CFD00BE00C6 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
 		0AA7C6D217235C72008FDFA6 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -153,9 +192,6 @@
 		0ABF9E5A1710C11A00C29E84 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		0ABF9E611710C6A800C29E84 /* disclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclose.png; sourceTree = "<group>"; };
 		0ABF9E621710C6A800C29E84 /* disclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclose@2x.png"; sourceTree = "<group>"; };
-		0ABF9E651710D22E00C29E84 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
-		0ABF9E661710D22E00C29E84 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
-		0ABF9E671710D22E00C29E84 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
 		0AFC2306171319DD006FFF45 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		0AFC2307171319DD006FFF45 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		0AFC2308171319DD006FFF45 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -173,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A310F1517289038007378D0 /* MapKit.framework in Frameworks */,
 				0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */,
 				0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */,
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
@@ -183,6 +220,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A127BEF172D987900F6966A /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0A127C00172D9AF500F6966A /* cancel_btn.png */,
+				0A127C01172D9AF500F6966A /* cancel_btn@2x.png */,
+				0A127BF0172D987900F6966A /* done_btn.png */,
+				0A127BF1172D987900F6966A /* done_btn@2x.png */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		0A127BF7172D9AAC00F6966A /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				0A127C04172D9E7A00F6966A /* transparent.png */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,9 +256,50 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		0A310EFF1728901C007378D0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A310F001728901C007378D0 /* Collection */,
+				0A310F091728901C007378D0 /* Map */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0A310F001728901C007378D0 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				0A310F011728901C007378D0 /* OPProviderListViewController.h */,
+				0A310F021728901C007378D0 /* OPProviderListViewController.m */,
+				0A310F031728901C007378D0 /* OPProviderListViewController.xib */,
+				0A310F041728901C007378D0 /* OPSingleImageLayout.h */,
+				0A310F051728901C007378D0 /* OPSingleImageLayout.m */,
+				0A310F061728901C007378D0 /* OPViewController.h */,
+				0A310F071728901C007378D0 /* OPViewController.m */,
+				0A310F081728901C007378D0 /* OPViewController.xib */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		0A310F091728901C007378D0 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				0A310F0A1728901C007378D0 /* OPMapViewController.h */,
+				0A310F0B1728901C007378D0 /* OPMapViewController.m */,
+				0A310F0C1728901C007378D0 /* OPMapViewController.xib */,
+				0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */,
+				0A310F1617289091007378D0 /* OPAnnotation.h */,
+				0A310F1717289091007378D0 /* OPAnnotation.m */,
+				0A310F19172890AA007378D0 /* OPAnnotationView.h */,
+				0A310F1A172890AA007378D0 /* OPAnnotationView.m */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		0A44CBD4171074EF00D7C1B6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0A127BF7172D9AAC00F6966A /* Background */,
+				0A127BEF172D987900F6966A /* Buttons */,
 				0ABF9E541710C11A00C29E84 /* Icons */,
 				0A44CBD5171074EF00D7C1B6 /* Application */,
 			);
@@ -230,12 +327,12 @@
 		0A44CBDF171074EF00D7C1B6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0A310EFF1728901C007378D0 /* ViewControllers */,
 				0AB6B8BD1711C7FF004CF7A5 /* Activity */,
 				0A1EF47C17108B3A00AB8B62 /* Providers */,
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
 				0A44CBE9171074EF00D7C1B6 /* Model */,
-				0A44CBEF171074EF00D7C1B6 /* ViewControllers */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -260,6 +357,8 @@
 			children = (
 				0A44CBE7171074EF00D7C1B6 /* OPScrollView.h */,
 				0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */,
+				0A127BF4172D98FE00F6966A /* OPAppearance.h */,
+				0A127BF5172D98FE00F6966A /* OPAppearance.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -271,21 +370,6 @@
 				0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0A44CBEF171074EF00D7C1B6 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0A44CBF0171074EF00D7C1B6 /* OPViewController.h */,
-				0A44CBF1171074EF00D7C1B6 /* OPViewController.m */,
-				0A44CBF2171074EF00D7C1B6 /* OPViewController.xib */,
-				0A44CBF3171074EF00D7C1B6 /* OPSingleImageLayout.h */,
-				0A44CBF4171074EF00D7C1B6 /* OPSingleImageLayout.m */,
-				0ABF9E651710D22E00C29E84 /* OPProviderListViewController.h */,
-				0ABF9E661710D22E00C29E84 /* OPProviderListViewController.m */,
-				0ABF9E671710D22E00C29E84 /* OPProviderListViewController.xib */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -309,6 +393,7 @@
 		0A609EB8171072BD0084735B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A310F1417289038007378D0 /* MapKit.framework */,
 				0A609EB9171072BD0084735B /* UIKit.framework */,
 				0A609EBB171072BD0084735B /* Foundation.framework */,
 				0A609EBD171072BD0084735B /* CoreGraphics.framework */,
@@ -424,6 +509,10 @@
 		0ABF9E541710C11A00C29E84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				0A864E0B172D8CFD00BE00C6 /* map.png */,
+				0A864E0E172D8CFD00BE00C6 /* map@2x.png */,
+				0A864E0C172D8CFD00BE00C6 /* mapsearch.png */,
+				0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */,
 				0AB6B8B11711C647004CF7A5 /* share.png */,
 				0AB6B8B21711C647004CF7A5 /* share@2x.png */,
 				0AB6B8B31711C647004CF7A5 /* tumblr.png */,
@@ -501,7 +590,6 @@
 				0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */,
 				0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */,
 				0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */,
-				0A44CC03171074EF00D7C1B6 /* OPViewController.xib in Resources */,
 				0ABF9E531710AF7E00C29E84 /* OPHeaderReusableView.xib in Resources */,
 				0ABF9E5B1710C11A00C29E84 /* grid.png in Resources */,
 				0ABF9E5C1710C11A00C29E84 /* grid@2x.png in Resources */,
@@ -511,7 +599,6 @@
 				0ABF9E601710C11A00C29E84 /* search@2x.png in Resources */,
 				0ABF9E631710C6A800C29E84 /* disclose.png in Resources */,
 				0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */,
-				0ABF9E691710D22E00C29E84 /* OPProviderListViewController.xib in Resources */,
 				0AB6B8B71711C647004CF7A5 /* share.png in Resources */,
 				0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */,
 				0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */,
@@ -530,6 +617,19 @@
 				0AFC2315171319DD006FFF45 /* Icon@2x.png in Resources */,
 				0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */,
 				0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */,
+				0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */,
+				0A310F111728901C007378D0 /* OPViewController.xib in Resources */,
+				0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */,
+				0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */,
+				0A864E0F172D8CFD00BE00C6 /* map.png in Resources */,
+				0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */,
+				0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */,
+				0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */,
+				0A127BF2172D987900F6966A /* done_btn.png in Resources */,
+				0A127BF3172D987900F6966A /* done_btn@2x.png in Resources */,
+				0A127C02172D9AF500F6966A /* cancel_btn.png in Resources */,
+				0A127C03172D9AF500F6966A /* cancel_btn@2x.png in Resources */,
+				0A127C05172D9E7A00F6966A /* transparent.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,8 +675,6 @@
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
-				0A44CC02171074EF00D7C1B6 /* OPViewController.m in Sources */,
-				0A44CC04171074EF00D7C1B6 /* OPSingleImageLayout.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */,
@@ -584,7 +682,6 @@
 				0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */,
 				0ABF9E481710A02100C29E84 /* AFLOCAPIClient.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
-				0ABF9E681710D22E00C29E84 /* OPProviderListViewController.m in Sources */,
 				0AB6B8C71711C7FF004CF7A5 /* OPTumblrBlogViewController.m in Sources */,
 				0AB6B8C91711C7FF004CF7A5 /* OPTumblrPostViewController.m in Sources */,
 				0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */,
@@ -595,6 +692,13 @@
 				0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */,
 				0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */,
 				0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */,
+				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
+				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
+				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
+				0A310F121728901C007378D0 /* OPMapViewController.m in Sources */,
+				0A310F1817289091007378D0 /* OPAnnotation.m in Sources */,
+				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
+				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

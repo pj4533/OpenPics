@@ -12,6 +12,8 @@
 #import "OPImageItem.h"
 #import "AFJSONRequestOperation.h"
 #import "NSDictionary+DefObject.h"
+#import "TTTURLRequestFormatter.h"
+
 
 NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 
@@ -21,8 +23,43 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Europeana";
+        self.supportsLocationSearching = YES;
     }
     return self;
+}
+
+- (void) getItemsWithRegion:(MKCoordinateRegion) region
+                 completion:(void (^)(NSArray* items))completion {
+    
+    CLLocationCoordinate2D center = region.center;
+    CLLocationCoordinate2D topLeft, bottomRight;
+    topLeft.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
+    topLeft.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
+    bottomRight.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
+    bottomRight.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
+    
+    NSString* latitudeParameter = [NSString stringWithFormat:@"pl_wgs84_pos_lat:[%f TO %f]", bottomRight.latitude, topLeft.latitude ];
+    NSString* longitudeParameter = [NSString stringWithFormat:@"pl_wgs84_pos_long:[%f TO %f]", topLeft.longitude, bottomRight.longitude];
+    
+    NSDictionary* parameters = @{
+                                 @"qf" : @[latitudeParameter,longitudeParameter,@"image"],
+                                 @"rows" : @"100",
+                                 @"query" : @"*:*"
+                                 };
+    
+    NSLog(@"(EURO LOCATION GET) %@", parameters);
+
+    [[AFEuropeanaClient sharedClient] getPath:@"search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", [TTTURLRequestFormatter cURLCommandFromURLRequest:operation.request]);
+        NSArray* resultArray = responseObject[@"items"];
+        NSArray* retArray = [self parseDocs:resultArray];
+        
+        if (completion) {
+            completion(retArray);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
+    }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -39,35 +76,12 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         parameters[@"start"] = startItem;
     }
 
+    NSLog(@"(EURO GET) %@", parameters);
+
     [[AFEuropeanaClient sharedClient] getPath:@"search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSArray* resultArray = responseObject[@"items"];
-        NSMutableArray* retArray = [NSMutableArray array];
-        for (NSDictionary* itemDict in resultArray) {
-
-            NSArray* edmPreview = itemDict[@"edmPreview"];
-            if (edmPreview && edmPreview.count) {
-                NSString* urlString = edmPreview[0];
-                NSURL* imageUrl = [NSURL URLWithString:urlString];
-                NSString* titleString = @"";
-                if (itemDict[@"title"]) {
-                    NSArray* titleArray = itemDict[@"title"];
-                    if (titleArray.count) {
-                        titleString = titleArray[0];
-                    }
-                }
-                                
-                NSDictionary* opImageDict = @{
-                                              @"imageUrl": imageUrl,
-                                              @"title" : titleString,
-                                              @"providerSpecific" : @{
-                                                        @"europeanaItem":itemDict[@"link"]
-                                                      }
-                                              };
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                [retArray addObject:item];
-            }
-        }
+        NSArray* retArray = [self parseDocs:resultArray];
         
         BOOL returnCanLoadMore = NO;
         NSString* itemsCount = responseObject[@"itemsCount"];
@@ -313,5 +327,69 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     }];
     [operation start];
 }
+
+#pragma mark - Utilities
+
+- (NSArray*) parseDocs:(NSArray*) resultArray {
+    NSMutableArray* retArray = [NSMutableArray array];
+    for (NSDictionary* itemDict in resultArray) {
+        
+        NSArray* edmPreview = itemDict[@"edmPreview"];
+        if (edmPreview && edmPreview.count) {
+            NSString* urlString = edmPreview[0];
+            NSURL* imageUrl = [NSURL URLWithString:urlString];
+            NSString* titleString = @"";
+            NSString* latitude = nil;
+            NSString* longitude = nil;
+
+            if (itemDict[@"title"]) {
+                NSArray* titleArray = itemDict[@"title"];
+                if (titleArray.count) {
+                    titleString = titleArray[0];
+                }
+            }
+            
+            NSMutableDictionary* opImageDict = [@{
+                                          @"imageUrl": imageUrl,
+                                          @"title" : titleString,
+                                          @"providerSpecific" : @{
+                                                  @"europeanaItem":itemDict[@"link"]
+                                                  }
+                                          } mutableCopy];
+            
+            if (itemDict[@"edmPlaceLatitude"]) {
+                if ([itemDict[@"edmPlaceLatitude"] isKindOfClass:[NSArray class]]) {
+                    NSArray* placeLatitude = itemDict[@"edmPlaceLatitude"];
+                    for (NSString* thisLat in placeLatitude) {
+                        if (![thisLat isEqualToString:@"0.0"]) {
+                            latitude = thisLat;
+                        }
+                    }
+                }
+            }
+            if (itemDict[@"edmPlaceLongitude"]) {
+                if ([itemDict[@"edmPlaceLongitude"] isKindOfClass:[NSArray class]]) {
+                    NSArray* placeLongitude = itemDict[@"edmPlaceLongitude"];
+                    for (NSString* thisLong in placeLongitude) {
+                        if (![thisLong isEqualToString:@"0.0"]) {
+                            longitude = thisLong;
+                        }
+                    }
+                }
+            }
+
+            if (latitude && longitude) {
+                opImageDict[@"latitude"] = latitude;
+                opImageDict[@"longitude"] = longitude;
+            }
+
+            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            [retArray addObject:item];
+        }
+    }
+
+    return retArray;
+}
+
 
 @end
