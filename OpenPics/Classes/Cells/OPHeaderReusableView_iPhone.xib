@@ -155,6 +155,7 @@
 						<string key="NSFrame">{{246, 68}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="131310328"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="338741449"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -168,7 +169,7 @@
 					<object class="IBUIButton" id="1063249374">
 						<reference key="NSNextResponder" ref="131310328"/>
 						<int key="NSvFlags">267</int>
-						<string key="NSFrame">{{13, 65}, {257, 29}}</string>
+						<string key="NSFrame">{{13, 65}, {225, 29}}</string>
 						<reference key="NSSuperview" ref="131310328"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="228473181"/>
@@ -195,22 +196,25 @@
 					<object class="IBUIButton" id="338741449">
 						<reference key="NSNextResponder" ref="131310328"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{278, 54}, {42, 39}}</string>
+						<string key="NSFrame">{{274, 50}, {44, 44}}</string>
 						<reference key="NSSuperview" ref="131310328"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Button</string>
 						<reference key="IBUIHighlightedTitleColor" ref="1048962586"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="349576768"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">map.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="649749831"/>
 						<reference key="IBUIFont" ref="869946445"/>
 					</object>
@@ -437,6 +441,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="disclose.png">{24, 24}</string>
+			<string key="map.png">{64, 64}</string>
 			<string key="search.png">{128, 128}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

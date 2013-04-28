@@ -252,7 +252,14 @@
 #pragma mark - OPHeaderDelegate
 
 - (void) flipToMap {
-    OPMapViewController* mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
+    OPMapViewController* mapViewController;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController_iPhone" bundle:nil];
+    } else {
+        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
+    }
+    
     mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     mapViewController.provider = self.currentProvider;
     [self presentViewController:mapViewController animated:YES completion:nil];

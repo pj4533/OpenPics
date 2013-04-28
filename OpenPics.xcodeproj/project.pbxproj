@@ -36,6 +36,11 @@
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
 		0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */; };
 		0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */; };
+		0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */; };
+		0A864E0F172D8CFD00BE00C6 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0B172D8CFD00BE00C6 /* map.png */; };
+		0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0C172D8CFD00BE00C6 /* mapsearch.png */; };
+		0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */; };
+		0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0E172D8CFD00BE00C6 /* map@2x.png */; };
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
 		0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */; };
@@ -126,6 +131,11 @@
 		0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
 		0A629F3117223B7B00E0FAD5 /* AFEuropeanaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaClient.h; sourceTree = "<group>"; };
 		0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaClient.m; sourceTree = "<group>"; };
+		0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController_iPhone.xib; sourceTree = "<group>"; };
+		0A864E0B172D8CFD00BE00C6 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		0A864E0C172D8CFD00BE00C6 /* mapsearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapsearch.png; sourceTree = "<group>"; };
+		0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mapsearch@2x.png"; sourceTree = "<group>"; };
+		0A864E0E172D8CFD00BE00C6 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
 		0AA7C6D217235C72008FDFA6 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -244,6 +254,7 @@
 				0A310F0A1728901C007378D0 /* OPMapViewController.h */,
 				0A310F0B1728901C007378D0 /* OPMapViewController.m */,
 				0A310F0C1728901C007378D0 /* OPMapViewController.xib */,
+				0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */,
 				0A310F1617289091007378D0 /* OPAnnotation.h */,
 				0A310F1717289091007378D0 /* OPAnnotation.m */,
 				0A310F19172890AA007378D0 /* OPAnnotationView.h */,
@@ -462,6 +473,10 @@
 		0ABF9E541710C11A00C29E84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				0A864E0B172D8CFD00BE00C6 /* map.png */,
+				0A864E0E172D8CFD00BE00C6 /* map@2x.png */,
+				0A864E0C172D8CFD00BE00C6 /* mapsearch.png */,
+				0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */,
 				0AB6B8B11711C647004CF7A5 /* share.png */,
 				0AB6B8B21711C647004CF7A5 /* share@2x.png */,
 				0AB6B8B31711C647004CF7A5 /* tumblr.png */,
@@ -569,6 +584,11 @@
 				0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */,
 				0A310F111728901C007378D0 /* OPViewController.xib in Resources */,
 				0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */,
+				0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */,
+				0A864E0F172D8CFD00BE00C6 /* map.png in Resources */,
+				0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */,
+				0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */,
+				0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
