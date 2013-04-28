@@ -18,6 +18,8 @@
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) OPProvider* provider;
 @property (strong, nonatomic) IBOutlet UISearchBar *mapSearchBar;
+@property (strong, nonatomic) IBOutlet UIView *backBackgroundView;
+@property (strong, nonatomic) IBOutlet UIView *searchBackgroundView;
 
 - (IBAction)searchTapped:(id)sender;
 - (IBAction)flipToGrid:(id)sender;

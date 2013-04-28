@@ -46,6 +46,9 @@
 
     _searchBarHidden = YES;
 
+    self.backBackgroundView.layer.cornerRadius = 7.0f;
+    self.searchBackgroundView.layer.cornerRadius = 7.0f;
+
     self.activityIndicatorView.alpha = 0.0;
     self.activityIndicatorView.layer.cornerRadius = 5.0f;
     
