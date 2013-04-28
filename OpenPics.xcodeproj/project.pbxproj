@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A127BF2172D987900F6966A /* done_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127BF0172D987900F6966A /* done_btn.png */; };
+		0A127BF3172D987900F6966A /* done_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127BF1172D987900F6966A /* done_btn@2x.png */; };
+		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
+		0A127C02172D9AF500F6966A /* cancel_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C00172D9AF500F6966A /* cancel_btn.png */; };
+		0A127C03172D9AF500F6966A /* cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C01172D9AF500F6966A /* cancel_btn@2x.png */; };
+		0A127C05172D9E7A00F6966A /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A127C04172D9E7A00F6966A /* transparent.png */; };
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F021728901C007378D0 /* OPProviderListViewController.m */; };
@@ -83,6 +89,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A127BF0172D987900F6966A /* done_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done_btn.png; sourceTree = "<group>"; };
+		0A127BF1172D987900F6966A /* done_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_btn@2x.png"; sourceTree = "<group>"; };
+		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
+		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
+		0A127C00172D9AF500F6966A /* cancel_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_btn.png; sourceTree = "<group>"; };
+		0A127C01172D9AF500F6966A /* cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_btn@2x.png"; sourceTree = "<group>"; };
+		0A127C04172D9E7A00F6966A /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
 		0A1EF47E17108B5400AB8B62 /* OPProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProvider.m; sourceTree = "<group>"; };
 		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
@@ -207,6 +220,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A127BEF172D987900F6966A /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0A127C00172D9AF500F6966A /* cancel_btn.png */,
+				0A127C01172D9AF500F6966A /* cancel_btn@2x.png */,
+				0A127BF0172D987900F6966A /* done_btn.png */,
+				0A127BF1172D987900F6966A /* done_btn@2x.png */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		0A127BF7172D9AAC00F6966A /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				0A127C04172D9E7A00F6966A /* transparent.png */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +298,8 @@
 		0A44CBD4171074EF00D7C1B6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0A127BF7172D9AAC00F6966A /* Background */,
+				0A127BEF172D987900F6966A /* Buttons */,
 				0ABF9E541710C11A00C29E84 /* Icons */,
 				0A44CBD5171074EF00D7C1B6 /* Application */,
 			);
@@ -323,6 +357,8 @@
 			children = (
 				0A44CBE7171074EF00D7C1B6 /* OPScrollView.h */,
 				0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */,
+				0A127BF4172D98FE00F6966A /* OPAppearance.h */,
+				0A127BF5172D98FE00F6966A /* OPAppearance.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -589,6 +625,11 @@
 				0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */,
 				0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */,
 				0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */,
+				0A127BF2172D987900F6966A /* done_btn.png in Resources */,
+				0A127BF3172D987900F6966A /* done_btn@2x.png in Resources */,
+				0A127C02172D9AF500F6966A /* cancel_btn.png in Resources */,
+				0A127C03172D9AF500F6966A /* cancel_btn@2x.png in Resources */,
+				0A127C05172D9E7A00F6966A /* transparent.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +698,7 @@
 				0A310F121728901C007378D0 /* OPMapViewController.m in Sources */,
 				0A310F1817289091007378D0 /* OPAnnotation.m in Sources */,
 				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
+				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

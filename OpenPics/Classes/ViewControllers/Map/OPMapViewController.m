@@ -156,7 +156,7 @@
     }
 }
 
-- (void) cancelTapped {
+- (void) doneTapped {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -251,7 +251,12 @@
     viewController.flowLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
     viewController.singleImageLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
     viewController.currentProvider = self.provider;
-    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTapped)];
+
+    UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    doneButton.frame = CGRectMake(0,0,45,29);
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"done_btn"] forState:UIControlStateNormal];
+    [doneButton addTarget:self action:@selector(doneTapped) forControlEvents:UIControlEventTouchUpInside];
+    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     
     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;

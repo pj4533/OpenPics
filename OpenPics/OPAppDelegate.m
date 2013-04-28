@@ -18,6 +18,8 @@
 #import "OPDPLAProvider.h"
 #import "OPEuropeanaProvider.h"
 
+#import "OPAppearance.h"
+
 @implementation OPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,6 +28,8 @@
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+    [OPAppearance setupGlobalAppearance];
+    
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];
