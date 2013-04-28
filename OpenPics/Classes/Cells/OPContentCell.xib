@@ -314,7 +314,7 @@
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUILabel" id="224871156">
 										<reference key="NSNextResponder" ref="97797643"/>
-										<int key="NSvFlags">292</int>
+										<int key="NSvFlags">290</int>
 										<string key="NSFrame">{{65, 20}, {872, 132}}</string>
 										<reference key="NSSuperview" ref="97797643"/>
 										<reference key="NSWindow"/>

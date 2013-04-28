@@ -15,6 +15,7 @@
         self.imageUrl = dict[@"imageUrl"];
         self.title = dict[@"title"];
         self.providerSpecific = dict[@"providerSpecific"];
+        self.location = CLLocationCoordinate2DMake([dict[@"latitude"] floatValue], [dict[@"longitude"] floatValue]);
     }
     
     return self;
