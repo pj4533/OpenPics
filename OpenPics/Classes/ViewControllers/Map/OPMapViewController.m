@@ -20,6 +20,8 @@
     NSArray* _items;
     NSMutableDictionary* _pins;
     
+    BOOL _searchBarHidden;
+
     BOOL _centeringMap;
     BOOL _selectedAnnotation;
 }
@@ -41,6 +43,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    _searchBarHidden = YES;
+
     self.activityIndicatorView.alpha = 0.0;
     self.activityIndicatorView.layer.cornerRadius = 5.0f;
     
@@ -55,6 +60,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Utilities
 
 - (IBAction) zoomToUserLocation {
     MKCoordinateRegion zoomRegion;
@@ -111,7 +118,40 @@
     }];
 }
 
+- (void) hideSearchBar {
+    [UIView animateWithDuration:.3
+                     animations:^ {
+                         CGRect frame = self.mapSearchBar.frame;
+                         frame.origin.y = frame.origin.y - 88;
+                         self.mapSearchBar.frame = frame;
+                     } completion:^(BOOL finished) {
+                         self.mapSearchBar.hidden = YES;
+                     }];
+    _searchBarHidden = YES;
+    [self.mapSearchBar resignFirstResponder];
+}
+
+- (void) showSearchBar {
+    self.mapSearchBar.hidden = NO;
+    [UIView animateWithDuration:.3
+                     animations:^ {
+                         CGRect frame = self.mapSearchBar.frame;
+                         frame.origin.y = frame.origin.y + 88;
+                         self.mapSearchBar.frame = frame;
+                     }];
+    _searchBarHidden = NO;
+    [self.mapSearchBar becomeFirstResponder];
+}
+
 #pragma mark - Actions
+
+- (IBAction)searchTapped:(id)sender {
+    if (_searchBarHidden) {
+        [self showSearchBar];
+    } else {
+        [self hideSearchBar];
+    }
+}
 
 - (void) cancelTapped {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -213,6 +253,47 @@
     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [self searchTapped:self];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString* searchString = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	NSMutableString* stringForURL = [NSMutableString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=false",searchString];
+    
+    
+    NSURL *url = [NSURL URLWithString:stringForURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSArray* resultsArray = [JSON objectForKey:@"results"];
+        
+        if ([resultsArray count] > 0) {
+            NSDictionary* dict = [resultsArray objectAtIndex:0];            
+            double lat = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+            double lng = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+            [self.internalMapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lng) animated:YES];
+        }
+        
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    }];
+    
+    [operation start];
+    [self hideSearchBar];
 }
 
 @end

@@ -10,14 +10,16 @@
 #import "OPAnnotationView.h"
 
 @class OPProvider;
-@interface OPMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate,OPAnnotationDelegate>
+@interface OPMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate,OPAnnotationDelegate,UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *internalMapView;
 @property (strong, nonatomic) IBOutlet UIView *activityIndicatorView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) OPProvider* provider;
+@property (strong, nonatomic) IBOutlet UISearchBar *mapSearchBar;
 
+- (IBAction)searchTapped:(id)sender;
 - (IBAction)flipToGrid:(id)sender;
 
 @end
