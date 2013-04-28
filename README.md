@@ -4,6 +4,8 @@ An open source iOS application for viewing images from multiple remote sources. 
 
 ![Screenshot](Screenshots/openpics.png "Screenshot")
 
+![Screenshot](Screenshots/openpics_map_.png "Screenshot")
+
 ## Goals
 
 * Always use the latest iOS technology.  (Target only latest OS version)
