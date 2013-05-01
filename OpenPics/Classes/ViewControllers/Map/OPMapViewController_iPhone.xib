@@ -54,7 +54,7 @@
 					</object>
 					<object class="IBUIView" id="7731846">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">269</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIActivityIndicatorView" id="208879621">
 								<reference key="NSNextResponder" ref="7731846"/>
@@ -62,7 +62,6 @@
 								<string key="NSFrame">{{12, 11}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="7731846"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -83,7 +82,7 @@
 					</object>
 					<object class="IBUIView" id="899471011">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">269</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="1063494127">
 								<reference key="NSNextResponder" ref="899471011"/>
@@ -186,7 +185,7 @@
 					</object>
 					<object class="IBUIView" id="47965401">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">269</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="641844184">
 								<reference key="NSNextResponder" ref="47965401"/>
