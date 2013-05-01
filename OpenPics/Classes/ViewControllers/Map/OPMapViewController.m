@@ -192,6 +192,9 @@
         if( annView == nil ){
             annView = [[OPAnnotationView alloc] initWithAnnotation:opAnnotation reuseIdentifier:@"openpics"];
             annView.delegate = self;
+        } else {
+            annView.annotation = opAnnotation;
+            [annView.imageView setImageWithURL:opAnnotation.item.imageUrl];
         }
         
         return annView;

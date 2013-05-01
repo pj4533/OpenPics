@@ -18,9 +18,9 @@
     if (self) {        
         OPAnnotation* opAnnotation = (OPAnnotation*) annotation;
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-        self.leftCalloutAccessoryView = imageView;
-        [imageView setImageWithURL:opAnnotation.item.imageUrl];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
+        self.leftCalloutAccessoryView = self.imageView;
+        [self.imageView setImageWithURL:opAnnotation.item.imageUrl];
         self.canShowCallout = YES;
         [self setEnabled:YES];
         

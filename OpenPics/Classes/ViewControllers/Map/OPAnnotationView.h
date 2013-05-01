@@ -15,5 +15,6 @@
 @interface OPAnnotationView : MKPinAnnotationView
 
 @property (strong, nonatomic) id delegate;
+@property (strong, nonatomic) UIImageView* imageView;
 
 @end
