@@ -31,11 +31,11 @@
 }
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
-    
+
 }
 
 - (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
-    
+    [self upRezItem:item withCompletion:completion];
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "OPCDLProvider.h"
 #import "OPDPLAProvider.h"
 #import "OPEuropeanaProvider.h"
+#import "OPLIFEProvider.h"
 
 #import "OPAppearance.h"
 
@@ -35,7 +36,8 @@
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];
     [[OPProviderController shared] addProvider:[[OPDPLAProvider alloc] initWithProviderType:OPProviderTypeDPLA]];
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
-    
+    [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[OPViewController alloc] initWithNibName:@"OPViewController" bundle:nil];

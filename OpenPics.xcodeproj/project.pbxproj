@@ -42,6 +42,8 @@
 		0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A612D281715ED75008B6311 /* OPCDLProvider.m */; };
 		0A629F3017223B5C00E0FAD5 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */; };
 		0A629F3317223B7B00E0FAD5 /* AFEuropeanaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */; };
+		0A6A2376173583CB00029BA0 /* AFLIFEClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A2375173583CB00029BA0 /* AFLIFEClient.m */; };
+		0A6A2379173584D400029BA0 /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A2378173584D400029BA0 /* OPLIFEProvider.m */; };
 		0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */; };
 		0A864E0F172D8CFD00BE00C6 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0B172D8CFD00BE00C6 /* map.png */; };
 		0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0C172D8CFD00BE00C6 /* mapsearch.png */; };
@@ -144,6 +146,10 @@
 		0A629F2F17223B5C00E0FAD5 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
 		0A629F3117223B7B00E0FAD5 /* AFEuropeanaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaClient.h; sourceTree = "<group>"; };
 		0A629F3217223B7B00E0FAD5 /* AFEuropeanaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaClient.m; sourceTree = "<group>"; };
+		0A6A2374173583CB00029BA0 /* AFLIFEClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLIFEClient.h; sourceTree = "<group>"; };
+		0A6A2375173583CB00029BA0 /* AFLIFEClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLIFEClient.m; sourceTree = "<group>"; };
+		0A6A2377173584D400029BA0 /* OPLIFEProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPLIFEProvider.h; sourceTree = "<group>"; };
+		0A6A2378173584D400029BA0 /* OPLIFEProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPLIFEProvider.m; sourceTree = "<group>"; };
 		0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController_iPhone.xib; sourceTree = "<group>"; };
 		0A864E0B172D8CFD00BE00C6 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		0A864E0C172D8CFD00BE00C6 /* mapsearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapsearch.png; sourceTree = "<group>"; };
@@ -242,6 +248,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A6A2373173583B400029BA0 /* LIFE */,
 				0A629F2D17223B4300E0FAD5 /* Europeana */,
 				0AAB0C231719B9DF000790A0 /* DPLA */,
 				0A612D231715ED35008B6311 /* CDL */,
@@ -447,6 +454,17 @@
 				0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */,
 			);
 			path = Europeana;
+			sourceTree = "<group>";
+		};
+		0A6A2373173583B400029BA0 /* LIFE */ = {
+			isa = PBXGroup;
+			children = (
+				0A6A2374173583CB00029BA0 /* AFLIFEClient.h */,
+				0A6A2375173583CB00029BA0 /* AFLIFEClient.m */,
+				0A6A2377173584D400029BA0 /* OPLIFEProvider.h */,
+				0A6A2378173584D400029BA0 /* OPLIFEProvider.m */,
+			);
+			path = LIFE;
 			sourceTree = "<group>";
 		};
 		0AAB0C231719B9DF000790A0 /* DPLA */ = {
@@ -699,6 +717,8 @@
 				0A310F1817289091007378D0 /* OPAnnotation.m in Sources */,
 				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
+				0A6A2376173583CB00029BA0 /* AFLIFEClient.m in Sources */,
+				0A6A2379173584D400029BA0 /* OPLIFEProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
