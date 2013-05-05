@@ -22,7 +22,6 @@
 
 #import "OPLIFEProvider.h"
 #import "OPImageItem.h"
-#import "AFLIFEClient.h"
 #import "TTTURLRequestFormatter.h"
 #import "AFJSONRequestOperation.h"
 
@@ -43,9 +42,12 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
     
     NSString* startValue = [NSString stringWithFormat:@"%d", (pageNumber.integerValue - 1) * 20];
-    NSString* queryUrlString = [NSString stringWithFormat:@"http://images.google.com/search?q=%@ source:life&tbm=isch&sout=1&biw=1899&bih=1077&sa=N&start=%@", queryString,startValue];
+    NSString* queryUrlString = [NSString stringWithFormat:@"http://images.google.com/search?q=%@ source:life&tbm=isch&sout=1&biw=1899&bih=1077&sa=N&start=%@&tbs=isz:m", queryString,startValue];
     queryUrlString = [queryUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:queryUrlString];
+    
+    NSLog(@"(LIFE GET) %@", queryUrlString);
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -57,28 +59,30 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         NSMutableArray* retArray = [NSMutableArray array];
         for (int i=1; i < comp.count; i++) {
             NSArray* comp2 = [comp[i] componentsSeparatedByString:@".html"];
-            
-            NSString* urlString = [NSString stringWithFormat:@"http://www.gstatic.com/hostedimg/%@_large", comp2[0]];
+                        
+            NSString* urlString = [NSString stringWithFormat:@"http://www.gstatic.com/hostedimg/%@_landing", comp2[0]];
             NSURL* imageUrl = [NSURL URLWithString:urlString];
             NSString* titleString = @"";
-            
-            NSArray* titleComps = [comp2[1] componentsSeparatedByString:@"<cite title=\"images.google.com\">images.google.com</cite><br>"];
-            if (titleComps.count == 2) {
-                NSArray* innerComps = [titleComps[1] componentsSeparatedByString:@"<br>"];
-                titleString = innerComps[0];
-                titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
-                titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
-                titleString = [titleString stringByReplacingOccurrencesOfString:@" - Hosted" withString:@""];
-            }
+//
+//            NSArray* titleComps = [comp2[1] componentsSeparatedByString:@"<cite title=\"images.google.com\">images.google.com</cite><br>"];
+//            if (titleComps.count == 2) {
+//                NSArray* innerComps = [titleComps[1] componentsSeparatedByString:@"<br>"];
+//                titleString = innerComps[0];
+//                titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
+//                titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
+//                titleString = [titleString stringByReplacingOccurrencesOfString:@" - Hosted" withString:@""];
+//            }
 
             NSDictionary* opImageDict = @{
                                           @"imageUrl": imageUrl,
-                                          @"title" : titleString
+                                          @"title" : titleString,
+                                          @"providerSpecific" : @{@"imageId": comp2[0]}
                                           };
             imageIds[comp2[0]] = opImageDict;
         }
         
-        for (NSDictionary* thisImage in imageIds.allValues) {
+        for (NSString* thisKey in imageIds.allKeys) {
+            NSDictionary* thisImage = imageIds[thisKey];
             OPImageItem* item = [[OPImageItem alloc] initWithDictionary:thisImage];
             [retArray addObject:item];
         }
@@ -96,44 +100,40 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         NSLog(@"%@", error);
     }];
     [httpOperation start];
-//    
-//    
-//    
-//
-//    
-//    [[AFLIFEClient sharedClient] getPath:@"customsearch/v1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//        NSLog(@"%@", responseObject);
-//        NSArray* resultArray = responseObject[@"items"];
-//        NSMutableArray* retArray = [NSMutableArray array];
-//        for (NSDictionary* itemDict in resultArray) {
-//            NSURL* imageUrl = [NSURL URLWithString:itemDict[@"link"]];
-//            NSString* titleString = @"";
-//            if (itemDict[@"title"]) {
-//                titleString = itemDict[@"title"];
-//            }
-//            NSDictionary* opImageDict = @{
-//                                          @"imageUrl": imageUrl,
-//                                          @"title" : titleString
-//                                          };
-//            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-//            [retArray addObject:item];
-//        }
-//        
-//        BOOL returnCanLoadMore = NO;
-////        NSDictionary* pagesDict = responseObject[@"pages"];
-////        NSInteger thisPage = [pagesDict[@"current"] integerValue];
-////        NSInteger totalPages = [pagesDict[@"total"] integerValue];
-////        if (thisPage <= totalPages) {
-////            returnCanLoadMore = YES;
-////        }
-//        
-//        if (completion) {
-//            completion(retArray,returnCanLoadMore);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
-//    }];
 }
+
+- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+    
+    NSString* imageId = item.providerSpecific[@"imageId"];
+    
+    NSString* urlString = item.imageUrl.absoluteString;
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"_landing" withString:@"_large"];
+    
+    NSString* queryUrlString = [NSString stringWithFormat:@"http://images.google.com/hosted/life/%@.html", imageId];
+    NSURL *url = [NSURL URLWithString:queryUrlString];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+        NSArray* compArray = [webpageHTML componentsSeparatedByString:@"<table id=\"ltable\"><div>"];
+        NSArray* compArray2 = [compArray[1] componentsSeparatedByString:@"</div>"];
+        item.title = compArray2[0];
+        item.title = [item.title stringByReplacingOccurrencesOfString:@"<strong>" withString:@""];
+        item.title = [item.title stringByReplacingOccurrencesOfString:@"</strong>" withString:@""];
+        
+        if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
+            if (completion) {
+                completion([NSURL URLWithString:urlString], item);
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    [httpOperation start];
+    
+}
+
 
 @end
