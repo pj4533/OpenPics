@@ -63,15 +63,6 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
             NSString* urlString = [NSString stringWithFormat:@"http://www.gstatic.com/hostedimg/%@_landing", comp2[0]];
             NSURL* imageUrl = [NSURL URLWithString:urlString];
             NSString* titleString = @"";
-//
-//            NSArray* titleComps = [comp2[1] componentsSeparatedByString:@"<cite title=\"images.google.com\">images.google.com</cite><br>"];
-//            if (titleComps.count == 2) {
-//                NSArray* innerComps = [titleComps[1] componentsSeparatedByString:@"<br>"];
-//                titleString = innerComps[0];
-//                titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
-//                titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
-//                titleString = [titleString stringByReplacingOccurrencesOfString:@" - Hosted" withString:@""];
-//            }
 
             NSDictionary* opImageDict = @{
                                           @"imageUrl": imageUrl,
@@ -118,10 +109,21 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         NSString* webpageHTML = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
         NSArray* compArray = [webpageHTML componentsSeparatedByString:@"<table id=\"ltable\"><div>"];
-        NSArray* compArray2 = [compArray[1] componentsSeparatedByString:@"</div>"];
+        NSArray* compArray2 = [compArray[1] componentsSeparatedByString:@"<tr><th>"];
         item.title = compArray2[0];
         item.title = [item.title stringByReplacingOccurrencesOfString:@"<strong>" withString:@""];
-        item.title = [item.title stringByReplacingOccurrencesOfString:@"</strong>" withString:@""];
+        item.title = [item.title stringByReplacingOccurrencesOfString:@"</strong>" withString:@" "];
+        item.title = [item.title stringByReplacingOccurrencesOfString:@"<div>" withString:@""];
+        item.title = [item.title stringByReplacingOccurrencesOfString:@"</div>" withString:@""];
+        
+        NSRange textRange;
+        textRange =[compArray[1] rangeOfString:@"Date taken:</th><td>"];
+        if(textRange.location != NSNotFound) {
+            NSArray* dateComps = [compArray[1] componentsSeparatedByString:@"Date taken:</th><td>"];
+            NSArray* dateComps2 = [dateComps[1] componentsSeparatedByString:@"</td>"];
+            item.title = [item.title stringByAppendingFormat:@" (%@)", dateComps2[0]];
+        }
+
         
         if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
             if (completion) {
