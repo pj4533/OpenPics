@@ -176,13 +176,15 @@
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
     if (uprezMode && uprezMode.boolValue) {
-        [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
+        [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
+            self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
-        [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl) {
+        [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
+            self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     }

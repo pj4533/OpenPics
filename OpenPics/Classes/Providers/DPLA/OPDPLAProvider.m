@@ -96,7 +96,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
 
 // Nothing to see here....please move along
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
 
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
@@ -123,7 +123,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             NSString* imageInfoUrlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=1", hostName, collectionString,idString];
             NSURL *url = [NSURL URLWithString:imageInfoUrlString];
             NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048";
-            [self contentDMImageInfoWithURL:url withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
+            [self contentDMImageInfoWithURL:url withItem:item withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
         }
     } else if ([providerName isEqualToString:@"Digital Library of Georgia"]) {
         NSLog(@"KNOWN: %@", providerName);
@@ -183,7 +183,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                         NSString* imageInfoUrlString = [NSString stringWithFormat:@"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=1", hostName, collectionString,idString];
                         NSURL *url = [NSURL URLWithString:imageInfoUrlString];
                         NSString* urlFormat = @"http://%@/utils/ajaxhelper/?CISOROOT=%@&CISOPTR=%@&action=2&DMSCALE=%f&DMWIDTH=2048&DMHEIGHT=2048&DMX=0&DMY=0&DMROTATE=0&DMTEXT=";
-                        [self contentDMImageInfoWithURL:url withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
+                        [self contentDMImageInfoWithURL:url withItem:item withHostName:hostName withCollection:collectionString withID:idString withURLFormat:urlFormat withCompletion:completion];
                     }
                 }
             }
@@ -200,13 +200,13 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
         if (completion) {
-            completion([NSURL URLWithString:urlString]);
+            completion([NSURL URLWithString:urlString],item);
         }
     }
 
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
     
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
@@ -217,7 +217,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
         if (completion) {
-            completion([NSURL URLWithString:urlString]);
+            completion([NSURL URLWithString:urlString], item);
         }
     }
 }
@@ -341,11 +341,12 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 }
 
 - (void) contentDMImageInfoWithURL:(NSURL*) url
+                          withItem:(OPImageItem*) item
                       withHostName:(NSString*) hostName
                     withCollection:(NSString*) collectionString
                             withID:(NSString*) idString
                      withURLFormat:(NSString*) urlFormat
-                    withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+                    withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -373,7 +374,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                     scaledUrlString = [NSString stringWithFormat:urlFormat, hostName, collectionString,idString, scalePercent];
                 }
                 if (completion) {
-                    completion([NSURL URLWithString:scaledUrlString]);
+                    completion([NSURL URLWithString:scaledUrlString], item);
                 }
             }
         }
