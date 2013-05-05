@@ -99,7 +99,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     }];
 }
 
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl))completion {
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* europeanaItem = providerSpecific[@"europeanaItem"];
     NSURL* url = [NSURL URLWithString:europeanaItem];
@@ -205,7 +205,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                                         
                                         NSString* bigpicUrlString = quotesComponents.lastObject;
                                         bigpicUrlString = [bigpicUrlString stringByReplacingOccurrencesOfString:@"1280x1280" withString:@"800x600"];
-                                        completion([NSURL URLWithString:bigpicUrlString]);
+                                        completion([NSURL URLWithString:bigpicUrlString],item);
                                     }
                                 }
                             }
@@ -235,7 +235,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                                     if (quotesComponents && quotesComponents.count) {
                                         NSString* finalUprezedUrlString = [NSString stringWithFormat:@"http://wellcomeimages.org/indexplus/%@", quotesComponents.lastObject];
                                         if (completion) {
-                                            completion([NSURL URLWithString:finalUprezedUrlString]);
+                                            completion([NSURL URLWithString:finalUprezedUrlString],item);
                                         }
                                     }
                                 }
@@ -264,7 +264,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                                     NSArray* quotesComponents = [components[0] componentsSeparatedByString:@"\""];
                                     if (quotesComponents && quotesComponents.count) {
                                         if (completion) {
-                                            completion([NSURL URLWithString:quotesComponents.lastObject]);
+                                            completion([NSURL URLWithString:quotesComponents.lastObject],item);
                                         }
                                     }
                                 }
@@ -292,7 +292,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                                     NSArray* quotesComponents = [components[0] componentsSeparatedByString:@"\""];
                                     if (quotesComponents && quotesComponents.count) {
                                         if (completion) {
-                                            completion([NSURL URLWithString:quotesComponents.lastObject]);
+                                            completion([NSURL URLWithString:quotesComponents.lastObject],item);
                                         }
                                     }
                                 }
@@ -318,7 +318,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         
         if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
             if (completion) {
-                completion([NSURL URLWithString:urlString]);
+                completion([NSURL URLWithString:urlString],item);
             }
         }
         
