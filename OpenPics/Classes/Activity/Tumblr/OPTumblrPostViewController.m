@@ -11,7 +11,9 @@
 #import "OPShareToTumblrActivity.h"
 #import "OPActivityTokens.h"
 
-@interface OPTumblrPostViewController ()
+@interface OPTumblrPostViewController () {
+    DWTagList* _tagList;
+}
 
 @end
 
@@ -69,11 +71,12 @@
     
     self.tagsTextField.tag = 1;
     
-    self.thumbnailImageView.image = self.image;
+    self.thumbnailImageView.image = self.item[@"image"];
     self.captionTextView.text = self.captionText;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [self setupSuggestedTags];
 }
 
 - (void)viewDidUnload
@@ -93,6 +96,51 @@
     return YES;
 }
 
+#pragma mark - Helpers
+
+- (void) setupSuggestedTags {
+    NSMutableOrderedSet* tags = [[NSMutableOrderedSet alloc] init];
+    NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace | NSLinguisticTaggerOmitPunctuation | NSLinguisticTaggerJoinNames;
+    NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes: [NSLinguisticTagger availableTagSchemesForLanguage:@"en"] options:options];
+    
+    
+    [tags addObject:@"vintage"];
+    
+    tagger.string = self.item[@"title"];
+    [tagger enumerateTagsInRange:NSMakeRange(0, [tagger.string length]) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
+        NSString *token = [tagger.string substringWithRange:tokenRange];
+        
+        if (
+            [tag isEqualToString:NSLinguisticTagOtherWord] ||
+            [tag isEqualToString:NSLinguisticTagNoun] ||
+            [tag isEqualToString:NSLinguisticTagOrganizationName] ||
+            [tag isEqualToString:NSLinguisticTagPlaceName] ||
+            [tag isEqualToString:NSLinguisticTagNumber] ||
+            [tag isEqualToString:NSLinguisticTagPersonalName]
+            ) {
+            [tags addObject:token];
+        }
+    }];
+    
+    self.tags = tags;
+    
+    if (_tagList) {
+        [_tagList removeFromSuperview];
+    }
+    
+    // Initalise and set the frame of the tag list
+    _tagList = [[DWTagList alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tagsViewBackground.frame.size.width, self.tagsViewBackground.frame.size.height)];
+    
+    // Add the items to the array
+    [_tagList setTags:[self.tags array]];
+    _tagList.tagDelegate = self;
+    
+    // Add the taglist to your UIView
+    [self.tagsViewBackground addSubview:_tagList];    
+}
+
+#pragma mark - Actions
+
 - (IBAction)cancelTapped:(id)sender {
     [self.delegate didCancel];
 }
@@ -102,10 +150,6 @@
     [self.delegate didPostTumblrWithTitle:self.captionTextView.text withTags:self.tagsTextField.text withState:stateString.lowercaseString intoBlogHostName:self.blogNameLabel.text];
 }
 
-- (void) didSelectBlogWithHostName:(NSString *)blogHostName {
-    self.blogNameLabel.text = blogHostName;
-}
-
 - (IBAction)switchBlogTapped:(id)sender {
     OPTumblrBlogViewController* tumblrBlog = [[OPTumblrBlogViewController alloc] initWithNibName:@"OPTumblrBlogViewController" bundle:nil];
     tumblrBlog.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -113,5 +157,18 @@
     tumblrBlog.delegate = self;
     [self presentViewController:tumblrBlog animated:YES completion:nil];
 }
+
+#pragma mark - OPTumblrBlogDelegate
+
+- (void) didSelectBlogWithHostName:(NSString *)blogHostName {
+    self.blogNameLabel.text = blogHostName;
+}
+
+#pragma mark - DWTagsListDelegate
+
+- (void)selectedTag:(NSString*)tagName {
+    self.tagsTextField.text = [self.tagsTextField.text stringByAppendingFormat:@"%@,", tagName];
+}
+
 
 @end

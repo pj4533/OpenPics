@@ -37,8 +37,11 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
 - (BOOL) canPerformWithActivityItems:(NSArray *)activityItems {
     for (id thisItem in activityItems) {
         if ([thisItem isKindOfClass:[UIImage class]]) {
+            NSLog(@"KIND: IMAGE");
             return YES;
-        }
+        } else if ([thisItem isKindOfClass:[NSDictionary class]])
+            NSLog(@"KIND: DICT");
+        return YES;
     }
     
     return NO;
@@ -47,12 +50,12 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
 - (void) prepareWithActivityItems:(NSArray *)activityItems {
 
     for (id thisItem in activityItems) {
-        if ([thisItem isKindOfClass:[UIImage class]]) {
-            _item = @{@"image":thisItem};
+        if ([thisItem isKindOfClass:[NSDictionary class]]) {
+            _item = thisItem;
             _tumblrVC = [[OPTumblrPostViewController alloc] initWithNibName:@"OPTumblrPostViewController" bundle:nil];
             _tumblrVC.modalPresentationStyle = UIModalPresentationFormSheet;
             _tumblrVC.captionTextView.text = @"";
-            _tumblrVC.image = (UIImage*) thisItem;
+            _tumblrVC.item = thisItem;
             _tumblrVC.delegate = self;
         }
     }
@@ -77,7 +80,7 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
     AFTumblrAPIClient* tumblrClient = [[AFTumblrAPIClient alloc] initWithKey:kOPACTIVITYTOKEN_TUMBLR
                                                                       secret:kOPACTIVITYSECRET_TUMBLR
                                                            callbackUrlString:kTumblrCallbackURLString];
-    [tumblrClient postPhotoWithData:UIImageJPEGRepresentation([_item objectForKey:@"image"], 0.8)
+    [tumblrClient postPhotoWithData:UIImageJPEGRepresentation(_item[@"image"], 0.8)
                            withTags:tags
                           withState:state
                    withClickThruUrl:@""

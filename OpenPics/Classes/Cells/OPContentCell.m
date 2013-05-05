@@ -176,14 +176,19 @@
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
     if (uprezMode && uprezMode.boolValue) {
+        // this is kind of weird cause in some cases the item is modified by the provider on uprezing
+        // I should probably somehow change the main reference to the object so we don't have different
+        // versions?
         [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
+            self.item = item;
             self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
         [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
+            self.item = item;
             self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
@@ -273,8 +278,13 @@
 
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
     
-    if (self.internalScrollView.zoomScale == 1.0)
-        return self.internalScrollView.imageView.image;
+    if (self.internalScrollView.zoomScale == 1.0) {
+        NSDictionary* returnItem = @{
+                                     @"image":self.internalScrollView.imageView.image,
+                                     @"title":self.item.title
+                                     };
+        return returnItem;
+    }
     
     CGRect rect = CGRectMake(0, 0, self.internalScrollView.frame.size.width, self.internalScrollView.frame.size.height);
     CGSize pageSize = rect.size;
@@ -284,9 +294,13 @@
     CGContextTranslateCTM(resizedContext, -self.internalScrollView.contentOffset.x, -self.internalScrollView.contentOffset.y);
     [self.internalScrollView.layer renderInContext:resizedContext];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
-    return image;
+    
+    NSDictionary* returnItem = @{
+                                 @"image":image,
+                                 @"title":self.item.title
+                                 };
+    return returnItem;
 }
 
 @end
