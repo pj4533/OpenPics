@@ -35,6 +35,8 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 Sharing (Tumblr, Twitter & Facebook) uses UIActivitys from iOS6.  The Twitter and Facebook are the built in implementations, however the Tumblr is custom.  The tokens for Tumblr are handled the same way as Providers above.  The tokens go in the OPActivityTokens.h file as a define.  I have ifdef'd out that stuff, so you should still be able to run without Tumblr tokens.  (Tumblr just won't show up as a Activity choice)
 
+One fun thing is that the Tumblr UIActivity uses [NSLinguisticTagger](http://nshipster.com/nslinguistictagger/) to generate suggested tags by analyzing the title of the image and attempting to detect proper names, places and dates.  Not always accurate, but it is helpful!
+
 ## Dependencies
 
 * AFNetworking
