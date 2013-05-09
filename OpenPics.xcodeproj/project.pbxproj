@@ -32,6 +32,7 @@
 		0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
+		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -127,6 +128,8 @@
 		0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPScrollView.m; sourceTree = "<group>"; };
 		0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
+		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A609EBB171072BD0084735B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -217,6 +220,7 @@
 				0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */,
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
 				396F3F854DE14ED09163A40D /* libPods.a in Frameworks */,
+				0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +401,7 @@
 		0A609EB8171072BD0084735B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A4ADA25173B228D00F08A86 /* Crashlytics.framework */,
 				0A310F1417289038007378D0 /* MapKit.framework */,
 				0A609EB9171072BD0084735B /* UIKit.framework */,
 				0A609EBB171072BD0084735B /* Foundation.framework */,
@@ -413,6 +418,7 @@
 				0A44CBDF171074EF00D7C1B6 /* Classes */,
 				0A609EC8171072BD0084735B /* OPAppDelegate.h */,
 				0A609EC9171072BD0084735B /* OPAppDelegate.m */,
+				0A4ADA27173B284000F08A86 /* OPAppTokens.h */,
 				0A609EC0171072BD0084735B /* Supporting Files */,
 			);
 			path = OpenPics;
@@ -556,6 +562,7 @@
 				0A609EB3171072BD0084735B /* Frameworks */,
 				0A609EB4171072BD0084735B /* Resources */,
 				811ED3184DA5491EA4541985 /* Copy Pods Resources */,
+				0A4ADA24173B226400F08A86 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -649,6 +656,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A4ADA24173B226400F08A86 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 8c95b6fdd8883915ed918c51131016451ca2e1db";
+		};
 		0A5C19371711BB5D00979A7C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -660,7 +680,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/Classes/Activity/OPActivityTokens.h\n";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/Classes/Activity/OPActivityTokens.h\ntouch OpenPics/OPAppTokens.h\n";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -795,6 +815,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2655F4B36C704F96B3CB86FC /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
@@ -808,6 +832,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2655F4B36C704F96B3CB86FC /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";

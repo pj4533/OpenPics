@@ -7,6 +7,7 @@
 //
 
 #import "OPAppDelegate.h"
+#import "OPAppTokens.h"
 #import "AFNetworking.h"
 #import "AFOAuth1Client.h"
 #import "OPViewController.h"
@@ -20,6 +21,7 @@
 #import "OPLIFEProvider.h"
 
 #import "OPAppearance.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation OPAppDelegate
 
@@ -29,6 +31,10 @@
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+#ifdef kOPAPPTOKEN_CRASHLYTICS
+    [Crashlytics startWithAPIKey:kOPAPPTOKEN_CRASHLYTICS];
+#endif
+    
     [OPAppearance setupGlobalAppearance];
     
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
