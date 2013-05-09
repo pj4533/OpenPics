@@ -1,4 +1,4 @@
-# OpenPics
+# OpenPics  
 
 An open source iOS application for viewing images from multiple remote sources. Get it on the [app store](https://itunes.apple.com/us/app/openpics/id633423505?ls=1&mt=8).
 
@@ -77,4 +77,6 @@ PJ Gray
 OpenPics is available under the GPLv3 license.  You can modify it and release it, but its gotta be free.
 
 See the LICENSE file for more info.
+
+![OSI](OpenPics/Images/OSI/OSI-logo-100x117.png "OSI")
 
