@@ -24,6 +24,22 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     return self;
 }
 
+- (OPImageItem*) getItemFromDict:(NSDictionary*) itemDict {
+    NSString* imageId = itemDict[@"imageID"];
+    if (imageId) {
+        NSString* urlString = [NSString stringWithFormat:@"http://images.nypl.org/index.php?id=%@&t=w", imageId];
+        NSURL* imageUrl = [NSURL URLWithString:urlString];
+        NSString* titleString = @"";
+        if (itemDict[@"title"]) {
+            titleString = itemDict[@"title"];
+        }
+        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+        return item;
+    }
+    return nil;
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
@@ -49,21 +65,20 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     
     [nyplClient getPath:@"items/search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* responseDict = responseObject[@"nyplAPI"][@"response"];
-        NSArray* resultArray = responseDict[@"result"];
+        id result = responseDict[@"result"];
         NSMutableArray* retArray = [NSMutableArray array];
-        for (NSDictionary* itemDict in resultArray) {
-            
-            NSString* imageId = itemDict[@"imageID"];
-            if (imageId) {
-                NSString* urlString = [NSString stringWithFormat:@"http://images.nypl.org/index.php?id=%@&t=w", imageId];
-                NSURL* imageUrl = [NSURL URLWithString:urlString];
-                NSString* titleString = @"";
-                if (itemDict[@"title"]) {
-                    titleString = itemDict[@"title"];
+        
+        if ([result isKindOfClass:[NSArray class]]) {
+            for (NSDictionary* itemDict in result) {
+                OPImageItem* newItem = [self getItemFromDict:itemDict];
+                if (newItem) {
+                    [retArray addObject:newItem];
                 }
-                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                [retArray addObject:item];
+            }
+        } else if ([result isKindOfClass:[NSDictionary class]]){
+            OPImageItem* newItem = [self getItemFromDict:result];
+            if (newItem) {
+                [retArray addObject:newItem];
             }
         }
         
