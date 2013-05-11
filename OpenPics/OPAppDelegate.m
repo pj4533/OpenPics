@@ -64,8 +64,7 @@
 #if !TARGET_IPHONE_SIMULATOR
 #ifdef kOPAPPTOKEN_STATHAT
     AFStatHatClient* stathat = [[AFStatHatClient alloc] initWithEZKey:kOPAPPTOKEN_STATHAT];
-    NSTimeInterval secondsAppWasActive = [[NSDate date] timeIntervalSinceDate:_appBecameActiveDate];
-    [stathat postEZStat:@"Length of time using OpenPics (in minutes)" withValue:@(secondsAppWasActive/60)];
+    [stathat postEZStat:@"Seconds using OpenPics" withValue:@([[NSDate date] timeIntervalSinceDate:_appBecameActiveDate])];
 #endif
 #endif
 }
