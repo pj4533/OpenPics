@@ -31,7 +31,6 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                              @"q" : queryString,
                              @"sp" : pageNumber,
                              @"fo" : @"json",
-                             @"fa" : @"displayed:anywhere",
                              @"c" : @"100"
                              };
 
@@ -48,7 +47,17 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                 if (itemDict[@"title"]) {
                     titleString = itemDict[@"title"];
                 }
-                NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
+
+                if (itemDict[@"links"]) {
+                    providerSpecific[@"links"] = itemDict[@"links"];
+                }
+
+                NSDictionary* opImageDict = @{
+                                              @"imageUrl": imageUrl,
+                                              @"title" : titleString,
+                                              @"providerSpecific": providerSpecific
+                                              };
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];                
             }
@@ -58,7 +67,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         NSDictionary* pagesDict = responseObject[@"pages"];
         NSInteger thisPage = [pagesDict[@"current"] integerValue];
         NSInteger totalPages = [pagesDict[@"total"] integerValue];
-        if (thisPage <= totalPages) {
+        if (thisPage < totalPages) {
             returnCanLoadMore = YES;
         }
 
@@ -69,5 +78,50 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
 }
+
+- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+}
+
+// Nothing to see here....please move along
+- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+    NSDictionary* providerSpecific = item.providerSpecific;
+    if (providerSpecific[@"links"]) {
+        NSDictionary* linksDict = providerSpecific[@"links"];
+        if (linksDict[@"resource"]) {
+            NSString* resourceUrlString = [NSString stringWithFormat:@"%@?fo=json",linksDict[@"resource"]];
+            NSURL* url = [NSURL URLWithString:resourceUrlString];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+
+                NSString* urlString = item.imageUrl.absoluteString;
+                if (JSON[@"resource"]) {
+                    NSDictionary* resourceDict = JSON[@"resource"];
+                    NSInteger largestSize = [resourceDict[@"largest_s"] intValue];
+                    NSInteger largerSize = [resourceDict[@"larger_s"] intValue];
+                    NSInteger largeSize = [resourceDict[@"large_s"] intValue];
+                    
+                    if ((largestSize > 0) && (largestSize < 12582912)) {
+                        urlString = resourceDict[@"largest"];
+                    } else if ((largerSize > 0) && (largerSize < 12582912)) {
+                        urlString = resourceDict[@"larger"];
+                    } else if ((largeSize > 0) && (largeSize < 12582912)) {
+                        urlString = resourceDict[@"large"];
+                    }
+                }
+
+                if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
+                    if (completion) {
+                        completion([NSURL URLWithString:urlString],item);
+                    }
+                }
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                NSLog(@"%@",error);
+            }];
+            [operation start];
+        }
+    }
+    
+}
+
 
 @end
