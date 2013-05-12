@@ -79,6 +79,8 @@
 		0ABF9E601710C11A00C29E84 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E5A1710C11A00C29E84 /* search@2x.png */; };
 		0ABF9E631710C6A800C29E84 /* disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E611710C6A800C29E84 /* disclose.png */; };
 		0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E621710C6A800C29E84 /* disclose@2x.png */; };
+		0AF2030B17400E760006D996 /* AFTroveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2030A17400E760006D996 /* AFTroveClient.m */; };
+		0AF2030E17400FAE0006D996 /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2030D17400FAE0006D996 /* OPTroveProvider.m */; };
 		0AFC230E171319DD006FFF45 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2306171319DD006FFF45 /* Icon-72.png */; };
 		0AFC230F171319DD006FFF45 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2307171319DD006FFF45 /* Icon-72@2x.png */; };
 		0AFC2310171319DD006FFF45 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2308171319DD006FFF45 /* Icon-Small-50.png */; };
@@ -198,6 +200,10 @@
 		0ABF9E5A1710C11A00C29E84 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		0ABF9E611710C6A800C29E84 /* disclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclose.png; sourceTree = "<group>"; };
 		0ABF9E621710C6A800C29E84 /* disclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclose@2x.png"; sourceTree = "<group>"; };
+		0AF2030917400E760006D996 /* AFTroveClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTroveClient.h; sourceTree = "<group>"; };
+		0AF2030A17400E760006D996 /* AFTroveClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTroveClient.m; sourceTree = "<group>"; };
+		0AF2030C17400FAE0006D996 /* OPTroveProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTroveProvider.h; sourceTree = "<group>"; };
+		0AF2030D17400FAE0006D996 /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
 		0AFC2306171319DD006FFF45 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		0AFC2307171319DD006FFF45 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		0AFC2308171319DD006FFF45 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AF2030817400E580006D996 /* Trove */,
 				0A6A2373173583B400029BA0 /* LIFE */,
 				0A629F2D17223B4300E0FAD5 /* Europeana */,
 				0AAB0C231719B9DF000790A0 /* DPLA */,
@@ -550,6 +557,17 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		0AF2030817400E580006D996 /* Trove */ = {
+			isa = PBXGroup;
+			children = (
+				0AF2030917400E760006D996 /* AFTroveClient.h */,
+				0AF2030A17400E760006D996 /* AFTroveClient.m */,
+				0AF2030C17400FAE0006D996 /* OPTroveProvider.h */,
+				0AF2030D17400FAE0006D996 /* OPTroveProvider.m */,
+			);
+			path = Trove;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -733,6 +751,8 @@
 				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A6A2379173584D400029BA0 /* OPLIFEProvider.m in Sources */,
+				0AF2030B17400E760006D996 /* AFTroveClient.m in Sources */,
+				0AF2030E17400FAE0006D996 /* OPTroveProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
