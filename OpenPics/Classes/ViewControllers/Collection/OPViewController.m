@@ -239,6 +239,14 @@
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"error getting image");
+        [UIView animateWithDuration:0.25 animations:^{
+            imageView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            imageView.image = [UIImage imageNamed:@"image_cancel"];
+            [UIView animateWithDuration:0.5 animations:^{
+                imageView.alpha = 1.0;
+            }];
+        }];
     }];
     [operation start];
     

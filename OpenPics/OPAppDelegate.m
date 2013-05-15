@@ -19,6 +19,7 @@
 #import "OPDPLAProvider.h"
 #import "OPEuropeanaProvider.h"
 #import "OPLIFEProvider.h"
+#import "OPTroveProvider.h"
 
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
@@ -50,7 +51,8 @@
     [[OPProviderController shared] addProvider:[[OPDPLAProvider alloc] initWithProviderType:OPProviderTypeDPLA]];
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
-        
+    [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[OPViewController alloc] initWithNibName:@"OPViewController" bundle:nil];
