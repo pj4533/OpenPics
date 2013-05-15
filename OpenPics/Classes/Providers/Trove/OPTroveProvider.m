@@ -65,6 +65,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         NSMutableArray* retArray = [NSMutableArray array];
         if (resultArray) {
             for (NSDictionary* itemDict in resultArray) {
+
                 NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
                 
                 NSArray* holdingArray = itemDict[@"holding"];
@@ -100,6 +101,11 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                     if (itemDict[@"snippet"]) {
                         titleString = itemDict[@"snippet"];
                     }
+                    
+                    titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
+                    titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
+                    titleString = [titleString stringByReplacingOccurrencesOfString:@"<i>" withString:@""];
+                    
                     NSDictionary* opImageDict = @{
                                                   @"imageUrl": imageUrl,
                                                   @"title" : titleString,
@@ -135,9 +141,21 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     
     NSString* providerName = providerSpecific[@"troveHoldingName"];
     
-    if ([providerName isEqualToString:@"University of Washington Libraries Digital Collections"]) {
+    if (!providerSpecific[@"troveHoldingName"]) {
+        NSLog(@"KNOWN: No Provider");
+        
+        // this is a flickr image, really I should detect this by parsing the URL and use the Flickr API to get the largest available image url
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"_t.jpg" withString:@"_b.jpg"];
+        
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"http://artsearch.nga.gov.au/Images/SML" withString:@"http://artsearch.nga.gov.au/Images/LRG"];
+    } else if ([providerName isEqualToString:@"University of Washington Libraries Digital Collections"]) {
         NSLog(@"KNOWN: %@", providerName);
         urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
+    } else if ([providerName isEqualToString:@"University of Nevada, Las Vegas Digital Collections"]) {
+        NSLog(@"KNOWN: %@", providerName);
+        // TODO: figure out contentDM version 5 - how to get image info?
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbnail.exe" withString:@"getimage.exe"];
+        urlString = [urlString stringByAppendingString:@"&action=2&DMSCALE=25&DMWIDTH=2048&DMHEIGHT=2048"];
     } else if ([providerName isEqualToString:@"University of Michigan Library Repository"]) {
         NSLog(@"KNOWN: %@", providerName);
         if (providerSpecific[@"troveHoldingValue"]) {
@@ -162,6 +180,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         }
     } else {
         NSLog(@"UNKNOWN: %@", providerName);
+        NSLog(@"URL: %@", item.imageUrl.absoluteString);
     }
     
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
