@@ -79,6 +79,8 @@
 		0ABF9E601710C11A00C29E84 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E5A1710C11A00C29E84 /* search@2x.png */; };
 		0ABF9E631710C6A800C29E84 /* disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E611710C6A800C29E84 /* disclose.png */; };
 		0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E621710C6A800C29E84 /* disclose@2x.png */; };
+		0AEB314E174322A6004102B9 /* image_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEB314C174322A6004102B9 /* image_cancel.png */; };
+		0AEB314F174322A6004102B9 /* image_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEB314D174322A6004102B9 /* image_cancel@2x.png */; };
 		0AF2030B17400E760006D996 /* AFTroveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2030A17400E760006D996 /* AFTroveClient.m */; };
 		0AF2030E17400FAE0006D996 /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2030D17400FAE0006D996 /* OPTroveProvider.m */; };
 		0AFC230E171319DD006FFF45 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC2306171319DD006FFF45 /* Icon-72.png */; };
@@ -200,6 +202,8 @@
 		0ABF9E5A1710C11A00C29E84 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		0ABF9E611710C6A800C29E84 /* disclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclose.png; sourceTree = "<group>"; };
 		0ABF9E621710C6A800C29E84 /* disclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclose@2x.png"; sourceTree = "<group>"; };
+		0AEB314C174322A6004102B9 /* image_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_cancel.png; sourceTree = "<group>"; };
+		0AEB314D174322A6004102B9 /* image_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_cancel@2x.png"; sourceTree = "<group>"; };
 		0AF2030917400E760006D996 /* AFTroveClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTroveClient.h; sourceTree = "<group>"; };
 		0AF2030A17400E760006D996 /* AFTroveClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTroveClient.m; sourceTree = "<group>"; };
 		0AF2030C17400FAE0006D996 /* OPTroveProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTroveProvider.h; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 		0ABF9E541710C11A00C29E84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				0AEB314C174322A6004102B9 /* image_cancel.png */,
+				0AEB314D174322A6004102B9 /* image_cancel@2x.png */,
 				0A864E0B172D8CFD00BE00C6 /* map.png */,
 				0A864E0E172D8CFD00BE00C6 /* map@2x.png */,
 				0A864E0C172D8CFD00BE00C6 /* mapsearch.png */,
@@ -668,6 +674,8 @@
 				0A127C02172D9AF500F6966A /* cancel_btn.png in Resources */,
 				0A127C03172D9AF500F6966A /* cancel_btn@2x.png in Resources */,
 				0A127C05172D9E7A00F6966A /* transparent.png in Resources */,
+				0AEB314E174322A6004102B9 /* image_cancel.png in Resources */,
+				0AEB314F174322A6004102B9 /* image_cancel@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
