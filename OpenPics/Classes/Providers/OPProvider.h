@@ -28,4 +28,13 @@
 
 - (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
 
+
+- (void) contentDMImageInfoWithURL:(NSURL*) url
+                          withItem:(OPImageItem*) item
+                      withHostName:(NSString*) hostName
+                    withCollection:(NSString*) collectionString
+                            withID:(NSString*) idString
+                     withURLFormat:(NSString*) urlFormat
+                    withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
+
 @end

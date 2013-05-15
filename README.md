@@ -24,6 +24,7 @@ Each remote image source gets a OPProvider class.  Providers can be easily added
 * Digital Public Library of America (https://github.com/dpla/platform)
 * Europeana (http://www.europeana.eu/portal/api-introduction.html)
 * LIFE Magazine (http://images.google.com/hosted/life)
+* National Library of Australia - Trove (http://trove.nla.gov.au/general/api)
 
 For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:
 
