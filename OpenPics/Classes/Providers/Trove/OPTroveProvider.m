@@ -63,9 +63,6 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         NSDictionary* recordsDict = pictureZone[@"records"];
         NSArray* resultArray = recordsDict[@"work"];
         
-        NSLog(@"%@", responseObject);
-        
-        
         NSMutableArray* retArray = [NSMutableArray array];
         if (resultArray) {
             for (NSDictionary* itemDict in resultArray) {
@@ -111,6 +108,10 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                         titleString = itemDict[@"snippet"];
                     }
                     
+                    if (itemDict[@"troveUrl"]) {
+                        providerSpecific[@"troveUrl"] = itemDict[@"troveUrl"];
+                    }
+                    
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"<i>" withString:@""];
@@ -153,24 +154,38 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     if (!providerSpecific[@"troveHoldingName"]) {
         NSLog(@"KNOWN: No Provider");
         
-        NSLog(@"%@", urlString);
-        
-        // this is a flickr image, really I should detect this by parsing the URL and use the Flickr API to get the largest available image url
-        urlString = [urlString stringByReplacingOccurrencesOfString:@"_t.jpg" withString:@"_b.jpg"];
         urlString = [urlString stringByReplacingOccurrencesOfString:@"http://artsearch.nga.gov.au/Images/SML" withString:@"http://artsearch.nga.gov.au/Images/LRG"];
         
         if (providerSpecific[@"troveHoldingNUC"]) {
             NSString* nuc = providerSpecific[@"troveHoldingNUC"];
             if ([nuc isEqualToString:@"WLB"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"png" withString:@"jpg"];
             } else if ([nuc isEqualToString:@"NSL"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"t.jpg" withString:@"h.jpg"];
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"_DAMt" withString:@"_DAMx"];
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"acms.sl.nsw.gov.au" withString:@"143.119.202.10"];
             } else if ([nuc isEqualToString:@"AAAR:PS"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
                 NSArray* equalsComponents = [urlString componentsSeparatedByString:@"="];
                 NSString* imageId = equalsComponents.lastObject;
                 urlString = [NSString stringWithFormat:@"http://recordsearch.naa.gov.au/NAAMedia/ShowImage.asp?B=%@&T=P&S=1",imageId];
+            } else if ([nuc isEqualToString:@"QSCL"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"t.jpg" withString:@".jpg"];
+            } else if ([nuc isEqualToString:@"YUF"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                // this is a flickr image, really I should detect this by parsing the URL and use the Flickr API to get the largest available image url
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"_t.jpg" withString:@"_b.jpg"];
+            } else if ([nuc isEqualToString:@"AAWM"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                NSString* imageId = urlString.lastPathComponent;
+                urlString = [NSString stringWithFormat:@"http://www.awm.gov.au/collection/images/screen/%@.jpg",imageId];
+            } else {
+                NSLog(@"UNKNOWN NUC: %@", nuc);
+                NSLog(@"THUMBNAIL: %@", urlString);
+                NSLog(@"TROVE URL: %@", providerSpecific[@"troveUrl"]);
             }
         }
     } else if ([providerName isEqualToString:@"University of Washington Libraries Digital Collections"]) {
@@ -204,8 +219,9 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
             [httpOperation start];
         }
     } else {
-        NSLog(@"UNKNOWN: %@", providerName);
-        NSLog(@"URL: %@", item.imageUrl.absoluteString);
+        NSLog(@"UNKNOWN PROVIDER: %@", providerName);
+        NSLog(@"THUMBNAIL: %@", urlString);
+        NSLog(@"TROVE URL: %@", providerSpecific[@"troveUrl"]);
     }
     
     if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
