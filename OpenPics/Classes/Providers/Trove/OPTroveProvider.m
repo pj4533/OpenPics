@@ -48,6 +48,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                                  @"zone": @"picture",
                                  @"encoding": @"json",
                                  @"l-availability": @"y/f",
+                                 @"l-australian": @"y",
                                  @"include": @"holdings,links,subscribinglibs,workversions",
                                  @"s":[NSString stringWithFormat:@"%d", (pageNumber.integerValue - 1) * 20]
                                  };
@@ -180,8 +181,11 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"_t.jpg" withString:@"_b.jpg"];
             } else if ([nuc isEqualToString:@"AAWM"]) {
                 NSLog(@"KNOWN NUC: %@", nuc);
-                NSString* imageId = urlString.lastPathComponent;
-                urlString = [NSString stringWithFormat:@"http://www.awm.gov.au/collection/images/screen/%@.jpg",imageId];
+                NSLog(@"THUMBNAIL: %@", urlString);
+                NSLog(@"TROVE URL: %@", providerSpecific[@"troveUrl"]);
+
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"http://cas.awm.gov.au/thumb_img/" withString:@"http://www.awm.gov.au/collection/images/screen/"];
+                urlString = [urlString stringByAppendingString:@".jpg"];
             } else {
                 NSLog(@"UNKNOWN NUC: %@", nuc);
                 NSLog(@"THUMBNAIL: %@", urlString);
