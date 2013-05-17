@@ -58,6 +58,7 @@
 		0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */; };
 		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
 		0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C281719BB35000790A0 /* AFDPLAClient.m */; };
+		0AB1AAA01745B45F00E12685 /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB1AA9F1745B45F00E12685 /* OPPopularProvider.m */; };
 		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
 		0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B21711C647004CF7A5 /* share@2x.png */; };
 		0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B31711C647004CF7A5 /* tumblr.png */; };
@@ -188,6 +189,8 @@
 		0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPDPLAProvider.m; sourceTree = "<group>"; };
 		0AAB0C271719BB35000790A0 /* AFDPLAClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLAClient.h; sourceTree = "<group>"; };
 		0AAB0C281719BB35000790A0 /* AFDPLAClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLAClient.m; sourceTree = "<group>"; };
+		0AB1AA9E1745B45F00E12685 /* OPPopularProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPopularProvider.h; sourceTree = "<group>"; };
+		0AB1AA9F1745B45F00E12685 /* OPPopularProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPopularProvider.m; sourceTree = "<group>"; };
 		0AB6B8B11711C647004CF7A5 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		0AB6B8B21711C647004CF7A5 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B31711C647004CF7A5 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr.png; sourceTree = "<group>"; };
@@ -331,6 +334,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AB1AA9D1745B43B00E12685 /* Popular */,
 				0AF2030817400E580006D996 /* Trove */,
 				0A6A2373173583B400029BA0 /* LIFE */,
 				0A629F2D17223B4300E0FAD5 /* Europeana */,
@@ -573,6 +577,15 @@
 				0AAB0C281719BB35000790A0 /* AFDPLAClient.m */,
 			);
 			path = DPLA;
+			sourceTree = "<group>";
+		};
+		0AB1AA9D1745B43B00E12685 /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				0AB1AA9E1745B45F00E12685 /* OPPopularProvider.h */,
+				0AB1AA9F1745B45F00E12685 /* OPPopularProvider.m */,
+			);
+			path = Popular;
 			sourceTree = "<group>";
 		};
 		0AB6B8BD1711C7FF004CF7A5 /* Activity */ = {
@@ -848,6 +861,7 @@
 				0AF2030E17400FAE0006D996 /* OPTroveProvider.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
+				0AB1AAA01745B45F00E12685 /* OPPopularProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
