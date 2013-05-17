@@ -24,6 +24,8 @@
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
 #import "AFStatHatClient.h"
+#import "OPBackend.h"
+
 
 @interface OPAppDelegate () {
     NSDate* _appBecameActiveDate;
@@ -52,6 +54,8 @@
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
+    
+    OPBackend* backend = [OPBackend shared];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
