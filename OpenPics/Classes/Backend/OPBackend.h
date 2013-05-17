@@ -22,10 +22,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OPBackend : NSObject {
-    BOOL _backendConfigured;
-}
+@class OPImageItem;
+@interface OPBackend : NSObject
+
+@property BOOL usingBackend;
 
 + (OPBackend *)shared;
+
+- (void) saveItem:(OPImageItem*) item;
 
 @end

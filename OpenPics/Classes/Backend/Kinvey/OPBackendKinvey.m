@@ -22,10 +22,13 @@
 
 #import "OPBackendKinvey.h"
 #import "OPBackendTokens.h"
+#import "OPImageItem.h"
+
 #import <KinveyKit/KinveyKit.h>
 
 @interface OPBackendKinvey () {
     KCSClient* _kinveyClient;
+    KCSAppdataStore* _store;
 }
 
 @end
@@ -38,12 +41,11 @@
         return nil;
     }
 #ifndef kOPBACKEND_KINVEY_APP_KEY
-    _backendConfigured = NO;
+    self.usingBackend = NO;
 #else
     _kinveyClient = [[KCSClient sharedClient] initializeKinveyServiceForAppKey:kOPBACKEND_KINVEY_APP_KEY
                                                                  withAppSecret:kOPBACKEND_KINVEY_APP_SECRET
                                                                   usingOptions:nil];
-    
     [KCSPing pingKinveyWithBlock:^(KCSPingResult *result) {
         if (result.pingWasSuccessful == YES){
             NSLog(@"Kinvey Ping Success");
@@ -52,9 +54,41 @@
         }
     }];
     
-    _backendConfigured = YES;
+    KCSCollection* collection = [KCSCollection collectionFromString:@"ImageItem" ofClass:[NSMutableDictionary class]];
+    _store = [KCSAppdataStore storeWithCollection:collection options:nil];
+    
+    self.usingBackend = YES;
 #endif
     return self;
+}
+
+- (void) saveItem:(OPImageItem*) item {
+    NSMutableDictionary* kinveyItem = [@{
+                                        @"imageUrl": item.imageUrl.absoluteString,
+                                       @"lat": [NSString stringWithFormat:@"%f", item.location.latitude],
+                                       @"lon": [NSString stringWithFormat:@"%f", item.location.longitude]
+                                        } mutableCopy];
+
+    if (item.providerSpecific)
+        kinveyItem[@"providerSpecific"] = item.providerSpecific;
+
+    if (item.title)
+        kinveyItem[@"title"] = item.title;
+
+    [_store saveObject:kinveyItem withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
+        if (errorOrNil != nil) {
+            //save failed, show an error alert
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Save failed", @"Save Failed")
+                                                                message:[errorOrNil localizedFailureReason] //not actually localized
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        } else {
+            //save was successful
+            NSLog(@"Successfully saved item (id='%@').", [objectsOrNil[0] kinveyObjectId]);
+        }
+    } withProgressBlock:nil];
 }
 
 @end

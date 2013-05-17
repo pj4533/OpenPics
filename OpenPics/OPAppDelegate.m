@@ -55,7 +55,11 @@
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
     
-    OPBackend* backend = [OPBackend shared];
+    if ([[OPBackend shared] usingBackend]) {
+        NSLog(@"Using Backend");
+    } else {
+        NSLog(@"No Backend");
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

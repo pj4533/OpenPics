@@ -940,7 +940,6 @@
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Airship\"",
 					"\"$(SRCROOT)/External/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -963,7 +962,6 @@
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Airship\"",
 					"\"$(SRCROOT)/External/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

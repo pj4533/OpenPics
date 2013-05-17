@@ -36,4 +36,7 @@
     return _shared;
 }
 
+- (void) saveItem:(OPImageItem*) item {
+}
+
 @end
