@@ -28,6 +28,7 @@
     
     self.backBackgroundView.alpha = 0.0f;
     self.shareBackgroundView.alpha = 0.0f;
+    self.favoriteBackgroundView.alpha = 0.0f;
     
     self.completedView.alpha = 0.0f;
     self.completedView.layer.masksToBounds = NO;
@@ -37,6 +38,7 @@
 
     self.backBackgroundView.layer.cornerRadius = 7.0f;
     self.shareBackgroundView.layer.cornerRadius = 7.0f;
+    self.favoriteBackgroundView.layer.cornerRadius = 7.0f;
     
     UITapGestureRecognizer* doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
     doubleTapGesture.numberOfTapsRequired = 2;
@@ -62,9 +64,6 @@
 #pragma mark - Actions
 
 - (IBAction)shareTapped:(id)sender {
-    
-#warning TEMP
-    [[OPBackend shared] saveItem:self.item];
     
     NSArray* appActivities = @[];
 
@@ -110,6 +109,12 @@
     }
 }
 
+- (IBAction)favoriteTapped:(id)sender {
+    [[OPBackend shared] saveItem:self.item];
+    
+    [self showCompletedViewWithText:@"Favorited!"];
+}
+
 - (IBAction)backTapped:(id)sender {
     
     if (self.internalScrollView.zoomScale != 1.0f) {
@@ -152,6 +157,7 @@
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 0.0f;
         self.shareBackgroundView.alpha = 0.0f;
+        self.favoriteBackgroundView.alpha = 0.0f;
         self.descriptionView.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (completion) {
@@ -164,6 +170,7 @@
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 1.0f;
         self.shareBackgroundView.alpha = 1.0f;
+        self.favoriteBackgroundView.alpha = 1.0f;
         self.descriptionView.alpha = 1.0;
     } completion:^(BOOL finished) {
         self.showingUI = YES;
