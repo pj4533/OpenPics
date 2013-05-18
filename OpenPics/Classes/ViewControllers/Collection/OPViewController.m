@@ -70,17 +70,22 @@
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     }
     
-    [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
-        _canLoadMore = canLoadMore;
-        [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-        self.items = [items mutableCopy];
-        [self.internalCollectionView reloadData];
-    }];
-
+    // if we are in view did load and we don't have any items, the do an initial search on the current provider
+    // this allows for the provider to give us a more passive experience by showing some images, rather than a blank
+    // screen.
+    //
+    // if we DO have items, skip it, as this means that we were likely called from the map.
+    if (!self.items.count) {
+        [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+            _canLoadMore = canLoadMore;
+            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+            self.items = [items mutableCopy];
+            [self.internalCollectionView reloadData];
+        }];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-#warning check map, the initial search might break it, espeicially on one result
     if (self.items.count == 1) {
         [self switchToSingleImageWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     }

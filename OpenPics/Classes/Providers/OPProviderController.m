@@ -43,6 +43,11 @@
 }
 
 - (OPProvider*) getProviderWithType:(NSString*) providerType {
+    for (OPProvider* thisProvider in _providers) {
+        if ([thisProvider.providerType isEqualToString:providerType])
+            return thisProvider;
+    }
+    
     return nil;
 }
 

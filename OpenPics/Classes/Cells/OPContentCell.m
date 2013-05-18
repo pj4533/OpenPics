@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "OPShareToTumblrActivity.h"
 #import "OPProvider.h"
+#import "OPProviderController.h"
 #import "OPBackend.h"
 
 @interface OPContentCell () {
@@ -179,18 +180,20 @@
 
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+    
+    OPProvider* thisItemProvider = [[OPProviderController shared] getProviderWithType:self.item.providerType];
     if (uprezMode && uprezMode.boolValue) {
         // this is kind of weird cause in some cases the item is modified by the provider on uprezing
         // I should probably somehow change the main reference to the object so we don't have different
         // versions?
-        [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
-        [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             self.titleLabel.text = item.title;
