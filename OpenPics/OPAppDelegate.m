@@ -21,6 +21,7 @@
 #import "OPLIFEProvider.h"
 #import "OPTroveProvider.h"
 #import "OPPopularProvider.h"
+#import "OPFavoritesProvider.h"
 
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
@@ -51,6 +52,7 @@
     if ([[OPBackend shared] usingBackend]) {
         NSLog(@"Using Backend");
         [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
+        [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
     } else {
         NSLog(@"No Backend");
     }

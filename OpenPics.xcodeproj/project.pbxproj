@@ -55,6 +55,7 @@
 		0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0E172D8CFD00BE00C6 /* map@2x.png */; };
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
+		0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6CAC91747E61700DB4C18 /* OPFavoritesProvider.m */; };
 		0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */; };
 		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
 		0AAB0C291719BB35000790A0 /* AFDPLAClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C281719BB35000790A0 /* AFDPLAClient.m */; };
@@ -183,6 +184,8 @@
 		0A864E0E172D8CFD00BE00C6 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
+		0AA6CAC81747E61700DB4C18 /* OPFavoritesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFavoritesProvider.h; sourceTree = "<group>"; };
+		0AA6CAC91747E61700DB4C18 /* OPFavoritesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFavoritesProvider.m; sourceTree = "<group>"; };
 		0AA7C6D217235C72008FDFA6 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
 		0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DefObject.m"; sourceTree = "<group>"; };
 		0AAB0C241719B9FD000790A0 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
@@ -334,6 +337,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AA6CAC71747E60200DB4C18 /* Favorites */,
 				0AB1AA9D1745B43B00E12685 /* Popular */,
 				0AF2030817400E580006D996 /* Trove */,
 				0A6A2373173583B400029BA0 /* LIFE */,
@@ -566,6 +570,15 @@
 				0A6A2378173584D400029BA0 /* OPLIFEProvider.m */,
 			);
 			path = LIFE;
+			sourceTree = "<group>";
+		};
+		0AA6CAC71747E60200DB4C18 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0AA6CAC81747E61700DB4C18 /* OPFavoritesProvider.h */,
+				0AA6CAC91747E61700DB4C18 /* OPFavoritesProvider.m */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		0AAB0C231719B9DF000790A0 /* DPLA */ = {
@@ -862,6 +875,7 @@
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
 				0AB1AAA01745B45F00E12685 /* OPPopularProvider.m in Sources */,
+				0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

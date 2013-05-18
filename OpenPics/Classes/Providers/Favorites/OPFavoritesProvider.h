@@ -1,4 +1,4 @@
-// OPBackend.m
+// OPFavoritesProvider.h
 // 
 // Copyright (c) 2013 Say Goodnight Software
 //
@@ -20,34 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "OPBackend.h"
-#import "OPBackendKinvey.h"
+#import "OPProvider.h"
 
-@implementation OPBackend
+extern NSString* const OPProviderTypeFavorites;
 
-+ (OPBackend *)shared {
-
-    static OPBackend *_shared = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _shared = [[OPBackendKinvey alloc] init];
-    });
-    
-    return _shared;
-}
-
-- (void) saveItem:(OPImageItem*) item {
-}
-
-- (void) getItemsWithQuery:(NSString*) queryString
-            withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-}
-
-- (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
-                         withPageNumber:(NSNumber*) pageNumber
-                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    
-}
+@interface OPFavoritesProvider : OPProvider
 
 @end

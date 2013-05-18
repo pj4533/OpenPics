@@ -46,14 +46,7 @@
     _kinveyClient = [[KCSClient sharedClient] initializeKinveyServiceForAppKey:kOPBACKEND_KINVEY_APP_KEY
                                                                  withAppSecret:kOPBACKEND_KINVEY_APP_SECRET
                                                                   usingOptions:nil];
-    [KCSPing pingKinveyWithBlock:^(KCSPingResult *result) {
-        if (result.pingWasSuccessful == YES){
-            NSLog(@"Kinvey Ping Success");
-        } else {
-            NSLog(@"Kinvey Ping Failed");
-        }
-    }];
-    
+
     KCSCollection* collection = [KCSCollection collectionFromString:@"ImageItem" ofClass:[NSMutableDictionary class]];
     _store = [KCSAppdataStore storeWithCollection:collection options:nil];
     
@@ -61,6 +54,50 @@
 #endif
     return self;
 }
+
+- (void) getItemsWithKCSQuery:(KCSQuery*) query
+            withPageNumber:(NSNumber*) pageNumber
+                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    
+    query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:20];
+    
+    NSInteger countToStart = 0;
+    if (pageNumber) {
+        countToStart = (pageNumber.integerValue * 20) - 20;
+    }
+    
+    query.skipModifier = [[KCSQuerySkipModifier alloc] initWithcount:countToStart];
+
+    KCSQuerySortModifier* dateStort = [[KCSQuerySortModifier alloc] initWithField:@"date" inDirection:kKCSDescending];
+    [query addSortModifier:dateStort];
+
+    [_store countWithQuery:query completion:^(unsigned long count, NSError *errorOrNil) {
+        NSLog(@"There are %ld elements", count);
+        [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
+            if (errorOrNil != nil) {
+                //An error happened, just log for now
+                NSLog(@"An error occurred on fetch: %@", errorOrNil);
+            } else {
+                NSMutableArray* imageItems = [NSMutableArray array];
+                for (NSDictionary* thisObject in objectsOrNil) {
+                    OPImageItem* newImageItem = [[OPImageItem alloc] initWithDictionary:thisObject];
+                    [imageItems addObject:newImageItem];
+                }
+                
+                BOOL moreToLoad = NO;
+                
+                if ((countToStart + imageItems.count) < count) {
+                    moreToLoad = YES;
+                }
+                
+                completion(imageItems,moreToLoad);
+            }
+        } withProgressBlock:nil];
+    }];    
+}
+
+
+#pragma mark OPBackend Overrides
 
 - (void) saveItem:(OPImageItem*) item {
     NSMutableDictionary* kinveyItem = [@{
@@ -93,21 +130,37 @@
     } withProgressBlock:nil];
 }
 
+
+
+- (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
+                         withPageNumber:(NSNumber*) pageNumber
+                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+
+    [KCSPing pingKinveyWithBlock:^(KCSPingResult *result) {
+        if (result.pingWasSuccessful == YES){
+            KCSQuery* query;
+            
+            if (queryString) {
+                query = [KCSQuery queryOnField:@"title" withRegex:queryString options:kKCSRegexpCaseInsensitive];
+            } else {
+                query = [KCSQuery query];
+            }
+
+            [query addQuery:[KCSQuery queryOnField:KCSMetadataFieldCreator withExactMatchForValue:[[KCSUser activeUser] userId]]];
+            
+            [self getItemsWithKCSQuery:query withPageNumber:pageNumber completion:completion];
+        } else {
+            NSLog(@"Kinvey Ping Failed");
+        }
+    }];
+    
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
     
     KCSQuery* query;
-    
-    query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:20];
-    
-    NSInteger countToStart = 0;
-    if (pageNumber) {
-        countToStart = (pageNumber.integerValue * 20) - 20;
-    }
-    
-    query.skipModifier = [[KCSQuerySkipModifier alloc] initWithcount:countToStart];
-    
     
     if (queryString) {
         query = [KCSQuery queryOnField:@"title" withRegex:queryString options:kKCSRegexpCaseInsensitive];
@@ -115,33 +168,7 @@
         query = [KCSQuery query];
     }
     
-    KCSQuerySortModifier* dateStort = [[KCSQuerySortModifier alloc] initWithField:@"date" inDirection:kKCSDescending];
-    [query addSortModifier:dateStort];
-    
-    [_store countWithQuery:query completion:^(unsigned long count, NSError *errorOrNil) {
-        NSLog(@"There are %ld elements", count);
-        [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
-            if (errorOrNil != nil) {
-                //An error happened, just log for now
-                NSLog(@"An error occurred on fetch: %@", errorOrNil);
-            } else {
-                NSMutableArray* imageItems = [NSMutableArray array];
-                for (NSDictionary* thisObject in objectsOrNil) {
-                    OPImageItem* newImageItem = [[OPImageItem alloc] initWithDictionary:thisObject];
-                    [imageItems addObject:newImageItem];
-                }
-                
-                BOOL moreToLoad = NO;
-                
-                if ((countToStart + imageItems.count) < count) {
-                    moreToLoad = YES;
-                }
-                
-                completion(imageItems,moreToLoad);
-            }
-        } withProgressBlock:nil];
-    }];
-
+    [self getItemsWithKCSQuery:query withPageNumber:pageNumber completion:completion];
 }
 
 @end

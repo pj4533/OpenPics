@@ -1,4 +1,4 @@
-// OPBackend.m
+// OPFavoritesProvider.m
 // 
 // Copyright (c) 2013 Say Goodnight Software
 //
@@ -20,34 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "OPFavoritesProvider.h"
+#import "OPImageItem.h"
 #import "OPBackend.h"
-#import "OPBackendKinvey.h"
 
-@implementation OPBackend
+NSString * const OPProviderTypeFavorites = @"com.saygoodnight.Favorites";
 
-+ (OPBackend *)shared {
+@implementation OPFavoritesProvider
 
-    static OPBackend *_shared = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _shared = [[OPBackendKinvey alloc] init];
-    });
-    
-    return _shared;
-}
-
-- (void) saveItem:(OPImageItem*) item {
+- (id) initWithProviderType:(NSString*) providerType {
+    self = [super initWithProviderType:providerType];
+    if (self) {
+        self.providerName = @"Your Favorites";
+    }
+    return self;
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    [[OPBackend shared] getItemsCreatedByUserWithQuery:queryString withPageNumber:pageNumber completion:completion];
 }
 
-- (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
-                         withPageNumber:(NSNumber*) pageNumber
-                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    
+- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    [self getItemsWithQuery:nil withPageNumber:nil completion:completion];
 }
 
 @end

@@ -35,4 +35,8 @@
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
 
+- (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
+                         withPageNumber:(NSNumber*) pageNumber
+                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+
 @end
