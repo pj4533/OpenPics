@@ -64,7 +64,9 @@
 
 - (void) saveItem:(OPImageItem*) item {
     NSMutableDictionary* kinveyItem = [@{
+                                       @"date":[NSDate date],
                                         @"imageUrl": item.imageUrl.absoluteString,
+                                        @"providerType": item.providerType,
                                        @"lat": [NSString stringWithFormat:@"%f", item.location.latitude],
                                        @"lon": [NSString stringWithFormat:@"%f", item.location.longitude]
                                         } mutableCopy];
@@ -87,6 +89,27 @@
         } else {
             //save was successful
             NSLog(@"Successfully saved item (id='%@').", [objectsOrNil[0] kinveyObjectId]);
+        }
+    } withProgressBlock:nil];
+}
+
+- (void) fetchItemsWithCompletion:(void (^)(NSArray* items)) completion {
+    KCSQuery* query = [KCSQuery query];
+    KCSQuerySortModifier* dateStort = [[KCSQuerySortModifier alloc] initWithField:@"date" inDirection:kKCSDescending];
+    [query addSortModifier:dateStort];
+    
+    [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
+        if (errorOrNil != nil) {
+            //An error happened, just log for now
+            NSLog(@"An error occurred on fetch: %@", errorOrNil);
+        } else {
+            NSMutableArray* imageItems = [NSMutableArray array];
+            for (NSDictionary* thisObject in objectsOrNil) {
+                OPImageItem* newImageItem = [[OPImageItem alloc] initWithDictionary:thisObject];
+                [imageItems addObject:newImageItem];
+            }
+            
+            completion(imageItems);
         }
     } withProgressBlock:nil];
 }

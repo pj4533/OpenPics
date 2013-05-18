@@ -12,10 +12,18 @@
 - (id) initWithDictionary:(NSDictionary*) dict {
     self = [super init];
     if (self) {
-        self.imageUrl = dict[@"imageUrl"];
+        id imageUrlOrString = dict[@"imageUrl"];
+
+        if ([imageUrlOrString isKindOfClass:[NSString class]]) {
+            self.imageUrl = [NSURL URLWithString:imageUrlOrString];
+        } else {
+            self.imageUrl = imageUrlOrString;
+        }
+        
         self.title = dict[@"title"];
         self.providerSpecific = dict[@"providerSpecific"];
         self.location = CLLocationCoordinate2DMake([dict[@"latitude"] floatValue], [dict[@"longitude"] floatValue]);
+        self.providerType = dict[@"providerType"];
     }
     
     return self;

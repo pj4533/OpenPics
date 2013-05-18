@@ -17,6 +17,8 @@
 
 - (id) initWithProviderType:(NSString*) providerType;
 
+- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;

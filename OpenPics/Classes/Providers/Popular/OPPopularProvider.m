@@ -22,6 +22,7 @@
 
 #import "OPPopularProvider.h"
 #import "OPImageItem.h"
+#import "OPBackend.h"
 
 NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
 
@@ -45,6 +46,13 @@ NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
     // for this app,  if no, don't add it.   if so, add it.  up rez by using the OPProviderController to create a
     // provider and call uprez directly.
     
+    [[OPBackend shared] fetchItemsWithCompletion:^(NSArray *items) {
+        completion(items,NO);
+    }];
+}
+
+- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    [self getItemsWithQuery:nil withPageNumber:nil completion:completion];
 }
 
 @end

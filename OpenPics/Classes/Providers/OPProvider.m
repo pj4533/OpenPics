@@ -26,6 +26,9 @@
     
 }
 
+- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+}
+
 - (void) getItemsWithRegion:(MKCoordinateRegion) region
                  completion:(void (^)(NSArray* items))completion {
     

@@ -70,9 +70,17 @@
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     }
     
+    [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+        _canLoadMore = canLoadMore;
+        [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+        self.items = [items mutableCopy];
+        [self.internalCollectionView reloadData];
+    }];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+#warning check map, the initial search might break it, espeicially on one result
     if (self.items.count == 1) {
         [self switchToSingleImageWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     }
@@ -314,6 +322,13 @@
     _currentQueryString = @"";
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
+    
+    [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+        _canLoadMore = canLoadMore;
+        [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+        self.items = [items mutableCopy];
+        [self.internalCollectionView reloadData];
+    }];
 }
 
 #pragma mark - DERPIN

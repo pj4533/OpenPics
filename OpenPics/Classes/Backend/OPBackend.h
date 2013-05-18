@@ -31,4 +31,6 @@
 
 - (void) saveItem:(OPImageItem*) item;
 
+- (void) fetchItemsWithCompletion:(void (^)(NSArray* items)) completion;
+
 @end

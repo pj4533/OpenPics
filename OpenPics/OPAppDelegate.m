@@ -20,6 +20,7 @@
 #import "OPEuropeanaProvider.h"
 #import "OPLIFEProvider.h"
 #import "OPTroveProvider.h"
+#import "OPPopularProvider.h"
 
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
@@ -47,6 +48,7 @@
     
     [OPAppearance setupGlobalAppearance];
     
+    [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];

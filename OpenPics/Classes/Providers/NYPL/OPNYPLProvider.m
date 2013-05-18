@@ -33,7 +33,11 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         if (itemDict[@"title"]) {
             titleString = itemDict[@"title"];
         }
-        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+        NSDictionary* opImageDict = @{
+                                      @"imageUrl": imageUrl,
+                                      @"title" : titleString,
+                                      @"providerType": self.providerType
+                                      };
         OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
         return item;
     }
