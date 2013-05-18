@@ -36,21 +36,14 @@ NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
     return self;
 }
 
-#warning turn off supporting searching for pop provider (or just implement it)
-
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-//    [[OPBackend shared] fetchItemsWithCompletion:^(NSArray *items) {
-//        completion(items,NO);
-//    }];
+    [[OPBackend shared] getItemsWithQuery:queryString withPageNumber:pageNumber completion:completion];
 }
 
 - (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    [[OPBackend shared] fetchItemsWithCompletion:^(NSArray *items) {
-        completion(items,NO);
-    }];
-//    [self getItemsWithQuery:nil withPageNumber:nil completion:completion];
+    [self getItemsWithQuery:nil withPageNumber:nil completion:completion];
 }
 
 @end

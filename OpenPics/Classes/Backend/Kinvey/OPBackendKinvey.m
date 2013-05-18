@@ -93,25 +93,55 @@
     } withProgressBlock:nil];
 }
 
-- (void) fetchItemsWithCompletion:(void (^)(NSArray* items)) completion {
-    KCSQuery* query = [KCSQuery query];
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+    
+    KCSQuery* query;
+    
+    query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:20];
+    
+    NSInteger countToStart = 0;
+    if (pageNumber) {
+        countToStart = (pageNumber.integerValue * 20) - 20;
+    }
+    
+    query.skipModifier = [[KCSQuerySkipModifier alloc] initWithcount:countToStart];
+    
+    
+    if (queryString) {
+        query = [KCSQuery queryOnField:@"title" withRegex:queryString options:kKCSRegexpCaseInsensitive];
+    } else {
+        query = [KCSQuery query];
+    }
+    
     KCSQuerySortModifier* dateStort = [[KCSQuerySortModifier alloc] initWithField:@"date" inDirection:kKCSDescending];
     [query addSortModifier:dateStort];
     
-    [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
-        if (errorOrNil != nil) {
-            //An error happened, just log for now
-            NSLog(@"An error occurred on fetch: %@", errorOrNil);
-        } else {
-            NSMutableArray* imageItems = [NSMutableArray array];
-            for (NSDictionary* thisObject in objectsOrNil) {
-                OPImageItem* newImageItem = [[OPImageItem alloc] initWithDictionary:thisObject];
-                [imageItems addObject:newImageItem];
+    [_store countWithQuery:query completion:^(unsigned long count, NSError *errorOrNil) {
+        NSLog(@"There are %ld elements", count);
+        [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
+            if (errorOrNil != nil) {
+                //An error happened, just log for now
+                NSLog(@"An error occurred on fetch: %@", errorOrNil);
+            } else {
+                NSMutableArray* imageItems = [NSMutableArray array];
+                for (NSDictionary* thisObject in objectsOrNil) {
+                    OPImageItem* newImageItem = [[OPImageItem alloc] initWithDictionary:thisObject];
+                    [imageItems addObject:newImageItem];
+                }
+                
+                BOOL moreToLoad = NO;
+                
+                if ((countToStart + imageItems.count) < count) {
+                    moreToLoad = YES;
+                }
+                
+                completion(imageItems,moreToLoad);
             }
-            
-            completion(imageItems);
-        }
-    } withProgressBlock:nil];
+        } withProgressBlock:nil];
+    }];
+
 }
 
 @end

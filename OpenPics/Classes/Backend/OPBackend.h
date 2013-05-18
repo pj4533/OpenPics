@@ -31,6 +31,8 @@
 
 - (void) saveItem:(OPImageItem*) item;
 
-- (void) fetchItemsWithCompletion:(void (^)(NSArray* items)) completion;
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
 
 @end

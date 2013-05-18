@@ -48,7 +48,13 @@
     
     [OPAppearance setupGlobalAppearance];
     
-    [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
+    if ([[OPBackend shared] usingBackend]) {
+        NSLog(@"Using Backend");
+        [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
+    } else {
+        NSLog(@"No Backend");
+    }
+    
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];
@@ -57,11 +63,6 @@
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
     
-    if ([[OPBackend shared] usingBackend]) {
-        NSLog(@"Using Backend");
-    } else {
-        NSLog(@"No Backend");
-    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
