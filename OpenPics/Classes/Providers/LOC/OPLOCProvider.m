@@ -96,6 +96,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
             NSString* resourceUrlString = [NSString stringWithFormat:@"%@?fo=json",linksDict[@"resource"]];
             NSURL* url = [NSURL URLWithString:resourceUrlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/plain"]];
             AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
                 NSString* urlString = item.imageUrl.absoluteString;
