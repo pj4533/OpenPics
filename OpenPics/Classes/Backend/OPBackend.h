@@ -33,10 +33,12 @@
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure;
 
 - (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
                          withPageNumber:(NSNumber*) pageNumber
-                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion;
+                                success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                                failure:(void (^)(NSError* error))failure;
 
 @end

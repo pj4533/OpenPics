@@ -62,6 +62,9 @@ static NSString * const kAFDPLABaseURLString = @"http://api.dp.la/v2/";
     alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
     alertView.defaultButtonTitleColor = [UIColor asbestosColor];
     [alertView show];
+    if (failure) {
+        failure(nil);
+    }
 #else
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
     mutableParams[@"api_key"] = kOPPROVIDERTOKEN_DPLA;

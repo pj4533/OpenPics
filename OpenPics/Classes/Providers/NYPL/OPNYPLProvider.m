@@ -46,9 +46,9 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
 
-    
 #ifndef kOPPROVIDERTOKEN_NYPL
 #warning *** WARNING: Make sure you have added your NYPL token to OPProviderTokens.h!
     FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"No Token!"
@@ -67,6 +67,8 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
     alertView.defaultButtonTitleColor = [UIColor asbestosColor];
     [alertView show];
+    
+    failure(nil);
 #else
     NSDictionary* parameters = @{
                                  @"q":queryString,
@@ -104,10 +106,13 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
             returnCanLoadMore = YES;
         }
         
-        if (completion) {
-            completion(retArray, returnCanLoadMore);
+        if (success) {
+            success(retArray, returnCanLoadMore);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
 #endif

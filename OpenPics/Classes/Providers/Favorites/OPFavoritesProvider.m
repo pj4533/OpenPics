@@ -39,12 +39,20 @@ NSString * const OPProviderTypeFavorites = @"com.saygoodnight.Favorites";
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    [[OPBackend shared] getItemsCreatedByUserWithQuery:queryString withPageNumber:pageNumber completion:completion];
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
+    [[OPBackend shared] getItemsCreatedByUserWithQuery:queryString
+                                        withPageNumber:pageNumber
+                                               success:success
+                                               failure:failure];
 }
 
-- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    [self getItemsWithQuery:nil withPageNumber:nil completion:completion];
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    [self getItemsWithQuery:nil
+             withPageNumber:nil
+                    success:success
+                    failure:failure];
 }
 
 @end

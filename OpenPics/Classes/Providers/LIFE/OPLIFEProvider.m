@@ -39,7 +39,8 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
     
     NSString* startValue = [NSString stringWithFormat:@"%d", (pageNumber.integerValue - 1) * 20];
     NSString* queryUrlString = [NSString stringWithFormat:@"http://images.google.com/search?q=%@ source:life&tbm=isch&sout=1&biw=1899&bih=1077&sa=N&start=%@&tbs=isz:m", queryString,startValue];
@@ -85,10 +86,13 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         if(textRange.location != NSNotFound)
             returnCanLoadMore = YES;
         
-        if (completion) {
-            completion(retArray,returnCanLoadMore);
+        if (success) {
+            success(retArray,returnCanLoadMore);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"%@", error);
     }];
     [httpOperation start];

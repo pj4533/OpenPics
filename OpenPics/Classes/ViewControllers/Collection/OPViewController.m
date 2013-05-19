@@ -115,19 +115,21 @@
 - (void) doInitialSearch {
     if (self.currentProvider.supportsInitialSearching) {
         [SVProgressHUD showWithStatus:@"Searching..."];
-        [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+        [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
             [SVProgressHUD dismiss];
             _canLoadMore = canLoadMore;
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
             self.items = [items mutableCopy];
             [self.internalCollectionView reloadData];
-        }];        
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Search failed."];
+        }];
     }
 }
 
 - (void) getMoreItems {
     [SVProgressHUD showWithStatus:@"Searching..."];
-    [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
+    [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
         [SVProgressHUD dismiss];
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
@@ -135,7 +137,7 @@
             self.items = [items mutableCopy];
             [self.internalCollectionView reloadData];
         } else {
-
+            
             // this is getting rid of the extra cell that holds the 'Load More...' spinner
             if (!_canLoadMore) {
                 [self.internalCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.items.count inSection:0]]];
@@ -151,6 +153,8 @@
             }
             [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
         }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"Search failed."];
     }];
 }
 

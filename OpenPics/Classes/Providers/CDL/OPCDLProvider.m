@@ -25,7 +25,8 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
     
     NSMutableDictionary* parameters = [@{
                                  @"keyword" : queryString,
@@ -108,11 +109,14 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
                 
             }
             
-            if (completion) {
-                completion(retArray,returnCanLoadMore);
+            if (success) {
+                success(retArray,returnCanLoadMore);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
 }

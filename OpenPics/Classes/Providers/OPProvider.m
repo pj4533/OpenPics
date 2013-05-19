@@ -23,15 +23,19 @@
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
     
 }
 
-- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
 }
 
 - (void) getItemsWithRegion:(MKCoordinateRegion) region
-                 completion:(void (^)(NSArray* items))completion {
+                    success:(void (^)(NSArray* items))success
+                    failure:(void (^)(NSError* error))failure {
     
 }
 

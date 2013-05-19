@@ -29,7 +29,8 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 }
 
 - (void) getItemsWithRegion:(MKCoordinateRegion) region
-                 completion:(void (^)(NSArray* items))completion {
+                    success:(void (^)(NSArray* items))success
+                    failure:(void (^)(NSError* error))failure {
     
     CLLocationCoordinate2D center = region.center;
     CLLocationCoordinate2D topLeft, bottomRight;
@@ -54,17 +55,21 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         NSArray* resultArray = responseObject[@"items"];
         NSArray* retArray = [self parseDocs:resultArray];
         
-        if (completion) {
-            completion(retArray);
+        if (success) {
+            success(retArray);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
     NSMutableDictionary* parameters = [@{
                                  @"query":queryString,
                                  @"rows" : @"50",
@@ -91,10 +96,13 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         }
 
         NSLog(@"COUNT: %@   TOTAL: %@", itemsCount, totalResults);
-        if (completion) {
-            completion(retArray, returnCanLoadMore);
+        if (success) {
+            success(retArray, returnCanLoadMore);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
 }

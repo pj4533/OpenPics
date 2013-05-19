@@ -56,9 +56,10 @@
 }
 
 - (void) getItemsWithKCSQuery:(KCSQuery*) query
-            withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
-    
+               withPageNumber:(NSNumber*) pageNumber
+                      success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure {
+
     query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:20];
     
     NSInteger countToStart = 0;
@@ -90,7 +91,9 @@
                     moreToLoad = YES;
                 }
                 
-                completion(imageItems,moreToLoad);
+                if (success) {
+                    success(imageItems,moreToLoad);
+                }
             }
         } withProgressBlock:nil];
     }];    
@@ -128,7 +131,8 @@
 
 - (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
                          withPageNumber:(NSNumber*) pageNumber
-                             completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                                success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                                failure:(void (^)(NSError* error))failure {
 
     [KCSPing pingKinveyWithBlock:^(KCSPingResult *result) {
         if (result.pingWasSuccessful == YES){
@@ -142,7 +146,7 @@
 
             [query addQuery:[KCSQuery queryOnField:KCSMetadataFieldCreator withExactMatchForValue:[[KCSUser activeUser] userId]]];
             
-            [self getItemsWithKCSQuery:query withPageNumber:pageNumber completion:completion];
+            [self getItemsWithKCSQuery:query withPageNumber:pageNumber success:success failure:failure];
         } else {
             NSLog(@"Kinvey Ping Failed");
         }
@@ -152,7 +156,8 @@
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
-                completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
     
     KCSQuery* query;
     
@@ -162,7 +167,7 @@
         query = [KCSQuery query];
     }
     
-    [self getItemsWithKCSQuery:query withPageNumber:pageNumber completion:completion];
+    [self getItemsWithKCSQuery:query withPageNumber:pageNumber success:success failure:failure];
 }
 
 @end

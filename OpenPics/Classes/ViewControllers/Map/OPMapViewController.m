@@ -80,7 +80,7 @@
     
     MKCoordinateRegion region = self.internalMapView.region;
 
-    [_provider getItemsWithRegion:region completion:^(NSArray *items) {
+    [_provider getItemsWithRegion:region success:^(NSArray *items) {
         [UIView animateWithDuration:0.5 animations:^{
             self.activityIndicatorView.alpha = 0.0;
         } completion:^(BOOL finished) {
@@ -114,6 +114,12 @@
             }
         }
         [self.internalMapView addAnnotations:annotations.allValues];
+    } failure:^(NSError *error) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.activityIndicatorView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [self.activityIndicator stopAnimating];
+        }];
     }];
     [self.activityIndicator startAnimating];
     [UIView animateWithDuration:0.5 animations:^{
