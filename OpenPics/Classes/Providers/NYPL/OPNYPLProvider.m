@@ -58,6 +58,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
 
+#ifdef kOPPROVIDERTOKEN_NYPL
     NSDictionary* parameters = @{
                                  @"q":queryString,
                                  @"per_page" : @"50",
@@ -103,6 +104,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
+#endif
 }
 
 @end

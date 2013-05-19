@@ -56,10 +56,11 @@ static NSString * const kAFTroveBaseURLString = @"http://api.trove.nla.gov.au/";
 }
 
 - (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    
+#ifdef kOPPROVIDERTOKEN_TROVE
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
     mutableParams[@"key"] = kOPPROVIDERTOKEN_TROVE;
     
     [super getPath:path parameters:mutableParams success:success failure:failure];
+#endif
 }
 @end

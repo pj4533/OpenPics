@@ -42,10 +42,11 @@ static NSString * const kAFDPLABaseURLString = @"http://api.dp.la/v2/";
 }
 
 - (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    
+#ifdef kOPPROVIDERTOKEN_DPLA
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
     mutableParams[@"api_key"] = kOPPROVIDERTOKEN_DPLA;
     
     [super getPath:path parameters:mutableParams success:success failure:failure];
+#endif
 }
 @end
