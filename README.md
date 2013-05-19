@@ -18,6 +18,9 @@ Public usage stats for the app store version are available [here](https://www.st
 
 Each remote image source gets a OPProvider class.  Providers can be easily added provided they conform to the OPProvider base class.  Currently supported providers:
 
+* Currently Popular - Recently favorited images
+* Your favorites - Images you have marked as favorites
+
 * Library of Congress (http://www.loc.gov/pictures/api)
 * New York Public Library (http://api.repo.nypl.org)
 * California Digital Library - XTF (http://www.cdlib.org/services/publishing/tools/xtf/)
@@ -33,6 +36,10 @@ For APIs like NYPL, which require a token, it should go into the file OPProvider
 ```
 
 This header file is in the .gitignore, so as to not add tokens to the GitHub repository.  So either only use non-token providers (like Library of Congress), or create the above file in your local repository.   If anyone has a better way of managing this, I am all ears!
+
+## Backend
+
+Favorites are stored using a flexible backend based on the OPBackend class.  The current implementation uses [Kinvey](http://www.kinvey.com).  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
 
 ## Sharing
 
