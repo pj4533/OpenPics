@@ -34,7 +34,7 @@ For APIs like NYPL, which require a token, it should go into the file OPProvider
 #define kOPPROVIDERTOKEN_NYPL @"<your token here>"
 ```
 
-This header file is in the .gitignore, so as to not add tokens to the GitHub repository.  So either only use non-token providers (like Library of Congress), or create the above file in your local repository.   If anyone has a better way of managing this, I am all ears!
+This header file is in the .gitignore, so as to not add tokens to the GitHub repository.  When an OPProvider is added to the OPProviderController, it is checked to see if it is configured properly with a token.  If not, it isn't added and can't be used.  If you wish to use these token based providers, go to the corresponding website, create a token and add it to the above file in your local repository.   If anyone has a better way of managing this, I am all ears!
 
 ## Backend
 
