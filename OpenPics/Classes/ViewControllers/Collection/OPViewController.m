@@ -39,6 +39,7 @@
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0, 10.0f, 0.0f, 10.0f);
         self.singleImageLayout = [[OPSingleImageLayout alloc] init];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
