@@ -325,6 +325,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                                           @"imageUrl": imageUrl,
                                           @"title" : titleString,
                                           @"providerSpecific" : providerSpecific,
+                                          @"providerType": self.providerType
                                           } mutableCopy];
             
             if (latitude && longitude) {

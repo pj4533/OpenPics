@@ -120,7 +120,8 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                     NSDictionary* opImageDict = @{
                                                   @"imageUrl": imageUrl,
                                                   @"title" : titleString,
-                                                  @"providerSpecific" : providerSpecific
+                                                  @"providerSpecific" : providerSpecific,
+                                                  @"providerType": self.providerType
                                                   };
                     OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                     [retArray addObject:item];

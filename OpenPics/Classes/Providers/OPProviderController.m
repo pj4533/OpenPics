@@ -7,6 +7,7 @@
 //
 
 #import "OPProviderController.h"
+#import "OPProvider.h"
 
 @interface OPProviderController () {
     NSMutableArray* _providers;
@@ -42,8 +43,23 @@
 }
 
 - (OPProvider*) getProviderWithType:(NSString*) providerType {
+    for (OPProvider* thisProvider in _providers) {
+        if ([thisProvider.providerType isEqualToString:providerType])
+            return thisProvider;
+    }
+    
     return nil;
 }
+
+- (BOOL) isSupportedProviderType:(NSString*) providerType {
+    for (OPProvider* thisProvider in _providers) {
+        if ([thisProvider.providerType isEqualToString:providerType])
+            return YES;
+    }
+    
+    return NO;
+}
+
 
 - (NSArray*) getProviders {
     return _providers;

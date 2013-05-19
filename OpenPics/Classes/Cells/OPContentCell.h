@@ -20,13 +20,11 @@
 
 @property (strong, nonatomic) IBOutlet UIView *backBackgroundView;
 @property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
+@property (strong, nonatomic) IBOutlet UIView *favoriteBackgroundView;
 
 
 @property (strong, nonatomic) OPViewController* mainViewController;
 @property (strong, nonatomic) NSIndexPath *indexPath;
-
-@property (strong, nonatomic) IBOutlet UIView *completedView;
-@property (strong, nonatomic) IBOutlet UILabel *completedViewLabel;
 
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
@@ -35,6 +33,7 @@
 
 - (IBAction)backTapped:(id)sender;
 - (IBAction)shareTapped:(id)sender;
+- (IBAction)favoriteTapped:(id)sender;
 
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion;
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion;

@@ -352,6 +352,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
             NSMutableDictionary* opImageDict = [@{
                                           @"imageUrl": imageUrl,
                                           @"title" : titleString,
+                                          @"providerType": self.providerType,
                                           @"providerSpecific" : @{
                                                   @"europeanaItem":itemDict[@"link"]
                                                   }

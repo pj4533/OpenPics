@@ -15,6 +15,7 @@
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
 #import "OPMapViewController.h"
+#import "SVProgressHUD.h"
 
 
 @interface OPViewController () {
@@ -70,6 +71,14 @@
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     }
     
+    // if we are in view did load and we don't have any items, the do an initial search on the current provider
+    // this allows for the provider to give us a more passive experience by showing some images, rather than a blank
+    // screen.
+    //
+    // if we DO have items, skip it, as this means that we were likely called from the map.
+    if (!self.items.count) {
+        [self doInitialSearch];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -101,8 +110,23 @@
 
 #pragma mark - Helpers
 
+- (void) doInitialSearch {
+    if (self.currentProvider.supportsInitialSearching) {
+        [SVProgressHUD showWithStatus:@"Searching..."];
+        [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+            [SVProgressHUD dismiss];
+            _canLoadMore = canLoadMore;
+            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+            self.items = [items mutableCopy];
+            [self.internalCollectionView reloadData];
+        }];        
+    }
+}
+
 - (void) getMoreItems {
+    [SVProgressHUD showWithStatus:@"Searching..."];
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
+        [SVProgressHUD dismiss];
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
@@ -314,6 +338,9 @@
     _currentQueryString = @"";
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
+    
+    
+    [self doInitialSearch];
 }
 
 #pragma mark - DERPIN

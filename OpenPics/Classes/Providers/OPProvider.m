@@ -16,6 +16,7 @@
     if (self) {
         self.providerType = providerType;
         self.supportsLocationSearching = NO;
+        self.supportsInitialSearching = NO;
     }
     return self;
 }
@@ -24,6 +25,9 @@
             withPageNumber:(NSNumber*) pageNumber
                 completion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
     
+}
+
+- (void) doInitialSearchWithCompletion:(void (^)(NSArray* items, BOOL canLoadMore))completion {
 }
 
 - (void) getItemsWithRegion:(MKCoordinateRegion) region

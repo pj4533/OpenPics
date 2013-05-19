@@ -67,6 +67,7 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
             NSDictionary* opImageDict = @{
                                           @"imageUrl": imageUrl,
                                           @"title" : titleString,
+                                          @"providerType": self.providerType,
                                           @"providerSpecific" : @{@"imageId": comp2[0]}
                                           };
             imageIds[comp2[0]] = opImageDict;
