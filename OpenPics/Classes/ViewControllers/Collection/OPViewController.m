@@ -39,17 +39,17 @@
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0, 10.0f, 0.0f, 10.0f);
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
         self.singleImageLayout = [[OPSingleImageLayout alloc] init];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 97.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
         } else {
             self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 155.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
         }    
 
         
@@ -80,6 +80,7 @@
     if (!self.items.count) {
         [self doInitialSearch];
     }
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {

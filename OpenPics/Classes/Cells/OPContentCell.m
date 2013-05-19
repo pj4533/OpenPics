@@ -150,6 +150,7 @@
     self.showingUI = NO;
 
     [UIView animateWithDuration:0.7f animations:^{
+        [UIApplication sharedApplication].statusBarHidden = YES;
         self.backBackgroundView.alpha = 0.0f;
         self.shareBackgroundView.alpha = 0.0f;
         self.favoriteBackgroundView.alpha = 0.0f;
@@ -163,6 +164,7 @@
 
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion {
     [UIView animateWithDuration:0.7f animations:^{
+        [UIApplication sharedApplication].statusBarHidden = NO;
         self.backBackgroundView.alpha = 1.0f;
         self.shareBackgroundView.alpha = 1.0f;
         self.favoriteBackgroundView.alpha = 1.0f;
@@ -208,7 +210,6 @@
     
     if (animated) {
     } else {
-//        self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
         self.showingUI = YES;
     }
 }
@@ -216,9 +217,8 @@
 - (void) setupForGridLayout {
     
     self.internalScrollView.userInteractionEnabled = NO;
-
-//    self.internalScrollView.frame = CGRectMake(self.internalScrollView.frame.origin.x, self.internalScrollView.frame.origin.y, self.frame.size.width, self.frame.size.height);
     [self fadeOutUIWithCompletion:nil];
+    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
