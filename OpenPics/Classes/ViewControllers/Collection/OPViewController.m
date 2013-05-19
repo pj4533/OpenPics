@@ -349,23 +349,45 @@
 
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake ) {
+        [self.view endEditing:YES];
+        
         NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
         NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
         if (uprezMode && uprezMode.boolValue) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Exiting full uprez mode."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
+                                                                  message:@"Exiting full uprez mode."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+            alertView.titleLabel.textColor = [UIColor cloudsColor];
+            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+            alertView.messageLabel.textColor = [UIColor cloudsColor];
+            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
+            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
+            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+            alertView.defaultButtonColor = [UIColor cloudsColor];
+            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
+            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+            [alertView show];
             [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Entering full uprez mode."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
+                                                                  message:@"Entering full uprez mode."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+            alertView.titleLabel.textColor = [UIColor cloudsColor];
+            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+            alertView.messageLabel.textColor = [UIColor cloudsColor];
+            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
+            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
+            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+            alertView.defaultButtonColor = [UIColor cloudsColor];
+            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
+            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+            [alertView show];
             [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
         }
         [currentDefaults synchronize];

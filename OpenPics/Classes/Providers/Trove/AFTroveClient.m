@@ -60,12 +60,22 @@ static NSString * const kAFTroveBaseURLString = @"http://api.trove.nla.gov.au/";
 #ifndef kOPPROVIDERTOKEN_TROVE
     
 #warning *** WARNING: Make sure you have added your Trove token to OPProviderTokens.h!
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Token!"
-                                                    message:@"No Trove Token found. Add it to OPProviderTokens.h or use another image source."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"No Token!"
+                                                          message:@"No Trove Token found. Add it to OPProviderTokens.h or use another image source."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.font = [UIFont flatFontOfSize:14];
+    alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    [alertView show];
 #else
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
     mutableParams[@"key"] = kOPPROVIDERTOKEN_TROVE;

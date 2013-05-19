@@ -250,16 +250,11 @@
     NSValue* locationValue = [NSValue valueWithMKCoordinate:annotation.item.location];
     OPViewController* viewController = [[OPViewController alloc] initWithNibName:@"OPViewController" bundle:nil];
     viewController.items = _pins[locationValue];
-    viewController.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
+    viewController.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
     viewController.flowLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
     viewController.singleImageLayout.headerReferenceSize = CGSizeMake(0.0f, 0.0f);
     viewController.currentProvider = self.provider;
-
-    UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    doneButton.frame = CGRectMake(0,0,45,29);
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"done_btn"] forState:UIControlStateNormal];
-    [doneButton addTarget:self action:@selector(doneTapped) forControlEvents:UIControlEventTouchUpInside];
-    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped)];
     
     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;

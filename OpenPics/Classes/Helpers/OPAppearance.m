@@ -38,12 +38,9 @@
     [[UISearchBar appearance] setBackgroundImage:searchImg];
     [[UISearchBar appearance] setBackgroundColor:[UIColor blackColor]];
     
-    UIImage *cancelImg = [[UIImage imageNamed:@"cancel_btn"]
-                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil]
-     setBackgroundImage:cancelImg forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitlePositionAdjustment:UIOffsetMake(400.f, 0)
-                                                                                       forBarMetrics:UIBarMetricsDefault];
+    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor wetAsphaltColor]
+                                  highlightedColor:[UIColor midnightBlueColor]
+                                      cornerRadius:3];
     
 }
 

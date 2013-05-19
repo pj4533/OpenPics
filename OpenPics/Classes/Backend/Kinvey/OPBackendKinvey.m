@@ -115,17 +115,11 @@
         kinveyItem[@"title"] = item.title;
 
     [_store saveObject:kinveyItem withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
-        if (errorOrNil != nil) {
-            //save failed, show an error alert
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Save failed", @"Save Failed")
-                                                                message:[errorOrNil localizedFailureReason] //not actually localized
-                                                               delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
-                                                      otherButtonTitles:nil];
-            [alertView show];
-        } else {
+        if (errorOrNil == nil) {
             //save was successful
             NSLog(@"Successfully saved item (id='%@').", [objectsOrNil[0] kinveyObjectId]);
+        } else {
+            NSLog(@"ERROR: %@", errorOrNil);
         }
     } withProgressBlock:nil];
 }
