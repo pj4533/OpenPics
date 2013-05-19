@@ -11,6 +11,7 @@
 #import "AFDPLAClient.h"
 #import "TTTURLRequestFormatter.h"
 #import "AFJSONRequestOperation.h"
+#import "OPProviderTokens.h"
 
 NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
@@ -23,6 +24,15 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         self.supportsLocationSearching = YES;
     }
     return self;
+}
+
+- (BOOL) isConfigured {
+#ifndef kOPPROVIDERTOKEN_DPLA
+#warning *** WARNING: Make sure you have added your DPLA token to OPProviderTokens.h!
+    return NO;
+#else
+    return YES;
+#endif
 }
 
 - (void) getItemsWithRegion:(MKCoordinateRegion) region

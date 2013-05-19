@@ -31,7 +31,9 @@
         _providers = [NSMutableArray array];
     }
     
-    [_providers addObject:provider];
+    if ([provider isConfigured]) {
+        [_providers addObject:provider];
+    }
 }
 
 - (OPProvider*) getFirstProvider {

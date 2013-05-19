@@ -24,7 +24,7 @@
 #import "OPImageItem.h"
 #import "AFTroveClient.h"
 #import "AFJSONRequestOperation.h"
-
+#import "OPProviderTokens.h"
 
 NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
 
@@ -36,6 +36,15 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         self.providerName = @"National Library of Australia - Trove";
     }
     return self;
+}
+
+- (BOOL) isConfigured {
+#ifndef kOPPROVIDERTOKEN_TROVE
+#warning *** WARNING: Make sure you have added your Trove token to OPProviderTokens.h!
+    return NO;
+#else
+    return YES;
+#endif
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

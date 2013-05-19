@@ -44,32 +44,20 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     return nil;
 }
 
+- (BOOL) isConfigured {
+#ifndef kOPPROVIDERTOKEN_NYPL
+#warning *** WARNING: Make sure you have added your NYPL token to OPProviderTokens.h!
+    return NO;
+#else
+    return YES;
+#endif
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
 
-#ifndef kOPPROVIDERTOKEN_NYPL
-#warning *** WARNING: Make sure you have added your NYPL token to OPProviderTokens.h!
-    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"No Token!"
-                                                          message:@"No NYPL Token found. Add it to OPProviderTokens.h or use another image source."
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-    alertView.titleLabel.textColor = [UIColor cloudsColor];
-    alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-    alertView.messageLabel.textColor = [UIColor cloudsColor];
-    alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-    alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
-    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-    alertView.defaultButtonColor = [UIColor cloudsColor];
-    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-    alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
-    [alertView show];
-    
-    failure(nil);
-#else
     NSDictionary* parameters = @{
                                  @"q":queryString,
                                  @"per_page" : @"50",
@@ -115,7 +103,6 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
-#endif
 }
 
 @end

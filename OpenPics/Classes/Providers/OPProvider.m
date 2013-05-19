@@ -21,6 +21,10 @@
     return self;
 }
 
+- (BOOL) isConfigured {
+    return YES;
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success

@@ -24,6 +24,8 @@
 
 - (id) initWithProviderType:(NSString*) providerType;
 
+- (BOOL) isConfigured;
+
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure;
 

@@ -28,6 +28,15 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     return self;
 }
 
+- (BOOL) isConfigured {
+#ifndef kOPPROVIDERTOKEN_EUROPEANA
+#warning *** WARNING: Make sure you have added your Europeana token to OPProviderTokens.h!
+    return NO;
+#else
+    return YES;
+#endif
+}
+
 - (void) getItemsWithRegion:(MKCoordinateRegion) region
                     success:(void (^)(NSArray* items))success
                     failure:(void (^)(NSError* error))failure {
