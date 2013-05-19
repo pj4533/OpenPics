@@ -18,9 +18,8 @@ Public usage stats for the app store version are available [here](https://www.st
 
 Each remote image source gets a OPProvider class.  Providers can be easily added provided they conform to the OPProvider base class.  Currently supported providers:
 
-* Currently Popular - Recently favorited images
-* Your favorites - Images you have marked as favorites
-
+* Currently Popular - Recently favorited images (Using OPBackend)
+* Your favorites - Images you have marked as favorites (Using OPBackend)
 * Library of Congress (http://www.loc.gov/pictures/api)
 * New York Public Library (http://api.repo.nypl.org)
 * California Digital Library - XTF (http://www.cdlib.org/services/publishing/tools/xtf/)
