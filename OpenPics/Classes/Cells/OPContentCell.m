@@ -11,10 +11,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "OPShareToTumblrActivity.h"
 #import "OPProvider.h"
+#import "OPProviderController.h"
+#import "OPBackend.h"
+#import "SVProgressHUD.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
     AFImageRequestOperation* _upRezOperation;
+    
+    NSString* _completedString;
 }
 
 @end
@@ -26,15 +31,13 @@
     
     self.backBackgroundView.alpha = 0.0f;
     self.shareBackgroundView.alpha = 0.0f;
-    
-    self.completedView.alpha = 0.0f;
-    self.completedView.layer.masksToBounds = NO;
-    self.completedView.layer.cornerRadius = 8.0f;
+    self.favoriteBackgroundView.alpha = 0.0f;
     
     self.descriptionView.alpha = 0.0f;
 
     self.backBackgroundView.layer.cornerRadius = 7.0f;
     self.shareBackgroundView.layer.cornerRadius = 7.0f;
+    self.favoriteBackgroundView.layer.cornerRadius = 7.0f;
     
     UITapGestureRecognizer* doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
     doubleTapGesture.numberOfTapsRequired = 2;
@@ -73,21 +76,28 @@
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
                                                                              applicationActivities:appActivities];
     
+    
+//    SHOW ONLY AFTER VC GOES AWAY
     [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (completed) {
-            NSString* completedString;
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(keyboardDidHide:)
+                                                         name:UIKeyboardDidHideNotification
+                                                       object:nil];
+
             if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             } else if ([activityType isEqualToString:UIActivityTypeMail]) {
-                completedString = @"Sent!";
+                _completedString = @"Sent!";
             } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
-                completedString = @"Saved!";
+                _completedString = @"Saved!";
             } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             }
-            [self showCompletedViewWithText:completedString];
+        } else {
+            _completedString = nil;
         }
     }];
     
@@ -103,6 +113,12 @@
         _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
         [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
+}
+
+- (IBAction)favoriteTapped:(id)sender {
+    [[OPBackend shared] saveItem:self.item];
+    
+    [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
 }
 
 - (IBAction)backTapped:(id)sender {
@@ -130,23 +146,13 @@
     self.titleLabel.text = self.item.title;
 }
 
-- (void) showCompletedViewWithText:(NSString*) completedString {
-    self.completedViewLabel.text = completedString;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.completedView.alpha = 1.0f;
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25 delay:1.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.completedView.alpha = 0.0f;
-        } completion:nil];
-    }];
-}
-
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion {
     self.showingUI = NO;
 
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 0.0f;
         self.shareBackgroundView.alpha = 0.0f;
+        self.favoriteBackgroundView.alpha = 0.0f;
         self.descriptionView.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (completion) {
@@ -159,6 +165,7 @@
     [UIView animateWithDuration:0.7f animations:^{
         self.backBackgroundView.alpha = 1.0f;
         self.shareBackgroundView.alpha = 1.0f;
+        self.favoriteBackgroundView.alpha = 1.0f;
         self.descriptionView.alpha = 1.0;
     } completion:^(BOOL finished) {
         self.showingUI = YES;
@@ -175,18 +182,20 @@
 
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+    
+    OPProvider* thisItemProvider = [[OPProviderController shared] getProviderWithType:self.item.providerType];
     if (uprezMode && uprezMode.boolValue) {
         // this is kind of weird cause in some cases the item is modified by the provider on uprezing
         // I should probably somehow change the main reference to the object so we don't have different
         // versions?
-        [self.provider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
-        [self.provider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             self.titleLabel.text = item.title;
@@ -301,6 +310,18 @@
                                  @"title":self.item.title
                                  };
     return returnItem;
+}
+
+#pragma mark Notifications
+
+- (void) keyboardDidHide:(id) note {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (_completedString) {
+        [SVProgressHUD showSuccessWithStatus:_completedString];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"Failed"];
+    }
 }
 
 @end

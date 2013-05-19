@@ -20,10 +20,14 @@
 #import "OPEuropeanaProvider.h"
 #import "OPLIFEProvider.h"
 #import "OPTroveProvider.h"
+#import "OPPopularProvider.h"
+#import "OPFavoritesProvider.h"
 
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
 #import "AFStatHatClient.h"
+#import "OPBackend.h"
+
 
 @interface OPAppDelegate () {
     NSDate* _appBecameActiveDate;
@@ -45,6 +49,14 @@
     
     [OPAppearance setupGlobalAppearance];
     
+    if ([[OPBackend shared] usingBackend]) {
+        NSLog(@"Using Backend");
+        [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
+        [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
+    } else {
+        NSLog(@"No Backend");
+    }
+    
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
     [[OPProviderController shared] addProvider:[[OPCDLProvider alloc] initWithProviderType:OPProviderTypeCDL]];
@@ -52,6 +64,7 @@
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

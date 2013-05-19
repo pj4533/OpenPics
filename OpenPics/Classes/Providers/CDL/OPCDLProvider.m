@@ -93,7 +93,11 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
                         }
                                                 
                         NSURL* imageUrl = [NSURL URLWithString:urlString];
-                        NSDictionary* opImageDict = @{@"imageUrl": imageUrl, @"title" : titleString};
+                        NSDictionary* opImageDict = @{
+                                                      @"imageUrl": imageUrl,
+                                                      @"title" : titleString,
+                                                      @"providerType": self.providerType
+                                                      };
                         OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                         [retArray addObject:item];
                     }

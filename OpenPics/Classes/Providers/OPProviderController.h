@@ -19,4 +19,6 @@
 - (OPProvider*) getProviderWithType:(NSString*) providerType;
 - (NSArray*) getProviders;
 
+- (BOOL) isSupportedProviderType:(NSString*) providerType;
+
 @end

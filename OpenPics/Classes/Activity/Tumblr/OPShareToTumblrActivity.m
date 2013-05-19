@@ -8,6 +8,7 @@
 #import "OPShareToTumblrActivity.h"
 #import "AFTumblrAPIClient.h"
 #import "OPActivityTokens.h"
+#import "SVProgressHUD.h"
 
 NSString * const kTumblrCallbackURLString = @"openpics://success";
 
@@ -74,12 +75,14 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
     [self activityDidFinish:NO];
 }
 
+
 - (void) didPostTumblrWithTitle:(NSString *)titleString withTags:(NSString*) tags withState:(NSString *)state intoBlogHostName:(NSString *)blogHostName {
 
 #ifdef kOPACTIVITYTOKEN_TUMBLR
     AFTumblrAPIClient* tumblrClient = [[AFTumblrAPIClient alloc] initWithKey:kOPACTIVITYTOKEN_TUMBLR
                                                                       secret:kOPACTIVITYSECRET_TUMBLR
                                                            callbackUrlString:kTumblrCallbackURLString];
+    [SVProgressHUD showWithStatus:@"Posting..."];
     [tumblrClient postPhotoWithData:UIImageJPEGRepresentation(_item[@"image"], 0.8)
                            withTags:tags
                           withState:state
@@ -88,7 +91,7 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
                    intoBlogHostName:blogHostName
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 [self activityDidFinish:YES];
-                                NSLog(@"RESPONSE: %@", responseObject);                                
+                                NSLog(@"RESPONSE: %@", responseObject);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 [self activityDidFinish:NO];
