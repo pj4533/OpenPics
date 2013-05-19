@@ -77,7 +77,7 @@ static NSString * const kAFTroveBaseURLString = @"http://api.trove.nla.gov.au/";
     alertView.defaultButtonTitleColor = [UIColor asbestosColor];
     [alertView show];
     if (failure) {
-        failure(nil);
+        failure(nil,nil);
     }
 #else
     NSMutableDictionary* mutableParams = [parameters mutableCopy];

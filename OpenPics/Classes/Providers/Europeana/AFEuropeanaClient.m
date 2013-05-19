@@ -63,7 +63,7 @@ static NSString * const kEuropeanaBaseURLString = @"http://europeana.eu/api/v2/"
     alertView.defaultButtonTitleColor = [UIColor asbestosColor];
     [alertView show];
     if (failure) {
-        failure(nil);
+        failure(nil,nil);
     }
 #else
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
