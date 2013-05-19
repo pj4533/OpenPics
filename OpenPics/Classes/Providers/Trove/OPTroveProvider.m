@@ -126,6 +126,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"<b>" withString:@""];
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"</b>" withString:@""];
                     titleString = [titleString stringByReplacingOccurrencesOfString:@"<i>" withString:@""];
+                    titleString = [titleString stringByReplacingOccurrencesOfString:@"<br/>" withString:@"\n"];
                     
                     NSDictionary* opImageDict = @{
                                                   @"imageUrl": imageUrl,
@@ -186,9 +187,24 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                 NSArray* equalsComponents = [urlString componentsSeparatedByString:@"="];
                 NSString* imageId = equalsComponents.lastObject;
                 urlString = [NSString stringWithFormat:@"http://recordsearch.naa.gov.au/NAAMedia/ShowImage.asp?B=%@&T=P&S=1",imageId];
+            } else if ([nuc isEqualToString:@"ANL"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"-t" withString:@"-v"];
             } else if ([nuc isEqualToString:@"QSCL"]) {
                 NSLog(@"KNOWN NUC: %@", nuc);
                 urlString = [urlString stringByReplacingOccurrencesOfString:@"t.jpg" withString:@".jpg"];
+            } else if ([nuc isEqualToString:@"NMUS:E"]) {
+                NSLog(@"KNOWN NUC: %@ (Larger available)", nuc);
+                // this has a larger image available but its weirdly tiled...would take work to put back together.
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"thumbs" withString:@"TLF_mediums"];
+            } else if ([nuc isEqualToString:@"VNMU:I"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                urlString = [urlString stringByReplacingOccurrencesOfString:@"_HoverThumb" withString:@"_Large"];
+            } else if ([nuc isEqualToString:@"VMUA"]) {
+                NSLog(@"KNOWN NUC: %@", nuc);
+                NSString* lastPathComponent = urlString.lastPathComponent;
+                lastPathComponent = [lastPathComponent stringByReplacingOccurrencesOfString:@"t" withString:@""];
+                urlString = [[urlString stringByDeletingLastPathComponent] stringByAppendingFormat:@"/%@", lastPathComponent];
             } else if ([nuc isEqualToString:@"YUF"]) {
                 NSLog(@"KNOWN NUC: %@", nuc);
                 // this is a flickr image, really I should detect this by parsing the URL and use the Flickr API to get the largest available image url
