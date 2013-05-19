@@ -13,10 +13,13 @@
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
+#import "SVProgressHUD.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
     AFImageRequestOperation* _upRezOperation;
+    
+    NSString* _completedString;
 }
 
 @end
@@ -29,10 +32,6 @@
     self.backBackgroundView.alpha = 0.0f;
     self.shareBackgroundView.alpha = 0.0f;
     self.favoriteBackgroundView.alpha = 0.0f;
-    
-    self.completedView.alpha = 0.0f;
-    self.completedView.layer.masksToBounds = NO;
-    self.completedView.layer.cornerRadius = 8.0f;
     
     self.descriptionView.alpha = 0.0f;
 
@@ -77,21 +76,28 @@
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
                                                                              applicationActivities:appActivities];
     
+    
+//    SHOW ONLY AFTER VC GOES AWAY
     [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (completed) {
-            NSString* completedString;
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(keyboardDidHide:)
+                                                         name:UIKeyboardDidHideNotification
+                                                       object:nil];
+
             if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             } else if ([activityType isEqualToString:UIActivityTypeMail]) {
-                completedString = @"Sent!";
+                _completedString = @"Sent!";
             } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
-                completedString = @"Saved!";
+                _completedString = @"Saved!";
             } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
-                completedString = @"Posted!";
+                _completedString = @"Posted!";
             }
-            [self showCompletedViewWithText:completedString];
+        } else {
+            _completedString = nil;
         }
     }];
     
@@ -112,7 +118,7 @@
 - (IBAction)favoriteTapped:(id)sender {
     [[OPBackend shared] saveItem:self.item];
     
-    [self showCompletedViewWithText:@"Favorited!"];
+    [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
 }
 
 - (IBAction)backTapped:(id)sender {
@@ -138,17 +144,6 @@
 
 - (void) setupLabels {
     self.titleLabel.text = self.item.title;
-}
-
-- (void) showCompletedViewWithText:(NSString*) completedString {
-    self.completedViewLabel.text = completedString;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.completedView.alpha = 1.0f;
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25 delay:1.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.completedView.alpha = 0.0f;
-        } completion:nil];
-    }];
 }
 
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion {
@@ -315,6 +310,18 @@
                                  @"title":self.item.title
                                  };
     return returnItem;
+}
+
+#pragma mark Notifications
+
+- (void) keyboardDidHide:(id) note {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (_completedString) {
+        [SVProgressHUD showSuccessWithStatus:_completedString];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"Failed"];
+    }
 }
 
 @end

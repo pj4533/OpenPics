@@ -13,7 +13,14 @@
 
 @property (strong, nonatomic) NSString* providerType;
 @property (strong, nonatomic) NSString* providerName;
+
+// This means the provider gives location information for items
+//    DEFAULT:  NO
 @property BOOL supportsLocationSearching;
+
+// This means the provider has an initial search, for a more passive experience of browsing
+//    DEFAULT:  NO
+@property BOOL supportsInitialSearching;
 
 - (id) initWithProviderType:(NSString*) providerType;
 

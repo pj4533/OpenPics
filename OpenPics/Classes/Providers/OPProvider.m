@@ -16,6 +16,7 @@
     if (self) {
         self.providerType = providerType;
         self.supportsLocationSearching = NO;
+        self.supportsInitialSearching = NO;
     }
     return self;
 }

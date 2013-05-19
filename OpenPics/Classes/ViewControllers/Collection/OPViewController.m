@@ -15,6 +15,7 @@
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
 #import "OPMapViewController.h"
+#import "SVProgressHUD.h"
 
 
 @interface OPViewController () {
@@ -76,12 +77,7 @@
     //
     // if we DO have items, skip it, as this means that we were likely called from the map.
     if (!self.items.count) {
-        [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
-            _canLoadMore = canLoadMore;
-            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            self.items = [items mutableCopy];
-            [self.internalCollectionView reloadData];
-        }];
+        [self doInitialSearch];
     }
 }
 
@@ -114,8 +110,23 @@
 
 #pragma mark - Helpers
 
+- (void) doInitialSearch {
+    if (self.currentProvider.supportsInitialSearching) {
+        [SVProgressHUD showWithStatus:@"Searching..."];
+        [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
+            [SVProgressHUD dismiss];
+            _canLoadMore = canLoadMore;
+            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+            self.items = [items mutableCopy];
+            [self.internalCollectionView reloadData];
+        }];        
+    }
+}
+
 - (void) getMoreItems {
+    [SVProgressHUD showWithStatus:@"Searching..."];
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage completion:^(NSArray *items, BOOL canLoadMore) {
+        [SVProgressHUD dismiss];
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
             [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
@@ -328,12 +339,8 @@
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     
-    [self.currentProvider doInitialSearchWithCompletion:^(NSArray *items, BOOL canLoadMore) {
-        _canLoadMore = canLoadMore;
-        [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-        self.items = [items mutableCopy];
-        [self.internalCollectionView reloadData];
-    }];
+    
+    [self doInitialSearch];
 }
 
 #pragma mark - DERPIN

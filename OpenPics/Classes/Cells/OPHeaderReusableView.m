@@ -32,9 +32,11 @@
 - (IBAction)searchTapped:(id)sender {
     [self.internalTextField resignFirstResponder];
 
-    if (self.delegate) {
-        [self.delegate doSearchWithQuery:self.internalTextField.text];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    
 }
 
 - (IBAction)providerTapped:(id)sender {
@@ -59,4 +61,13 @@
     return YES;
 }
 
+#pragma mark Notifications
+
+- (void) keyboardDidHide:(id) note {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (self.delegate) {
+        [self.delegate doSearchWithQuery:self.internalTextField.text];
+    }
+}
 @end

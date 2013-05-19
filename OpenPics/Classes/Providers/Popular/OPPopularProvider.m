@@ -32,6 +32,7 @@ NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Currently Popular Images";
+        self.supportsInitialSearching = YES;
     }
     return self;
 }

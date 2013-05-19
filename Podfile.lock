@@ -26,6 +26,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.1.1)
   - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
+  - SVProgressHUD (0.9)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - AFTumblrAPIClient (~> 0.0.4)
   - DWTagList
   - FormatterKit (= 1.1.1)
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 3504a91dde7554a587fd73d369c9954aeb8f2ecb
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   DWTagList: 76302ed894130ed285e95eb11e704a55593101ab
   FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
+  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
 
 COCOAPODS: 0.19.1

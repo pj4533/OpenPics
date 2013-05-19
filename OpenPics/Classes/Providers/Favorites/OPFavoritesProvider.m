@@ -32,6 +32,7 @@ NSString * const OPProviderTypeFavorites = @"com.saygoodnight.Favorites";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Your Favorites";
+        self.supportsInitialSearching = YES;
     }
     return self;
 }

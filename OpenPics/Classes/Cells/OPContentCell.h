@@ -26,9 +26,6 @@
 @property (strong, nonatomic) OPViewController* mainViewController;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
-@property (strong, nonatomic) IBOutlet UIView *completedView;
-@property (strong, nonatomic) IBOutlet UILabel *completedViewLabel;
-
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
