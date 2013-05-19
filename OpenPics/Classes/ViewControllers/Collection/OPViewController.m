@@ -43,7 +43,7 @@
         self.singleImageLayout = [[OPSingleImageLayout alloc] init];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            self.flowLayout.itemSize = CGSizeMake(100.0f, 100.0f);
+            self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
             self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
             self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
         } else {
