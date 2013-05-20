@@ -116,9 +116,14 @@
 }
 
 - (IBAction)favoriteTapped:(id)sender {
-    [[OPBackend shared] saveItem:self.item];
+    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+#warning REMOVE FAVORITE IN OPBACKEND
+        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+    } else {
+        [[OPBackend shared] saveItem:self.item];
+        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+    }
     
-    [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
 }
 
 - (IBAction)backTapped:(id)sender {
@@ -205,6 +210,13 @@
         }];
     }
 
+    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+        self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
+        self.favoriteButtonLabel.text = @"Remove";
+    } else {
+        self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
+        self.favoriteButtonLabel.text = @"Favorite";
+    }
     
     [self fadeInUIWithCompletion:nil];
     

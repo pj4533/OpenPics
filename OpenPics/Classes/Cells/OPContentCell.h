@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
 @property (strong, nonatomic) IBOutlet UIView *favoriteBackgroundView;
 
+@property (strong, nonatomic) IBOutlet UIImageView *favoriteButtonImageView;
+@property (strong, nonatomic) IBOutlet UILabel *favoriteButtonLabel;
 
 @property (strong, nonatomic) OPViewController* mainViewController;
 @property (strong, nonatomic) NSIndexPath *indexPath;

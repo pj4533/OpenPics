@@ -25,7 +25,8 @@
 @class OPImageItem;
 @interface OPBackend : NSObject
 
-@property BOOL usingBackend;
+@property BOOL usingRemoteBackend;
+@property NSMutableArray* itemsCreatedByUser;
 
 + (OPBackend *)shared;
 
@@ -40,5 +41,7 @@
                          withPageNumber:(NSNumber*) pageNumber
                                 success:(void (^)(NSArray* items, BOOL canLoadMore))success
                                 failure:(void (^)(NSError* error))failure;
+
+- (BOOL) didUserCreateItem:(OPImageItem*) item;
 
 @end

@@ -49,12 +49,11 @@
     
     [OPAppearance setupGlobalAppearance];
     
-    if ([[OPBackend shared] usingBackend]) {
-        NSLog(@"Using Backend");
+    if ([[OPBackend shared] usingRemoteBackend]) {
+        NSLog(@"Using Remote Backend");
         [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
-        [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
     } else {
-        NSLog(@"No Backend");
+        NSLog(@"No Remote Backend");
     }
     
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
@@ -64,7 +63,8 @@
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
-    
+    [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
+
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

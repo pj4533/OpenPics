@@ -29,5 +29,31 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.title = [decoder decodeObjectForKey:@"title"];
+    self.imageUrl = [decoder decodeObjectForKey:@"imageUrl"];
+    self.providerSpecific = [decoder decodeObjectForKey:@"providerSpecific"];
+    self.location = CLLocationCoordinate2DMake([[decoder decodeObjectForKey:@"latitude"] floatValue], [[decoder decodeObjectForKey:@"longitude"] floatValue]);
+    self.providerType = [decoder decodeObjectForKey:@"providerType"];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.title forKey:@"title"];
+    [encoder encodeObject:self.imageUrl forKey:@"imageUrl"];
+    [encoder encodeObject:self.providerSpecific forKey:@"providerSpecific"];
+    [encoder encodeObject:[NSNumber numberWithFloat:self.location.latitude] forKey:@"latitude"];
+    [encoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];
+    [encoder encodeObject:self.providerType forKey:@"providerType"];
+}
+
 
 @end
