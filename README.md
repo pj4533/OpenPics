@@ -1,4 +1,3 @@
-
 ![Icon](OpenPics/Images/Application/Icon@2x.png "Icon")
 
 # OpenPics
@@ -22,7 +21,7 @@ Public usage stats for the app store version are available [here](https://www.st
 Each remote image source gets a OPProvider class.  Providers can be easily added provided they conform to the OPProvider base class.  Currently supported providers:
 
 * Currently Popular - Recently favorited images (Using OPBackend)
-* Your favorites - Images you have marked as favorites (Using OPBackend)
+* Your favorites - Images you have marked as favorites (Using local Keyed Archiver)
 * Library of Congress (http://www.loc.gov/pictures/api)
 * New York Public Library (http://api.repo.nypl.org)
 * California Digital Library - XTF (http://www.cdlib.org/services/publishing/tools/xtf/)
@@ -41,7 +40,7 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 ## Backend
 
-Favorites are stored using a flexible backend based on the OPBackend class.  The current implementation uses [Kinvey](http://www.kinvey.com).  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
+Popular images (recently favorited) are stored using a flexible backend based on the OPBackend class.  The current implementation uses [Kinvey](http://www.kinvey.com).  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
 
 ## Sharing
 
