@@ -20,4 +20,6 @@
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) OPProvider* currentProvider;
 
+- (void) forceReload;
+
 @end

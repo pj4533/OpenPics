@@ -55,11 +55,18 @@
 
 - (void) saveItem:(OPImageItem*) item {
     [self.itemsCreatedByUser addObject:item];
+    [self saveFavoritesToDisk];
+}
+
+- (void) removeItem:(OPImageItem*) item {
+    NSMutableArray* iterationArray = [self.itemsCreatedByUser mutableCopy];
+    for (OPImageItem* thisItem in iterationArray) {
+        if ([thisItem.imageUrl.absoluteString isEqualToString:item.imageUrl.absoluteString]) {
+            [self.itemsCreatedByUser removeObjectIdenticalTo:thisItem];
+        }
+    }
     
-    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachesFolder    = [pathList  objectAtIndex:0];
-    NSString* favoritesPath = [cachesFolder stringByAppendingPathComponent:@"favorites"];
-    [NSKeyedArchiver archiveRootObject:self.itemsCreatedByUser toFile:favoritesPath];
+    [self saveFavoritesToDisk];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -72,9 +79,20 @@
                          withPageNumber:(NSNumber*) pageNumber
                                 success:(void (^)(NSArray* items, BOOL canLoadMore))success
                                 failure:(void (^)(NSError* error))failure {
-#warning ADD SEARCHING USING QUERY STRING HERE
     if (success) {
-        success(self.itemsCreatedByUser, NO);
+        if (!queryString || [queryString isEqualToString:@""]) {
+            success(self.itemsCreatedByUser,NO);
+        } else {
+            NSMutableArray* returnItems = [NSMutableArray array];
+            for (OPImageItem* item in self.itemsCreatedByUser) {
+                NSRange textRange;
+                textRange =[item.title rangeOfString:queryString options:NSCaseInsensitiveSearch];
+                if(textRange.location != NSNotFound) {
+                    [returnItems addObject:item];
+                }
+            }
+            success(returnItems, NO);
+        }
     }
 }
 
@@ -87,4 +105,12 @@
     return NO;
 }
 
+#pragma mark - Utilities
+
+- (void) saveFavoritesToDisk {
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachesFolder    = [pathList  objectAtIndex:0];
+    NSString* favoritesPath = [cachesFolder stringByAppendingPathComponent:@"favorites"];
+    [NSKeyedArchiver archiveRootObject:self.itemsCreatedByUser toFile:favoritesPath];
+}
 @end

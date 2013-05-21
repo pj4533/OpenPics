@@ -31,6 +31,7 @@
 + (OPBackend *)shared;
 
 - (void) saveItem:(OPImageItem*) item;
+- (void) removeItem:(OPImageItem*) item;
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
