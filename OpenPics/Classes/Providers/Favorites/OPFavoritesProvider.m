@@ -51,7 +51,7 @@ NSString * const OPProviderTypeFavorites = @"com.saygoodnight.Favorites";
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
     [self getItemsWithQuery:nil
-             withPageNumber:nil
+             withPageNumber:@1
                     success:success
                     failure:failure];
 }

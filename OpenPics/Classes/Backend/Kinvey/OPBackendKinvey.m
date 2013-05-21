@@ -71,7 +71,6 @@
     [query addSortModifier:dateStort];
 
     [_store countWithQuery:query completion:^(unsigned long count, NSError *errorOrNil) {
-        NSLog(@"There are %ld elements", count);
         [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
             if (errorOrNil != nil) {
                 //An error happened, just log for now

@@ -123,6 +123,7 @@
 
 - (void) doInitialSearch {
     if (self.currentProvider.supportsInitialSearching) {
+        _currentPage = [NSNumber numberWithInteger:1];
         [SVProgressHUD showWithStatus:@"Searching..."];
         [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
             [SVProgressHUD dismiss];
