@@ -107,7 +107,8 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                     for (NSDictionary* identifierDict in identifierArray) {
                         
                         if ([identifierDict[@"linktype"] isEqualToString:@"thumbnail"]) {
-                            imageUrl = [NSURL URLWithString:identifierDict[@"value"]];
+                            NSString* urlString = [identifierDict[@"value"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                            imageUrl = [NSURL URLWithString:urlString];
                         }
                     }
 
