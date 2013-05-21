@@ -112,6 +112,15 @@
 
 #pragma mark - Helpers
 
+- (void) forceReload {
+    _canLoadMore = NO;
+    _currentPage = [NSNumber numberWithInteger:1];
+    _currentQueryString = @"";
+    self.items = [@[] mutableCopy];
+    [self.internalCollectionView reloadData];
+    [self doInitialSearch];
+}
+
 - (void) doInitialSearch {
     if (self.currentProvider.supportsInitialSearching) {
         [SVProgressHUD showWithStatus:@"Searching..."];
@@ -344,8 +353,6 @@
     _currentQueryString = @"";
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
-    
-    
     [self doInitialSearch];
 }
 

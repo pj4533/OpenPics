@@ -22,6 +22,8 @@
 
 #import "OPBackend.h"
 #import "OPBackendKinvey.h"
+#import "OPBackendTokens.h"
+#import "OPImageItem.h"
 
 @implementation OPBackend
 
@@ -30,13 +32,41 @@
     static OPBackend *_shared = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+
+#ifndef kOPBACKEND_KINVEY_APP_KEY
+        _shared = [[OPBackend alloc] init];
+        _shared.usingRemoteBackend = NO;
+#else
         _shared = [[OPBackendKinvey alloc] init];
+        _shared.usingRemoteBackend = YES;
+#endif
+        
+        NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *cachesFolder    = [pathList  objectAtIndex:0];
+        NSString* favoritesPath = [cachesFolder stringByAppendingPathComponent:@"favorites"];
+        _shared.itemsCreatedByUser = [NSKeyedUnarchiver unarchiveObjectWithFile:favoritesPath];
+        if (!_shared.itemsCreatedByUser) {
+            _shared.itemsCreatedByUser = [NSMutableArray array];
+        }
     });
     
     return _shared;
 }
 
 - (void) saveItem:(OPImageItem*) item {
+    [self.itemsCreatedByUser addObject:item];
+    [self saveFavoritesToDisk];
+}
+
+- (void) removeItem:(OPImageItem*) item {
+    NSMutableArray* iterationArray = [self.itemsCreatedByUser mutableCopy];
+    for (OPImageItem* thisItem in iterationArray) {
+        if ([thisItem.imageUrl.absoluteString isEqualToString:item.imageUrl.absoluteString]) {
+            [self.itemsCreatedByUser removeObjectIdenticalTo:thisItem];
+        }
+    }
+    
+    [self saveFavoritesToDisk];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -49,7 +79,38 @@
                          withPageNumber:(NSNumber*) pageNumber
                                 success:(void (^)(NSArray* items, BOOL canLoadMore))success
                                 failure:(void (^)(NSError* error))failure {
-
+    if (success) {
+        if (!queryString || [queryString isEqualToString:@""]) {
+            success(self.itemsCreatedByUser,NO);
+        } else {
+            NSMutableArray* returnItems = [NSMutableArray array];
+            for (OPImageItem* item in self.itemsCreatedByUser) {
+                NSRange textRange;
+                textRange =[item.title rangeOfString:queryString options:NSCaseInsensitiveSearch];
+                if(textRange.location != NSNotFound) {
+                    [returnItems addObject:item];
+                }
+            }
+            success(returnItems, NO);
+        }
+    }
 }
 
+- (BOOL) didUserCreateItem:(OPImageItem*) item {
+    for (OPImageItem* thisItem in self.itemsCreatedByUser) {
+        if ([item.imageUrl.absoluteString isEqualToString:thisItem.imageUrl.absoluteString]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+#pragma mark - Utilities
+
+- (void) saveFavoritesToDisk {
+    NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachesFolder    = [pathList  objectAtIndex:0];
+    NSString* favoritesPath = [cachesFolder stringByAppendingPathComponent:@"favorites"];
+    [NSKeyedArchiver archiveRootObject:self.itemsCreatedByUser toFile:favoritesPath];
+}
 @end

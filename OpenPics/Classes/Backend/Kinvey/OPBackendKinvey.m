@@ -40,9 +40,7 @@
     if (!self) {
         return nil;
     }
-#ifndef kOPBACKEND_KINVEY_APP_KEY
-    self.usingBackend = NO;
-#else
+#ifdef kOPBACKEND_KINVEY_APP_KEY
     _kinveyClient = [[KCSClient sharedClient] initializeKinveyServiceForAppKey:kOPBACKEND_KINVEY_APP_KEY
                                                                  withAppSecret:kOPBACKEND_KINVEY_APP_SECRET
                                                                   usingOptions:nil];
@@ -50,7 +48,7 @@
     KCSCollection* collection = [KCSCollection collectionFromString:@"ImageItem" ofClass:[NSMutableDictionary class]];
     _store = [KCSAppdataStore storeWithCollection:collection options:nil];
     
-    self.usingBackend = YES;
+    self.usingRemoteBackend = YES;
 #endif
     return self;
 }
@@ -103,6 +101,8 @@
 #pragma mark OPBackend Overrides
 
 - (void) saveItem:(OPImageItem*) item {
+    [super saveItem:item];
+    
     NSMutableDictionary* kinveyItem = [@{
                                        @"date":[NSDate date],
                                         @"imageUrl": item.imageUrl.absoluteString,
@@ -125,33 +125,6 @@
             NSLog(@"ERROR: %@", errorOrNil);
         }
     } withProgressBlock:nil];
-}
-
-
-
-- (void) getItemsCreatedByUserWithQuery:(NSString*) queryString
-                         withPageNumber:(NSNumber*) pageNumber
-                                success:(void (^)(NSArray* items, BOOL canLoadMore))success
-                                failure:(void (^)(NSError* error))failure {
-
-    [KCSPing pingKinveyWithBlock:^(KCSPingResult *result) {
-        if (result.pingWasSuccessful == YES){
-            KCSQuery* query;
-            
-            if (queryString) {
-                query = [KCSQuery queryOnField:@"title" withRegex:queryString options:kKCSRegexpCaseInsensitive];
-            } else {
-                query = [KCSQuery query];
-            }
-
-            [query addQuery:[KCSQuery queryOnField:KCSMetadataFieldCreator withExactMatchForValue:[[KCSUser activeUser] userId]]];
-            
-            [self getItemsWithKCSQuery:query withPageNumber:pageNumber success:success failure:failure];
-        } else {
-            NSLog(@"Kinvey Ping Failed");
-        }
-    }];
-    
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

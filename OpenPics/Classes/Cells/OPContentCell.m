@@ -10,6 +10,7 @@
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OPShareToTumblrActivity.h"
+#import "OPFavoritesProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
@@ -20,6 +21,8 @@
     AFImageRequestOperation* _upRezOperation;
     
     NSString* _completedString;
+    
+    BOOL _shouldForceReloadOnBack;
 }
 
 @end
@@ -116,19 +119,32 @@
 }
 
 - (IBAction)favoriteTapped:(id)sender {
-    [[OPBackend shared] saveItem:self.item];
+    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+        [[OPBackend shared] removeItem:self.item];
+        [self setButtonToFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+            _shouldForceReloadOnBack = YES;
+        }
+    } else {
+        [[OPBackend shared] saveItem:self.item];
+        [self setButtonToRemoveFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+            _shouldForceReloadOnBack = NO;
+        }
+    }
     
-    [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
 }
 
 - (IBAction)backTapped:(id)sender {
-    
+
     if (self.internalScrollView.zoomScale != 1.0f) {
         [self.internalScrollView setZoomScale:1.0f animated:YES];
     }
     
     UICollectionView* collectionView = self.mainViewController.internalCollectionView;
-    
+        
     [self setupForGridLayout];
     
     collectionView.scrollEnabled = YES;
@@ -137,10 +153,24 @@
     
     [collectionView setCollectionViewLayout:(UICollectionViewLayout*)self.mainViewController.flowLayout animated:YES];
     [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    
+    if (_shouldForceReloadOnBack) {
+        [self.mainViewController forceReload];
+    }
 }
 
 
 #pragma mark - Utility Functions
+
+- (void)setButtonToFavorite {
+    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
+    self.favoriteButtonLabel.text = @"Favorite";
+}
+
+- (void)setButtonToRemoveFavorite {
+    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
+    self.favoriteButtonLabel.text = @"Remove";
+}
 
 - (void) setupLabels {
     self.titleLabel.text = self.item.title;
@@ -179,7 +209,9 @@
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
     [self setupLabels];
-
+    
+    _shouldForceReloadOnBack = NO;
+    
     self.internalScrollView.userInteractionEnabled = YES;
 
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
@@ -205,6 +237,11 @@
         }];
     }
 
+    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+        [self setButtonToRemoveFavorite];
+    } else {
+        [self setButtonToFavorite];
+    }
     
     [self fadeInUIWithCompletion:nil];
     

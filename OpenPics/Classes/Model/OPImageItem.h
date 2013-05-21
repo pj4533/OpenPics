@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OPImageItem : NSObject
+@interface OPImageItem : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* title;
