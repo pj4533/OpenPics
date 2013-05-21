@@ -238,7 +238,6 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{0, 30}, {44, 12}}</string>
 										<reference key="NSSuperview" ref="219768785"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -436,6 +435,22 @@
 					<int key="connectionID">95</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">favoriteButtonImageView</string>
+						<reference key="source" ref="436347121"/>
+						<reference key="destination" ref="1016782186"/>
+					</object>
+					<int key="connectionID">97</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">favoriteButtonLabel</string>
+						<reference key="source" ref="436347121"/>
+						<reference key="destination" ref="514548308"/>
+					</object>
+					<int key="connectionID">99</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">backTapped:</string>
 						<reference key="source" ref="49860156"/>
@@ -625,7 +640,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">96</int>
+			<int key="maxID">99</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

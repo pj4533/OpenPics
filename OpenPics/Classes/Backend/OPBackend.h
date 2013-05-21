@@ -25,11 +25,13 @@
 @class OPImageItem;
 @interface OPBackend : NSObject
 
-@property BOOL usingBackend;
+@property BOOL usingRemoteBackend;
+@property NSMutableArray* itemsCreatedByUser;
 
 + (OPBackend *)shared;
 
 - (void) saveItem:(OPImageItem*) item;
+- (void) removeItem:(OPImageItem*) item;
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
@@ -40,5 +42,7 @@
                          withPageNumber:(NSNumber*) pageNumber
                                 success:(void (^)(NSArray* items, BOOL canLoadMore))success
                                 failure:(void (^)(NSError* error))failure;
+
+- (BOOL) didUserCreateItem:(OPImageItem*) item;
 
 @end
