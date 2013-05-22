@@ -13,7 +13,7 @@
 @protocol OPHeaderDelegate <NSObject>
 - (void) doSearchWithQuery:(NSString*) queryString;
 - (void) flipToMap;
-- (void) providerTappedFromRect:(CGRect) rect;
+- (void) providerTappedFromRect:(CGRect) rect inView:(UIView*)view;
 @end
 
 @interface OPHeaderReusableView : UICollectionReusableView <UITextFieldDelegate>

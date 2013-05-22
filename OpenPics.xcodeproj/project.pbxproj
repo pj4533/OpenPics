@@ -35,6 +35,8 @@
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
 		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
+		0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD3C4174C47DC00C05CD7 /* OPFlickrCommonsProvider.m */; };
+		0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD3C7174C489200C05CD7 /* AFFlickrAPIClient.m */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -155,6 +157,10 @@
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
 		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
+		0A5FD3C3174C47DC00C05CD7 /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
+		0A5FD3C4174C47DC00C05CD7 /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
+		0A5FD3C6174C489200C05CD7 /* AFFlickrAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFlickrAPIClient.h; sourceTree = "<group>"; };
+		0A5FD3C7174C489200C05CD7 /* AFFlickrAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrAPIClient.m; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A609EBB171072BD0084735B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -326,6 +332,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A5FD3C2174C47C000C05CD7 /* FlickrCommons */,
 				0AA6CAC71747E60200DB4C18 /* Favorites */,
 				0AB1AA9D1745B43B00E12685 /* Popular */,
 				0AF2030817400E580006D996 /* Trove */,
@@ -458,6 +465,17 @@
 				0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0A5FD3C2174C47C000C05CD7 /* FlickrCommons */ = {
+			isa = PBXGroup;
+			children = (
+				0A5FD3C6174C489200C05CD7 /* AFFlickrAPIClient.h */,
+				0A5FD3C7174C489200C05CD7 /* AFFlickrAPIClient.m */,
+				0A5FD3C3174C47DC00C05CD7 /* OPFlickrCommonsProvider.h */,
+				0A5FD3C4174C47DC00C05CD7 /* OPFlickrCommonsProvider.m */,
+			);
+			path = FlickrCommons;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -868,6 +886,8 @@
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
 				0AB1AAA01745B45F00E12685 /* OPPopularProvider.m in Sources */,
 				0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */,
+				0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */,
+				0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

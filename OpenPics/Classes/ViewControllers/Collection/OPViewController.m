@@ -313,10 +313,11 @@
     [self presentViewController:mapViewController animated:YES completion:nil];
 }
 
-- (void) providerTappedFromRect:(CGRect) rect {
+- (void) providerTappedFromRect:(CGRect) rect inView:(UIView *)view{
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
     }
+    
     
     OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
     providerListViewController.delegate = self;
@@ -325,7 +326,7 @@
         [self presentViewController:providerListViewController animated:YES completion:nil];
     } else {
         _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
-        [_popover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [_popover presentPopoverFromRect:[view convertRect:rect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 
