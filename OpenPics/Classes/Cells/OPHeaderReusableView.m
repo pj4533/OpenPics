@@ -43,7 +43,7 @@
     if (self.delegate) {
         self.internalTextField.text = @"";
         
-        [self.delegate providerTappedFromRect:self.providerButton.frame];
+        [self.delegate providerTappedFromRect:self.providerButton.frame inView:self];
     }
 }
 

@@ -22,6 +22,7 @@
 #import "OPTroveProvider.h"
 #import "OPPopularProvider.h"
 #import "OPFavoritesProvider.h"
+#import "OPFlickrCommonsProvider.h"
 
 #import "OPAppearance.h"
 #import <Crashlytics/Crashlytics.h>
@@ -63,6 +64,7 @@
     [[OPProviderController shared] addProvider:[[OPEuropeanaProvider alloc] initWithProviderType:OPProviderTypeEuropeana]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
+    [[OPProviderController shared] addProvider:[[OPFlickrCommonsProvider alloc] initWithProviderType:OPProviderTypeFlickrCommons]];
     [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
 
     
