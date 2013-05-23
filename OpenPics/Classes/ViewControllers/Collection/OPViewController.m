@@ -27,6 +27,8 @@
     NSString* _currentQueryString;
 
     UIPopoverController* _popover;
+    
+    NSMutableDictionary* _cellSizes;
 }
 @end
 
@@ -35,10 +37,13 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _cellSizes = [NSMutableDictionary dictionary];
         self.items = [NSMutableArray array];
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
-        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.flowLayout = [[OPFlowLayout alloc] init];
+        self.flowLayout.minimumLineSpacing = 2.0f;
+        self.flowLayout.minimumInteritemSpacing = 2.0f;
         self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
         self.singleImageLayout = [[OPSingleImageLayout alloc] init];
         
@@ -47,7 +52,7 @@
             self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
             self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
         } else {
-            self.flowLayout.itemSize = CGSizeMake(300.0f, 300.0f);
+            self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
             self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
             self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
         }    
@@ -189,6 +194,25 @@
     [cell setupForSingleImageLayoutAnimated:NO];
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (collectionViewLayout == self.flowLayout) {
+        if (_cellSizes[indexPath]) {
+            return [_cellSizes[indexPath] CGSizeValue];
+        } else {
+            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+                return CGSizeMake(75.0f, 75.0f);
+            } else {
+                return CGSizeMake(200.0f, 200.0f);
+            }
+        }
+    }
+    
+    return self.singleImageLayout.itemSize;
+}
+
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -270,11 +294,25 @@
             [UIView animateWithDuration:0.25 animations:^{
                 imageView.alpha = 0.0;
             } completion:^(BOOL finished) {
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.image = image;
                 [UIView animateWithDuration:0.5 animations:^{
                     imageView.alpha = 1.0;
                 }];
+
+                CGSize cellSize;
+                CGFloat deviceCellSizeConstant;
+                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+                    deviceCellSizeConstant = 75.0;
+                } else {
+                    deviceCellSizeConstant = 200.0;
+                }
+                
+                // set dynamic width
+                cellSize = CGSizeMake((image.size.width*deviceCellSizeConstant)/image.size.height, deviceCellSizeConstant);
+                
+                _cellSizes[indexPath] = [NSValue valueWithCGSize:cellSize];
+                [self.internalCollectionView.collectionViewLayout invalidateLayout];
             }];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
