@@ -17,7 +17,8 @@
 #import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 
-
+#warning BUG:  click on Louis Jordan, then back.  screws with layout
+#warning BUG:  change uiviewcontent on bad image so doesn't fill, but centers
 @interface OPViewController () {
     BOOL _canLoadMore;
 
@@ -28,7 +29,10 @@
 
     UIPopoverController* _popover;
     
-    NSMutableDictionary* _cellSizes;
+    
+#warning TODO: memory fix
+    // TODO:   save all the sizes here, but put the images in a NSCache, if not in there reload image
+    NSMutableDictionary* _loadedImages;
 }
 @end
 
@@ -37,7 +41,8 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _cellSizes = [NSMutableDictionary dictionary];
+        _loadedImages = [NSMutableDictionary dictionary];
+        
         self.items = [NSMutableArray array];
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
@@ -117,13 +122,57 @@
 
 #pragma mark - Helpers
 
+- (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
+    for (NSInteger i=0; i<items.count; i++) {
+        NSIndexPath* indexPath = indexPaths[i];
+        OPImageItem* item = items[i];
+        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
+        AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            _loadedImages[indexPath] = image;
+            NSLog(@"COUNT: %d %d", _loadedImages.count, self.items.count);
+            if (_loadedImages.count == self.items.count) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+            }
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"error getting image");
+            _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
+            if (_loadedImages.count == self.items.count) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+            }
+        }];
+        [operation start];
+    }
+}
+
 - (void) forceReload {
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
+    _loadedImages = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
+    [self.flowLayout invalidateLayout];
     [self doInitialSearch];
+}
+
+- (void) loadInitialPageWithItems:(NSArray*) items {
+    [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+    self.items = [items mutableCopy];
+
+    // TODO: use performBatch when bug is fixed in UICollectionViews with headers
+    NSMutableArray* indexPaths = [NSMutableArray array];
+    for (int i = 0; i < self.items.count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+    }
+
+    [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
+        [SVProgressHUD dismiss];
+        [self.internalCollectionView reloadData];
+    }];
 }
 
 - (void) doInitialSearch {
@@ -131,11 +180,8 @@
         _currentPage = [NSNumber numberWithInteger:1];
         [SVProgressHUD showWithStatus:@"Searching..."];
         [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
-            [SVProgressHUD dismiss];
             _canLoadMore = canLoadMore;
-            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            self.items = [items mutableCopy];
-            [self.internalCollectionView reloadData];
+            [self loadInitialPageWithItems:items];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:@"Search failed."];
         }];
@@ -145,28 +191,22 @@
 - (void) getMoreItems {
     [SVProgressHUD showWithStatus:@"Searching..."];
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
-        [SVProgressHUD dismiss];
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
-            [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            self.items = [items mutableCopy];
-            [self.internalCollectionView reloadData];
-        } else {
-            
-            // this is getting rid of the extra cell that holds the 'Load More...' spinner
-            if (!_canLoadMore) {
-                [self.internalCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.items.count inSection:0]]];
-            }
-            
+            [self loadInitialPageWithItems:items];
+        } else {            
             NSInteger offset = [self.items count];
             [self.items addObjectsFromArray:items];
             
             // TODO: use performBatch when bug is fixed in UICollectionViews with headers
             NSMutableArray* indexPaths = [NSMutableArray array];
-            for (int i = offset; i < [self.items count]; i++) {
+            for (int i = offset; i < self.items.count; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
             }
-            [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+            [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
+                [SVProgressHUD dismiss];
+                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+            }];            
         }
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"Search failed."];
@@ -196,18 +236,17 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
+#warning BUG:  seems to not pick up new sizes for reused cells?
+//      search for boston in flickr
+
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    UIImage* thisImage = _loadedImages[indexPath];
     if (collectionViewLayout == self.flowLayout) {
-        if (_cellSizes[indexPath]) {
-            return [_cellSizes[indexPath] CGSizeValue];
-        } else {
-            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-                return CGSizeMake(75.0f, 75.0f);
-            } else {
-                return CGSizeMake(200.0f, 200.0f);
-            }
-        }
+        CGSize cellSize;
+        CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
+        cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+
+        return cellSize;
     }
     
     return self.singleImageLayout.itemSize;
@@ -232,10 +271,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    
-    if (_canLoadMore)
-        return [self.items count] + 1;
-    
     return [self.items count];
 }
 
@@ -261,18 +296,14 @@
     
     static NSString *cellIdentifier = @"generic";
     OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+        
     cell.internalScrollView.imageView.image = nil;
     
-    if ( (indexPath.item == [self.items count]) && _canLoadMore){
+    if ( (indexPath.item == self.items.count-1) && _canLoadMore){
         NSInteger currentPageInt = [_currentPage integerValue];
         _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
 
         [self getMoreItems];
-        
-        cell.internalScrollView.userInteractionEnabled = NO;
-        cell.internalScrollView.imageView.image = nil;
-        return cell;
     }
     
     OPImageItem* item = self.items[indexPath.item];
@@ -283,46 +314,10 @@
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
     
-    __weak UIImageView* imageView = cell.internalScrollView.imageView;
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-    imageView.contentMode = UIViewContentModeCenter;
+    UIImageView* imageView = cell.internalScrollView.imageView;
     imageView.alpha = 0.0f;
-    imageView.image = [UIImage imageNamed:@"hourglass_white"];
-    
-    AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if ([cell.item.imageUrl isEqual:request.URL]) {
-            [UIView animateWithDuration:0.25 animations:^{
-                imageView.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
-                imageView.image = image;
-                [UIView animateWithDuration:0.5 animations:^{
-                    imageView.alpha = 1.0;
-                }];
-
-                CGSize cellSize;
-                CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-                
-                // set dynamic width
-                cellSize = CGSizeMake((image.size.width*deviceCellSizeConstant)/image.size.height, deviceCellSizeConstant);
-                
-                _cellSizes[indexPath] = [NSValue valueWithCGSize:cellSize];
-                [self.internalCollectionView.collectionViewLayout invalidateLayout];
-            }];
-        }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"error getting image");
-        [UIView animateWithDuration:0.25 animations:^{
-            imageView.alpha = 0.0;
-        } completion:^(BOOL finished) {
-            imageView.image = [UIImage imageNamed:@"image_cancel"];
-            [UIView animateWithDuration:0.5 animations:^{
-                imageView.alpha = 1.0;
-            }];
-        }];
-    }];
-    [operation start];
-    
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.image = _loadedImages[indexPath];
     [UIView animateWithDuration:0.5 animations:^{
         imageView.alpha = 1.0;
     }];
@@ -367,9 +362,11 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
+    _loadedImages = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
-    
+    [self.flowLayout invalidateLayout];
+
     [self getMoreItems];
 }
 
@@ -386,8 +383,10 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
+    _loadedImages = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
+    [self.flowLayout invalidateLayout];
     [self doInitialSearch];
 }
 

@@ -56,6 +56,7 @@
 // evenly filled
     for (NSMutableArray* thisRow in rows) {
         NSInteger rowWidth = [self getWidthOfRow:thisRow];
+        NSLog(@"WIDTH: %d", rowWidth);
         CGFloat perItemWidthDifference = (rect.size.width - self.sectionInset.left - self.sectionInset.right - rowWidth) / thisRow.count;
         
         NSInteger currentXOffset = self.sectionInset.left;
