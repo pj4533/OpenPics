@@ -210,6 +210,8 @@
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
     [self setupLabels];
     
+    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
     _shouldForceReloadOnBack = NO;
     
     self.internalScrollView.userInteractionEnabled = YES;
@@ -252,7 +254,7 @@
 }
 
 - (void) setupForGridLayout {
-    
+    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.internalScrollView.userInteractionEnabled = NO;
     [self fadeOutUIWithCompletion:nil];
     [UIApplication sharedApplication].statusBarHidden = NO;
