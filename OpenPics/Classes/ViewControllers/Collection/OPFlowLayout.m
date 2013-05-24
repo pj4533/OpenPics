@@ -29,9 +29,6 @@
     NSArray* arr = [super layoutAttributesForElementsInRect:rect];
     
     // THIS CODE SEPARATES INTO ROWS
-    //
-    // CURRENTLY HAS BUG:  search for 'boston' in LOC
-    //    seems likely something to do with when an item is a lone item on a row.
     NSMutableArray* rows = [NSMutableArray array];
     NSMutableArray* currentRow = nil;
     NSInteger currentIndex = 0;
@@ -47,7 +44,7 @@
 
         if (arr.count > currentIndex+1) {
             UICollectionViewLayoutAttributes* nextAtts = arr[currentIndex+1];
-            if (nextAtts.frame.origin.x < atts.frame.origin.x) {
+            if (nextAtts.frame.origin.y > atts.frame.origin.y) {
                 nextIsNewRow = YES;
             }
         }
@@ -56,14 +53,12 @@
         currentIndex++;
     }
 
-    
-    // Evenly filled -- erro on iphone sim.   cell reuse maybe?
+// evenly filled
     for (NSMutableArray* thisRow in rows) {
         NSInteger rowWidth = [self getWidthOfRow:thisRow];
         CGFloat perItemWidthDifference = (rect.size.width - self.sectionInset.left - self.sectionInset.right - rowWidth) / thisRow.count;
         
-        UICollectionViewLayoutAttributes* firstInRowAttrs = thisRow[0];
-        NSInteger currentXOffset = firstInRowAttrs.frame.origin.x;
+        NSInteger currentXOffset = self.sectionInset.left;
         for (UICollectionViewLayoutAttributes* attrs in thisRow) {
             CGRect f = attrs.frame;
             f.origin.x = currentXOffset;

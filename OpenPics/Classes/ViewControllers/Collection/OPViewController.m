@@ -301,12 +301,7 @@
                 }];
 
                 CGSize cellSize;
-                CGFloat deviceCellSizeConstant;
-                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-                    deviceCellSizeConstant = 75.0;
-                } else {
-                    deviceCellSizeConstant = 200.0;
-                }
+                CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
                 
                 // set dynamic width
                 cellSize = CGSizeMake((image.size.width*deviceCellSizeConstant)/image.size.height, deviceCellSizeConstant);
