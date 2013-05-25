@@ -29,6 +29,7 @@ PODS:
   - KissXML (5.0)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (0.9)
+  - TMCache (1.1.2)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
@@ -38,12 +39,13 @@ DEPENDENCIES:
   - DWTagList
   - FlatUIKit
   - FormatterKit (= 1.1.1)
-  - SGSStaggeredFlowLayout (from `~/projects/SGSStaggeredFlowLayout`)
+  - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD
+  - TMCache
 
 EXTERNAL SOURCES:
   SGSStaggeredFlowLayout:
-    :path: ~/projects/SGSStaggeredFlowLayout
+    :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 3504a91dde7554a587fd73d369c9954aeb8f2ecb
@@ -57,5 +59,6 @@ SPEC CHECKSUMS:
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+  TMCache: 6003b743a5331388d3c862a0a60da1bef553a714
 
 COCOAPODS: 0.19.1

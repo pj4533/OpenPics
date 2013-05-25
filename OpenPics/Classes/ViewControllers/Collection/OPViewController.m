@@ -16,6 +16,7 @@
 #import "OPProviderListViewController.h"
 #import "OPMapViewController.h"
 #import "SVProgressHUD.h"
+#import "TMCache.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -124,24 +125,34 @@
     for (NSInteger i=0; i<items.count; i++) {
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
-        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-        AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            _loadedImages[indexPath] = image;
+        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
+            _loadedImages[indexPath] = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
             if (_loadedImages.count == self.items.count) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
                 });
             }
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            NSLog(@"error getting image");
-            _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
-            if (_loadedImages.count == self.items.count) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion();
-                });
-            }
-        }];
-        [operation start];
+        } else {
+            NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
+            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                _loadedImages[indexPath] = image;
+                [[TMCache sharedCache] setObject:image forKey:item.imageUrl.absoluteString];
+                if (_loadedImages.count == self.items.count) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion();
+                    });
+                }
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"error getting image");
+                _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
+                if (_loadedImages.count == self.items.count) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion();
+                    });
+                }
+            }];
+            [operation start];            
+        }
     }
 }
 
