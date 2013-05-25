@@ -31,6 +31,8 @@
 
 #import "TMCache.h"
 
+#import "AFRedditAPIClient.h"
+
 @interface OPAppDelegate () {
     NSDate* _appBecameActiveDate;
 }
@@ -72,6 +74,8 @@
     [[OPProviderController shared] addProvider:[[OPFlickrCommonsProvider alloc] initWithProviderType:OPProviderTypeFlickrCommons]];
     [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
 
+    AFRedditAPIClient *reddit = [AFRedditAPIClient sharedClient];
+    [reddit loginToRedditWithUsername:@"ohnuthin" andPassword:@"0h@yon12"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

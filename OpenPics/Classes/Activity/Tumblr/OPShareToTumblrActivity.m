@@ -9,6 +9,7 @@
 #import "AFTumblrAPIClient.h"
 #import "OPActivityTokens.h"
 #import "SVProgressHUD.h"
+#import "AFRedditAPIClient.h"
 
 NSString * const kTumblrCallbackURLString = @"openpics://success";
 
@@ -79,24 +80,28 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
 - (void) didPostTumblrWithTitle:(NSString *)titleString withTags:(NSString*) tags withState:(NSString *)state intoBlogHostName:(NSString *)blogHostName {
 
 #ifdef kOPACTIVITYTOKEN_TUMBLR
-    AFTumblrAPIClient* tumblrClient = [[AFTumblrAPIClient alloc] initWithKey:kOPACTIVITYTOKEN_TUMBLR
-                                                                      secret:kOPACTIVITYSECRET_TUMBLR
-                                                           callbackUrlString:kTumblrCallbackURLString];
+//    AFTumblrAPIClient* tumblrClient = [[AFTumblrAPIClient alloc] initWithKey:kOPACTIVITYTOKEN_TUMBLR
+//                                                                      secret:kOPACTIVITYSECRET_TUMBLR
+//                                                           callbackUrlString:kTumblrCallbackURLString];
     [SVProgressHUD showWithStatus:@"Posting..."];
-    [tumblrClient postPhotoWithData:UIImageJPEGRepresentation(_item[@"image"], 0.8)
-                           withTags:tags
-                          withState:state
-                   withClickThruUrl:@""
-                        withCaption:titleString
-                   intoBlogHostName:blogHostName
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                [self activityDidFinish:YES];
-                                NSLog(@"RESPONSE: %@", responseObject);
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                [self activityDidFinish:NO];
-                                NSLog(@"ERROR: %@", error);
-                            }];
+    AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
+    [redditClient submitImageToReddit:_item[@"image"] title:titleString success:^(NSDictionary *response) {
+        NSLog(@"%@", response);
+    }];
+//    [tumblrClient postPhotoWithData:UIImageJPEGRepresentation(_item[@"image"], 0.8)
+//                           withTags:tags
+//                          withState:state
+//                   withClickThruUrl:@""
+//                        withCaption:titleString
+//                   intoBlogHostName:blogHostName
+//                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                [self activityDidFinish:YES];
+//                                NSLog(@"RESPONSE: %@", responseObject);
+//                            }
+//                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                [self activityDidFinish:NO];
+//                                NSLog(@"ERROR: %@", error);
+//                            }];
 #endif
 
 }
