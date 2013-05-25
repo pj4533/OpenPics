@@ -10,13 +10,13 @@
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
 #import "OPSingleImageLayout.h"
-#import "OPFlowLayout.h"
+#import "SGSStaggeredFlowLayout.h"
 
 @class OPProvider;
 @interface OPViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, OPHeaderDelegate, OPProviderListDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *internalCollectionView;
-@property (strong, nonatomic) OPFlowLayout *flowLayout;
+@property (strong, nonatomic) SGSStaggeredFlowLayout *flowLayout;
 @property (strong, nonatomic) OPSingleImageLayout *singleImageLayout;
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) OPProvider* currentProvider;

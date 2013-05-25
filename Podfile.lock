@@ -27,6 +27,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.1.1)
   - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
+  - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (0.9)
 
 DEPENDENCIES:
@@ -37,7 +38,12 @@ DEPENDENCIES:
   - DWTagList
   - FlatUIKit
   - FormatterKit (= 1.1.1)
+  - SGSStaggeredFlowLayout (from `~/projects/SGSStaggeredFlowLayout`)
   - SVProgressHUD
+
+EXTERNAL SOURCES:
+  SGSStaggeredFlowLayout:
+    :path: ~/projects/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 3504a91dde7554a587fd73d369c9954aeb8f2ecb
@@ -49,6 +55,7 @@ SPEC CHECKSUMS:
   FlatUIKit: 3d2c6375ed741a8e8ffe663a3c1fe52d84309f04
   FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
+  SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
 
 COCOAPODS: 0.19.1
