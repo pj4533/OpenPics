@@ -234,9 +234,6 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
-#warning BUG:  seems to not pick up new sizes for reused cells?
-//      search for boston in flickr
-
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     UIImage* thisImage = _loadedImages[indexPath];
     if (collectionViewLayout == self.flowLayout) {
