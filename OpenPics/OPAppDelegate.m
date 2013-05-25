@@ -29,6 +29,7 @@
 #import "AFStatHatClient.h"
 #import "OPBackend.h"
 
+#import "TMCache.h"
 
 @interface OPAppDelegate () {
     NSDate* _appBecameActiveDate;
@@ -47,6 +48,10 @@
 #ifdef kOPAPPTOKEN_CRASHLYTICS
     [Crashlytics startWithAPIKey:kOPAPPTOKEN_CRASHLYTICS];
 #endif
+    
+    TMCache* sharedCache = [TMCache sharedCache];
+    // disk limit 25mb
+    sharedCache.diskCache.byteLimit = 26214400;
     
     [OPAppearance setupGlobalAppearance];
     
