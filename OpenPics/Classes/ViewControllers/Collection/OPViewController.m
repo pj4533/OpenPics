@@ -57,8 +57,8 @@
             self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
         } else {
             self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 175.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
         }    
 
         
