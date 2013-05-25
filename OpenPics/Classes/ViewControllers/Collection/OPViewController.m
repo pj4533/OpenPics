@@ -88,10 +88,12 @@
     // screen.
     //
     // if we DO have items, skip it, as this means that we were likely called from the map.
-    if (!self.items.count) {
+    if (self.items.count) {
+        [self loadInitialPageWithItems:self.items];
+    } else {
         [self doInitialSearch];
     }
-    
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
