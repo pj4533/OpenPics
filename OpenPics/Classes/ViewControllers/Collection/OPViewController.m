@@ -271,11 +271,14 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage* thisImage = _loadedImages[indexPath];
+    
     if (collectionViewLayout == self.flowLayout) {
-        CGSize cellSize;
-        CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-        cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+        CGSize cellSize = self.flowLayout.itemSize;
+        if (indexPath.item < _loadedImages.count) {
+            UIImage* thisImage = _loadedImages[indexPath];
+            CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
+            cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+        }
 
         return cellSize;
     }
@@ -302,7 +305,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return [self.items count];
+    return [self.items count]+1;
 }
 
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -327,17 +330,35 @@
     
     static NSString *cellIdentifier = @"generic";
     OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-        
-    cell.internalScrollView.imageView.image = nil;
     
-    if ( (indexPath.item == self.items.count-1) && _canLoadMore){
-        NSInteger currentPageInt = [_currentPage integerValue];
-        _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-
-        [SVProgressHUD showWithStatus:@"Searching..."];
-        [self getMoreItems];
+    // remove activity indicator if present
+    for (UIView* subview in cell.contentView.subviews) {
+        if (subview.tag == -1) {
+            [subview removeFromSuperview];
+        }
     }
     
+    cell.internalScrollView.imageView.image = nil;
+    
+    if (indexPath.item == self.items.count) {
+        if (_canLoadMore) {
+            NSInteger currentPageInt = [_currentPage integerValue];
+            _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+            [self getMoreItems];
+
+            UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            activity.center = cell.contentView.center;
+            [activity startAnimating];
+            activity.tag = -1;
+            [cell.contentView addSubview:activity];
+        }
+    
+        
+        cell.internalScrollView.userInteractionEnabled = NO;
+        cell.internalScrollView.imageView.image = nil;
+        return cell;
+    }
+
     OPImageItem* item = self.items[indexPath.item];
     
     cell.mainViewController = self;
