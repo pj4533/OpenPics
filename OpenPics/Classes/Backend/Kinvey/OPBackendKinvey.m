@@ -58,15 +58,14 @@
                       success:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure {
 
-    query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:20];
+    query.limitModifer = [[KCSQueryLimitModifier alloc] initWithLimit:40];
     
     NSInteger countToStart = 0;
     if (pageNumber) {
-        countToStart = (pageNumber.integerValue * 20) - 20;
+        countToStart = (pageNumber.integerValue * 40) - 40;
     }
     
     query.skipModifier = [[KCSQuerySkipModifier alloc] initWithcount:countToStart];
-
     KCSQuerySortModifier* dateStort = [[KCSQuerySortModifier alloc] initWithField:@"date" inDirection:kKCSDescending];
     [query addSortModifier:dateStort];
 
