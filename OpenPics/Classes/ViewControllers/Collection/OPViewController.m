@@ -122,12 +122,13 @@
 #pragma mark - Helpers
 
 - (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
+    NSInteger totalImagesAfterLoading = self.items.count + items.count;
     for (NSInteger i=0; i<items.count; i++) {
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
             _loadedImages[indexPath] = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
-            if (_loadedImages.count == self.items.count) {
+            if (_loadedImages.count == totalImagesAfterLoading) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
                 });
@@ -137,7 +138,7 @@
             AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 _loadedImages[indexPath] = image;
                 [[TMCache sharedCache] setObject:image forKey:item.imageUrl.absoluteString];
-                if (_loadedImages.count == self.items.count) {
+                if (_loadedImages.count == totalImagesAfterLoading) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion();
                     });
@@ -145,7 +146,7 @@
             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                 NSLog(@"error getting image");
                 _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
-                if (_loadedImages.count == self.items.count) {
+                if (_loadedImages.count == totalImagesAfterLoading) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion();
                     });
@@ -169,16 +170,16 @@
 
 - (void) loadInitialPageWithItems:(NSArray*) items {
     [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-    self.items = [items mutableCopy];
 
     // TODO: use performBatch when bug is fixed in UICollectionViews with headers
     NSMutableArray* indexPaths = [NSMutableArray array];
-    for (int i = 0; i < self.items.count; i++) {
+    for (int i = 0; i < items.count; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
     }
 
     [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
         [SVProgressHUD dismiss];
+        self.items = [items mutableCopy];
         [self.internalCollectionView reloadData];
     }];
 }
@@ -197,24 +198,24 @@
 }
 
 - (void) getMoreItems {
-    [SVProgressHUD showWithStatus:@"Searching..."];
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
         _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
             [self loadInitialPageWithItems:items];
-        } else {            
+        } else {
             NSInteger offset = [self.items count];
-            [self.items addObjectsFromArray:items];
-            
+
             // TODO: use performBatch when bug is fixed in UICollectionViews with headers
             NSMutableArray* indexPaths = [NSMutableArray array];
-            for (int i = offset; i < self.items.count; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+            for (int i = 0; i < items.count; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
             }
             [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
                 [SVProgressHUD dismiss];
+                [self.items addObjectsFromArray:items];
                 [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
-            }];            
+            }];
+            
         }
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"Search failed."];
@@ -308,6 +309,7 @@
         NSInteger currentPageInt = [_currentPage integerValue];
         _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
 
+        [SVProgressHUD showWithStatus:@"Searching..."];
         [self getMoreItems];
     }
     
@@ -376,6 +378,7 @@
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
 
+    [SVProgressHUD showWithStatus:@"Searching..."];
     [self getMoreItems];
 }
 
