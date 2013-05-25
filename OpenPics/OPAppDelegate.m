@@ -50,8 +50,9 @@
 #endif
     
     TMCache* sharedCache = [TMCache sharedCache];
-    // disk limit 25mb
-    sharedCache.diskCache.byteLimit = 26214400;
+
+    // disk limit 100mb
+    sharedCache.diskCache.byteLimit = 104857600;
     
     [OPAppearance setupGlobalAppearance];
     

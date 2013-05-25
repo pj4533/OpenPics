@@ -17,6 +17,7 @@
 #import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 #import "TMCache.h"
+#import "UIImage+Preload.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -127,7 +128,8 @@
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
-            _loadedImages[indexPath] = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
+            UIImage* image = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
+            _loadedImages[indexPath] = [image preloadedImage];
             if (_loadedImages.count == totalImagesAfterLoading) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
@@ -136,7 +138,7 @@
         } else {
             NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
             AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                _loadedImages[indexPath] = image;
+                _loadedImages[indexPath] = [image preloadedImage];
                 [[TMCache sharedCache] setObject:image forKey:item.imageUrl.absoluteString];
                 if (_loadedImages.count == totalImagesAfterLoading) {
                     dispatch_async(dispatch_get_main_queue(), ^{
