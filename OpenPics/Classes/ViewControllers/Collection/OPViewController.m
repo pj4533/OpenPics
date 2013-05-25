@@ -9,6 +9,7 @@
 #import "OPViewController.h"
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
+#import "AFNetworking.h"
 #import "OPContentCell.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
@@ -122,41 +123,61 @@
 
 #pragma mark - Helpers
 
+// This is the main guts of the image loading for now.  I may want to delay the loading of ALL the images on the
+// current page, but I preload here to make this as fast as possible when scrolling and whatnot.
 - (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
-    NSInteger totalImagesAfterLoading = self.items.count + items.count;
+    NSMutableArray* requestOperations = [NSMutableArray array];
+    
+    // First, iterate over the items to load
     for (NSInteger i=0; i<items.count; i++) {
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
+        
+        // if found in cache, then put it in the _loadedImages dictionary (this is where all currently displayed images go
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
             UIImage* image = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
             _loadedImages[indexPath] = [image preloadedImage];
-            if (_loadedImages.count == totalImagesAfterLoading) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion();
-                });
-            }
         } else {
+            // if not found in cache, then create a image request to go download it, to be batch enqueued later
+            //   the userinfo just communicates the indexpath of this image request for later processing
             NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                _loadedImages[indexPath] = [image preloadedImage];
-                [[TMCache sharedCache] setObject:image forKey:item.imageUrl.absoluteString];
-                if (_loadedImages.count == totalImagesAfterLoading) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion();
-                    });
-                }
-            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                NSLog(@"error getting image");
-                _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
-                if (_loadedImages.count == totalImagesAfterLoading) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion();
-                    });
-                }
-            }];
-            [operation start];            
+            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:nil];
+            operation.userInfo = @{@"indexpath": indexPath};
+            [requestOperations addObject:operation];
         }
     }
+
+    // Now we have either loaded the images from the cache or created image requests.  so create the throwaway client (url meaningless here)
+    AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost"]];
+    
+    // enqueue all the image requests from above.  as per the AFNetworking FAQ, we ignore the success blocks on the individual
+    // operations, and instead process them all in THIS completion block.
+    [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
+        
+        // do this work on a background thread so we don't block the UI
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            for (AFImageRequestOperation* thisOperation in operations) {
+                NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
+                UIImage* loadedImage = [UIImage imageNamed:@"image_cancel"];
+                if (thisOperation.responseImage) {
+                    loadedImage = thisOperation.responseImage;
+                    // preload the image for speed
+                    UIImage* returnImage = [thisOperation.responseImage preloadedImage];
+                    if (returnImage) {
+                        // cache the preloaded image -- prob don't need all these error checking if's here.
+                        [[TMCache sharedCache] setObject:returnImage forKey:thisOperation.request.URL.absoluteString];
+                        loadedImage = returnImage;
+                    }
+                }
+                // put the final image in the _loadedImages dictionary
+                _loadedImages[indexPath] = loadedImage;
+            }
+            // finally dispatch async on main queue to call the completion of this whole deal.
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion();
+            });
+        });
+    }];
 }
 
 - (void) forceReload {
@@ -200,9 +221,10 @@
 }
 
 - (void) getMoreItems {
+    _canLoadMore = NO;
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
-        _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
+            _canLoadMore = canLoadMore;
             [self loadInitialPageWithItems:items];
         } else {
             NSInteger offset = [self.items count];
@@ -216,6 +238,7 @@
                 [SVProgressHUD dismiss];
                 [self.items addObjectsFromArray:items];
                 [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                _canLoadMore = canLoadMore;
             }];
             
         }
