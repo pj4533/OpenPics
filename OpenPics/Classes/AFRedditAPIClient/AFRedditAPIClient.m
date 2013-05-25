@@ -49,16 +49,16 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     }];
 }
 
-- (void)submitImageToReddit:(UIImage*)image title:(NSString*)title success:(void (^)(NSDictionary*))success {
+- (void)submitImage:(UIImage*)image toSubreddit:(NSString*)subreddit title:(NSString*)title success:(void (^)(NSDictionary*))success {
     [self uploadToImgur:image title:title success:^(NSDictionary *response) {
         NSString *link = response[@"data"][@"link"];
         NSDictionary *params = @{
                                  @"api_type": @"json",
                                  @"kind": @"link",
-                                 @"title": @"test",
+                                 @"title": title,
                                  @"uh": self.modHash,
                                  @"url": link,
-                                 @"sr": @"pics",
+                                 @"sr": subreddit,
                                  @"save": @"true"
                                  };
         [self postPath:@"submit" parameters:params success:^(NSDictionary *success) {
