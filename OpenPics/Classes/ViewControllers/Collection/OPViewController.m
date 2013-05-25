@@ -45,7 +45,6 @@
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
         self.flowLayout = [[SGSStaggeredFlowLayout alloc] init];
-        self.flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
         self.flowLayout.minimumLineSpacing = 2.0f;
         self.flowLayout.minimumInteritemSpacing = 2.0f;
         self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
