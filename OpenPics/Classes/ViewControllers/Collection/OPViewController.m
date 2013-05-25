@@ -17,7 +17,6 @@
 #import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 
-#warning BUG:  change uiviewcontent on bad image so doesn't fill, but centers
 @interface OPViewController () {
     BOOL _canLoadMore;
 
@@ -129,7 +128,6 @@
         NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
         AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             _loadedImages[indexPath] = image;
-            NSLog(@"COUNT: %d %d", _loadedImages.count, self.items.count);
             if (_loadedImages.count == self.items.count) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion();
@@ -316,7 +314,11 @@
     
     UIImageView* imageView = cell.internalScrollView.imageView;
     imageView.alpha = 0.0f;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    if (_loadedImages[indexPath] == [UIImage imageNamed:@"image_cancel"]) {
+        imageView.contentMode = UIViewContentModeCenter;
+    } else {
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+    }
     imageView.image = _loadedImages[indexPath];
     [UIView animateWithDuration:0.5 animations:^{
         imageView.alpha = 1.0;
