@@ -49,7 +49,8 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
                                  @"method" : @"flickr.photos.search",
                                  @"format" : @"json",
                                  @"is_commons": @"true",
-                                 @"extras": @"url_b,url_o"
+                                 @"extras": @"url_b,url_o",
+                                 @"per_page": @"20"
                                  };
     
     

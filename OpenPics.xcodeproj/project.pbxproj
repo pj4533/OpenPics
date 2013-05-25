@@ -35,7 +35,6 @@
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
 		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
-		0A4D6507174CEC9A005E0E30 /* OPFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6506174CEC9A005E0E30 /* OPFlowLayout.m */; };
 		0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD3C4174C47DC00C05CD7 /* OPFlickrCommonsProvider.m */; };
 		0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD3C7174C489200C05CD7 /* AFFlickrAPIClient.m */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
@@ -158,8 +157,6 @@
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
 		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
-		0A4D6505174CEC9A005E0E30 /* OPFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlowLayout.h; sourceTree = "<group>"; };
-		0A4D6506174CEC9A005E0E30 /* OPFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlowLayout.m; sourceTree = "<group>"; };
 		0A5FD3C3174C47DC00C05CD7 /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
 		0A5FD3C4174C47DC00C05CD7 /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
 		0A5FD3C6174C489200C05CD7 /* AFFlickrAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFlickrAPIClient.h; sourceTree = "<group>"; };
@@ -374,8 +371,6 @@
 				0A310F061728901C007378D0 /* OPViewController.h */,
 				0A310F071728901C007378D0 /* OPViewController.m */,
 				0A310F081728901C007378D0 /* OPViewController.xib */,
-				0A4D6505174CEC9A005E0E30 /* OPFlowLayout.h */,
-				0A4D6506174CEC9A005E0E30 /* OPFlowLayout.m */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -893,7 +888,6 @@
 				0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */,
 				0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */,
 				0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */,
-				0A4D6507174CEC9A005E0E30 /* OPFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
