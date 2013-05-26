@@ -9,6 +9,7 @@
 #import "OPShareToRedditActivity.h"
 #import "AFRedditAPIClient.h"
 #import "SVProgressHUD.h"
+#import "OPImageItem.h"
 
 NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
@@ -34,7 +35,10 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (BOOL) canPerformWithActivityItems:(NSArray *)activityItems {
     for (id thisItem in activityItems) {
-        if ([thisItem isKindOfClass:[UIImage class]]) {
+        if ([thisItem isKindOfClass:[OPImageItem class]]) {
+            NSLog(@"KIND: OPIMAGEITEM");
+            return YES;
+        } else if ([thisItem isKindOfClass:[UIImage class]]) {
             NSLog(@"KIND: IMAGE");
             return YES;
         } else if ([thisItem isKindOfClass:[NSDictionary class]])
@@ -47,7 +51,7 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (void) prepareWithActivityItems:(NSArray *)activityItems {
     for (id thisItem in activityItems) {
-        if ([thisItem isKindOfClass:[NSDictionary class]]) {
+        if ([thisItem isKindOfClass:[NSDictionary class]] || [thisItem isKindOfClass:[OPImageItem class]]) {
             _item = thisItem;
             _redditVC = [[OPRedditPostViewController alloc] initWithNibName:@"OPRedditPostViewController" bundle:nil];
             _redditVC.modalPresentationStyle = UIModalPresentationFormSheet;

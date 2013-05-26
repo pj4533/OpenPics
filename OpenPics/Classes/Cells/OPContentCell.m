@@ -78,7 +78,7 @@
     appActivities = @[shareToTumblr, shareToReddit];
 #endif
     
-    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
+    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self.item]
                                                                              applicationActivities:appActivities];
     
     
@@ -99,6 +99,8 @@
             } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
                 _completedString = @"Saved!";
             } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
+                _completedString = @"Posted!";
+            } else if ([activityType isEqualToString:UIActivityTypeShareToReddit]) {
                 _completedString = @"Posted!";
             }
         } else {
