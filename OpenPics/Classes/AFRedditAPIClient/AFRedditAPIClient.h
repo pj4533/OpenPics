@@ -18,5 +18,6 @@
 + (instancetype)sharedClient;
 - (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password success:(void (^)(NSDictionary*))success;
 - (void)postImage:(UIImage*)image toSubreddit:(NSString*)subreddit withTitle:(NSString*)title success:(void (^)(NSDictionary*))success;
+- (void) getUsersSubscribedSubredditsWithSuccess:(void (^)(NSArray*))success;
 - (BOOL) isAuthenticated;
 @end

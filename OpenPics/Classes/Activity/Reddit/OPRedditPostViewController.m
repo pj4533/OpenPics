@@ -36,6 +36,7 @@
     self.postBackgroundView.layer.borderWidth = 1;
     self.postBackgroundView.layer.cornerRadius = 3;
     self.thumbnailImageView.image = self.item[@"image"];
+    [self.titleField becomeFirstResponder];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -43,6 +44,11 @@
         OPRedditAuthViewController *authVC = [[OPRedditAuthViewController alloc] initWithNibName:@"OPRedditAuthViewController" bundle:nil];
         authVC.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:authVC animated:YES completion:nil];
+    }
+    if (!self.subredditArray) {
+        [_redditClient getUsersSubscribedSubredditsWithSuccess:^(NSArray *subreddits) {
+            self.subredditArray = subreddits;
+        }];
     }
 }
 
@@ -59,4 +65,19 @@
 - (IBAction)postTapped:(id)sender {
     [self.delegate didPostToRedditWithTitle:self.titleField.text toSubreddit:self.subredditField.text];
 }
+
+- (IBAction)switchSubredditTapped:(id)sender {
+    OPSubredditViewController *subredditView = [[OPSubredditViewController alloc] initWithNibName:@"OPSubredditViewController" bundle:nil];
+    subredditView.modalPresentationStyle = UIModalPresentationFormSheet;
+    subredditView.subreddits = self.subredditArray;
+    subredditView.delegate = self;
+    [self presentViewController:subredditView animated:YES completion:nil];
+}
+
+#pragma mark - OPSubredditDelegate
+
+- (void) didSelectSubreddit:(NSString*)subreddit {
+    self.subredditField.text = subreddit;
+}
+
 @end
