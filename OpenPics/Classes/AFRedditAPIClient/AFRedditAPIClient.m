@@ -53,14 +53,22 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
         NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
         [currentDefaults setObject:self.modHash forKey:@"modHash"];
         [currentDefaults setObject:self.cookie forKey:@"cookie"];
-        [self getPath:@"reddits.json" parameters:nil success:^(NSDictionary *subreddits) {
-            NSArray *arrayOfSubreddits = subreddits[@"data"][@"children"];
-            NSMutableArray *reddits = [[NSMutableArray alloc] init];
-            for (NSDictionary *thisSubreddit in arrayOfSubreddits) {
-                [reddits addObject:thisSubreddit[@"data"][@"display_name"]];
-            }
-            success(response);
-        }];
+        success(response);
+    }];
+}
+
+- (void) getUsersSubscribedSubredditsWithSuccess:(void (^)(NSArray*))success {
+    NSDictionary *parameters = @{
+                                 @"uh": self.modHash,
+                                 @"limit": @"100"
+                                 };
+    [self getPath:@"/subreddits/mine.json" parameters:parameters success:^(NSDictionary *subreddits) {
+        NSArray *arrayOfSubreddits = subreddits[@"data"][@"children"];
+        NSMutableArray *reddits = [[NSMutableArray alloc] init];
+        for (NSDictionary *thisSubreddit in arrayOfSubreddits) {
+            [reddits addObject:thisSubreddit[@"data"][@"display_name"]];
+        }
+        success([NSArray arrayWithArray:reddits]);
     }];
 }
 
@@ -110,7 +118,7 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
 
 - (void)getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(NSDictionary*))success {
     [super getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"\nSuccess Getting Path: %@\nResponse Object:%@", path, (AFJSONRequestOperation*)operation);
+        NSLog(@"\nSuccess Getting Path: %@", path);
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"\nError Getting Path: %@\nWith Error:\n%@", path, error);

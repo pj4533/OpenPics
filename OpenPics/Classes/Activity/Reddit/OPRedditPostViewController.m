@@ -44,6 +44,11 @@
         authVC.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:authVC animated:YES completion:nil];
     }
+    if (!self.subredditArray) {
+        [_redditClient getUsersSubscribedSubredditsWithSuccess:^(NSArray *subreddits) {
+            self.subredditArray = subreddits;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,4 +64,19 @@
 - (IBAction)postTapped:(id)sender {
     [self.delegate didPostToRedditWithTitle:self.titleField.text toSubreddit:self.subredditField.text];
 }
+
+- (IBAction)switchSubredditTapped:(id)sender {
+    OPSubredditViewController *subredditView = [[OPSubredditViewController alloc] initWithNibName:@"OPSubredditViewController" bundle:nil];
+    subredditView.modalPresentationStyle = UIModalPresentationFormSheet;
+    subredditView.subreddits = self.subredditArray;
+    subredditView.delegate = self;
+    [self presentViewController:subredditView animated:YES completion:nil];
+}
+
+#pragma mark - OPSubredditDelegate
+
+- (void) didSelectSubreddit:(NSString*)subreddit {
+    self.subredditField.text = subreddit;
+}
+
 @end
