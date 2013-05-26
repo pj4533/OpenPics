@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "OPSubredditViewController.h"
+#import "OPImageItem.h"
+#import "OPRedditAuthViewController.h"
 
 @protocol OPRedditPostDelegate <NSObject>
 - (void)didPostToRedditWithTitle:(NSString*)title toSubreddit:(NSString*)subreddit;
 - (void)didCancel;
 @end
 
-@interface OPRedditPostViewController : UIViewController <OPSubredditDelegate>
+@interface OPRedditPostViewController : UIViewController <OPSubredditDelegate, OPRedditAuthDelegate>
 
 @property (strong, nonatomic) NSDictionary *item;
 @property (strong, nonatomic) id delegate;

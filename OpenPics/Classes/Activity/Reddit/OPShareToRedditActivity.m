@@ -9,6 +9,7 @@
 #import "OPShareToRedditActivity.h"
 #import "AFRedditAPIClient.h"
 #import "SVProgressHUD.h"
+#import "OPImageItem.h"
 
 NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
@@ -34,7 +35,10 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (BOOL) canPerformWithActivityItems:(NSArray *)activityItems {
     for (id thisItem in activityItems) {
-        if ([thisItem isKindOfClass:[UIImage class]]) {
+        if ([thisItem isKindOfClass:[OPImageItem class]]) {
+            NSLog(@"KIND: OPIMAGEITEM");
+            return YES;
+        } else if ([thisItem isKindOfClass:[UIImage class]]) {
             NSLog(@"KIND: IMAGE");
             return YES;
         } else if ([thisItem isKindOfClass:[NSDictionary class]])
@@ -47,7 +51,7 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (void) prepareWithActivityItems:(NSArray *)activityItems {
     for (id thisItem in activityItems) {
-        if ([thisItem isKindOfClass:[NSDictionary class]]) {
+        if ([thisItem isKindOfClass:[NSDictionary class]] || [thisItem isKindOfClass:[OPImageItem class]]) {
             _item = thisItem;
             _redditVC = [[OPRedditPostViewController alloc] initWithNibName:@"OPRedditPostViewController" bundle:nil];
             _redditVC.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -69,11 +73,13 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (void)didPostToRedditWithTitle:(NSString *)title toSubreddit:(NSString *)subreddit {
     AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
-    [redditClient postImage:_item[@"image"] toSubreddit:subreddit withTitle:title success:^(NSDictionary *response) {
-        if ([response[@"json"][@"errors"] count]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Posting to Reddit" message:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"]] delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    [SVProgressHUD showWithStatus:@"Posting..."];
+    [redditClient postItem:_item toSubreddit:subreddit withTitle:title completion:^(NSDictionary *response, BOOL success) {
+        if (!success) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Posting to Reddit" message:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"][0][1]] delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
             [alert show];
             [self activityDidFinish:NO];
+            [SVProgressHUD showErrorWithStatus:@"Error."];
         } else {
             [self activityDidFinish:YES];
         }

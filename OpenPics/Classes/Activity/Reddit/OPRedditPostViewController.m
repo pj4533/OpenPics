@@ -42,11 +42,13 @@
 - (void) viewDidAppear:(BOOL)animated {
     if (![_redditClient isAuthenticated]) {
         OPRedditAuthViewController *authVC = [[OPRedditAuthViewController alloc] initWithNibName:@"OPRedditAuthViewController" bundle:nil];
+        authVC.delegate = self;
         authVC.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:authVC animated:YES completion:nil];
+        return;
     }
     if (!self.subredditArray) {
-        [_redditClient getUsersSubscribedSubredditsWithSuccess:^(NSArray *subreddits) {
+        [_redditClient getUsersSubscribedSubredditsWithCompletion:^(NSArray *subreddits, BOOL success) {
             self.subredditArray = subreddits;
         }];
     }
@@ -80,4 +82,11 @@
     self.subredditField.text = subreddit;
 }
 
+#pragma mark - OPRedditAuthDelegate
+
+- (void) didAuthenticateWithReddit {
+    [_redditClient getUsersSubscribedSubredditsWithCompletion:^(NSArray *subreddits, BOOL success) {
+        self.subredditArray = subreddits;
+    }];
+}
 @end

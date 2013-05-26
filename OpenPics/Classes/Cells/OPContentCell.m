@@ -100,6 +100,8 @@
                 _completedString = @"Saved!";
             } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
                 _completedString = @"Posted!";
+            } else if ([activityType isEqualToString:UIActivityTypeShareToReddit]) {
+                _completedString = @"Posted!";
             }
         } else {
             _completedString = nil;
@@ -331,7 +333,8 @@
     if (self.internalScrollView.zoomScale == 1.0) {
         NSDictionary* returnItem = @{
                                      @"image":self.internalScrollView.imageView.image,
-                                     @"title":self.item.title
+                                     @"title":self.item.title,
+                                     @"imageUrl":self.item.imageUrl
                                      };
         return returnItem;
     }
