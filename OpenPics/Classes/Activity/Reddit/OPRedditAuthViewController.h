@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FUIButton.h"
 
 @protocol OPRedditAuthDelegate <NSObject>
 
@@ -17,7 +18,7 @@
 @interface OPRedditAuthViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet FUIButton *loginButton;
 @property (strong, nonatomic) id delegate;
 
 - (IBAction)loginToReddit:(id)sender;

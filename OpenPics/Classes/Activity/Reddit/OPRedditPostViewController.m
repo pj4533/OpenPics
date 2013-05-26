@@ -52,6 +52,7 @@
             self.subredditArray = subreddits;
         }];
     }
+    [self.titleField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

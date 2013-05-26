@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.usernameField becomeFirstResponder];
+    self.passwordField.secureTextEntry = YES;
+    self.loginButton = [[FUIButton alloc] init];
 }
 
 - (void)didReceiveMemoryWarning

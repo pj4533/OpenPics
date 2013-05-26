@@ -17,9 +17,20 @@
 @property (strong, nonatomic) NSString *captcha;
 
 + (instancetype)sharedClient;
-- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion;
-- (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
-- (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL))completion;
+
+- (void) loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion;
+
 - (BOOL) isAuthenticated;
+
+- (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
+
+- (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL))completion;
+
 - (void) getCaptchaIDWithCompletion:(void (^)(NSString*, BOOL))completion;
+
+- (void) postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion;
+
+- (void)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion;
+
+
 @end
