@@ -47,6 +47,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="761744749"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -77,10 +78,11 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="667123180">
 								<reference key="NSNextResponder" ref="761744749"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 20}, {105, 105}}</string>
+								<int key="NSvFlags">293</int>
+								<string key="NSFrame">{{19, 20}, {105, 105}}</string>
 								<reference key="NSSuperview" ref="761744749"/>
-								<reference key="NSNextKeyView" ref="19748973"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="640096857"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -88,10 +90,11 @@
 							</object>
 							<object class="IBUITextField" id="626477458">
 								<reference key="NSNextResponder" ref="761744749"/>
-								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{136, 94}, {147, 31}}</string>
+								<int key="NSvFlags">295</int>
+								<string key="NSFrame">{{137, 94}, {120, 31}}</string>
 								<reference key="NSSuperview" ref="761744749"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="19748973"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -112,6 +115,7 @@
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
+								<int key="IBUIClearButtonMode">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="621704999">
 									<int key="type">1</int>
 									<double key="pointSize">14</double>
@@ -124,9 +128,10 @@
 							</object>
 							<object class="IBUITextField" id="640096857">
 								<reference key="NSNextResponder" ref="761744749"/>
-								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{136, 50}, {147, 30}}</string>
+								<int key="NSvFlags">295</int>
+								<string key="NSFrame">{{137, 56}, {147, 30}}</string>
 								<reference key="NSSuperview" ref="761744749"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="626477458"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -146,15 +151,17 @@
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
+								<int key="IBUIClearButtonMode">1</int>
 								<reference key="IBUIFontDescription" ref="621704999"/>
 								<reference key="IBUIFont" ref="1037628819"/>
 							</object>
 							<object class="IBUIButton" id="19748973">
 								<reference key="NSNextResponder" ref="761744749"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{257, 4}, {29, 31}}</string>
+								<string key="NSFrame">{{258, 94}, {29, 31}}</string>
 								<reference key="NSSuperview" ref="761744749"/>
-								<reference key="NSNextKeyView" ref="640096857"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -188,6 +195,7 @@
 						</array>
 						<string key="NSFrame">{{9, 51}, {303, 145}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="667123180"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -200,6 +208,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="746080341"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -414,8 +423,8 @@
 						<reference key="object" ref="761744749"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="667123180"/>
-							<reference ref="640096857"/>
 							<reference ref="626477458"/>
+							<reference ref="640096857"/>
 							<reference ref="19748973"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
@@ -471,7 +480,61 @@
 			<nil key="sourceID"/>
 			<int key="maxID">117</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">OPRedditPostViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancelTapped:">id</string>
+						<string key="postTapped:">id</string>
+						<string key="switchSubredditTapped:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancelTapped:">
+							<string key="name">cancelTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="postTapped:">
+							<string key="name">postTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="switchSubredditTapped:">
+							<string key="name">switchSubredditTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="postBackgroundView">UIView</string>
+						<string key="subredditField">UITextField</string>
+						<string key="thumbnailImageView">UIImageView</string>
+						<string key="titleField">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="postBackgroundView">
+							<string key="name">postBackgroundView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="subredditField">
+							<string key="name">subredditField</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="thumbnailImageView">
+							<string key="name">thumbnailImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titleField">
+							<string key="name">titleField</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OPRedditPostViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

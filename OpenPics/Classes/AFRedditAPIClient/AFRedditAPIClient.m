@@ -95,7 +95,11 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
                                  @"save": @"true"
                                  };
         [self postPath:@"api/submit" parameters:params success:^(NSDictionary *response) {
-            NSLog(@"Reddit Post Image Response:\n%@", response);
+            if ([response[@"json"][@"errors"] count]) {
+                NSLog(@"\nError Posting to Reddit:\n%@", response[@"json"][@"errors"]);
+            } else {
+                NSLog(@"\nSuccess Posting to Reddit:\n%@", response[@"json"]);
+            }
             success(response);
         }];
     }];

@@ -36,6 +36,7 @@
     self.postBackgroundView.layer.borderWidth = 1;
     self.postBackgroundView.layer.cornerRadius = 3;
     self.thumbnailImageView.image = self.item[@"image"];
+    [self.titleField becomeFirstResponder];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

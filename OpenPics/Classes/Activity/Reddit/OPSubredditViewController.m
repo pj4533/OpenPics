@@ -20,7 +20,6 @@
     if (self) {
         // Custom initialization
     }
-    self.subredditTableView.dataSource = self;
     return self;
 }
 
@@ -47,13 +46,8 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.subreddits count];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Subreddit Count: %i", [self.subreddits count]);
     return self.subreddits.count;
 }
 
