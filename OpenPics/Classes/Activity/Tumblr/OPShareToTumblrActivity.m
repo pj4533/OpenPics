@@ -9,7 +9,6 @@
 #import "AFTumblrAPIClient.h"
 #import "OPActivityTokens.h"
 #import "SVProgressHUD.h"
-#import "AFRedditAPIClient.h"
 
 NSString * const kTumblrCallbackURLString = @"openpics://success";
 
@@ -50,7 +49,6 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
 }
 
 - (void) prepareWithActivityItems:(NSArray *)activityItems {
-
     for (id thisItem in activityItems) {
         if ([thisItem isKindOfClass:[NSDictionary class]]) {
             _item = thisItem;

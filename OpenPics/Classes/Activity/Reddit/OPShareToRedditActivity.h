@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OPRedditPostViewController.h"
 
-extern NSString * const kRedditCallbackURLString;
 extern NSString* const UIActivityTypeShareToReddit;
 
-@interface OPShareToRedditActivity : UIActivity
+@interface OPShareToRedditActivity : UIActivity <OPRedditPostDelegate>
 
 @end

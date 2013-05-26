@@ -109,6 +109,10 @@
 		0AFC2313171319DD006FFF45 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230B171319DD006FFF45 /* Icon-Small@2x.png */; };
 		0AFC2314171319DD006FFF45 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230C171319DD006FFF45 /* Icon.png */; };
 		0AFC2315171319DD006FFF45 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230D171319DD006FFF45 /* Icon@2x.png */; };
+		182E81A71751793700B50B07 /* OPRedditPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E81A51751793700B50B07 /* OPRedditPostViewController.m */; };
+		182E81A81751793700B50B07 /* OPRedditPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182E81A61751793700B50B07 /* OPRedditPostViewController.xib */; };
+		182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */; };
+		182E81AD17517C0900B50B07 /* OPRedditAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */; };
 		1834D90E1751240500986009 /* reddit-alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90C1751240500986009 /* reddit-alien.png */; };
 		1834D90F1751240500986009 /* reddit-alien@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90D1751240500986009 /* reddit-alien@2x.png */; };
 		1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834D9111751243300986009 /* OPShareToRedditActivity.m */; };
@@ -263,6 +267,12 @@
 		0AFC230B171319DD006FFF45 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		0AFC230C171319DD006FFF45 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0AFC230D171319DD006FFF45 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		182E81A41751793700B50B07 /* OPRedditPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditPostViewController.h; sourceTree = "<group>"; };
+		182E81A51751793700B50B07 /* OPRedditPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditPostViewController.m; sourceTree = "<group>"; };
+		182E81A61751793700B50B07 /* OPRedditPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPRedditPostViewController.xib; sourceTree = "<group>"; };
+		182E81A917517C0800B50B07 /* OPRedditAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditAuthViewController.h; sourceTree = "<group>"; };
+		182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditAuthViewController.m; sourceTree = "<group>"; };
+		182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPRedditAuthViewController.xib; sourceTree = "<group>"; };
 		1834D90C1751240500986009 /* reddit-alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reddit-alien.png"; sourceTree = "<group>"; };
 		1834D90D1751240500986009 /* reddit-alien@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reddit-alien@2x.png"; sourceTree = "<group>"; };
 		1834D9101751243300986009 /* OPShareToRedditActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPShareToRedditActivity.h; sourceTree = "<group>"; };
@@ -714,6 +724,12 @@
 			children = (
 				1834D9101751243300986009 /* OPShareToRedditActivity.h */,
 				1834D9111751243300986009 /* OPShareToRedditActivity.m */,
+				182E81A41751793700B50B07 /* OPRedditPostViewController.h */,
+				182E81A51751793700B50B07 /* OPRedditPostViewController.m */,
+				182E81A61751793700B50B07 /* OPRedditPostViewController.xib */,
+				182E81A917517C0800B50B07 /* OPRedditAuthViewController.h */,
+				182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */,
+				182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */,
 			);
 			path = Reddit;
 			sourceTree = "<group>";
@@ -831,6 +847,8 @@
 				0AE1C5B1174ADE2800BAA804 /* heart_minus@2x.png in Resources */,
 				1834D90E1751240500986009 /* reddit-alien.png in Resources */,
 				1834D90F1751240500986009 /* reddit-alien@2x.png in Resources */,
+				182E81A81751793700B50B07 /* OPRedditPostViewController.xib in Resources */,
+				182E81AD17517C0900B50B07 /* OPRedditAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,6 +942,8 @@
 				0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */,
 				1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */,
 				1834D916175127F200986009 /* AFRedditAPIClient.m in Sources */,
+				182E81A71751793700B50B07 /* OPRedditPostViewController.m in Sources */,
+				182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

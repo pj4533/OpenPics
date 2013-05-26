@@ -15,6 +15,7 @@
 #import "OPProviderController.h"
 #import "OPBackend.h"
 #import "SVProgressHUD.h"
+#import "OPShareToRedditActivity.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
@@ -73,7 +74,8 @@
 #warning *** WARNING: Make sure you have added your Tumblr token to OPActivityTokens.h
 #else
     OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
-    appActivities = @[shareToTumblr];
+    OPShareToRedditActivity* shareToReddit = [[OPShareToRedditActivity alloc] init];
+    appActivities = @[shareToTumblr, shareToReddit];
 #endif
     
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]

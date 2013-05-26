@@ -25,9 +25,14 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
 }
 
 - (instancetype)init {
-    self = [super initWithBaseURL:[NSURL URLWithString:@"http://www.reddit.com/api"]];
+    self = [super initWithBaseURL:[NSURL URLWithString:@"http://www.reddit.com"]];
     if (!self) {
         return nil;
+    }
+    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+    if ([currentDefaults objectForKey:@"modHash"] && [currentDefaults objectForKey:@"cookie"]) {
+        self.modHash = [currentDefaults objectForKey:@"modHash"];
+        self.cookie = [currentDefaults objectForKey:@"cookie"];
     }
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"application/x-www-form-urlencoded"]];
     
@@ -35,21 +40,41 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     return self;
 }
 
-- (void)loginToRedditWithUsername:(NSString*)username andPassword:(NSString*)password {
+- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password success:(void (^)(NSDictionary*))success {
     NSDictionary *params = @{
                              @"user": username,
                              @"passwd": password,
                              @"api_type": @"json",
                              @"rem": @"True"
                              };
-    [self postPath:@"login" parameters:params success:^(NSDictionary *response) {
-        NSLog(@"%@", response);
+    [self postPath:@"api/login" parameters:params success:^(NSDictionary *response) {
         self.modHash = response[@"json"][@"data"][@"modhash"];
         self.cookie = response[@"json"][@"data"][@"cookie"];
+        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+        [currentDefaults setObject:self.modHash forKey:@"modHash"];
+        [currentDefaults setObject:self.cookie forKey:@"cookie"];
+        [self getPath:@"reddits.json" parameters:nil success:^(NSDictionary *subreddits) {
+            NSArray *arrayOfSubreddits = subreddits[@"data"][@"children"];
+            NSMutableArray *reddits = [[NSMutableArray alloc] init];
+            for (NSDictionary *thisSubreddit in arrayOfSubreddits) {
+                [reddits addObject:thisSubreddit[@"data"][@"display_name"]];
+            }
+            success(response);
+        }];
     }];
 }
 
-- (void)submitImage:(UIImage*)image toSubreddit:(NSString*)subreddit title:(NSString*)title success:(void (^)(NSDictionary*))success {
+- (BOOL) isAuthenticated {
+    if (self.modHash) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
+    return NO;
+}
+
+- (void)postImage:(UIImage*)image toSubreddit:(NSString*)subreddit withTitle:(NSString*)title success:(void (^)(NSDictionary*))success {
     [self uploadToImgur:image title:title success:^(NSDictionary *response) {
         NSString *link = response[@"data"][@"link"];
         NSDictionary *params = @{
@@ -61,8 +86,9 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
                                  @"sr": subreddit,
                                  @"save": @"true"
                                  };
-        [self postPath:@"submit" parameters:params success:^(NSDictionary *success) {
-            NSLog(@"success!");
+        [self postPath:@"api/submit" parameters:params success:^(NSDictionary *response) {
+            NSLog(@"Reddit Post Image Response:\n%@", response);
+            success(response);
         }];
     }];
 }

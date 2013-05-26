@@ -12,12 +12,11 @@
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
-@property (nonatomic) BOOL loggedIn;
 @property (strong, nonatomic) NSString *modHash;
 @property (strong, nonatomic) NSString *cookie;
 
 + (instancetype)sharedClient;
-- (void)loginToRedditWithUsername:(NSString*)username andPassword:(NSString*)password;
-- (void)submitImage:(UIImage*)image toSubreddit:(NSString*)subreddit title:(NSString*)title success:(void (^)(NSDictionary*))success;
-
+- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password success:(void (^)(NSDictionary*))success;
+- (void)postImage:(UIImage*)image toSubreddit:(NSString*)subreddit withTitle:(NSString*)title success:(void (^)(NSDictionary*))success;
+- (BOOL) isAuthenticated;
 @end
