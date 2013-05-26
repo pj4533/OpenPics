@@ -21,5 +21,5 @@
 - (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
 - (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL))completion;
 - (BOOL) isAuthenticated;
-- (void) getCaptchaID;
+- (void) getCaptchaIDWithCompletion:(void (^)(NSString*, BOOL))completion;
 @end
