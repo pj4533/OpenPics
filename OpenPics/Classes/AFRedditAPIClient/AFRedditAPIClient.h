@@ -14,10 +14,12 @@
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *modHash;
 @property (strong, nonatomic) NSString *cookie;
+@property (strong, nonatomic) NSString *captcha;
 
 + (instancetype)sharedClient;
-- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password success:(void (^)(NSDictionary*))success;
-- (void)postImage:(UIImage*)image toSubreddit:(NSString*)subreddit withTitle:(NSString*)title success:(void (^)(NSDictionary*))success;
-- (void) getUsersSubscribedSubredditsWithSuccess:(void (^)(NSArray*))success;
+- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion;
+- (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
+- (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL))completion;
 - (BOOL) isAuthenticated;
+- (void) getCaptchaID;
 @end

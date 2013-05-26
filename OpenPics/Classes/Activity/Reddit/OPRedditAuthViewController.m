@@ -39,8 +39,9 @@
 
 - (IBAction)loginToReddit:(id)sender {
     AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
-    [redditClient loginToRedditWithUsername:self.usernameField.text password:self.passwordField.text success:^(NSDictionary *response) {
+    [redditClient loginToRedditWithUsername:self.usernameField.text password:self.passwordField.text completion:^(NSDictionary *response, BOOL success) {
         NSLog(@"Logged In!");
+        [self.delegate didAuthenticateWithReddit];
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }

@@ -78,7 +78,7 @@
     appActivities = @[shareToTumblr, shareToReddit];
 #endif
     
-    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self.item]
+    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
                                                                              applicationActivities:appActivities];
     
     
@@ -333,7 +333,8 @@
     if (self.internalScrollView.zoomScale == 1.0) {
         NSDictionary* returnItem = @{
                                      @"image":self.internalScrollView.imageView.image,
-                                     @"title":self.item.title
+                                     @"title":self.item.title,
+                                     @"imageUrl":self.item.imageUrl
                                      };
         return returnItem;
     }

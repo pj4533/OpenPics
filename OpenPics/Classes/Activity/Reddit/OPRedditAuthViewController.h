@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OPRedditAuthDelegate <NSObject>
+
+- (void) didAuthenticateWithReddit;
+
+@end
+
 @interface OPRedditAuthViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) id delegate;
 
 - (IBAction)loginToReddit:(id)sender;
 - (IBAction)cancelTapped:(id)sender;

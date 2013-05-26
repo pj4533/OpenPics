@@ -73,11 +73,13 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
 - (void)didPostToRedditWithTitle:(NSString *)title toSubreddit:(NSString *)subreddit {
     AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
-    [redditClient postImage:_item[@"image"] toSubreddit:subreddit withTitle:title success:^(NSDictionary *response) {
-        if ([response[@"json"][@"errors"] count]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Posting to Reddit" message:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"]] delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    [SVProgressHUD showWithStatus:@"Posting..."];
+    [redditClient postItem:_item toSubreddit:subreddit withTitle:title completion:^(NSDictionary *response, BOOL success) {
+        if (!success) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Posting to Reddit" message:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"][0][1]] delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
             [alert show];
             [self activityDidFinish:NO];
+            [SVProgressHUD showErrorWithStatus:@"Error."];
         } else {
             [self activityDidFinish:YES];
         }
