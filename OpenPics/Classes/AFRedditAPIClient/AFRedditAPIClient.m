@@ -10,8 +10,6 @@
 #import "AFJSONRequestOperation.h"
 #import "TTTURLRequestFormatter.h"
 
-static NSString *kImgurAPIKey = @"541b2754d7499e8";
-
 @implementation AFRedditAPIClient
 
 + (instancetype) sharedClient {
@@ -179,7 +177,7 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
 
 - (void) uploadToImgur:(UIImage*)image title:(NSString*)title completion:(void (^)(NSDictionary*))completion {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"https://api.imgur.com/3"]];
-    [client setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Client-ID %@", kImgurAPIKey]];
+    [client setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Client-ID %@", self.imgurClientID]];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     NSData *imageData = UIImagePNGRepresentation(image);
     NSDictionary *params = @{

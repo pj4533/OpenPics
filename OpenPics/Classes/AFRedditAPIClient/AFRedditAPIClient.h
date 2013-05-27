@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *modHash;
 @property (strong, nonatomic) NSString *cookie;
+@property (strong, nonatomic) NSString *imgurClientID;
 
 + (instancetype) sharedClient;
 
