@@ -30,6 +30,7 @@
 
     UIPopoverController* _popover;
     
+    BOOL _isSearching;
     
 #warning TODO: memory fix
     // TODO:   save all the sizes here, but put the images in a NSCache, if not in there reload image
@@ -220,6 +221,7 @@
 
 - (void) getMoreItems {
     _canLoadMore = NO;
+    _isSearching = YES;
     OPProvider* providerSearched = self.currentProvider;
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
         if ([_currentPage isEqual:@1]) {
@@ -235,6 +237,7 @@
             }
             [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
                 [SVProgressHUD dismiss];
+                _isSearching = NO;
                 if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
                     [self.items addObjectsFromArray:items];
                     [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
@@ -278,7 +281,12 @@
         if (indexPath.item < _loadedImages.count) {
             UIImage* thisImage = _loadedImages[indexPath];
             CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-            cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+            CGFloat newWidth = (thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height;
+            CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
+            if (newWidth > maxWidth) {
+                newWidth = maxWidth;
+            }
+            cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
         }
 
         return cellSize;
@@ -346,14 +354,15 @@
             NSInteger currentPageInt = [_currentPage integerValue];
             _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
             [self getMoreItems];
+        }
 
+        if (_isSearching && self.items.count) {
             UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             activity.center = cell.contentView.center;
             [activity startAnimating];
             activity.tag = -1;
             [cell.contentView addSubview:activity];
-        }
-    
+        }    
         
         cell.internalScrollView.userInteractionEnabled = NO;
         cell.internalScrollView.imageView.image = nil;
@@ -440,6 +449,7 @@
     
     self.currentProvider = provider;
     _canLoadMore = NO;
+    _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
     _loadedImages = [NSMutableDictionary dictionary];
