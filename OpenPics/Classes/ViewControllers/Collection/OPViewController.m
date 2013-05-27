@@ -161,7 +161,7 @@
             for (AFImageRequestOperation* thisOperation in operations) {
                 NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
                 UIImage* loadedImage = [UIImage imageNamed:@"image_cancel"];
-                if (thisOperation.responseImage) {
+                if (thisOperation.responseImage && !thisOperation.error) {
                     loadedImage = thisOperation.responseImage;
                     // preload the image for speed
                     UIImage* returnImage = [thisOperation.responseImage preloadedImage];
@@ -170,6 +170,8 @@
                         [[TMCache sharedCache] setObject:returnImage forKey:thisOperation.request.URL.absoluteString];
                         loadedImage = returnImage;
                     }
+                } else {
+                    NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
                 }
                 // put the final image in the _loadedImages dictionary
                 _loadedImages[indexPath] = loadedImage;
