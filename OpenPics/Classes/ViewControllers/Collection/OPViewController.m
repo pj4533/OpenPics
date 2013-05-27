@@ -208,7 +208,7 @@
 - (void) doInitialSearch {
     if (self.currentProvider.supportsInitialSearching) {
         _currentPage = [NSNumber numberWithInteger:1];
-        [SVProgressHUD showWithStatus:@"Searching..."];
+        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
         [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
             _canLoadMore = canLoadMore;
             [self loadInitialPageWithItems:items];
@@ -220,6 +220,7 @@
 
 - (void) getMoreItems {
     _canLoadMore = NO;
+    OPProvider* providerSearched = self.currentProvider;
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
         if ([_currentPage isEqual:@1]) {
             _canLoadMore = canLoadMore;
@@ -234,8 +235,10 @@
             }
             [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
                 [SVProgressHUD dismiss];
-                [self.items addObjectsFromArray:items];
-                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
+                    [self.items addObjectsFromArray:items];
+                    [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                }
                 _canLoadMore = canLoadMore;
             }];
             
@@ -422,7 +425,7 @@
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
 
-    [SVProgressHUD showWithStatus:@"Searching..."];
+    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
     [self getMoreItems];
 }
 
