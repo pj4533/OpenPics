@@ -18,7 +18,9 @@
 @interface OPRedditAuthViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
-@property (strong, nonatomic) IBOutlet FUIButton *loginButton;
+@property (strong, nonatomic) FUIButton *loginButton;
+
+@property (strong, nonatomic) IBOutlet UIView *buttonView;
 @property (strong, nonatomic) id delegate;
 
 - (IBAction)loginToReddit:(id)sender;
