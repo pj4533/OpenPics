@@ -124,16 +124,16 @@
 // current page, but I preload here to make this as fast as possible when scrolling and whatnot.
 - (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
     NSMutableArray* requestOperations = [NSMutableArray array];
+    NSMutableArray* imagesFoundInCache = [NSMutableArray array];
     
     // First, iterate over the items to load
     for (NSInteger i=0; i<items.count; i++) {
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
         
-        // if found in cache, then put it in the _loadedImages dictionary (this is where all currently displayed images go
+        // if found in cache, then add to array for later preloading on background thread
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
-            UIImage* image = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
-            _loadedImages[indexPath] = [image preloadedImage];
+            [imagesFoundInCache addObject:@{@"image":[[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString], @"indexpath":indexPath}];
         } else {
             // if not found in cache, then create a image request to go download it, to be batch enqueued later
             //   the userinfo just communicates the indexpath of this image request for later processing
@@ -151,8 +151,17 @@
     // operations, and instead process them all in THIS completion block.
     [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
         
+        NSLog(@"CACHE MISSES: %d", operations.count);
         // do this work on a background thread so we don't block the UI
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            // preload all the images found in cache, and save to _loadedImages
+            for (NSDictionary* cachedImageDict in imagesFoundInCache) {
+                UIImage* cachedImage = cachedImageDict[@"image"];
+                _loadedImages[cachedImageDict[@"indexpath"]] = [cachedImage preloadedImage];
+            }
+            
+            // iterate over all the operations compeleted here
             for (AFImageRequestOperation* thisOperation in operations) {
                 NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
                 UIImage* loadedImage = [UIImage imageNamed:@"image_cancel"];
@@ -171,6 +180,7 @@
                 // put the final image in the _loadedImages dictionary
                 _loadedImages[indexPath] = loadedImage;
             }
+            
             // finally dispatch async on main queue to call the completion of this whole deal.
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion();
@@ -278,7 +288,7 @@
     
     if (collectionViewLayout == self.flowLayout) {
         CGSize cellSize = self.flowLayout.itemSize;
-        if (indexPath.item < _loadedImages.count) {
+        if ((indexPath.item < _loadedImages.count) && (indexPath.item < self.items.count)){
             UIImage* thisImage = _loadedImages[indexPath];
             CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
             CGFloat newWidth = (thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height;
@@ -358,7 +368,7 @@
 
         if (_isSearching && self.items.count) {
             UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-            activity.center = cell.contentView.center;
+            activity.center = CGPointMake(100.0f, 100.0f);
             [activity startAnimating];
             activity.tag = -1;
             [cell.contentView addSubview:activity];
