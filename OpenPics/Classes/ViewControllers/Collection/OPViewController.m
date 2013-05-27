@@ -96,12 +96,6 @@
 
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    if (self.items.count == 1) {
-        [self switchToSingleImageWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-    }
-}
-
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
