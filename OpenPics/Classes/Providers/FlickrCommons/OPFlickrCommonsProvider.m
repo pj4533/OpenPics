@@ -24,6 +24,7 @@
 #import "AFFlickrAPIClient.h"
 #import "OPImageItem.h"
 #import "AFJSONRequestOperation.h"
+#import "OPProviderTokens.h"
 
 NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons";
 
@@ -35,6 +36,15 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
         self.providerName = @"Flickr Commons Project";
     }
     return self;
+}
+
+- (BOOL) isConfigured {
+#ifndef kOPPROVIDERTOKEN_FLICKR
+#warning *** WARNING: Make sure you have added your Flickr token to OPProviderTokens.h!
+    return NO;
+#else
+    return YES;
+#endif
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
