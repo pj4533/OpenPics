@@ -68,14 +68,16 @@
 
 - (IBAction)shareTapped:(id)sender {
     
-    NSArray* appActivities = @[];
-
+    NSMutableArray* appActivities = [NSMutableArray array];
+    
+    OPShareToRedditActivity* shareToReddit = [[OPShareToRedditActivity alloc] init];
+    [appActivities addObject:shareToReddit];
+    
 #ifndef kOPACTIVITYTOKEN_TUMBLR
 #warning *** WARNING: Make sure you have added your Tumblr token to OPActivityTokens.h
 #else
     OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
-    OPShareToRedditActivity* shareToReddit = [[OPShareToRedditActivity alloc] init];
-    appActivities = @[shareToTumblr, shareToReddit];
+    [appActivities addObject:shareToTumblr];
 #endif
     
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
