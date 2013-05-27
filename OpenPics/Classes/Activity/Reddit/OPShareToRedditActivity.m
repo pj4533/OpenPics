@@ -10,6 +10,7 @@
 #import "AFRedditAPIClient.h"
 #import "SVProgressHUD.h"
 #import "OPImageItem.h"
+#import "FUIAlertView.h"
 
 NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
@@ -76,14 +77,28 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
     [SVProgressHUD showWithStatus:@"Posting..."];
     [redditClient postItem:_item toSubreddit:subreddit withTitle:title completion:^(NSDictionary *response, BOOL success) {
         if (!success) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Posting to Reddit" message:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"][0][1]] delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlertViewWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"%@", response[@"json"][@"errors"][0][1]]];
             [self activityDidFinish:NO];
             [SVProgressHUD showErrorWithStatus:@"Error."];
         } else {
             [self activityDidFinish:YES];
         }
     }];
+}
+
+- (void) showAlertViewWithTitle:(NSString*)title andMessage:(NSString*)message {
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.font = [UIFont flatFontOfSize:14];
+    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    [alertView show];
 }
 
 @end

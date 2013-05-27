@@ -31,8 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.usernameField becomeFirstResponder];
     self.passwordField.secureTextEntry = YES;
-    self.loginButton = [[FUIButton alloc] initWithFrame:self.buttonView.frame];
-    [self.loginButton ]
+
     self.loginButton.buttonColor = [UIColor turquoiseColor];
     self.loginButton.shadowColor = [UIColor greenSeaColor];
     self.loginButton.shadowHeight = 3.0f;
@@ -40,8 +39,6 @@
     self.loginButton.titleLabel.font = [UIFont boldFlatFontOfSize:16];
     [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
-    self.loginButton.titleLabel.text = @"Login";
-    [self.buttonView addSubview:self.loginButton];
 }
 
 - (void)didReceiveMemoryWarning
