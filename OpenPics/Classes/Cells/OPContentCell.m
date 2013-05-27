@@ -357,6 +357,8 @@
 }
 
 #pragma mark Notifications
+#warning keyboardDidHide
+//TODO: not sure this is working properly, even with tumblr sharing
 
 - (void) keyboardDidHide:(id) note {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
