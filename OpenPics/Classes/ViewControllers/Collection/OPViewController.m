@@ -32,9 +32,7 @@
     
     BOOL _isSearching;
     
-#warning TODO: memory fix
-    // TODO:   save all the sizes here, but put the images in a NSCache, if not in there reload image
-    NSMutableDictionary* _loadedImages;
+    NSMutableDictionary* _imageSizesByIndexPath;
 }
 @end
 
@@ -43,7 +41,7 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _loadedImages = [NSMutableDictionary dictionary];
+        _imageSizesByIndexPath = [NSMutableDictionary dictionary];
         
         self.items = [NSMutableArray array];
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
@@ -120,8 +118,77 @@
 
 #pragma mark - Helpers
 
-// This is the main guts of the image loading for now.  I may want to delay the loading of ALL the images on the
-// current page, but I preload here to make this as fast as possible when scrolling and whatnot.
+// this loads an image to an imageview in a cell.  called from cellForIndexPath
+- (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
+    imageView.alpha = 0.0f;
+    
+    // First, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
+            // if in the cache, preload the image
+            UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
+            //TODO:  maybe only preload once?  Does it matter?
+            cachedImage = [cachedImage preloadedImage];
+            // then dispatch back to the main thread to set the image and fade it in
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.image = cachedImage;
+                [UIView animateWithDuration:0.5 animations:^{
+                    imageView.alpha = 1.0;
+                }];
+            });
+        } else {
+            // if not found in cache, go to main thread and setup cell with an hourglass image
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageView.contentMode = UIViewContentModeCenter;
+                imageView.image = [UIImage imageNamed:@"hourglass_white"];
+                
+                // create request to download image
+                NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
+                AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                    
+                    if ([item.imageUrl isEqual:request.URL]) {
+                        // dispatch to a background thread for preloading
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            UIImage* preloadedImage = [image preloadedImage];
+                            [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString];
+                            
+                            // then back to the main thread for setting and fading in
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [UIView animateWithDuration:0.25 animations:^{
+                                    imageView.alpha = 0.0;
+                                } completion:^(BOOL finished) {
+                                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                                    imageView.image = preloadedImage;
+                                    [UIView animateWithDuration:0.5 animations:^{
+                                        imageView.alpha = 1.0;
+                                    }];
+                                }];
+                            });
+                        });
+                    }
+                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                    NSLog(@"error getting image");
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageView.alpha = 0.0;
+                    } completion:^(BOOL finished) {
+                        imageView.image = [UIImage imageNamed:@"image_cancel"];
+                        [UIView animateWithDuration:0.5 animations:^{
+                            imageView.alpha = 1.0;
+                        }];
+                    }];
+                }];
+                [operation start];
+                [UIView animateWithDuration:0.5 animations:^{
+                    imageView.alpha = 1.0;
+                }];
+            });
+        }
+    });
+    
+}
+
+
 - (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
     NSMutableArray* requestOperations = [NSMutableArray array];
     NSMutableArray* imagesFoundInCache = [NSMutableArray array];
@@ -152,40 +219,27 @@
     [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
         
         NSLog(@"CACHE MISSES: %d", operations.count);
-        // do this work on a background thread so we don't block the UI
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            // preload all the images found in cache, and save to _loadedImages
-            for (NSDictionary* cachedImageDict in imagesFoundInCache) {
-                UIImage* cachedImage = cachedImageDict[@"image"];
-                _loadedImages[cachedImageDict[@"indexpath"]] = [cachedImage preloadedImage];
+        // save the size to _loadedImages
+        for (NSDictionary* cachedImageDict in imagesFoundInCache) {
+            UIImage* cachedImage = cachedImageDict[@"image"];
+            _imageSizesByIndexPath[cachedImageDict[@"indexpath"]] = [NSValue valueWithCGSize:cachedImage.size];
+        }
+        
+        // iterate over all the operations compeleted here and save the sizes
+        for (AFImageRequestOperation* thisOperation in operations) {
+            NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
+            CGSize imageSize = CGSizeMake(200.0f, 200.0f);
+            if (thisOperation.responseImage && !thisOperation.error) {
+                imageSize = thisOperation.responseImage.size;
+            } else {
+                NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
             }
-            
-            // iterate over all the operations compeleted here
-            for (AFImageRequestOperation* thisOperation in operations) {
-                NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
-                UIImage* loadedImage = [UIImage imageNamed:@"image_cancel"];
-                if (thisOperation.responseImage && !thisOperation.error) {
-                    loadedImage = thisOperation.responseImage;
-                    // preload the image for speed
-                    UIImage* returnImage = [thisOperation.responseImage preloadedImage];
-                    if (returnImage) {
-                        // cache the preloaded image -- prob don't need all these error checking if's here.
-                        [[TMCache sharedCache] setObject:returnImage forKey:thisOperation.request.URL.absoluteString];
-                        loadedImage = returnImage;
-                    }
-                } else {
-                    NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
-                }
-                // put the final image in the _loadedImages dictionary
-                _loadedImages[indexPath] = loadedImage;
-            }
-            
-            // finally dispatch async on main queue to call the completion of this whole deal.
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion();
-            });
-        });
+            _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:imageSize];
+        }
+    
+        if (completion) {
+            completion();
+        }
     }];
 }
 
@@ -193,7 +247,7 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _loadedImages = [NSMutableDictionary dictionary];
+    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -288,10 +342,11 @@
     
     if (collectionViewLayout == self.flowLayout) {
         CGSize cellSize = self.flowLayout.itemSize;
-        if ((indexPath.item < _loadedImages.count) && (indexPath.item < self.items.count)){
-            UIImage* thisImage = _loadedImages[indexPath];
+        if ((indexPath.item < _imageSizesByIndexPath.count) && (indexPath.item < self.items.count)){
+            NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
+            CGSize imageSize = [imageSizeValue CGSizeValue];
             CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-            CGFloat newWidth = (thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height;
+            CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
             CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
             if (newWidth > maxWidth) {
                 newWidth = maxWidth;
@@ -387,17 +442,7 @@
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
     
-    UIImageView* imageView = cell.internalScrollView.imageView;
-    imageView.alpha = 0.0f;
-    if (_loadedImages[indexPath] == [UIImage imageNamed:@"image_cancel"]) {
-        imageView.contentMode = UIViewContentModeCenter;
-    } else {
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-    }
-    imageView.image = _loadedImages[indexPath];
-    [UIView animateWithDuration:0.5 animations:^{
-        imageView.alpha = 1.0;
-    }];
+    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
     return cell;
 }
@@ -439,7 +484,7 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
-    _loadedImages = [NSMutableDictionary dictionary];
+    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -462,7 +507,7 @@
     _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _loadedImages = [NSMutableDictionary dictionary];
+    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
