@@ -10,6 +10,7 @@
 #import "AFRedditAPIClient.h"
 #import "OPRedditAuthViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TTTURLRequestFormatter.h"
 
 @interface OPRedditPostViewController () {
     AFRedditAPIClient *_redditClient;
@@ -37,6 +38,12 @@
     self.postBackgroundView.layer.cornerRadius = 3;
     self.thumbnailImageView.image = self.item[@"image"];
     [self.titleField becomeFirstResponder];
+    
+    if ([_redditClient isAuthenticated]) {
+        [_redditClient getUsersSubscribedSubredditsWithCompletion:^(NSArray *subreddits, BOOL success) {
+            self.subredditArray = subreddits;
+        }];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -46,11 +53,6 @@
         authVC.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:authVC animated:YES completion:nil];
         return;
-    }
-    if (!self.subredditArray) {
-        [_redditClient getUsersSubscribedSubredditsWithCompletion:^(NSArray *subreddits, BOOL success) {
-            self.subredditArray = subreddits;
-        }];
     }
     [self.titleField becomeFirstResponder];
 }
