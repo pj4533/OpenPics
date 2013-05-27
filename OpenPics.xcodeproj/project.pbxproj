@@ -118,7 +118,6 @@
 		1834D90E1751240500986009 /* reddit-alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90C1751240500986009 /* reddit-alien.png */; };
 		1834D90F1751240500986009 /* reddit-alien@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90D1751240500986009 /* reddit-alien@2x.png */; };
 		1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834D9111751243300986009 /* OPShareToRedditActivity.m */; };
-		1834D916175127F200986009 /* AFRedditAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834D915175127F200986009 /* AFRedditAPIClient.m */; };
 		18DD29571752EFC4001B19AE /* FUIAlertView+ShowAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -283,8 +282,6 @@
 		1834D90D1751240500986009 /* reddit-alien@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reddit-alien@2x.png"; sourceTree = "<group>"; };
 		1834D9101751243300986009 /* OPShareToRedditActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPShareToRedditActivity.h; sourceTree = "<group>"; };
 		1834D9111751243300986009 /* OPShareToRedditActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPShareToRedditActivity.m; sourceTree = "<group>"; };
-		1834D914175127F200986009 /* AFRedditAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AFRedditAPIClient.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		1834D915175127F200986009 /* AFRedditAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AFRedditAPIClient.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		18DD29551752EFC4001B19AE /* FUIAlertView+ShowAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIAlertView+ShowAlert.h"; sourceTree = "<group>"; };
 		18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIAlertView+ShowAlert.m"; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -449,7 +446,6 @@
 		0A44CBDF171074EF00D7C1B6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1834D9131751271500986009 /* AFRedditAPIClient */,
 				0A05EF121745A77400814F0B /* Backend */,
 				0A310EFF1728901C007378D0 /* ViewControllers */,
 				0AB6B8BD1711C7FF004CF7A5 /* Activity */,
@@ -747,15 +743,6 @@
 			path = Reddit;
 			sourceTree = "<group>";
 		};
-		1834D9131751271500986009 /* AFRedditAPIClient */ = {
-			isa = PBXGroup;
-			children = (
-				1834D914175127F200986009 /* AFRedditAPIClient.h */,
-				1834D915175127F200986009 /* AFRedditAPIClient.m */,
-			);
-			path = AFRedditAPIClient;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -955,7 +942,6 @@
 				0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */,
 				0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */,
 				1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */,
-				1834D916175127F200986009 /* AFRedditAPIClient.m in Sources */,
 				182E81A71751793700B50B07 /* OPRedditPostViewController.m in Sources */,
 				182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */,
 				182E81BE1751C3AD00B50B07 /* OPSubredditViewController.m in Sources */,

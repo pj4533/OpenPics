@@ -31,8 +31,6 @@
 
 #import "TMCache.h"
 
-#import "AFRedditAPIClient.h"
-
 @interface OPAppDelegate () {
     NSDate* _appBecameActiveDate;
 }
