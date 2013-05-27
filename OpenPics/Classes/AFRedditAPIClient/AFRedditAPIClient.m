@@ -14,7 +14,7 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
 
 @implementation AFRedditAPIClient
 
-+ (instancetype)sharedClient {
++ (instancetype) sharedClient {
     static id _sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -24,7 +24,7 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     return _sharedInstance;
 }
 
-- (instancetype)init {
+- (instancetype) init {
     self = [super initWithBaseURL:[NSURL URLWithString:@"http://www.reddit.com"]];
     if (!self) {
         return nil;
@@ -40,7 +40,7 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     return self;
 }
 
-- (void)loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion {
+- (void) loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion {
     NSDictionary *params = @{
                              @"user": username,
                              @"passwd": password,
@@ -48,25 +48,36 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
                              @"rem": @"True"
                              };
     [self postPath:@"api/login" parameters:params completion:^(NSDictionary *response, BOOL success) {
-        self.modHash = response[@"json"][@"data"][@"modhash"];
-        self.cookie = response[@"json"][@"data"][@"cookie"];
-        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
-        [currentDefaults setObject:self.modHash forKey:@"modHash"];
-        [currentDefaults setObject:self.cookie forKey:@"cookie"];
+        if (!success) {
+            NSLog(@"Failed Login");
+        } else {
+            self.modHash = response[@"modhash"];
+            self.cookie = response[@"cookie"];
+            NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+            [currentDefaults setObject:self.modHash forKey:@"modHash"];
+            [currentDefaults setObject:self.cookie forKey:@"cookie"];
+        }
         completion(response, success);
     }];
 }
 
-- (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL success))completion {
+- (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray* subreddits, BOOL success))completion {
+    if (![self isAuthenticated]) {
+        BOOL success = NO;
+        NSArray *subreddits = [[NSArray alloc]init];
+        completion(subreddits, success);
+        return;
+    }
+    
     NSDictionary *parameters = @{
                                  @"uh": self.modHash,
                                  @"limit": @"100"
                                  };
     [self getPath:@"/subreddits/mine.json" parameters:parameters completion:^(NSDictionary *subreddits, BOOL success) {
-        NSArray *arrayOfSubreddits = subreddits[@"data"][@"children"];
+        NSArray *arrayOfSubreddits = subreddits[@"children"];
         NSMutableArray *reddits = [[NSMutableArray alloc] init];
         for (NSDictionary *thisSubreddit in arrayOfSubreddits) {
-            [reddits addObject:thisSubreddit[@"data"][@"display_name"]];
+            [reddits addObject:thisSubreddit[@"display_name"]];
         }
         completion([NSArray arrayWithArray:reddits], success);
     }];
@@ -79,11 +90,9 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     } else {
         return NO;
     }
-    
-    return NO;
 }
 
-- (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion {
+- (void) postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion {
     NSDictionary *params = @{
                              @"api_type": @"json",
                              @"kind": @"link",
@@ -98,7 +107,77 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     }];
 }
 
-- (void)uploadToImgur:(UIImage*)image title:(NSString*)title completion:(void (^)(NSDictionary*))completion{
+- (void) getCaptchaIDWithCompletion:(void (^)(NSString*, BOOL))completion {
+    [self postPath:@"api/new_captcha" parameters:@{@"api_type": @"json"} completion:^(NSDictionary *response, BOOL success) {
+        if (!success) {
+            NSLog(@"No New Captcha:\n%@", response);
+        }
+        completion(response[@"iden"], success);
+    }];
+}
+
+- (void) postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion {
+    [super postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Posted to Path: %@", path);
+        BOOL success;
+        NSDictionary *jsonResponse;
+        
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil][@"json"];
+        } else {
+            jsonResponse = responseObject[@"json"];
+        }
+        
+        NSDictionary *dataDict = [[NSDictionary alloc] init];
+        
+        if ([jsonResponse[@"errors"] count]) {
+            NSLog(@"Error Posting to Reddit:\n%@", jsonResponse[@"errors"]);
+            dataDict =@{ @"errors": jsonResponse[@"errors"] };
+            success = NO;
+        } else {
+            NSLog(@"Success Posting to Reddit:\n%@", jsonResponse[@"data"]);
+            dataDict = jsonResponse[@"data"];
+            success = YES;
+        }
+        completion(dataDict, success);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error Posting to Path: %@\nWith Error:\n%@", path, error);
+    }];
+}
+
+- (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion {
+    [super getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got Path: %@", path);
+        NSDictionary *jsonResponse;
+        BOOL success;
+        
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil][@"json"];
+        } else {
+            jsonResponse = responseObject[@"json"];
+        }
+        
+        NSDictionary *dataDict = [[NSDictionary alloc] init];
+        
+        if ([jsonResponse[@"errors"] count]) {
+            NSLog(@"Error Getting from Reddit:\n%@", jsonResponse[@"errors"]);
+            dataDict =@{ @"errors": jsonResponse[@"errors"] };
+            success = NO;
+        } else {
+            NSLog(@"Success Getting from Reddit:\n%@", jsonResponse[@"data"]);
+            dataDict = jsonResponse[@"data"];
+            success = YES;
+        }
+        
+        completion(dataDict, success);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"\nError Getting Path: %@\nWith Error:\n%@", path, error);
+    }];
+}
+
+- (void) uploadToImgur:(UIImage*)image title:(NSString*)title completion:(void (^)(NSDictionary*))completion {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"https://api.imgur.com/3"]];
     [client setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Client-ID %@", kImgurAPIKey]];
     [client setParameterEncoding:AFFormURLParameterEncoding];
@@ -117,66 +196,6 @@ static NSString *kImgurAPIKey = @"541b2754d7499e8";
     }];
     
     [operation start];
-}
-
-- (void) getCaptchaIDWithCompletion:(void (^)(NSString*, BOOL))completion {
-    [self postPath:@"api/new_captcha" parameters:@{@"api_type": @"json"} completion:^(NSDictionary *response, BOOL success) {
-        if (!success) {
-            NSLog(@"No New Captcha:\n%@", response);
-        }
-        completion(response[@"json"][@"data"][@"iden"], success);
-    }];
-}
-
-- (void)postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion {
-    [super postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Posted to Path: %@", path);
-        BOOL success;
-        NSDictionary *jsonResponse;
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        } else {
-            jsonResponse = responseObject;
-        }
-        
-        if ([jsonResponse[@"json"][@"errors"] count]) {
-            NSLog(@"Error Posting to Reddit:\n%@", jsonResponse[@"json"][@"errors"]);
-            success = NO;
-        } else {
-            NSLog(@"Success Posting to Reddit:\n%@", jsonResponse[@"json"]);
-            success = YES;
-        }
-        completion(jsonResponse, success);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error Posting to Path: %@\nWith Error:\n%@", path, error);
-    }];
-}
-
-- (void)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion {
-    [super getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"Got Path: %@", path);
-        
-        NSDictionary *jsonResponse;
-        BOOL success;
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        } else {
-            jsonResponse = responseObject;
-        }
-        
-        if ([jsonResponse[@"json"][@"errors"] count]) {
-            NSLog(@"Error Getting from Reddit:\n%@", jsonResponse[@"json"][@"errors"]);
-            success = NO;
-        } else {
-            NSLog(@"Success Getting from Reddit:\n%@", jsonResponse[@"json"]);
-            success = YES;
-        }
-        
-        completion(jsonResponse, success);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"\nError Getting Path: %@\nWith Error:\n%@", path, error);
-    }];
 }
 
 @end

@@ -10,19 +10,16 @@
 
 @interface AFRedditAPIClient : AFHTTPClient
 
-@property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *modHash;
 @property (strong, nonatomic) NSString *cookie;
-@property (strong, nonatomic) NSString *captcha;
 
-+ (instancetype)sharedClient;
++ (instancetype) sharedClient;
 
 - (void) loginToRedditWithUsername:(NSString*)username password:(NSString*)password completion:(void (^)(NSDictionary*, BOOL))completion;
 
 - (BOOL) isAuthenticated;
 
-- (void)postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
+- (void) postItem:(NSDictionary*)item toSubreddit:(NSString*)subreddit withTitle:(NSString*)title completion:(void (^)(NSDictionary*, BOOL))completion;
 
 - (void) getUsersSubscribedSubredditsWithCompletion:(void (^)(NSArray*, BOOL))completion;
 
@@ -30,7 +27,8 @@
 
 - (void) postPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion;
 
-- (void)getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion;
+- (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSDictionary*, BOOL))completion;
 
+- (void) uploadToImgur:(UIImage*)image title:(NSString*)title completion:(void (^)(NSDictionary*))completion;
 
 @end

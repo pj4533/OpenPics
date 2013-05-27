@@ -9,6 +9,7 @@
 #import "OPRedditAuthViewController.h"
 #import "AFRedditAPIClient.h"
 #import "FUIButton.h"
+#import "FUIAlertView+ShowAlert.h"
 
 @interface OPRedditAuthViewController ()
 
@@ -48,12 +49,16 @@
 }
 
 - (IBAction)loginToReddit:(id)sender {
-    AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
-    [redditClient loginToRedditWithUsername:self.usernameField.text password:self.passwordField.text completion:^(NSDictionary *response, BOOL success) {
-        NSLog(@"Logged In!");
-        [self.delegate didAuthenticateWithReddit];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    if (self.usernameField.text.length && self.passwordField.text.length) {
+        AFRedditAPIClient *redditClient = [AFRedditAPIClient sharedClient];
+        [redditClient loginToRedditWithUsername:self.usernameField.text password:self.passwordField.text completion:^(NSDictionary *response, BOOL success) {
+            [self.delegate didAuthenticateWithReddit];
+            if (success) {
+                NSLog(@"Logged In!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 - (IBAction)cancelTapped:(id)sender {
