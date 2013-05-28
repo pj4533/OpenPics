@@ -127,8 +127,6 @@
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
             // if in the cache, preload the image
             UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
-            //TODO:  maybe only preload once?  Does it matter?
-            cachedImage = [cachedImage preloadedImage];
             // then dispatch back to the main thread to set the image and fade it in
             dispatch_async(dispatch_get_main_queue(), ^{
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -200,7 +198,7 @@
         
         // if found in cache, then add to array for later preloading on background thread
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
-            [imagesFoundInCache addObject:@{@"image":[[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString], @"indexpath":indexPath}];
+            [imagesFoundInCache addObject:@{@"image":[[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString], @"indexpath":indexPath, @"url":item.imageUrl.absoluteString}];
         } else {
             // if not found in cache, then create a image request to go download it, to be batch enqueued later
             //   the userinfo just communicates the indexpath of this image request for later processing
@@ -223,6 +221,13 @@
             // save the size to _loadedImages
             for (NSDictionary* cachedImageDict in imagesFoundInCache) {
                 UIImage* cachedImage = cachedImageDict[@"image"];
+                
+                // preload the image
+                UIImage* preloadedImage = [cachedImage preloadedImage];
+
+                // also cache the preloaded image -- this recacheing moves it to the memory cache for faster buttery scrolling
+                [[TMCache sharedCache] setObject:preloadedImage forKey:cachedImageDict[@"url"]];
+                
                 _imageSizesByIndexPath[cachedImageDict[@"indexpath"]] = [NSValue valueWithCGSize:cachedImage.size];
             }
             
@@ -233,8 +238,11 @@
                 if (thisOperation.responseImage && !thisOperation.error) {
                     imageSize = thisOperation.responseImage.size;
                     
+                    // preload the image
+                    UIImage* preloadedImage = [thisOperation.responseImage preloadedImage];
+                    
                     // also cache the image
-                    [[TMCache sharedCache] setObject:thisOperation.responseImage forKey:thisOperation.request.URL.absoluteString];
+                    [[TMCache sharedCache] setObject:preloadedImage forKey:thisOperation.request.URL.absoluteString];
                 } else {
                     NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
                 }
