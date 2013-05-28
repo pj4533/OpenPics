@@ -217,29 +217,36 @@
     // enqueue all the image requests from above.  as per the AFNetworking FAQ, we ignore the success blocks on the individual
     // operations, and instead process them all in THIS completion block.
     [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
-        
-        NSLog(@"CACHE MISSES: %d", operations.count);
-        // save the size to _loadedImages
-        for (NSDictionary* cachedImageDict in imagesFoundInCache) {
-            UIImage* cachedImage = cachedImageDict[@"image"];
-            _imageSizesByIndexPath[cachedImageDict[@"indexpath"]] = [NSValue valueWithCGSize:cachedImage.size];
-        }
-        
-        // iterate over all the operations compeleted here and save the sizes
-        for (AFImageRequestOperation* thisOperation in operations) {
-            NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
-            CGSize imageSize = CGSizeMake(200.0f, 200.0f);
-            if (thisOperation.responseImage && !thisOperation.error) {
-                imageSize = thisOperation.responseImage.size;
-            } else {
-                NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"CACHE MISSES: %d", operations.count);
+            // save the size to _loadedImages
+            for (NSDictionary* cachedImageDict in imagesFoundInCache) {
+                UIImage* cachedImage = cachedImageDict[@"image"];
+                _imageSizesByIndexPath[cachedImageDict[@"indexpath"]] = [NSValue valueWithCGSize:cachedImage.size];
             }
-            _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:imageSize];
-        }
-    
-        if (completion) {
-            completion();
-        }
+            
+            // iterate over all the operations compeleted here and save the sizes
+            for (AFImageRequestOperation* thisOperation in operations) {
+                NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
+                CGSize imageSize = CGSizeMake(200.0f, 200.0f);
+                if (thisOperation.responseImage && !thisOperation.error) {
+                    imageSize = thisOperation.responseImage.size;
+                    
+                    // also cache the image
+                    [[TMCache sharedCache] setObject:thisOperation.responseImage forKey:thisOperation.request.URL.absoluteString];
+                } else {
+                    NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
+                }
+                _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:imageSize];
+            }
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion();
+                }                
+            });
+        });
     }];
 }
 
