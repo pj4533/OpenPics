@@ -9,6 +9,7 @@
 #import "OPViewController.h"
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
+#import "AFNetworking.h"
 #import "OPContentCell.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
@@ -17,6 +18,7 @@
 #import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 #import "TMCache.h"
+#import "UIImage+Preload.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -28,6 +30,7 @@
 
     UIPopoverController* _popover;
     
+    BOOL _isSearching;
     
 #warning TODO: memory fix
     // TODO:   save all the sizes here, but put the images in a NSCache, if not in there reload image
@@ -86,16 +89,12 @@
     // screen.
     //
     // if we DO have items, skip it, as this means that we were likely called from the map.
-    if (!self.items.count) {
+    if (self.items.count) {
+        [self loadInitialPageWithItems:self.items];
+    } else {
         [self doInitialSearch];
     }
-    
-}
 
-- (void) viewDidAppear:(BOOL)animated {
-    if (self.items.count == 1) {
-        [self switchToSingleImageWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-    }
 }
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -121,40 +120,73 @@
 
 #pragma mark - Helpers
 
+// This is the main guts of the image loading for now.  I may want to delay the loading of ALL the images on the
+// current page, but I preload here to make this as fast as possible when scrolling and whatnot.
 - (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
-    NSInteger totalImagesAfterLoading = self.items.count + items.count;
+    NSMutableArray* requestOperations = [NSMutableArray array];
+    NSMutableArray* imagesFoundInCache = [NSMutableArray array];
+    
+    // First, iterate over the items to load
     for (NSInteger i=0; i<items.count; i++) {
         NSIndexPath* indexPath = indexPaths[i];
         OPImageItem* item = items[i];
+        
+        // if found in cache, then add to array for later preloading on background thread
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
-            _loadedImages[indexPath] = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
-            if (_loadedImages.count == totalImagesAfterLoading) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion();
-                });
-            }
+            [imagesFoundInCache addObject:@{@"image":[[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString], @"indexpath":indexPath}];
         } else {
+            // if not found in cache, then create a image request to go download it, to be batch enqueued later
+            //   the userinfo just communicates the indexpath of this image request for later processing
             NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                _loadedImages[indexPath] = image;
-                [[TMCache sharedCache] setObject:image forKey:item.imageUrl.absoluteString];
-                if (_loadedImages.count == totalImagesAfterLoading) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion();
-                    });
-                }
-            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                NSLog(@"error getting image");
-                _loadedImages[indexPath] = [UIImage imageNamed:@"image_cancel"];
-                if (_loadedImages.count == totalImagesAfterLoading) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion();
-                    });
-                }
-            }];
-            [operation start];            
+            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:nil];
+            operation.userInfo = @{@"indexpath": indexPath};
+            [requestOperations addObject:operation];
         }
     }
+
+    // Now we have either loaded the images from the cache or created image requests.  so create the throwaway client (url meaningless here)
+    AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost"]];
+    
+    // enqueue all the image requests from above.  as per the AFNetworking FAQ, we ignore the success blocks on the individual
+    // operations, and instead process them all in THIS completion block.
+    [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
+        
+        NSLog(@"CACHE MISSES: %d", operations.count);
+        // do this work on a background thread so we don't block the UI
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            // preload all the images found in cache, and save to _loadedImages
+            for (NSDictionary* cachedImageDict in imagesFoundInCache) {
+                UIImage* cachedImage = cachedImageDict[@"image"];
+                _loadedImages[cachedImageDict[@"indexpath"]] = [cachedImage preloadedImage];
+            }
+            
+            // iterate over all the operations compeleted here
+            for (AFImageRequestOperation* thisOperation in operations) {
+                NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
+                UIImage* loadedImage = [UIImage imageNamed:@"image_cancel"];
+                if (thisOperation.responseImage && !thisOperation.error) {
+                    loadedImage = thisOperation.responseImage;
+                    // preload the image for speed
+                    UIImage* returnImage = [thisOperation.responseImage preloadedImage];
+                    if (returnImage) {
+                        // cache the preloaded image -- prob don't need all these error checking if's here.
+                        [[TMCache sharedCache] setObject:returnImage forKey:thisOperation.request.URL.absoluteString];
+                        loadedImage = returnImage;
+                    }
+                } else {
+                    NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
+                }
+                // put the final image in the _loadedImages dictionary
+                _loadedImages[indexPath] = loadedImage;
+            }
+            
+            // finally dispatch async on main queue to call the completion of this whole deal.
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion();
+            });
+        });
+    }];
 }
 
 - (void) forceReload {
@@ -187,7 +219,7 @@
 - (void) doInitialSearch {
     if (self.currentProvider.supportsInitialSearching) {
         _currentPage = [NSNumber numberWithInteger:1];
-        [SVProgressHUD showWithStatus:@"Searching..."];
+        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
         [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
             _canLoadMore = canLoadMore;
             [self loadInitialPageWithItems:items];
@@ -198,9 +230,12 @@
 }
 
 - (void) getMoreItems {
+    _canLoadMore = NO;
+    _isSearching = YES;
+    OPProvider* providerSearched = self.currentProvider;
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
-        _canLoadMore = canLoadMore;
         if ([_currentPage isEqual:@1]) {
+            _canLoadMore = canLoadMore;
             [self loadInitialPageWithItems:items];
         } else {
             NSInteger offset = [self.items count];
@@ -212,8 +247,12 @@
             }
             [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
                 [SVProgressHUD dismiss];
-                [self.items addObjectsFromArray:items];
-                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                _isSearching = NO;
+                if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
+                    [self.items addObjectsFromArray:items];
+                    [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                }
+                _canLoadMore = canLoadMore;
             }];
             
         }
@@ -246,11 +285,19 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage* thisImage = _loadedImages[indexPath];
+    
     if (collectionViewLayout == self.flowLayout) {
-        CGSize cellSize;
-        CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-        cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+        CGSize cellSize = self.flowLayout.itemSize;
+        if ((indexPath.item < _loadedImages.count) && (indexPath.item < self.items.count)){
+            UIImage* thisImage = _loadedImages[indexPath];
+            CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
+            CGFloat newWidth = (thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height;
+            CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
+            if (newWidth > maxWidth) {
+                newWidth = maxWidth;
+            }
+            cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
+        }
 
         return cellSize;
     }
@@ -277,7 +324,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return [self.items count];
+    return [self.items count]+1;
 }
 
 - (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -302,17 +349,36 @@
     
     static NSString *cellIdentifier = @"generic";
     OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-        
-    cell.internalScrollView.imageView.image = nil;
     
-    if ( (indexPath.item == self.items.count-1) && _canLoadMore){
-        NSInteger currentPageInt = [_currentPage integerValue];
-        _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-
-        [SVProgressHUD showWithStatus:@"Searching..."];
-        [self getMoreItems];
+    // remove activity indicator if present
+    for (UIView* subview in cell.contentView.subviews) {
+        if (subview.tag == -1) {
+            [subview removeFromSuperview];
+        }
     }
     
+    cell.internalScrollView.imageView.image = nil;
+    
+    if (indexPath.item == self.items.count) {
+        if (_canLoadMore) {
+            NSInteger currentPageInt = [_currentPage integerValue];
+            _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+            [self getMoreItems];
+        }
+
+        if (_isSearching && self.items.count) {
+            UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            activity.center = CGPointMake(100.0f, 100.0f);
+            [activity startAnimating];
+            activity.tag = -1;
+            [cell.contentView addSubview:activity];
+        }    
+        
+        cell.internalScrollView.userInteractionEnabled = NO;
+        cell.internalScrollView.imageView.image = nil;
+        return cell;
+    }
+
     OPImageItem* item = self.items[indexPath.item];
     
     cell.mainViewController = self;
@@ -378,7 +444,7 @@
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
 
-    [SVProgressHUD showWithStatus:@"Searching..."];
+    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
     [self getMoreItems];
 }
 
@@ -393,6 +459,7 @@
     
     self.currentProvider = provider;
     _canLoadMore = NO;
+    _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
     _loadedImages = [NSMutableDictionary dictionary];

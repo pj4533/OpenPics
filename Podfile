@@ -11,3 +11,4 @@ pod 'SGSStaggeredFlowLayout', :git => 'https://github.com/pj4533/SGSStaggeredFlo
 pod 'TMCache'
 pod 'FormatterKit'
 pod 'AFRedditAPIClient'
+pod 'MDCParallaxView'

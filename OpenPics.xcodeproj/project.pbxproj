@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF1B1745A92000814F0B /* OPBackendKinvey.m */; };
 		0A05EF201745A99F00814F0B /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05EF1E1745A99F00814F0B /* libUAirship-1.4.0.a */; };
@@ -123,6 +124,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A031F9C175136EC008CD564 /* UIImage+Preload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Preload.h"; sourceTree = "<group>"; };
+		0A031F9D175136EC008CD564 /* UIImage+Preload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Preload.m"; sourceTree = "<group>"; };
 		0A05EF131745A79000814F0B /* OPBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackend.h; sourceTree = "<group>"; };
 		0A05EF141745A79000814F0B /* OPBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackend.m; sourceTree = "<group>"; };
 		0A05EF1A1745A92000814F0B /* OPBackendKinvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendKinvey.h; sourceTree = "<group>"; };
@@ -481,6 +484,8 @@
 				0A127BF5172D98FE00F6966A /* OPAppearance.m */,
 				18DD29551752EFC4001B19AE /* FUIAlertView+ShowAlert.h */,
 				18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */,
+				0A031F9C175136EC008CD564 /* UIImage+Preload.h */,
+				0A031F9D175136EC008CD564 /* UIImage+Preload.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */,
 				182E81BE1751C3AD00B50B07 /* OPSubredditViewController.m in Sources */,
 				18DD29571752EFC4001B19AE /* FUIAlertView+ShowAlert.m in Sources */,
+				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,8 +1013,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
