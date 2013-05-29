@@ -38,6 +38,7 @@ DEPENDENCIES:
   - AFTumblrAPIClient (~> 0.0.4)
   - DWTagList
   - FlatUIKit
+  - FormatterKit
   - FormatterKit (= 1.1.1)
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD

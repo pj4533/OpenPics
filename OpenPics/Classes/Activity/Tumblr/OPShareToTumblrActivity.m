@@ -49,7 +49,6 @@ NSString * const UIActivityTypeShareToTumblr = @"com.saygoodnight.share_to_tumbl
 }
 
 - (void) prepareWithActivityItems:(NSArray *)activityItems {
-
     for (id thisItem in activityItems) {
         if ([thisItem isKindOfClass:[NSDictionary class]]) {
             _item = thisItem;
