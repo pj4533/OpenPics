@@ -15,6 +15,7 @@
 #import "OPProviderController.h"
 #import "OPBackend.h"
 #import "SVProgressHUD.h"
+#import "OPShareToRedditActivity.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
@@ -67,13 +68,16 @@
 
 - (IBAction)shareTapped:(id)sender {
     
-    NSArray* appActivities = @[];
-
+    NSMutableArray* appActivities = [NSMutableArray array];
+    
+    OPShareToRedditActivity* shareToReddit = [[OPShareToRedditActivity alloc] init];
+    [appActivities addObject:shareToReddit];
+    
 #ifndef kOPACTIVITYTOKEN_TUMBLR
 #warning *** WARNING: Make sure you have added your Tumblr token to OPActivityTokens.h
 #else
     OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
-    appActivities = @[shareToTumblr];
+    [appActivities addObject:shareToTumblr];
 #endif
     
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
@@ -97,6 +101,8 @@
             } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
                 _completedString = @"Saved!";
             } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
+                _completedString = @"Posted!";
+            } else if ([activityType isEqualToString:UIActivityTypeShareToReddit]) {
                 _completedString = @"Posted!";
             }
         } else {
@@ -329,7 +335,8 @@
     if (self.internalScrollView.zoomScale == 1.0) {
         NSDictionary* returnItem = @{
                                      @"image":self.internalScrollView.imageView.image,
-                                     @"title":self.item.title
+                                     @"title":self.item.title,
+                                     @"imageUrl":self.item.imageUrl
                                      };
         return returnItem;
     }
@@ -352,6 +359,8 @@
 }
 
 #pragma mark Notifications
+#warning keyboardDidHide
+//TODO: not sure this is working properly, even with tumblr sharing
 
 - (void) keyboardDidHide:(id) note {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
