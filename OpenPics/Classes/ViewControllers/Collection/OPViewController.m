@@ -430,19 +430,21 @@
     cell.internalScrollView.imageView.image = nil;
     
     if (indexPath.item == self.items.count) {
-        if (_canLoadMore) {
-            NSInteger currentPageInt = [_currentPage integerValue];
-            _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-            [self getMoreItems];
+        if (self.items.count) {
+            if (_canLoadMore) {
+                NSInteger currentPageInt = [_currentPage integerValue];
+                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+                [self getMoreItems];
+            }
+            
+            if (_isSearching) {
+                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                activity.center = CGPointMake(100.0f, 100.0f);
+                [activity startAnimating];
+                activity.tag = -1;
+                [cell.contentView addSubview:activity];
+            }
         }
-
-        if (_isSearching && self.items.count) {
-            UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-            activity.center = CGPointMake(100.0f, 100.0f);
-            [activity startAnimating];
-            activity.tag = -1;
-            [cell.contentView addSubview:activity];
-        }    
         
         cell.internalScrollView.userInteractionEnabled = NO;
         cell.internalScrollView.imageView.image = nil;

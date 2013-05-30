@@ -5,6 +5,8 @@ PODS:
   - AFNetworking (1.2.0)
   - AFOAuth1Client (0.2.0):
     - AFNetworking (>= 1.0)
+  - AFRedditAPIClient (0.0.2):
+    - AFNetworking (~> 1.0)
   - AFStatHatClient (0.0.1):
     - AFNetworking (~> 1.0)
   - AFTumblrAPIClient (0.0.4):
@@ -27,6 +29,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.1.1)
   - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
+  - MDCParallaxView (0.1.4)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (0.9)
   - TMCache (1.1.2)
@@ -34,12 +37,14 @@ PODS:
 DEPENDENCIES:
   - AFKissXMLRequestOperation
   - AFNetworking
+  - AFRedditAPIClient
   - AFStatHatClient
   - AFTumblrAPIClient (~> 0.0.4)
   - DWTagList
   - FlatUIKit
   - FormatterKit
   - FormatterKit (= 1.1.1)
+  - MDCParallaxView
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD
   - TMCache
@@ -52,14 +57,16 @@ SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 3504a91dde7554a587fd73d369c9954aeb8f2ecb
   AFNetworking: 3cbae45f61a9f995cdbd56bd571223910d7f4e44
   AFOAuth1Client: 3e01e6e4218116c2e279671c8ab086133514a350
+  AFRedditAPIClient: 7afb78b38df23db0c2f661adf6d47d6e113cc644
   AFStatHatClient: e2643fe803f646c790573cf24260f20b0b48b94c
   AFTumblrAPIClient: 2bde5878581439234ae8409deeb64577b7341006
   DWTagList: 76302ed894130ed285e95eb11e704a55593101ab
   FlatUIKit: 3d2c6375ed741a8e8ffe663a3c1fe52d84309f04
   FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
+  MDCParallaxView: a1aea11598439a6c20864e7bec23aa595464475b
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
   TMCache: 6003b743a5331388d3c862a0a60da1bef553a714
 
-COCOAPODS: 0.20.1
+COCOAPODS: 0.20.2
