@@ -32,7 +32,7 @@
     
     BOOL _isSearching;
     
-    NSMutableDictionary* _imageSizesByIndexPath;
+    NSMutableDictionary* _imageSizesByIndexPath;    
 }
 @end
 
@@ -127,13 +127,19 @@
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
             // if in the cache, preload the image
             UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
-            // then dispatch back to the main thread to set the image and fade it in
+            // then dispatch back to the main thread to set the image
             dispatch_async(dispatch_get_main_queue(), ^{
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.image = cachedImage;
+                if (cachedImage.size.height) {
+                    _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cachedImage.size];
+                }
+                // then invalidate the layout - this will force a relayout, and the delegate will be called to
+                // fade in the cells after being laid out.
                 [UIView animateWithDuration:0.5 animations:^{
                     imageView.alpha = 1.0;
                 }];
+                [self.internalCollectionView.collectionViewLayout invalidateLayout];
             });
         } else {
             // if not found in cache, go to main thread and setup cell with an hourglass image
@@ -158,9 +164,14 @@
                                 } completion:^(BOOL finished) {
                                     imageView.contentMode = UIViewContentModeScaleAspectFill;
                                     imageView.image = preloadedImage;
+                                    if (preloadedImage.size.height) {
+                                        _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:preloadedImage.size];
+                                    }
                                     [UIView animateWithDuration:0.5 animations:^{
                                         imageView.alpha = 1.0;
                                     }];
+                                
+                                    [self.internalCollectionView.collectionViewLayout invalidateLayout];
                                 }];
                             });
                         });
@@ -186,78 +197,6 @@
     
 }
 
-
-- (void) loadItems:(NSArray*) items forIndexPaths:(NSArray*) indexPaths withCompletion:(void (^)())completion {
-    NSMutableArray* requestOperations = [NSMutableArray array];
-    NSMutableArray* imagesFoundInCache = [NSMutableArray array];
-    
-    // First, iterate over the items to load
-    for (NSInteger i=0; i<items.count; i++) {
-        NSIndexPath* indexPath = indexPaths[i];
-        OPImageItem* item = items[i];
-        
-        // if found in cache, then add to array for later preloading on background thread
-        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
-            [imagesFoundInCache addObject:@{@"image":[[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString], @"indexpath":indexPath, @"url":item.imageUrl.absoluteString}];
-        } else {
-            // if not found in cache, then create a image request to go download it, to be batch enqueued later
-            //   the userinfo just communicates the indexpath of this image request for later processing
-            NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-            AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:nil];
-            operation.userInfo = @{@"indexpath": indexPath};
-            [requestOperations addObject:operation];
-        }
-    }
-
-    // Now we have either loaded the images from the cache or created image requests.  so create the throwaway client (url meaningless here)
-    AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost"]];
-    
-    // enqueue all the image requests from above.  as per the AFNetworking FAQ, we ignore the success blocks on the individual
-    // operations, and instead process them all in THIS completion block.
-    [client enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:nil completionBlock:^(NSArray *operations) {
-
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSLog(@"CACHE MISSES: %d", operations.count);
-            // save the size to _loadedImages
-            for (NSDictionary* cachedImageDict in imagesFoundInCache) {
-                UIImage* cachedImage = cachedImageDict[@"image"];
-                
-                // preload the image
-                UIImage* preloadedImage = [cachedImage preloadedImage];
-
-                // also cache the preloaded image -- this recacheing moves it to the memory cache for faster buttery scrolling
-                [[TMCache sharedCache] setObject:preloadedImage forKey:cachedImageDict[@"url"]];
-                
-                _imageSizesByIndexPath[cachedImageDict[@"indexpath"]] = [NSValue valueWithCGSize:cachedImage.size];
-            }
-            
-            // iterate over all the operations compeleted here and save the sizes
-            for (AFImageRequestOperation* thisOperation in operations) {
-                NSIndexPath* indexPath = thisOperation.userInfo[@"indexpath"];
-                CGSize imageSize = CGSizeMake(200.0f, 200.0f);
-                if (thisOperation.responseImage && !thisOperation.error) {
-                    imageSize = thisOperation.responseImage.size;
-                    
-                    // preload the image
-                    UIImage* preloadedImage = [thisOperation.responseImage preloadedImage];
-                    
-                    // also cache the image
-                    [[TMCache sharedCache] setObject:preloadedImage forKey:thisOperation.request.URL.absoluteString];
-                } else {
-                    NSLog(@"IMAGE LOAD ERROR: %@ URL: %@", thisOperation.error.localizedDescription, thisOperation.request.URL.absoluteString);
-                }
-                _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:imageSize];
-            }
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    completion();
-                }                
-            });
-        });
-    }];
-}
-
 - (void) forceReload {
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
@@ -278,11 +217,9 @@
         [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
     }
 
-    [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
-        [SVProgressHUD dismiss];
-        self.items = [items mutableCopy];
-        [self.internalCollectionView reloadData];
-    }];
+    [SVProgressHUD dismiss];
+    self.items = [items mutableCopy];
+    [self.internalCollectionView reloadData];
 }
 
 - (void) doInitialSearch {
@@ -305,6 +242,7 @@
     [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
         if ([_currentPage isEqual:@1]) {
             _canLoadMore = canLoadMore;
+            _isSearching = NO;
             [self loadInitialPageWithItems:items];
         } else {
             NSInteger offset = [self.items count];
@@ -314,15 +252,14 @@
             for (int i = 0; i < items.count; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
             }
-            [self loadItems:items forIndexPaths:indexPaths withCompletion:^{
-                [SVProgressHUD dismiss];
-                _isSearching = NO;
-                if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
-                    [self.items addObjectsFromArray:items];
-                    [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
-                }
-                _canLoadMore = canLoadMore;
-            }];
+
+            [SVProgressHUD dismiss];
+            _isSearching = NO;
+            if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
+                [self.items addObjectsFromArray:items];
+                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+            }
+            _canLoadMore = canLoadMore;
             
         }
     } failure:^(NSError *error) {
@@ -360,13 +297,15 @@
         if ((indexPath.item < _imageSizesByIndexPath.count) && (indexPath.item < self.items.count)){
             NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
             CGSize imageSize = [imageSizeValue CGSizeValue];
-            CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-            CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
-            CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
-            if (newWidth > maxWidth) {
-                newWidth = maxWidth;
+            if (imageSize.height) {
+                CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
+                CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
+                CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
+                if (newWidth > maxWidth) {
+                    newWidth = maxWidth;
+                }
+                cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
             }
-            cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
         }
 
         return cellSize;
