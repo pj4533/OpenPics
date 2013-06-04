@@ -59,7 +59,7 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
                                  @"method" : @"flickr.photos.search",
                                  @"format" : @"json",
                                  @"is_commons": @"true",
-                                 @"extras": @"url_b,url_o",
+                                 @"extras": @"url_b,url_o,o_dims",
                                  @"per_page": @"20"
                                  };
     
@@ -80,7 +80,9 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
                                           @"imageUrl": [NSURL URLWithString:imageUrlString],
                                           @"title" : itemDict[@"title"],
                                           @"providerType": self.providerType,
-                                          @"providerSpecific": itemDict
+                                          @"providerSpecific": itemDict,
+                                          @"width": itemDict[@"width_o"],
+                                          @"height": itemDict[@"height_o"]
                                           };
             OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
