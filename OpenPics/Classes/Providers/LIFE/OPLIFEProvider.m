@@ -60,8 +60,19 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         NSMutableArray* retArray = [NSMutableArray array];
         for (int i=1; i < comp.count; i++) {
             NSArray* comp2 = [comp[i] componentsSeparatedByString:@".html"];
-                        
-            NSString* urlString = [NSString stringWithFormat:@"http://www.gstatic.com/hostedimg/%@_landing", comp2[0]];
+            NSString* imageId = comp2[0];
+            
+            NSArray* comp3 = [comp[i] componentsSeparatedByString:@"&amp;w="];
+            NSArray* comp4 = [comp3[1] componentsSeparatedByString:@"&"];
+
+            NSString* width = comp4[0];
+
+            NSArray* comp5 = [comp[i] componentsSeparatedByString:@"&amp;h="];
+            NSArray* comp6 = [comp5[1] componentsSeparatedByString:@"&"];
+
+            NSString* height = comp6[0];
+            
+            NSString* urlString = [NSString stringWithFormat:@"http://www.gstatic.com/hostedimg/%@_landing", imageId];
             NSURL* imageUrl = [NSURL URLWithString:urlString];
             NSString* titleString = @"";
 
@@ -69,9 +80,14 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
                                           @"imageUrl": imageUrl,
                                           @"title" : titleString,
                                           @"providerType": self.providerType,
-                                          @"providerSpecific" : @{@"imageId": comp2[0]}
+                                          @"providerSpecific" : @{@"imageId": imageId},
+                                          @"width": width,
+                                          @"height": height
                                           };
-            imageIds[comp2[0]] = opImageDict;
+            
+            NSLog(@"%@", opImageDict);
+            
+            imageIds[imageId] = opImageDict;
         }
         
         for (NSString* thisKey in imageIds.allKeys) {
