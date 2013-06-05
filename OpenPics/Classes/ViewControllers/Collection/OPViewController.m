@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 #import "TMCache.h"
 #import "UIImage+Preload.h"
+#import "NSString+MD5.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -124,9 +125,10 @@
     
     // First, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString]) {
+
+        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
             // if in the cache, preload the image
-            UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString];
+            UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
             // then dispatch back to the main thread to set the image
             dispatch_async(dispatch_get_main_queue(), ^{
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -158,7 +160,7 @@
                         // dispatch to a background thread for preloading
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                             UIImage* preloadedImage = [image preloadedImage];
-                            [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString];
+                            [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
                             
                             // then back to the main thread for setting and fading in
                             dispatch_async(dispatch_get_main_queue(), ^{

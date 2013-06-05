@@ -86,6 +86,7 @@
 		0ABF9E601710C11A00C29E84 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E5A1710C11A00C29E84 /* search@2x.png */; };
 		0ABF9E631710C6A800C29E84 /* disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E611710C6A800C29E84 /* disclose.png */; };
 		0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E621710C6A800C29E84 /* disclose@2x.png */; };
+		0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */; };
 		0AE1C5B0174ADE2800BAA804 /* heart_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE1C5AE174ADE2800BAA804 /* heart_minus.png */; };
 		0AE1C5B1174ADE2800BAA804 /* heart_minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE1C5AF174ADE2800BAA804 /* heart_minus@2x.png */; };
 		0AEB314E174322A6004102B9 /* image_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEB314C174322A6004102B9 /* image_cancel.png */; };
@@ -246,6 +247,8 @@
 		0ABF9E5A1710C11A00C29E84 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		0ABF9E611710C6A800C29E84 /* disclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclose.png; sourceTree = "<group>"; };
 		0ABF9E621710C6A800C29E84 /* disclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclose@2x.png"; sourceTree = "<group>"; };
+		0ADFACA5175FEFDB00A35553 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		0AE1C5AE174ADE2800BAA804 /* heart_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_minus.png; sourceTree = "<group>"; };
 		0AE1C5AF174ADE2800BAA804 /* heart_minus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_minus@2x.png"; sourceTree = "<group>"; };
 		0AEB314C174322A6004102B9 /* image_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_cancel.png; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 				18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */,
 				0A031F9C175136EC008CD564 /* UIImage+Preload.h */,
 				0A031F9D175136EC008CD564 /* UIImage+Preload.m */,
+				0ADFACA5175FEFDB00A35553 /* NSString+MD5.h */,
+				0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -952,6 +957,7 @@
 				182E81BE1751C3AD00B50B07 /* OPSubredditViewController.m in Sources */,
 				18DD29571752EFC4001B19AE /* FUIAlertView+ShowAlert.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
+				0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
