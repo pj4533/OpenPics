@@ -23,6 +23,7 @@
         self.title = dict[@"title"];
         self.providerSpecific = dict[@"providerSpecific"];
         self.location = CLLocationCoordinate2DMake([dict[@"latitude"] floatValue], [dict[@"longitude"] floatValue]);
+        self.size = CGSizeMake([dict[@"width"] floatValue], [dict[@"height"] floatValue]);
         self.providerType = dict[@"providerType"];
     }
     
@@ -42,6 +43,7 @@
     self.providerSpecific = [decoder decodeObjectForKey:@"providerSpecific"];
     self.location = CLLocationCoordinate2DMake([[decoder decodeObjectForKey:@"latitude"] floatValue], [[decoder decodeObjectForKey:@"longitude"] floatValue]);
     self.providerType = [decoder decodeObjectForKey:@"providerType"];
+    self.size = [decoder decodeCGSizeForKey:@"size"];
     
     return self;
 }
@@ -53,6 +55,7 @@
     [encoder encodeObject:[NSNumber numberWithFloat:self.location.latitude] forKey:@"latitude"];
     [encoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];
     [encoder encodeObject:self.providerType forKey:@"providerType"];
+    [encoder encodeCGSize:self.size forKey:@"size"];
 }
 
 

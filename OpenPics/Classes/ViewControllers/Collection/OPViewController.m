@@ -139,7 +139,10 @@
                 [UIView animateWithDuration:0.5 animations:^{
                     imageView.alpha = 1.0;
                 }];
-                [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                if (!item.size.height) {
+                    item.size = cachedImage.size;
+                    [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                }
             });
         } else {
             // if not found in cache, go to main thread and setup cell with an hourglass image
@@ -170,8 +173,10 @@
                                     [UIView animateWithDuration:0.5 animations:^{
                                         imageView.alpha = 1.0;
                                     }];
-                                
-                                    [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                                    if (!item.size.height) {
+                                        item.size = preloadedImage.size;
+                                        [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                                    }
                                 }];
                             });
                         });
@@ -294,9 +299,17 @@
     
     if (collectionViewLayout == self.flowLayout) {
         CGSize cellSize = self.flowLayout.itemSize;
-        if ((indexPath.item < _imageSizesByIndexPath.count) && (indexPath.item < self.items.count)){
-            NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
-            CGSize imageSize = [imageSizeValue CGSizeValue];
+        
+        CGSize imageSize = CGSizeZero;
+        if (indexPath.item < self.items.count) {
+            OPImageItem* item = self.items[indexPath.item];
+            if (item.size.height) {
+                imageSize = item.size;
+            } else if (indexPath.item < _imageSizesByIndexPath.count){
+                NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
+                imageSize = [imageSizeValue CGSizeValue];
+            }
+            
             if (imageSize.height) {
                 CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
                 CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
