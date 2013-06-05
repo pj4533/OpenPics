@@ -104,6 +104,7 @@
     NSMutableDictionary* kinveyItem = [@{
                                        @"date":[NSDate date],
                                         @"imageUrl": item.imageUrl.absoluteString,
+                                       @"providerUrl": item.providerUrl.absoluteString,
                                         @"providerType": item.providerType,
                                        @"lat": [NSString stringWithFormat:@"%f", item.location.latitude],
                                        @"lon": [NSString stringWithFormat:@"%f", item.location.longitude],

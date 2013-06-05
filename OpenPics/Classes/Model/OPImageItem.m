@@ -19,7 +19,13 @@
         } else {
             self.imageUrl = imageUrlOrString;
         }
-        
+
+        id providerUrlOrString = dict[@"providerUrl"];
+        if ([providerUrlOrString isKindOfClass:[NSString class]]) {
+            self.providerUrl = [NSURL URLWithString:providerUrlOrString];
+        } else {
+            self.providerUrl = providerUrlOrString;
+        }
         self.title = dict[@"title"];
         self.providerSpecific = dict[@"providerSpecific"];
         self.location = CLLocationCoordinate2DMake([dict[@"latitude"] floatValue], [dict[@"longitude"] floatValue]);
@@ -40,6 +46,7 @@
     
     self.title = [decoder decodeObjectForKey:@"title"];
     self.imageUrl = [decoder decodeObjectForKey:@"imageUrl"];
+    self.providerUrl = [decoder decodeObjectForKey:@"providerUrl"];
     self.providerSpecific = [decoder decodeObjectForKey:@"providerSpecific"];
     self.location = CLLocationCoordinate2DMake([[decoder decodeObjectForKey:@"latitude"] floatValue], [[decoder decodeObjectForKey:@"longitude"] floatValue]);
     self.providerType = [decoder decodeObjectForKey:@"providerType"];
@@ -51,6 +58,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.title forKey:@"title"];
     [encoder encodeObject:self.imageUrl forKey:@"imageUrl"];
+    [encoder encodeObject:self.providerUrl forKey:@"providerUrl"];
     [encoder encodeObject:self.providerSpecific forKey:@"providerSpecific"];
     [encoder encodeObject:[NSNumber numberWithFloat:self.location.latitude] forKey:@"latitude"];
     [encoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];

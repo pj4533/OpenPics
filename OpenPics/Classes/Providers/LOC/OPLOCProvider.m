@@ -38,6 +38,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     
     [[AFLOCAPIClient sharedClient] getPath:@"search" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
+        
         NSArray* resultArray = responseObject[@"results"];
         NSMutableArray* retArray = [NSMutableArray array];
         for (NSDictionary* itemDict in resultArray) {
@@ -50,16 +51,24 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                 }
                 NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
 
+                NSURL* providerUrl = nil;
                 if (itemDict[@"links"]) {
                     providerSpecific[@"links"] = itemDict[@"links"];
+                    if ([itemDict[@"links"] isKindOfClass:[NSDictionary class]]) {
+                        providerUrl = [NSURL URLWithString:itemDict[@"links"][@"item"]];
+                    }
                 }
 
-                NSDictionary* opImageDict = @{
+                NSMutableDictionary* opImageDict = [@{
                                               @"imageUrl": imageUrl,
                                               @"title" : titleString,
                                               @"providerType": self.providerType,
                                               @"providerSpecific": providerSpecific
-                                              };
+                                              } mutableCopy];
+                if (providerUrl) {
+                    opImageDict[@"providerUrl"] = providerUrl;
+                }
+                
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];                
             }

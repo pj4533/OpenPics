@@ -80,6 +80,12 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
 
                 NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
                 
+                NSString* troveUrlString = itemDict[@"troveUrl"];
+                NSURL* troveUrl = nil;
+                if (troveUrlString) {
+                    troveUrl = [NSURL URLWithString:troveUrlString];
+                }
+                
                 NSArray* holdingArray = itemDict[@"holding"];
                 if (holdingArray.count) {
                     NSDictionary* holdingDict = holdingArray[0];
@@ -133,7 +139,8 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                                                   @"imageUrl": imageUrl,
                                                   @"title" : titleString,
                                                   @"providerSpecific" : providerSpecific,
-                                                  @"providerType": self.providerType
+                                                  @"providerType": self.providerType,
+                                                  @"providerUrl": troveUrl
                                                   };
                     OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                     [retArray addObject:item];

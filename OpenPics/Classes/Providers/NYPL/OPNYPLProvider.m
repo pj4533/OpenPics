@@ -33,11 +33,21 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         if (itemDict[@"title"]) {
             titleString = itemDict[@"title"];
         }
-        NSDictionary* opImageDict = @{
+        
+        NSURL* providerUrl = nil;
+        if (itemDict[@"itemLink"]) {
+            providerUrl = [NSURL URLWithString:itemDict[@"itemLink"]];
+        }
+        
+        NSMutableDictionary* opImageDict = [@{
                                       @"imageUrl": imageUrl,
                                       @"title" : titleString,
                                       @"providerType": self.providerType
-                                      };
+                                      } mutableCopy];
+        if (providerUrl) {
+            opImageDict[@"providerUrl"] = providerUrl;
+        }
+        
         OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
         return item;
     }

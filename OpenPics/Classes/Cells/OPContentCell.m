@@ -16,6 +16,7 @@
 #import "OPBackend.h"
 #import "SVProgressHUD.h"
 #import "OPShareToRedditActivity.h"
+#import "TUSafariActivity.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
@@ -79,9 +80,19 @@
     OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
     [appActivities addObject:shareToTumblr];
 #endif
+
+    TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
+    [appActivities addObject:openInSafari];
     
-    UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
-                                                                             applicationActivities:appActivities];
+
+    UIActivityViewController *shareSheet;
+    if (self.item.providerUrl) {
+        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self,self.item.providerUrl]
+                                                       applicationActivities:appActivities];
+    } else {
+        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
+                                                       applicationActivities:appActivities];
+    }
     
     
 //    SHOW ONLY AFTER VC GOES AWAY
@@ -332,6 +343,10 @@
 
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
     
+    if ([activityType isEqualToString:NSStringFromClass([TUSafariActivity class])]) {
+        return self.item.providerUrl;
+    }
+    
     if (self.internalScrollView.zoomScale == 1.0) {
         NSDictionary* returnItem = @{
                                      @"image":self.internalScrollView.imageView.image,
@@ -356,6 +371,7 @@
                                  @"title":self.item.title
                                  };
     return returnItem;
+    
 }
 
 #pragma mark Notifications

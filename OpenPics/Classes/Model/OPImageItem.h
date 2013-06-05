@@ -9,6 +9,7 @@
 
 @interface OPImageItem : NSObject <NSCoding>
 
+@property (strong, nonatomic) NSURL* providerUrl;
 @property (strong, nonatomic) NSURL* imageUrl;
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSDictionary* providerSpecific;

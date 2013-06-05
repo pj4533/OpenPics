@@ -29,10 +29,10 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.1.1)
   - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
-  - MDCParallaxView (0.1.4)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (0.9)
   - TMCache (1.1.2)
+  - TUSafariActivity (1.0.0)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
@@ -44,10 +44,10 @@ DEPENDENCIES:
   - FlatUIKit
   - FormatterKit
   - FormatterKit (= 1.1.1)
-  - MDCParallaxView
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD
   - TMCache
+  - TUSafariActivity
 
 EXTERNAL SOURCES:
   SGSStaggeredFlowLayout:
@@ -64,9 +64,9 @@ SPEC CHECKSUMS:
   FlatUIKit: 3d2c6375ed741a8e8ffe663a3c1fe52d84309f04
   FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 8dfe0fb6d4e987fec63656ff07d5e697f49976f8
-  MDCParallaxView: a1aea11598439a6c20864e7bec23aa595464475b
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
   TMCache: 6003b743a5331388d3c862a0a60da1bef553a714
+  TUSafariActivity: bd9da588f5f9136ba445d89f8f86b6dccf4d46ba
 
 COCOAPODS: 0.20.2

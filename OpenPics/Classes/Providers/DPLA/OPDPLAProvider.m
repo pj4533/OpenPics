@@ -247,6 +247,8 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     for (NSDictionary* itemDict in resultArray) {
         
         NSURL* imageUrl = nil;
+        NSURL* providerUrl = nil;
+        
         NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
         
         // Maybe by default put entire record inside here?
@@ -259,6 +261,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         // DPLA is shown at
         NSString* isShownAt = itemDict[@"isShownAt"];
         providerSpecific[@"dplaIsShownAt"] = isShownAt;
+        providerUrl = [NSURL URLWithString:isShownAt];
         
         // DPLA original record dict
         NSDictionary* originalRecord = itemDict[@"originalRecord"];
@@ -349,6 +352,10 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             if (latitude && longitude) {
                 opImageDict[@"latitude"] = latitude;
                 opImageDict[@"longitude"] = longitude;
+            }
+            
+            if (providerUrl) {
+                opImageDict[@"providerUrl"] = providerUrl;
             }
             
             OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
