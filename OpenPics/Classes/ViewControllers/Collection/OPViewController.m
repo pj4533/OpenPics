@@ -119,6 +119,16 @@
 
 #pragma mark - Helpers
 
+- (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath {
+    for (NSIndexPath* thisIndexPath in self.internalCollectionView.indexPathsForVisibleItems) {
+        if (indexPath.item == thisIndexPath.item) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 // this loads an image to an imageview in a cell.  called from cellForIndexPath
 - (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
     imageView.alpha = 0.0f;
@@ -127,25 +137,28 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
-            // if in the cache, preload the image
-            UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+            
+            // Load the image from the cache
+            UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+                        
             // then dispatch back to the main thread to set the image
-            dispatch_async(dispatch_get_main_queue(), ^{
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
-                imageView.image = cachedImage;
-                if (cachedImage.size.height) {
-                    _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cachedImage.size];
-                }
-                // then invalidate the layout - this will force a relayout, and the delegate will be called to
-                // fade in the cells after being laid out.
-                [UIView animateWithDuration:0.5 animations:^{
-                    imageView.alpha = 1.0;
-                }];
-                if (!item.size.height) {
-                    item.size = cachedImage.size;
-                    [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                }
-            });
+            if ([self isCellVisibleAtIndexPath:indexPath]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                    imageView.image = cacheImage;
+                    if (cacheImage.size.height) {
+                        _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cacheImage.size];
+                    }
+                    [UIView animateWithDuration:0.5 animations:^{
+                        imageView.alpha = 1.0;
+                    }];
+                    // if we have no size information yet, save the information in item, and force a re-layout
+                    if (!item.size.height) {
+                        item.size = cacheImage.size;
+                        [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                    }
+                });
+            }
         } else {
             // if not found in cache, go to main thread and setup cell with an hourglass image
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -156,31 +169,33 @@
                 NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
                 AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                     
-                    if ([item.imageUrl isEqual:request.URL]) {
+                    if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
                         // dispatch to a background thread for preloading
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                             UIImage* preloadedImage = [image preloadedImage];
                             [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
                             
                             // then back to the main thread for setting and fading in
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [UIView animateWithDuration:0.25 animations:^{
-                                    imageView.alpha = 0.0;
-                                } completion:^(BOOL finished) {
-                                    imageView.contentMode = UIViewContentModeScaleAspectFill;
-                                    imageView.image = preloadedImage;
-                                    if (preloadedImage.size.height) {
-                                        _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:preloadedImage.size];
-                                    }
-                                    [UIView animateWithDuration:0.5 animations:^{
-                                        imageView.alpha = 1.0;
+                            if ([self isCellVisibleAtIndexPath:indexPath]) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [UIView animateWithDuration:0.25 animations:^{
+                                        imageView.alpha = 0.0;
+                                    } completion:^(BOOL finished) {
+                                        imageView.contentMode = UIViewContentModeScaleAspectFill;
+                                        imageView.image = preloadedImage;
+                                        if (preloadedImage.size.height) {
+                                            _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:preloadedImage.size];
+                                        }
+                                        [UIView animateWithDuration:0.5 animations:^{
+                                            imageView.alpha = 1.0;
+                                        }];
+                                        if (!item.size.height) {
+                                            item.size = preloadedImage.size;
+                                            [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                                        }
                                     }];
-                                    if (!item.size.height) {
-                                        item.size = preloadedImage.size;
-                                        [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                                    }
-                                }];
-                            });
+                                });
+                            }
                         });
                     }
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
