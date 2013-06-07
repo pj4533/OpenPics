@@ -133,38 +133,42 @@
 - (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
     imageView.alpha = 0.0f;
     
-    // First, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        imageView.contentMode = UIViewContentModeCenter;
+        imageView.image = [UIImage imageNamed:@"hourglass_white"];
+        
+        // First, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // Load the image from the cache
-            UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-                        
-            // then dispatch back to the main thread to set the image
-            if ([self isCellVisibleAtIndexPath:indexPath]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    imageView.contentMode = UIViewContentModeScaleAspectFill;
-                    imageView.image = cacheImage;
-                    if (cacheImage.size.height) {
-                        _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cacheImage.size];
-                    }
-                    [UIView animateWithDuration:0.5 animations:^{
-                        imageView.alpha = 1.0;
-                    }];
-                    // if we have no size information yet, save the information in item, and force a re-layout
-                    if (!item.size.height) {
-                        item.size = cacheImage.size;
-                        [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                    }
-                });
-            }
-        } else {
-            // if not found in cache, go to main thread and setup cell with an hourglass image
-            dispatch_async(dispatch_get_main_queue(), ^{
-                imageView.contentMode = UIViewContentModeCenter;
-                imageView.image = [UIImage imageNamed:@"hourglass_white"];
+            if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
                 
+                // Load the image from the cache
+                UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+                cacheImage = cacheImage.preloadedImage;
+                // then dispatch back to the main thread to set the image
+                if ([self isCellVisibleAtIndexPath:indexPath]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [UIView animateWithDuration:0.25 animations:^{
+                            imageView.alpha = 0.0;
+                        } completion:^(BOOL finished) {
+                            imageView.contentMode = UIViewContentModeScaleAspectFill;
+                            imageView.image = cacheImage;
+                            if (cacheImage.size.height) {
+                                _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cacheImage.size];
+                            }
+                            [UIView animateWithDuration:0.5 animations:^{
+                                imageView.alpha = 1.0;
+                            }];
+                            // if we have no size information yet, save the information in item, and force a re-layout
+                            if (!item.size.height) {
+                                item.size = cacheImage.size;
+                                [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                            }
+                        }];
+                    });
+                }
+            } else {
+                // if not found in cache, go to main thread and setup cell with an hourglass image
                 // create request to download image
                 NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
                 AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -172,7 +176,7 @@
                     if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
                         // dispatch to a background thread for preloading
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            UIImage* preloadedImage = [image preloadedImage];
+                            UIImage* preloadedImage = image.preloadedImage;
                             [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
                             
                             // then back to the main thread for setting and fading in
@@ -210,12 +214,13 @@
                     }];
                 }];
                 [operation start];
-                [UIView animateWithDuration:0.5 animations:^{
-                    imageView.alpha = 1.0;
-                }];
-            });
-        }
+            }
+        });
+        [UIView animateWithDuration:0.5 animations:^{
+            imageView.alpha = 1.0;
+        }];
     });
+
     
 }
 

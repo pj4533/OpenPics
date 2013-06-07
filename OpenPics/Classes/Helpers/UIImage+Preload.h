@@ -23,6 +23,6 @@
 
 @interface UIImage (Preload)
 
-- (UIImage *)preloadedImage;
+@property (nonatomic, copy) UIImage* preloadedImage;
 
 @end

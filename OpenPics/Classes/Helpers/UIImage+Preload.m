@@ -20,13 +20,23 @@
 // THE SOFTWARE.
 
 #import "UIImage+Preload.h"
+#import <objc/runtime.h>
 
 @implementation UIImage (Preload)
 
+- (void)setPreloadedImage:(UIImage *)preloadedImage {
+    objc_setAssociatedObject(self, @selector(preloadedImage), preloadedImage, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
 
 // Thanks to steipete for this gist
 //      https://gist.github.com/steipete/1144242
 - (UIImage *)preloadedImage {
+    UIImage* associatedObject = objc_getAssociatedObject(self, @selector(preloadedImage));
+    
+    if (associatedObject) {
+        return associatedObject;
+    }
+    
     CGImageRef image = self.CGImage;
     
     // make a bitmap context of a suitable size to draw to, forcing decode
@@ -49,6 +59,8 @@
     // clean up
     CGImageRelease(outputImage);
     CGContextRelease(imageContext);
+
+    self.preloadedImage = cachedImage;
     
     return cachedImage;
 }
