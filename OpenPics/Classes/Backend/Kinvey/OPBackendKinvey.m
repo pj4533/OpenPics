@@ -104,7 +104,6 @@
     NSMutableDictionary* kinveyItem = [@{
                                        @"date":[NSDate date],
                                         @"imageUrl": item.imageUrl.absoluteString,
-                                       @"providerUrl": item.providerUrl.absoluteString,
                                         @"providerType": item.providerType,
                                        @"lat": [NSString stringWithFormat:@"%f", item.location.latitude],
                                        @"lon": [NSString stringWithFormat:@"%f", item.location.longitude],
@@ -112,6 +111,9 @@
                                        @"height": [NSString stringWithFormat:@"%f", item.size.height]
                                         } mutableCopy];
 
+    if (item.providerUrl)
+        kinveyItem[@"providerUrl"] = item.providerUrl.absoluteString;
+    
     if (item.providerSpecific)
         kinveyItem[@"providerSpecific"] = item.providerSpecific;
 
