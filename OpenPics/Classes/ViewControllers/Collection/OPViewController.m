@@ -366,6 +366,8 @@
         return;
     }
     
+    [self.view endEditing:YES];
+    
     if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
         [self switchToGridWithIndexPath:indexPath];
     } else {
