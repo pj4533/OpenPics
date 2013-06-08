@@ -53,7 +53,7 @@ One fun thing is that the Tumblr UIActivity uses [NSLinguisticTagger](http://nsh
 
 * AFNetworking
 * CocoaPods
-* Heavy use of UICollectionView (currently using unmodified UICollectionViewFlowLayout)
+* Heavy use of UICollectionView (currently using my flow layout subclass: [SGSStaggeredFlowLayout](https://github.com/pj4533/SGSStaggeredFlowLayout) )
 
 ## To do
 
