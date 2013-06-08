@@ -66,5 +66,11 @@
     [encoder encodeCGSize:self.size forKey:@"size"];
 }
 
+- (BOOL)isEqual:(OPImageItem *)item {
+    if (![item isKindOfClass:OPImageItem.class]) return NO;
+    
+    return [self.imageUrl isEqual:item.imageUrl] && [self.title isEqual:item.title];
+}
+
 
 @end

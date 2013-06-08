@@ -23,6 +23,7 @@
 #import "OPPopularProvider.h"
 #import "OPImageItem.h"
 #import "OPBackend.h"
+#import "TMCache.h"
 
 NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
 
@@ -49,9 +50,29 @@ NSString * const OPProviderTypePopular = @"com.saygoodnight.Popular";
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
+    
+    NSDictionary* cachedQuery = [[TMCache sharedCache] objectForKey:@"initial_popular_query"];
+    
+    if (cachedQuery) {
+        if (success) {
+            success(cachedQuery[@"items"],[cachedQuery[@"canLoadMore"] boolValue]);
+        }
+    }
+    
     [self getItemsWithQuery:nil
              withPageNumber:@1
-                    success:success
+                    success:^(NSArray *items, BOOL canLoadMore) {
+
+                        if (cachedQuery && [cachedQuery[@"items"] isEqualToArray:items]) {
+                            return;
+                        }
+                        
+                        NSDictionary* newCachedQuery = @{@"items": items, @"canLoadMore":[NSNumber numberWithBool:canLoadMore]};
+                        [[TMCache sharedCache] setObject:newCachedQuery forKey:@"initial_popular_query"];
+                        if (success) {
+                            success(items,canLoadMore);
+                        }
+                    }
                     failure:failure];
 }
 

@@ -73,6 +73,9 @@
         [_store queryWithQuery:query withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
             if (errorOrNil != nil) {
                 //An error happened, just log for now
+                if (failure) {
+                    failure(errorOrNil);
+                }
                 NSLog(@"An error occurred on fetch: %@", errorOrNil);
             } else {
                 NSMutableArray* imageItems = [NSMutableArray array];
