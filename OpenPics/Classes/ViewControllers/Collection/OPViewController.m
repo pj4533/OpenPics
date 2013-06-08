@@ -33,7 +33,9 @@
     
     BOOL _isSearching;
     
-    NSMutableDictionary* _imageSizesByIndexPath;    
+    NSMutableDictionary* _imageSizesByIndexPath;
+    
+    BOOL _firstAppearance;
 }
 @end
 
@@ -63,15 +65,15 @@
             self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
         }    
 
-        
+        _firstAppearance = YES;
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
 
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
 
@@ -82,18 +84,25 @@
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
         [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     }
-    
-    // if we are in view did load and we don't have any items, the do an initial search on the current provider
-    // this allows for the provider to give us a more passive experience by showing some images, rather than a blank
-    // screen.
-    //
-    // if we DO have items, skip it, as this means that we were likely called from the map.
-    if (self.items.count) {
-        [self loadInitialPageWithItems:self.items];
-    } else {
-        [self doInitialSearch];
-    }
+}
 
+- (void) viewDidAppear:(BOOL)animated {
+    if (_firstAppearance) {
+        _firstAppearance = NO;
+        // if we are appearing for the first time and we don't have any items, the do an initial search on the current provider
+        // this allows for the provider to give us a more passive experience by showing some images, rather than a blank
+        // screen.
+        //
+        // if we DO have items, skip it, as this means that we were likely called from the map.
+        //
+        // i had this in viewDidLoad and got a weird error on app launch:
+        //    Application windows are expected to have a root view controller at the end of application launch
+        if (self.items.count) {
+            [self loadInitialPageWithItems:self.items];
+        } else {
+            [self doInitialSearch];
+        }
+    }
 }
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
