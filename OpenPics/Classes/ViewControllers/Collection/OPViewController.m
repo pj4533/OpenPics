@@ -362,6 +362,10 @@
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (!self.items.count) {
+        return;
+    }
+    
     if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
         [self switchToGridWithIndexPath:indexPath];
     } else {
