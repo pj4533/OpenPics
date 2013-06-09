@@ -3,8 +3,27 @@
 //  OpenPics
 //
 //  Created by PJ Gray on 4/6/13.
-//  Copyright (c) 2013 Say Goodnight Software. All rights reserved.
+// 
+// Copyright (c) 2013 Say Goodnight Software
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 
 #import "OPViewController.h"
 #import "OPImageItem.h"
@@ -20,21 +39,18 @@
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
+#import "FUIAlertView+ShowAlert.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
 
-    NSInteger _visibleItemAtStartOfRotate;
-    
     NSNumber* _currentPage;
     NSString* _currentQueryString;
 
     UIPopoverController* _popover;
     
     BOOL _isSearching;
-    
-    NSMutableDictionary* _imageSizesByIndexPath;
-    
+        
     BOOL _firstAppearance;
 }
 @end
@@ -44,8 +60,6 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _imageSizesByIndexPath = [NSMutableDictionary dictionary];
-        
         self.items = [NSMutableArray array];
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
@@ -126,7 +140,7 @@
 }
 
 
-#pragma mark - Helpers
+#pragma mark - Loading image helper functions
 
 - (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath {
     for (NSIndexPath* thisIndexPath in self.internalCollectionView.indexPathsForVisibleItems) {
@@ -138,106 +152,132 @@
     return NO;
 }
 
-// this loads an image to an imageview in a cell.  called from cellForIndexPath
-- (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
+- (void) fadeInHourglassToImageView:(UIImageView*) imageView withCompletion:(void (^)(void))completion {
     imageView.alpha = 0.0f;
     
+    // First, go to the main thread and set the imageview to hourglass, start with alpha at 0?
     dispatch_async(dispatch_get_main_queue(), ^{
         imageView.contentMode = UIViewContentModeCenter;
         imageView.image = [UIImage imageNamed:@"hourglass_white"];
         
-        // First, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
-                
-                // Load the image from the cache
-                UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-                cacheImage = cacheImage.preloadedImage;
-                // then dispatch back to the main thread to set the image
-                if ([self isCellVisibleAtIndexPath:indexPath]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [UIView animateWithDuration:0.25 animations:^{
-                            imageView.alpha = 0.0;
-                        } completion:^(BOOL finished) {
-                            imageView.contentMode = UIViewContentModeScaleAspectFill;
-                            imageView.image = cacheImage;
-                            if (cacheImage.size.height) {
-                                _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:cacheImage.size];
-                            }
-                            [UIView animateWithDuration:0.5 animations:^{
-                                imageView.alpha = 1.0;
-                            }];
-                            // if we have no size information yet, save the information in item, and force a re-layout
-                            if (!item.size.height) {
-                                item.size = cacheImage.size;
-                                [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                            }
-                        }];
-                    });
-                }
-            } else {
-                // if not found in cache, go to main thread and setup cell with an hourglass image
-                // create request to download image
-                NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-                AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                    
-                    if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
-                        // dispatch to a background thread for preloading
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            UIImage* preloadedImage = image.preloadedImage;
-                            [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
-                            
-                            // then back to the main thread for setting and fading in
-                            if ([self isCellVisibleAtIndexPath:indexPath]) {
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [UIView animateWithDuration:0.25 animations:^{
-                                        imageView.alpha = 0.0;
-                                    } completion:^(BOOL finished) {
-                                        imageView.contentMode = UIViewContentModeScaleAspectFill;
-                                        imageView.image = preloadedImage;
-                                        if (preloadedImage.size.height) {
-                                            _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:preloadedImage.size];
-                                        }
-                                        [UIView animateWithDuration:0.5 animations:^{
-                                            imageView.alpha = 1.0;
-                                        }];
-                                        if (!item.size.height) {
-                                            item.size = preloadedImage.size;
-                                            [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                                        }
-                                    }];
-                                });
-                            }
-                        });
-                    }
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                    NSLog(@"error getting image");
-                    [UIView animateWithDuration:0.25 animations:^{
-                        imageView.alpha = 0.0;
-                    } completion:^(BOOL finished) {
-                        imageView.image = [UIImage imageNamed:@"image_cancel"];
-                        [UIView animateWithDuration:0.5 animations:^{
-                            imageView.alpha = 1.0;
-                        }];
-                    }];
-                }];
-                [operation start];
-            }
-        });
+        if (completion) {
+            completion();
+        }
+        
+        // fade in the hourglass
         [UIView animateWithDuration:0.5 animations:^{
             imageView.alpha = 1.0;
         }];
     });
-
-    
 }
+
+- (void) getImageFromCacheWithItem:(OPImageItem*) item withCompletion:(void (^)(UIImage* cachedImage))completion {
+    // If found in cache, load the image
+    UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+    
+    // Use the category to get the preloaded image (will check for associated object)
+    cacheImage = cacheImage.preloadedImage;
+    if (completion) {
+        completion(cacheImage);
+    }
+}
+
+- (void) getImageWithRequestForItem:(OPImageItem*) item
+                        withSuccess:(void (^)(UIImage* image))success
+                        withFailure:(void (^)(void))failure {
+    // if not found in cache, create request to download image
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
+    AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        
+        // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
+        if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
+            
+            // dispatch to a background thread for preloading
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                // uses category - will check for assocaited object
+                UIImage* preloadedImage = image.preloadedImage;
+
+                // set the loaded object to the cache
+                [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
+
+                if (success) {
+                    success(preloadedImage);
+                }
+            });
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"error getting image");
+        if (failure) {
+            failure();
+        }
+    }];
+    [operation start];
+}
+
+- (void) getImageForItem:(OPImageItem*) item
+             withSuccess:(void (^)(UIImage* image))success
+             withFailure:(void (^)(void))failure {
+    // Then, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
+            [self getImageFromCacheWithItem:item withCompletion:success];
+        } else {
+            [self getImageWithRequestForItem:item withSuccess:success withFailure:failure];
+        }
+    });
+}
+
+// this loads an image to an imageview in a cell.  called from cellForIndexPath
+- (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
+    [self fadeInHourglassToImageView:imageView withCompletion:^{
+        [self getImageForItem:item withSuccess:^(UIImage *image) {
+            // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
+            if ([self isCellVisibleAtIndexPath:indexPath]) {
+                
+                // then dispatch back to the main thread to set the image
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // fade out the hourglass image
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageView.alpha = 0.0;
+                    } completion:^(BOOL finished) {
+                        imageView.contentMode = UIViewContentModeScaleAspectFill;
+                        imageView.image = image;
+                        
+                        // fade in image
+                        [UIView animateWithDuration:0.5 animations:^{
+                            imageView.alpha = 1.0;
+                        }];
+                        
+                        // if we have no size information yet, save the information in item, and force a re-layout
+                        if (!item.size.height) {
+                            item.size = image.size;
+                            [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                        }
+                    }];
+                });
+            }            
+        } withFailure:^{
+            [UIView animateWithDuration:0.25 animations:^{
+                imageView.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                imageView.image = [UIImage imageNamed:@"image_cancel"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    imageView.alpha = 1.0;
+                }];
+            }];            
+        }];
+    }];
+}
+
+#pragma mark - Loading Data Helper Functions
 
 - (void) forceReload {
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -303,6 +343,8 @@
     }];
 }
 
+#pragma mark - Switching layout helper functions
+
 - (void) switchToGridWithIndexPath:(NSIndexPath*) indexPath {
     self.internalCollectionView.scrollEnabled = YES;
     
@@ -336,9 +378,6 @@
             OPImageItem* item = self.items[indexPath.item];
             if (item.size.height) {
                 imageSize = item.size;
-            } else if (indexPath.item < _imageSizesByIndexPath.count){
-                NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
-                imageSize = [imageSizeValue CGSizeValue];
             }
             
             if (imageSize.height) {
@@ -490,7 +529,6 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -513,7 +551,6 @@
     _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -529,40 +566,10 @@
         NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
         NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
         if (uprezMode && uprezMode.boolValue) {
-            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
-                                                                  message:@"Exiting full uprez mode."
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles:nil];
-            alertView.titleLabel.textColor = [UIColor cloudsColor];
-            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-            alertView.messageLabel.textColor = [UIColor cloudsColor];
-            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
-            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-            alertView.defaultButtonColor = [UIColor cloudsColor];
-            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
-            [alertView show];
+            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Exiting full uprez mode." andDelegate:nil];
             [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
         } else {
-            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
-                                                                  message:@"Entering full uprez mode."
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles:nil];
-            alertView.titleLabel.textColor = [UIColor cloudsColor];
-            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-            alertView.messageLabel.textColor = [UIColor cloudsColor];
-            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
-            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-            alertView.defaultButtonColor = [UIColor cloudsColor];
-            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
-            [alertView show];
+            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Entering full uprez mode." andDelegate:nil];
             [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
         }
         [currentDefaults synchronize];
