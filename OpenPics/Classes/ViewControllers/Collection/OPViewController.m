@@ -39,6 +39,7 @@
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
+#import "FUIAlertView+ShowAlert.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -565,40 +566,10 @@
         NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
         NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
         if (uprezMode && uprezMode.boolValue) {
-            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
-                                                                  message:@"Exiting full uprez mode."
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles:nil];
-            alertView.titleLabel.textColor = [UIColor cloudsColor];
-            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-            alertView.messageLabel.textColor = [UIColor cloudsColor];
-            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
-            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-            alertView.defaultButtonColor = [UIColor cloudsColor];
-            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
-            [alertView show];
+            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Exiting full uprez mode." andDelegate:nil];
             [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
         } else {
-            FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"BOOM!"
-                                                                  message:@"Entering full uprez mode."
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles:nil];
-            alertView.titleLabel.textColor = [UIColor cloudsColor];
-            alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-            alertView.messageLabel.textColor = [UIColor cloudsColor];
-            alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-            alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
-            alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-            alertView.defaultButtonColor = [UIColor cloudsColor];
-            alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-            alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-            alertView.defaultButtonTitleColor = [UIColor asbestosColor];
-            [alertView show];
+            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Entering full uprez mode." andDelegate:nil];
             [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
         }
         [currentDefaults synchronize];

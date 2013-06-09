@@ -30,12 +30,16 @@
 @implementation FUIAlertView (ShowAlert)
 
 + (void) showOkayAlertViewWithTitle:(NSString*)title message:(NSString*)message andDelegate:(id)delegate {
-    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:title
+                                                          message:message
+                                                         delegate:delegate
+                                                cancelButtonTitle:@"Okay"
+                                                otherButtonTitles:nil];
     alertView.titleLabel.textColor = [UIColor cloudsColor];
     alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
     alertView.messageLabel.textColor = [UIColor cloudsColor];
     alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
     alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
     alertView.defaultButtonColor = [UIColor cloudsColor];
     alertView.defaultButtonShadowColor = [UIColor asbestosColor];
