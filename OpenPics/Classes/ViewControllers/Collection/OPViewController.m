@@ -43,8 +43,6 @@
 @interface OPViewController () {
     BOOL _canLoadMore;
 
-    NSInteger _visibleItemAtStartOfRotate;
-    
     NSNumber* _currentPage;
     NSString* _currentQueryString;
 
