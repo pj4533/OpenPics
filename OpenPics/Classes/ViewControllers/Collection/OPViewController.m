@@ -51,9 +51,7 @@
     UIPopoverController* _popover;
     
     BOOL _isSearching;
-    
-    NSMutableDictionary* _imageSizesByIndexPath;
-    
+        
     BOOL _firstAppearance;
 }
 @end
@@ -63,8 +61,6 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _imageSizesByIndexPath = [NSMutableDictionary dictionary];
-        
         self.items = [NSMutableArray array];
         self.currentProvider = [[OPProviderController shared] getFirstProvider];
 
@@ -251,11 +247,6 @@
                         imageView.contentMode = UIViewContentModeScaleAspectFill;
                         imageView.image = image;
                         
-                        // if we have an image - size is not zero, save the size to dictionary
-                        if (image.size.height) {
-                            _imageSizesByIndexPath[indexPath] = [NSValue valueWithCGSize:image.size];
-                        }
-                        
                         // fade in image
                         [UIView animateWithDuration:0.5 animations:^{
                             imageView.alpha = 1.0;
@@ -288,7 +279,6 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -389,9 +379,6 @@
             OPImageItem* item = self.items[indexPath.item];
             if (item.size.height) {
                 imageSize = item.size;
-            } else if (indexPath.item < _imageSizesByIndexPath.count){
-                NSValue* imageSizeValue = _imageSizesByIndexPath[indexPath];
-                imageSize = [imageSizeValue CGSizeValue];
             }
             
             if (imageSize.height) {
@@ -543,7 +530,6 @@
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
@@ -566,7 +552,6 @@
     _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
-    _imageSizesByIndexPath = [NSMutableDictionary dictionary];
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
