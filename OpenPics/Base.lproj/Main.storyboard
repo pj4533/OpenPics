@@ -76,24 +76,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sYw-8I-my0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYw-8I-my0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bn2-WZ-zcw">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bn2-WZ-zcw">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FiQ-xb-XG3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FiQ-xb-XG3">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="FiQ-xb-XG3" firstAttribute="leading" secondItem="sYw-8I-my0" secondAttribute="leading" id="1Qg-fy-lSC"/>
+                                    <constraint firstItem="FiQ-xb-XG3" firstAttribute="top" secondItem="sYw-8I-my0" secondAttribute="top" id="JMb-cK-VjF"/>
+                                    <constraint firstItem="Bn2-WZ-zcw" firstAttribute="bottom" secondItem="sYw-8I-my0" secondAttribute="bottom" id="Sn6-3C-69z"/>
+                                    <constraint firstItem="Bn2-WZ-zcw" firstAttribute="leading" secondItem="FiQ-xb-XG3" secondAttribute="leading" id="ddv-gJ-dEd"/>
+                                    <constraint firstItem="FiQ-xb-XG3" firstAttribute="bottom" secondItem="Bn2-WZ-zcw" secondAttribute="bottom" id="g7p-OX-EtP"/>
+                                    <constraint firstItem="FiQ-xb-XG3" firstAttribute="top" secondItem="Bn2-WZ-zcw" secondAttribute="top" id="obT-fS-qxQ"/>
+                                    <constraint firstItem="Bn2-WZ-zcw" firstAttribute="trailing" secondItem="sYw-8I-my0" secondAttribute="trailing" id="tdF-Ju-PoM"/>
+                                    <constraint firstItem="FiQ-xb-XG3" firstAttribute="trailing" secondItem="Bn2-WZ-zcw" secondAttribute="trailing" id="vzJ-ie-Woc"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="slide to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmI-e2-NHw">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="slide to start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmI-e2-NHw">
                                 <rect key="frame" x="20" y="468" width="280" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="xzx-sN-qgp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,7 +114,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="gmI-e2-NHw" secondAttribute="bottom" constant="48" id="DsD-qd-R2F"/>
+                            <constraint firstItem="sYw-8I-my0" firstAttribute="leading" secondItem="ffd-jQ-nic" secondAttribute="leading" id="0je-zE-dkD"/>
+                            <constraint firstAttribute="bottom" secondItem="gmI-e2-NHw" secondAttribute="bottom" constant="48" id="OLe-L8-KzV"/>
+                            <constraint firstItem="sYw-8I-my0" firstAttribute="top" secondItem="ffd-jQ-nic" secondAttribute="top" id="PpM-9E-Oef"/>
+                            <constraint firstItem="gmI-e2-NHw" firstAttribute="leading" secondItem="ffd-jQ-nic" secondAttribute="leading" constant="20" symbolic="YES" id="VqV-LS-9Zf"/>
+                            <constraint firstAttribute="trailing" secondItem="gmI-e2-NHw" secondAttribute="trailing" constant="20" symbolic="YES" id="pJz-Iy-gt6"/>
+                            <constraint firstItem="gmI-e2-NHw" firstAttribute="centerX" secondItem="sYw-8I-my0" secondAttribute="centerX" id="ufs-No-6Zy"/>
+                            <constraint firstItem="sYw-8I-my0" firstAttribute="bottom" secondItem="ffd-jQ-nic" secondAttribute="bottom" id="xve-LQ-Qnd"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
