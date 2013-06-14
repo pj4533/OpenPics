@@ -25,18 +25,18 @@
 @implementation OPAppearance
 
 + (void) setupGlobalAppearance {
-    UIImage *headerImg = [[UIImage imageNamed:@"transparent"]
-                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    
-    [[UINavigationBar appearance] setBackgroundImage:headerImg
-                                       forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
-    
-    UIImage *searchImg = [[UIImage imageNamed:@"transparent"]
-                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    
-    [[UISearchBar appearance] setBackgroundImage:searchImg];
-    [[UISearchBar appearance] setBackgroundColor:[UIColor blackColor]];
+//    UIImage *headerImg = [[UIImage imageNamed:@"transparent"]
+//                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    
+//    [[UINavigationBar appearance] setBackgroundImage:headerImg
+//                                       forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
+//    
+//    UIImage *searchImg = [[UIImage imageNamed:@"transparent"]
+//                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    
+//    [[UISearchBar appearance] setBackgroundImage:searchImg];
+//    [[UISearchBar appearance] setBackgroundColor:[UIColor blackColor]];
 
 #warning FIX
 //    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor wetAsphaltColor]
