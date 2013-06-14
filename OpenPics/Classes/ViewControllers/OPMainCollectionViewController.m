@@ -117,6 +117,7 @@
         OPSingleImageCollectionViewController *singleImage = (OPSingleImageCollectionViewController *)[segue destinationViewController];
         singleImage.items = self.items;
         singleImage.indexPath = indexPath;
+
 //        singleImage.useLayoutToLayoutNavigationTransitions = YES;
     }
 }

@@ -55,6 +55,7 @@
 
 
 - (void) viewDidAppear:(BOOL)animated {
+#warning THIS GOES AWAY ONCE LAYOUT TO LAYOUT IS FIXED
     [self.collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
@@ -282,6 +283,7 @@
     //    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
     [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
+    cell.titleLabel.text = item.title;
     
     return cell;
 }
