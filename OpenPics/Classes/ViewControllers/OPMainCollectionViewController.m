@@ -1,103 +1,72 @@
 //
-//  OPViewController.m
+//  OPMainCollectionViewController.m
 //  OpenPics
 //
-//  Created by PJ Gray on 4/6/13.
-// 
-// Copyright (c) 2013 Say Goodnight Software
+//  Created by PJ Gray on 6/11/13.
+//  Copyright (c) 2013 Say Goodnight Software. All rights reserved.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 
-
-#import "OPViewController.h"
+#import "OPMainCollectionViewController.h"
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
 #import "AFNetworking.h"
-#import "OPContentCell.h"
+#import "OPGridCell.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
-#import "OPHeaderReusableView.h"
-#import "OPProviderListViewController.h"
-#import "OPMapViewController.h"
+//#import "OPHeaderReusableView.h"
+//#import "OPProviderListViewController.h"
+//#import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
 #import "FUIAlertView+ShowAlert.h"
+#import "OPSingleImageCollectionViewController.h"
 
-@interface OPViewController () {
+@interface OPMainCollectionViewController () {
     BOOL _canLoadMore;
-
+    
     NSNumber* _currentPage;
     NSString* _currentQueryString;
-
+    
     UIPopoverController* _popover;
     
     BOOL _isSearching;
-        
+    
     BOOL _firstAppearance;
 }
 @end
 
-@implementation OPViewController
-
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.items = [NSMutableArray array];
-        self.currentProvider = [[OPProviderController shared] getFirstProvider];
-
-        self.flowLayout = [[SGSStaggeredFlowLayout alloc] init];
-        self.flowLayout.minimumLineSpacing = 2.0f;
-        self.flowLayout.minimumInteritemSpacing = 2.0f;
-        self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
-        self.singleImageLayout = [[OPSingleImageLayout alloc] init];
-        
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
-        } else {
-            self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
-        }    
-
-        _firstAppearance = YES;
-    }
-    return self;
-}
+@implementation OPMainCollectionViewController
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
+    
+    self.items = [NSMutableArray array];
+    self.currentProvider = [[OPProviderController shared] getFirstProvider];
+    
+    self.flowLayout = (SGSStaggeredFlowLayout*) self.collectionView.collectionViewLayout;
+    self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
+    self.flowLayout.minimumLineSpacing = 2.0f;
+    self.flowLayout.minimumInteritemSpacing = 2.0f;
+    self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
 
-    self.internalCollectionView.collectionViewLayout = self.flowLayout;
-
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
-        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView_iPhone" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-    } else {
-        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
-        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-    }
+    
+    _firstAppearance = YES;
+    
+    
+//    self.collectionView.collectionViewLayout = self.flowLayout;
+    
+    //    [self.collectionView registerClass:[OPContentCell class] forCellWithReuseIdentifier:@"generic"];
+    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
+    //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView_iPhone" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    //    } else {
+    //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
+    //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    //    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -121,16 +90,16 @@
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.collectionView.frame.size));
     
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
+    NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.collectionView.frame.size));
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    [self.internalCollectionView.collectionViewLayout invalidateLayout];
-    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    //    self.singleImageLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,10 +109,22 @@
 }
 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"singleImageSegue"]){
+        
+        OPGridCell* cell = (OPGridCell*) sender;
+        NSIndexPath*  indexPath = [self.collectionView indexPathForCell:cell];
+        
+        OPSingleImageCollectionViewController *singleImage = (OPSingleImageCollectionViewController *)[segue destinationViewController];
+        singleImage.items = self.items;
+        singleImage.indexPath = indexPath;
+//        singleImage.useLayoutToLayoutNavigationTransitions = YES;
+    }
+}
 #pragma mark - Loading image helper functions
 
 - (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath {
-    for (NSIndexPath* thisIndexPath in self.internalCollectionView.indexPathsForVisibleItems) {
+    for (NSIndexPath* thisIndexPath in self.collectionView.indexPathsForVisibleItems) {
         if (indexPath.item == thisIndexPath.item) {
             return YES;
         }
@@ -197,10 +178,10 @@
                 
                 // uses category - will check for assocaited object
                 UIImage* preloadedImage = image.preloadedImage;
-
+                
                 // set the loaded object to the cache
                 [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
-
+                
                 if (success) {
                     success(preloadedImage);
                 }
@@ -254,11 +235,11 @@
                         // if we have no size information yet, save the information in item, and force a re-layout
                         if (!item.size.height) {
                             item.size = image.size;
-                            [self.internalCollectionView.collectionViewLayout invalidateLayout];
+                            [self.collectionView.collectionViewLayout invalidateLayout];
                         }
                     }];
                 });
-            }            
+            }
         } withFailure:^{
             [UIView animateWithDuration:0.25 animations:^{
                 imageView.alpha = 0.0;
@@ -267,7 +248,7 @@
                 [UIView animateWithDuration:0.5 animations:^{
                     imageView.alpha = 1.0;
                 }];
-            }];            
+            }];
         }];
     }];
 }
@@ -279,23 +260,23 @@
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
     self.items = [@[] mutableCopy];
-    [self.internalCollectionView reloadData];
+    [self.collectionView reloadData];
     [self.flowLayout invalidateLayout];
     [self doInitialSearch];
 }
 
 - (void) loadInitialPageWithItems:(NSArray*) items {
-    [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-
+    [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+    
     // TODO: use performBatch when bug is fixed in UICollectionViews with headers
     NSMutableArray* indexPaths = [NSMutableArray array];
     for (int i = 0; i < items.count; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
     }
-
+    
     [SVProgressHUD dismiss];
     self.items = [items mutableCopy];
-    [self.internalCollectionView reloadData];
+    [self.collectionView reloadData];
 }
 
 - (void) doInitialSearch {
@@ -322,18 +303,18 @@
             [self loadInitialPageWithItems:items];
         } else {
             NSInteger offset = [self.items count];
-
+            
             // TODO: use performBatch when bug is fixed in UICollectionViews with headers
             NSMutableArray* indexPaths = [NSMutableArray array];
             for (int i = 0; i < items.count; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
             }
-
+            
             [SVProgressHUD dismiss];
             _isSearching = NO;
             if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
                 [self.items addObjectsFromArray:items];
-                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
+                [self.collectionView insertItemsAtIndexPaths:indexPaths];
             }
             _canLoadMore = canLoadMore;
             
@@ -346,32 +327,33 @@
 #pragma mark - Switching layout helper functions
 
 - (void) switchToGridWithIndexPath:(NSIndexPath*) indexPath {
-    self.internalCollectionView.scrollEnabled = YES;
-    
-    [self.flowLayout invalidateLayout];
-    [self.internalCollectionView setCollectionViewLayout:self.flowLayout animated:YES];
-    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-    [cell setupForGridLayout];
-    
-    [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-}
-
-- (void) switchToSingleImageWithIndexPath:(NSIndexPath*) indexPath {
-    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-    
-    self.internalCollectionView.scrollEnabled = NO;
-    [self.singleImageLayout invalidateLayout];
-    [self.internalCollectionView setCollectionViewLayout:self.singleImageLayout animated:YES];
-    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-    [cell setupForSingleImageLayoutAnimated:NO];
+    //    self.collectionView.scrollEnabled = YES;
+    //
+    //    [self.flowLayout invalidateLayout];
+    //    [self.collectionView setCollectionViewLayout:self.flowLayout animated:YES];
+    //    OPContentCell* cell = (OPContentCell*) [self.collectionView cellForItemAtIndexPath:indexPath];
+    //    [cell setupForGridLayout];
+    //
+    //    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    //}
+    //
+    //- (void) switchToSingleImageWithIndexPath:(NSIndexPath*) indexPath {
+    //    self.singleImageLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
+    //
+    //    self.collectionView.scrollEnabled = NO;
+    //    [self.singleImageLayout invalidateLayout];
+    //    [self.collectionView setCollectionViewLayout:self.singleImageLayout animated:YES];
+    //    OPContentCell* cell = (OPContentCell*) [self.collectionView cellForItemAtIndexPath:indexPath];
+    //    [cell setupForSingleImageLayoutAnimated:NO];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (collectionViewLayout == self.flowLayout) {
-        CGSize cellSize = self.flowLayout.itemSize;
+    if ([collectionViewLayout isKindOfClass:[SGSStaggeredFlowLayout class]]) {
+        SGSStaggeredFlowLayout* layout = (SGSStaggeredFlowLayout*) collectionViewLayout;
+        CGSize cellSize = layout.itemSize;
         
         CGSize imageSize = CGSizeZero;
         if (indexPath.item < self.items.count) {
@@ -381,37 +363,20 @@
             }
             
             if (imageSize.height) {
-                CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
+                CGFloat deviceCellSizeConstant = layout.itemSize.height;
                 CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
-                CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
+                CGFloat maxWidth = self.collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
                 if (newWidth > maxWidth) {
                     newWidth = maxWidth;
                 }
                 cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
             }
         }
-
+        
         return cellSize;
     }
     
-    return self.singleImageLayout.itemSize;
-}
-
-#pragma mark - UICollectionViewDelegate
-
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (!self.items.count) {
-        return;
-    }
-    
-    [self.view endEditing:YES];
-    
-    if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
-        [self switchToGridWithIndexPath:indexPath];
-    } else {
-        [self switchToSingleImageWithIndexPath:indexPath];
-    }
+    return CGSizeMake(200,00);//self.singleImageLayout.itemSize;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -422,72 +387,83 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return [self.items count]+1;
+    return [self.items count];//+1;
 }
 
-- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    
-    OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-    
-    header.delegate = self;
-
-    if (self.currentProvider.supportsLocationSearching) {
-        header.mapButton.hidden = NO;
-    } else {
-        header.mapButton.hidden = YES;
-    }
-    
-    [header.providerButton setTitle:self.currentProvider.providerName forState:UIControlStateNormal];
-
-    return header;
-}
+//- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//
+//    OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
+//
+//    header.delegate = self;
+//
+//    if (self.currentProvider.supportsLocationSearching) {
+//        header.mapButton.hidden = NO;
+//    } else {
+//        header.mapButton.hidden = YES;
+//    }
+//
+//    [header.providerButton setTitle:self.currentProvider.providerName forState:UIControlStateNormal];
+//
+//    return header;
+//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *cellIdentifier = @"generic";
-    OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    //    OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    //
+    //    // remove activity indicator if present
+    //    for (UIView* subview in cell.contentView.subviews) {
+    //        if (subview.tag == -1) {
+    //            [subview removeFromSuperview];
+    //        }
+    //    }
+    //
+    //    cell.internalScrollView.imageView.image = nil;
+    //
+    //    if (indexPath.item == self.items.count) {
+    //        if (self.items.count) {
+    //            if (_canLoadMore) {
+    //                NSInteger currentPageInt = [_currentPage integerValue];
+    //                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+    //                [self getMoreItems];
+    //            }
+    //
+    //            if (_isSearching) {
+    //                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    //                activity.center = CGPointMake(100.0f, 100.0f);
+    //                [activity startAnimating];
+    //                activity.tag = -1;
+    //                [cell.contentView addSubview:activity];
+    //            }
+    //        }
+    //
+    //        cell.internalScrollView.userInteractionEnabled = NO;
+    //        cell.internalScrollView.imageView.image = nil;
+    //        return cell;
+    //    }
     
-    // remove activity indicator if present
-    for (UIView* subview in cell.contentView.subviews) {
-        if (subview.tag == -1) {
-            [subview removeFromSuperview];
-        }
-    }
+    OPGridCell *cell = (OPGridCell*)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.internalScrollView.imageView.image = nil;
+    //    // remove activity indicator if present
+    //    for (UIView* subview in cell.contentView.subviews) {
+    //        if (subview.tag == -1) {
+    //            [subview removeFromSuperview];
+    //        }
+    //    }
     
-    if (indexPath.item == self.items.count) {
-        if (self.items.count) {
-            if (_canLoadMore) {
-                NSInteger currentPageInt = [_currentPage integerValue];
-                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-                [self getMoreItems];
-            }
-            
-            if (_isSearching) {
-                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                activity.center = CGPointMake(100.0f, 100.0f);
-                [activity startAnimating];
-                activity.tag = -1;
-                [cell.contentView addSubview:activity];
-            }
-        }
-        
-        cell.internalScrollView.userInteractionEnabled = NO;
-        cell.internalScrollView.imageView.image = nil;
-        return cell;
-    }
-
+    
     OPImageItem* item = self.items[indexPath.item];
     
-    cell.mainViewController = self;
-    cell.provider = self.currentProvider;
-    cell.item = item;
-    cell.indexPath = indexPath;
-    cell.internalScrollView.userInteractionEnabled = NO;
+    //    cell.mainViewController = self;
+    //    cell.provider = self.currentProvider;
+    //    cell.item = item;
+    //    cell.indexPath = indexPath;
+    //    cell.internalScrollView.userInteractionEnabled = NO;
+    //    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
-    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
+    [self loadImageFromItem:item intoImageView:cell.imageView atIndexPath:indexPath];
     
     return cell;
 }
@@ -495,34 +471,34 @@
 #pragma mark - OPHeaderDelegate
 
 - (void) flipToMap {
-    OPMapViewController* mapViewController;
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController_iPhone" bundle:nil];
-    } else {
-        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
-    }
-    
-    mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    mapViewController.provider = self.currentProvider;
-    [self presentViewController:mapViewController animated:YES completion:nil];
+    //    OPMapViewController* mapViewController;
+    //
+    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController_iPhone" bundle:nil];
+    //    } else {
+    //        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
+    //    }
+    //
+    //    mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    //    mapViewController.provider = self.currentProvider;
+    //    [self presentViewController:mapViewController animated:YES completion:nil];
 }
 
 - (void) providerTappedFromRect:(CGRect) rect inView:(UIView *)view{
-    if (_popover) {
-        [_popover dismissPopoverAnimated:YES];
-    }
-    
-    
-    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
-    providerListViewController.delegate = self;
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:providerListViewController animated:YES completion:nil];
-    } else {
-        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
-        [_popover presentPopoverFromRect:[view convertRect:rect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    }
+    //    if (_popover) {
+    //        [_popover dismissPopoverAnimated:YES];
+    //    }
+    //
+    //
+    //    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
+    //    providerListViewController.delegate = self;
+    //
+    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //        [self presentViewController:providerListViewController animated:YES completion:nil];
+    //    } else {
+    //        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+    //        [_popover presentPopoverFromRect:[view convertRect:rect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    //    }
 }
 
 - (void) doSearchWithQuery:(NSString *)queryString {
@@ -530,9 +506,9 @@
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = queryString;
     self.items = [@[] mutableCopy];
-    [self.internalCollectionView reloadData];
+    [self.collectionView reloadData];
     [self.flowLayout invalidateLayout];
-
+    
     [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
     [self getMoreItems];
 }
@@ -552,7 +528,7 @@
     _currentPage = [NSNumber numberWithInteger:1];
     _currentQueryString = @"";
     self.items = [@[] mutableCopy];
-    [self.internalCollectionView reloadData];
+    [self.collectionView reloadData];
     [self.flowLayout invalidateLayout];
     [self doInitialSearch];
 }

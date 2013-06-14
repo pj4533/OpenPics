@@ -1,5 +1,5 @@
 //
-//  OPAppDelegate.h
+//  OPContentCell.h
 //  OpenPics
 //
 //  Created by PJ Gray on 6/11/13.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OPAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface OPGridCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

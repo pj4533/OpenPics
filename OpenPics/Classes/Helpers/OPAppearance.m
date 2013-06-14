@@ -37,10 +37,11 @@
     
     [[UISearchBar appearance] setBackgroundImage:searchImg];
     [[UISearchBar appearance] setBackgroundColor:[UIColor blackColor]];
-    
-    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor wetAsphaltColor]
-                                  highlightedColor:[UIColor midnightBlueColor]
-                                      cornerRadius:3];
+
+#warning FIX
+//    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor wetAsphaltColor]
+//                                  highlightedColor:[UIColor midnightBlueColor]
+//                                      cornerRadius:3];
     
 }
 
