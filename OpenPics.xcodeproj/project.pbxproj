@@ -659,6 +659,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Say Goodnight Software";
 				TargetAttributes = {
+					0A74AFE71767D3810082DEC5 = {
+						DevelopmentTeam = U3FNBSFU75;
+					};
 					0A74B0081767D3810082DEC5 = {
 						TestTargetID = 0A74AFE71767D3810082DEC5;
 					};
