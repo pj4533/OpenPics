@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1D2938176BC89900F9E58B /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D2936176BC89900F9E58B /* OPContentCell.m */; };
+		0A1D293B176BCA9D00F9E58B /* OPGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D293A176BCA9D00F9E58B /* OPGridCell.m */; };
 		0A26128D176BBD12001732EE /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26128B176BBD12001732EE /* libUAirship-1.4.0.a */; };
 		0A26128E176BBD12001732EE /* KinveyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26128C176BBD12001732EE /* KinveyKit.framework */; };
 		0A2612C0176BC202001732EE /* OPRedditAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2612AD176BC202001732EE /* OPRedditAuthViewController.m */; };
@@ -34,7 +36,6 @@
 		0A2B949E1767E0910076F450 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2B949D1767E0910076F450 /* CoreTelephony.framework */; };
 		0A2B94A01767E09E0076F450 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2B949F1767E09E0076F450 /* CFNetwork.framework */; };
 		0A2B94A21767E0AA0076F450 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2B94A11767E0AA0076F450 /* Accounts.framework */; };
-		0A2B94A71767E6650076F450 /* OPGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B94A61767E6650076F450 /* OPGridCell.m */; };
 		0A2B94AA1768005C0076F450 /* OPMainCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B94A91768005C0076F450 /* OPMainCollectionViewController.m */; };
 		0A2B94AD176802DE0076F450 /* OPSingleImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B94AC176802DE0076F450 /* OPSingleImageCollectionViewController.m */; };
 		0A74AFEC1767D3810082DEC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A74AFEB1767D3810082DEC5 /* Foundation.framework */; };
@@ -91,6 +92,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1D2936176BC89900F9E58B /* OPContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPContentCell.m; sourceTree = "<group>"; };
+		0A1D2937176BC89900F9E58B /* OPContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPContentCell.h; sourceTree = "<group>"; };
+		0A1D2939176BCA9D00F9E58B /* OPGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPGridCell.h; sourceTree = "<group>"; };
+		0A1D293A176BCA9D00F9E58B /* OPGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPGridCell.m; sourceTree = "<group>"; };
 		0A26128B176BBD12001732EE /* libUAirship-1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.4.0.a"; sourceTree = "<group>"; };
 		0A26128C176BBD12001732EE /* KinveyKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KinveyKit.framework; path = External/KinveyKit.framework; sourceTree = SOURCE_ROOT; };
 		0A2612AA176BC202001732EE /* OPActivityTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPActivityTokens.h; sourceTree = "<group>"; };
@@ -130,8 +135,6 @@
 		0A2B949F1767E09E0076F450 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0A2B94A11767E0AA0076F450 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0A2B94A31767E1DB0076F450 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
-		0A2B94A51767E6650076F450 /* OPGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPGridCell.h; sourceTree = "<group>"; };
-		0A2B94A61767E6650076F450 /* OPGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPGridCell.m; sourceTree = "<group>"; };
 		0A2B94A81768005C0076F450 /* OPMainCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPMainCollectionViewController.h; sourceTree = "<group>"; };
 		0A2B94A91768005C0076F450 /* OPMainCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMainCollectionViewController.m; sourceTree = "<group>"; };
 		0A2B94AB176802DE0076F450 /* OPSingleImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageCollectionViewController.h; sourceTree = "<group>"; };
@@ -334,8 +337,10 @@
 		0A2B94A41767E6470076F450 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0A2B94A51767E6650076F450 /* OPGridCell.h */,
-				0A2B94A61767E6650076F450 /* OPGridCell.m */,
+				0A1D2939176BCA9D00F9E58B /* OPGridCell.h */,
+				0A1D293A176BCA9D00F9E58B /* OPGridCell.m */,
+				0A1D2937176BC89900F9E58B /* OPContentCell.h */,
+				0A1D2936176BC89900F9E58B /* OPContentCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -764,11 +769,11 @@
 			files = (
 				0A2612C0176BC202001732EE /* OPRedditAuthViewController.m in Sources */,
 				0A74B0821767DB8B0082DEC5 /* OPNYPLProvider.m in Sources */,
+				0A1D2938176BC89900F9E58B /* OPContentCell.m in Sources */,
 				0A74B0851767DB8B0082DEC5 /* OPPopularProvider.m in Sources */,
 				0A74B0741767DB8B0082DEC5 /* AFCDLClient.m in Sources */,
 				0A2B94AD176802DE0076F450 /* OPSingleImageCollectionViewController.m in Sources */,
 				0A74B07C1767DB8B0082DEC5 /* AFFlickrAPIClient.m in Sources */,
-				0A2B94A71767E6650076F450 /* OPGridCell.m in Sources */,
 				0A74B0751767DB8B0082DEC5 /* OPCDLProvider.m in Sources */,
 				0A74B07D1767DB8B0082DEC5 /* OPFlickrCommonsProvider.m in Sources */,
 				0A74B0711767DB8B0082DEC5 /* OPAppearance.m in Sources */,
@@ -794,6 +799,7 @@
 				0A74B06F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m in Sources */,
 				0A74B0831767DB8B0082DEC5 /* OPProvider.m in Sources */,
 				0A2612C4176BC202001732EE /* OPShareToRedditActivity.m in Sources */,
+				0A1D293B176BCA9D00F9E58B /* OPGridCell.m in Sources */,
 				0A2612C8176BC202001732EE /* OPTumblrBlogViewController.m in Sources */,
 				0A74B0811767DB8B0082DEC5 /* AFNYPLAPIClient.m in Sources */,
 				0A74B0781767DB8B0082DEC5 /* AFEuropeanaClient.m in Sources */,

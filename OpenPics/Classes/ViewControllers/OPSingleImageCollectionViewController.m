@@ -10,7 +10,7 @@
 #import "OPImageItem.h"
 #import "AFImageRequestOperation.h"
 #import "AFNetworking.h"
-#import "OPGridCell.h"
+#import "OPContentCell.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 //#import "OPHeaderReusableView.h"
@@ -263,7 +263,7 @@
     //        return cell;
     //    }
     
-    OPGridCell *cell = (OPGridCell*)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    OPContentCell *cell = (OPContentCell*)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
     //    // remove activity indicator if present
     //    for (UIView* subview in cell.contentView.subviews) {
@@ -282,7 +282,7 @@
     //    cell.internalScrollView.userInteractionEnabled = NO;
     //    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
-    [self loadImageFromItem:item intoImageView:cell.imageView atIndexPath:indexPath];
+    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
     return cell;
 }
