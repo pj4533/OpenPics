@@ -29,8 +29,6 @@
 #import "AFRedditAPIClient.h"
 #import "SVProgressHUD.h"
 #import "OPImageItem.h"
-#import "FUIAlertView+ShowAlert.h"
-#import "FUIAlertView.h"
 
 NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
 
@@ -97,9 +95,11 @@ NSString * const UIActivityTypeShareToReddit = @"com.ohwutup.share_to_reddit";
     [SVProgressHUD showWithStatus:@"Posting..."];
     [redditClient postItem:_item toSubreddit:subreddit withTitle:title completion:^(NSDictionary *response, BOOL success) {
         if (!success) {
-            [FUIAlertView showOkayAlertViewWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", response[@"errors"][0][1]] andDelegate:self];
-            [self activityDidFinish:NO];
-            [SVProgressHUD showErrorWithStatus:@"Error."];
+
+#warning FIX ALERT HERE FOR WARNING
+//            [FUIAlertView showOkayAlertViewWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", response[@"errors"][0][1]] andDelegate:self];
+//            [self activityDidFinish:NO];
+//            [SVProgressHUD showErrorWithStatus:@"Error."];
         } else {
             [self activityDidFinish:YES];
         }

@@ -18,9 +18,4 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <MapKit/MapKit.h>
-#import <FlatUIKit/FUIAlertView.h>
-#import <FlatUIKit/UIBarButtonItem+FlatUI.h>
-#import <FlatUIKit/UIColor+FlatUI.h>
-#import <FlatUIKit/UIFont+FlatUI.h>
-
 #endif

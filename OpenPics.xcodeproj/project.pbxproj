@@ -51,7 +51,6 @@
 		0A74B00D1767D3810082DEC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A74AFEF1767D3810082DEC5 /* UIKit.framework */; };
 		0A74B0151767D3810082DEC5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A74B0131767D3810082DEC5 /* InfoPlist.strings */; };
 		0A74B0171767D3810082DEC5 /* OpenPicsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B0161767D3810082DEC5 /* OpenPicsTests.m */; };
-		0A74B06F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B02F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m */; };
 		0A74B0701767DB8B0082DEC5 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B0311767DB8B0082DEC5 /* NSString+MD5.m */; };
 		0A74B0711767DB8B0082DEC5 /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B0331767DB8B0082DEC5 /* OPAppearance.m */; };
 		0A74B0721767DB8B0082DEC5 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B0351767DB8B0082DEC5 /* OPScrollView.m */; };
@@ -156,8 +155,6 @@
 		0A74B0121767D3810082DEC5 /* OpenPicsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenPicsTests-Info.plist"; sourceTree = "<group>"; };
 		0A74B0141767D3810082DEC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A74B0161767D3810082DEC5 /* OpenPicsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenPicsTests.m; sourceTree = "<group>"; };
-		0A74B02E1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIAlertView+ShowAlert.h"; sourceTree = "<group>"; };
-		0A74B02F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIAlertView+ShowAlert.m"; sourceTree = "<group>"; };
 		0A74B0301767DB8B0082DEC5 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		0A74B0311767DB8B0082DEC5 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		0A74B0321767DB8B0082DEC5 /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
@@ -462,8 +459,6 @@
 		0A74B02D1767DB8B0082DEC5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0A74B02E1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.h */,
-				0A74B02F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m */,
 				0A74B0301767DB8B0082DEC5 /* NSString+MD5.h */,
 				0A74B0311767DB8B0082DEC5 /* NSString+MD5.m */,
 				0A74B0321767DB8B0082DEC5 /* OPAppearance.h */,
@@ -796,7 +791,6 @@
 				0A74B0841767DB8B0082DEC5 /* OPProviderController.m in Sources */,
 				0A2612CA176BC202001732EE /* OPTumblrPostViewController.m in Sources */,
 				0A74B0801767DB8B0082DEC5 /* OPLOCProvider.m in Sources */,
-				0A74B06F1767DB8B0082DEC5 /* FUIAlertView+ShowAlert.m in Sources */,
 				0A74B0831767DB8B0082DEC5 /* OPProvider.m in Sources */,
 				0A2612C4176BC202001732EE /* OPShareToRedditActivity.m in Sources */,
 				0A1D293B176BCA9D00F9E58B /* OPGridCell.m in Sources */,

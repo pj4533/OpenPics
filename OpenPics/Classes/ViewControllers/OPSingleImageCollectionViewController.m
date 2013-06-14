@@ -20,7 +20,6 @@
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
-#import "FUIAlertView+ShowAlert.h"
 
 @interface OPSingleImageCollectionViewController () {
     BOOL _canLoadMore;

@@ -27,8 +27,6 @@
 
 #import "OPRedditAuthViewController.h"
 #import "AFRedditAPIClient.h"
-#import "FUIButton.h"
-#import "FUIAlertView+ShowAlert.h"
 
 @interface OPRedditAuthViewController ()
 
@@ -52,13 +50,13 @@
     [self.usernameField becomeFirstResponder];
     self.passwordField.secureTextEntry = YES;
 
-    self.loginButton.buttonColor = [UIColor turquoiseColor];
-    self.loginButton.shadowColor = [UIColor greenSeaColor];
-    self.loginButton.shadowHeight = 3.0f;
-    self.loginButton.cornerRadius = 6.0f;
-    self.loginButton.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-    [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+//    self.loginButton.buttonColor = [UIColor turquoiseColor];
+//    self.loginButton.shadowColor = [UIColor greenSeaColor];
+//    self.loginButton.shadowHeight = 3.0f;
+//    self.loginButton.cornerRadius = 6.0f;
+//    self.loginButton.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+//    [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+//    [self.loginButton setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,7 +20,6 @@
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
-#import "FUIAlertView+ShowAlert.h"
 #import "OPSingleImageCollectionViewController.h"
 
 @interface OPMainCollectionViewController () {
@@ -541,12 +540,14 @@
         
         NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
         NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+#warning FIX UPREZ MODE ALERTS
         if (uprezMode && uprezMode.boolValue) {
-            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Exiting full uprez mode." andDelegate:nil];
-            [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
+            
+//            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Exiting full uprez mode." andDelegate:nil];
+//            [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
         } else {
-            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Entering full uprez mode." andDelegate:nil];
-            [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
+//            [FUIAlertView showOkayAlertViewWithTitle:@"BOOM!" message:@"Entering full uprez mode." andDelegate:nil];
+//            [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
         }
         [currentDefaults synchronize];
     }
