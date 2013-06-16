@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A03417B176C22090068B54C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A03417A176C22090068B54C /* UIImage+ImageEffects.m */; };
 		0A1D2938176BC89900F9E58B /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D2936176BC89900F9E58B /* OPContentCell.m */; };
 		0A1D293B176BCA9D00F9E58B /* OPGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D293A176BCA9D00F9E58B /* OPGridCell.m */; };
 		0A26128D176BBD12001732EE /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26128B176BBD12001732EE /* libUAirship-1.4.0.a */; };
@@ -91,6 +92,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A034179176C22090068B54C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		0A03417A176C22090068B54C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0A1D2936176BC89900F9E58B /* OPContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPContentCell.m; sourceTree = "<group>"; };
 		0A1D2937176BC89900F9E58B /* OPContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPContentCell.h; sourceTree = "<group>"; };
 		0A1D2939176BCA9D00F9E58B /* OPGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPGridCell.h; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 		0A74B02D1767DB8B0082DEC5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0A034179176C22090068B54C /* UIImage+ImageEffects.h */,
+				0A03417A176C22090068B54C /* UIImage+ImageEffects.m */,
 				0A74B0301767DB8B0082DEC5 /* NSString+MD5.h */,
 				0A74B0311767DB8B0082DEC5 /* NSString+MD5.m */,
 				0A74B0321767DB8B0082DEC5 /* OPAppearance.h */,
@@ -659,9 +664,6 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Say Goodnight Software";
 				TargetAttributes = {
-					0A74AFE71767D3810082DEC5 = {
-						DevelopmentTeam = U3FNBSFU75;
-					};
 					0A74B0081767D3810082DEC5 = {
 						TestTargetID = 0A74AFE71767D3810082DEC5;
 					};
@@ -764,6 +766,7 @@
 			files = (
 				0A2612C0176BC202001732EE /* OPRedditAuthViewController.m in Sources */,
 				0A74B0821767DB8B0082DEC5 /* OPNYPLProvider.m in Sources */,
+				0A03417B176C22090068B54C /* UIImage+ImageEffects.m in Sources */,
 				0A1D2938176BC89900F9E58B /* OPContentCell.m in Sources */,
 				0A74B0851767DB8B0082DEC5 /* OPPopularProvider.m in Sources */,
 				0A74B0741767DB8B0082DEC5 /* AFCDLClient.m in Sources */,
@@ -927,6 +930,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/OpenPics/External",

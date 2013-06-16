@@ -94,8 +94,9 @@
     motionEffectCenterY.minimumRelativeValue = @(-284.0);
     motionEffectCenterY.maximumRelativeValue = @(284.0);
 
-    [self.imageContainerView addMotionEffect:motionEffectCenterX];
-    [self.imageContainerView addMotionEffect:motionEffectCenterY];
+    UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
+    group.motionEffects = @[motionEffectCenterX, motionEffectCenterY];
+    [self.imageContainerView addMotionEffect:group];
 }
 
 - (void)didReceiveMemoryWarning

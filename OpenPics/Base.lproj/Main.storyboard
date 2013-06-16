@@ -232,10 +232,11 @@
                                             <rect key="frame" x="0.0" y="384" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="goo-Yr-o5H">
-                                                    <rect key="frame" x="20" y="11" width="280" height="100"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="4uh-e4-M0u">
+                                                    <rect key="frame" x="20" y="20" width="280" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                                    <string key="text">Lucas ipsum dolor sit amet qu windu nadon skywalker rendar hallotan bibble talz klatooinian maul. Jettster gen'dai toydarian bajic nar lowbacca omwati tib. Neti olié jade coruscant talz yavin mirax. Mandalore veers togorian nar echani shmi zam p'w'eck. Kowakian raioballo tc-14 owen. Warrick gen'dai antemeridian aka kashyyyk tyber hssis. Needa selkath mod organa dagobah medon selkath vos lepi. C-3p0 stele mace artaru mandalorians ansionian rahn. Bormea shawda dalonbian darth terentatek trandoshan bib.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -253,7 +254,7 @@
                                     <outlet property="favoriteButtonLabel" destination="fAt-5p-e3G" id="ukL-xE-58b"/>
                                     <outlet property="internalScrollView" destination="HBe-px-h0h" id="eEB-rR-c9t"/>
                                     <outlet property="shareBackgroundView" destination="sLR-OH-kbK" id="DqS-QZ-6jH"/>
-                                    <outlet property="titleLabel" destination="goo-Yr-o5H" id="xB3-iQ-nLI"/>
+                                    <outlet property="titleLabel" destination="4uh-e4-M0u" id="Koa-HB-7ni"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
