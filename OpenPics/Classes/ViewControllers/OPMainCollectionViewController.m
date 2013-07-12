@@ -407,7 +407,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return [self.items count];//+1;
+    return [self.items count]+1;
 }
 
 //- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -431,40 +431,39 @@
 {
     
     static NSString *cellIdentifier = @"generic";
-    //    OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    //
-    //    // remove activity indicator if present
-    //    for (UIView* subview in cell.contentView.subviews) {
-    //        if (subview.tag == -1) {
-    //            [subview removeFromSuperview];
-    //        }
-    //    }
-    //
-    //    cell.internalScrollView.imageView.image = nil;
-    //
-    //    if (indexPath.item == self.items.count) {
-    //        if (self.items.count) {
-    //            if (_canLoadMore) {
-    //                NSInteger currentPageInt = [_currentPage integerValue];
-    //                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-    //                [self getMoreItems];
-    //            }
-    //
-    //            if (_isSearching) {
-    //                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //                activity.center = CGPointMake(100.0f, 100.0f);
-    //                [activity startAnimating];
-    //                activity.tag = -1;
-    //                [cell.contentView addSubview:activity];
-    //            }
-    //        }
-    //
-    //        cell.internalScrollView.userInteractionEnabled = NO;
-    //        cell.internalScrollView.imageView.image = nil;
-    //        return cell;
-    //    }
-    
     OPGridCell *cell = (OPGridCell*)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    
+    // remove activity indicator if present
+    for (UIView* subview in cell.contentView.subviews) {
+        if (subview.tag == -1) {
+            [subview removeFromSuperview];
+        }
+    }
+    
+    cell.imageView.image = nil;
+    
+    if (indexPath.item == self.items.count) {
+        if (self.items.count) {
+            if (_canLoadMore) {
+                NSInteger currentPageInt = [_currentPage integerValue];
+                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
+                [self getMoreItems];
+            }
+            
+            if (_isSearching) {
+                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                activity.center = CGPointMake(100.0f, 100.0f);
+                [activity startAnimating];
+                activity.tag = -1;
+                [cell.contentView addSubview:activity];
+            }
+        }
+        
+        cell.imageView.image = nil;
+        return cell;
+    }
+    
     
     //    // remove activity indicator if present
     //    for (UIView* subview in cell.contentView.subviews) {
