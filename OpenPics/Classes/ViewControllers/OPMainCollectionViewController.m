@@ -48,10 +48,15 @@
     self.currentProvider = [[OPProviderController shared] getFirstProvider];
     
     self.flowLayout = (SGSStaggeredFlowLayout*) self.collectionView.collectionViewLayout;
-    self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
     self.flowLayout.minimumLineSpacing = 2.0f;
     self.flowLayout.minimumInteritemSpacing = 2.0f;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
+    } else {
+        self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
+    }
 
     
     self.sourceBarButtonItem.title = [NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName];
@@ -59,9 +64,8 @@
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
     _searchBar.placeholder = @"Enter Search Terms...";
     _searchBar.delegate = self;
-    [_searchBar sizeToFit];
-    
     self.navigationItem.titleView = _searchBar;
+    
     
     _firstAppearance = YES;
     
@@ -78,10 +82,6 @@
     //    }
 }
 
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [self.navigationController setToolbarHidden:YES animated:NO];
-//}
 
 - (void) viewDidAppear:(BOOL)animated {
     if (_firstAppearance) {
@@ -136,6 +136,7 @@
 //        singleImage.useLayoutToLayoutNavigationTransitions = YES;
     } else if([[segue identifier] isEqualToString:@"sourceButtonSegue"]){
         OPProviderTableViewController *providerTable = (OPProviderTableViewController *)[segue destinationViewController];
+        providerTable.modalPresentationStyle = UIModalPresentationFormSheet;
         providerTable.delegate = self;
         
     }
@@ -535,11 +536,7 @@
 #pragma mark - OPProviderTableDelegate
 
 - (void) tappedProvider:(OPProvider *)provider {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [_popover dismissPopoverAnimated:YES];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     self.currentProvider = provider;
     self.sourceBarButtonItem.title = [NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName];

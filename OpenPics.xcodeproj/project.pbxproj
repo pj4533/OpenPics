@@ -348,6 +348,13 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0A49DBB817906062001E2425 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		0A74AFDF1767D3810082DEC5 = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +401,7 @@
 		0A74AFF11767D3810082DEC5 /* OpenPics */ = {
 			isa = PBXGroup;
 			children = (
+				0A49DBB817906062001E2425 /* iPad */,
 				0A2B947C1767DE050076F450 /* External */,
 				0A74B0251767DA350082DEC5 /* Classes */,
 				0A74AFFA1767D3810082DEC5 /* OPAppDelegate.h */,
@@ -945,6 +953,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/OpenPics/External/Airship",
@@ -953,6 +962,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "92B6BC52-9330-4E30-83A7-6FC840786EEF";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -972,6 +982,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/OpenPics/External/Airship",
@@ -980,6 +991,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "92B6BC52-9330-4E30-83A7-6FC840786EEF";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

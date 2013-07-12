@@ -178,15 +178,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBe-px-h0h" customClass="OPScrollView">
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBe-px-h0h" customClass="OPScrollView">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </scrollView>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0u-sZ-zOr" userLabel="Description View">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0u-sZ-zOr" userLabel="Description View">
                                             <rect key="frame" x="0.0" y="404" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="4uh-e4-M0u">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="4uh-e4-M0u">
                                                     <rect key="frame" x="20" y="20" width="280" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <string key="text">Lucas ipsum dolor sit amet qu windu nadon skywalker rendar hallotan bibble talz klatooinian maul. Jettster gen'dai toydarian bajic nar lowbacca omwati tib. Neti olié jade coruscant talz yavin mirax. Mandalore veers togorian nar echani shmi zam p'w'eck. Kowakian raioballo tc-14 owen. Warrick gen'dai antemeridian aka kashyyyk tyber hssis. Needa selkath mod organa dagobah medon selkath vos lepi. C-3p0 stele mace artaru mandalorians ansionian rahn. Bormea shawda dalonbian darth terentatek trandoshan bib.</string>
@@ -196,10 +196,26 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="4uh-e4-M0u" secondAttribute="bottom" constant="20" symbolic="YES" id="1ta-2P-OlC"/>
+                                                <constraint firstAttribute="trailing" secondItem="4uh-e4-M0u" secondAttribute="trailing" constant="20" symbolic="YES" id="OSq-Xm-qdn"/>
+                                                <constraint firstItem="4uh-e4-M0u" firstAttribute="leading" secondItem="A0u-sZ-zOr" secondAttribute="leading" constant="20" symbolic="YES" id="jtO-1O-Hvx"/>
+                                                <constraint firstItem="4uh-e4-M0u" firstAttribute="top" secondItem="A0u-sZ-zOr" secondAttribute="top" constant="20" symbolic="YES" id="oSD-lb-IE5"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="HBe-px-h0h" firstAttribute="leading" secondItem="aVK-WO-ozv" secondAttribute="leading" id="60o-6j-Icb"/>
+                                    <constraint firstItem="HBe-px-h0h" firstAttribute="leading" secondItem="A0u-sZ-zOr" secondAttribute="leading" id="7u0-Ks-6rd"/>
+                                    <constraint firstAttribute="bottom" secondItem="A0u-sZ-zOr" secondAttribute="bottom" constant="44" id="A2E-UO-sbb"/>
+                                    <constraint firstItem="A0u-sZ-zOr" firstAttribute="trailing" secondItem="aVK-WO-ozv" secondAttribute="trailing" id="Rjg-m0-hay"/>
+                                    <constraint firstItem="HBe-px-h0h" firstAttribute="trailing" secondItem="A0u-sZ-zOr" secondAttribute="trailing" id="Vyj-Yh-60B"/>
+                                    <constraint firstItem="A0u-sZ-zOr" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aVK-WO-ozv" secondAttribute="top" constant="404" id="lwC-Hd-JdT"/>
+                                    <constraint firstItem="HBe-px-h0h" firstAttribute="top" secondItem="aVK-WO-ozv" secondAttribute="top" id="q7b-da-X63"/>
+                                    <constraint firstItem="HBe-px-h0h" firstAttribute="bottom" secondItem="aVK-WO-ozv" secondAttribute="bottom" id="rZm-u8-7r7"/>
+                                </constraints>
                                 <size key="customSize" width="320" height="568"/>
                                 <connections>
                                     <outlet property="descriptionView" destination="A0u-sZ-zOr" id="vLe-tg-1gf"/>
