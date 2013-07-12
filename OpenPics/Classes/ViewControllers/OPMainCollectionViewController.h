@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SGSStaggeredFlowLayout.h"
+#import "OPProviderTableViewController.h"
 
 @class OPProvider;
 
-@interface OPMainCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface OPMainCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, OPProviderTableDelegate>
 
 
 @property (strong, nonatomic) SGSStaggeredFlowLayout *flowLayout;

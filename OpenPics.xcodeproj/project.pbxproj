@@ -39,6 +39,7 @@
 		0A2B94A21767E0AA0076F450 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2B94A11767E0AA0076F450 /* Accounts.framework */; };
 		0A2B94AA1768005C0076F450 /* OPMainCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B94A91768005C0076F450 /* OPMainCollectionViewController.m */; };
 		0A2B94AD176802DE0076F450 /* OPSingleImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B94AC176802DE0076F450 /* OPSingleImageCollectionViewController.m */; };
+		0A49DBB717904C1D001E2425 /* OPProviderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49DBB617904C1D001E2425 /* OPProviderTableViewController.m */; };
 		0A74AFEC1767D3810082DEC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A74AFEB1767D3810082DEC5 /* Foundation.framework */; };
 		0A74AFEE1767D3810082DEC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A74AFED1767D3810082DEC5 /* CoreGraphics.framework */; };
 		0A74AFF01767D3810082DEC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A74AFEF1767D3810082DEC5 /* UIKit.framework */; };
@@ -141,6 +142,8 @@
 		0A2B94A91768005C0076F450 /* OPMainCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMainCollectionViewController.m; sourceTree = "<group>"; };
 		0A2B94AB176802DE0076F450 /* OPSingleImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageCollectionViewController.h; sourceTree = "<group>"; };
 		0A2B94AC176802DE0076F450 /* OPSingleImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageCollectionViewController.m; sourceTree = "<group>"; };
+		0A49DBB517904C1D001E2425 /* OPProviderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTableViewController.h; sourceTree = "<group>"; };
+		0A49DBB617904C1D001E2425 /* OPProviderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderTableViewController.m; sourceTree = "<group>"; };
 		0A74AFE81767D3810082DEC5 /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A74AFEB1767D3810082DEC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A74AFED1767D3810082DEC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -455,6 +458,8 @@
 				0A2B94AC176802DE0076F450 /* OPSingleImageCollectionViewController.m */,
 				0AFC93ED1768DF860066C824 /* OPCoverViewController.h */,
 				0AFC93EE1768DF860066C824 /* OPCoverViewController.m */,
+				0A49DBB517904C1D001E2425 /* OPProviderTableViewController.h */,
+				0A49DBB617904C1D001E2425 /* OPProviderTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 				0A74B07D1767DB8B0082DEC5 /* OPFlickrCommonsProvider.m in Sources */,
 				0A74B0711767DB8B0082DEC5 /* OPAppearance.m in Sources */,
 				0A74B07F1767DB8B0082DEC5 /* AFLOCAPIClient.m in Sources */,
+				0A49DBB717904C1D001E2425 /* OPProviderTableViewController.m in Sources */,
 				0A74B0721767DB8B0082DEC5 /* OPScrollView.m in Sources */,
 				0A74AFF81767D3810082DEC5 /* main.m in Sources */,
 				0AFC93EF1768DF860066C824 /* OPCoverViewController.m in Sources */,

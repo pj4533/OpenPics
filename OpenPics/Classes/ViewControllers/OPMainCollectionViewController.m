@@ -31,8 +31,9 @@
     UIPopoverController* _popover;
     
     BOOL _isSearching;
-    
     BOOL _firstAppearance;
+    
+    UISearchBar* _searchBar;
 }
 @end
 
@@ -53,6 +54,13 @@
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
 
     
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+    _searchBar.placeholder = [NSString stringWithFormat:@"%@", self.currentProvider.providerName];
+    _searchBar.delegate = self;
+    [_searchBar sizeToFit];
+    
+    self.navigationItem.titleView = _searchBar;
+    
     _firstAppearance = YES;
     
     
@@ -66,6 +74,11 @@
     //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
     //        [self.collectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     //    }
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setToolbarHidden:YES animated:NO];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -119,6 +132,10 @@
         singleImage.indexPath = indexPath;
 
 //        singleImage.useLayoutToLayoutNavigationTransitions = YES;
+    } else if([[segue identifier] isEqualToString:@"sourceButtonSegue"]){
+        OPProviderTableViewController *providerTable = (OPProviderTableViewController *)[segue destinationViewController];
+        providerTable.delegate = self;
+        
     }
 }
 #pragma mark - Loading image helper functions
@@ -484,22 +501,22 @@
     //    [self presentViewController:mapViewController animated:YES completion:nil];
 }
 
-- (void) providerTappedFromRect:(CGRect) rect inView:(UIView *)view{
-    //    if (_popover) {
-    //        [_popover dismissPopoverAnimated:YES];
-    //    }
-    //
-    //
-    //    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
-    //    providerListViewController.delegate = self;
-    //
-    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    //        [self presentViewController:providerListViewController animated:YES completion:nil];
-    //    } else {
-    //        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
-    //        [_popover presentPopoverFromRect:[view convertRect:rect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    //    }
-}
+//- (void) providerTappedFromRect:(CGRect) rect inView:(UIView *)view{
+//    //    if (_popover) {
+//    //        [_popover dismissPopoverAnimated:YES];
+//    //    }
+//    //
+//    //
+//    //    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
+//    //    providerListViewController.delegate = self;
+//    //
+//    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//    //        [self presentViewController:providerListViewController animated:YES completion:nil];
+//    //    } else {
+//    //        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+//    //        [_popover presentPopoverFromRect:[view convertRect:rect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//    //    }
+//}
 
 - (void) doSearchWithQuery:(NSString *)queryString {
     _canLoadMore = NO;
@@ -513,7 +530,7 @@
     [self getMoreItems];
 }
 
-#pragma mark - OPProviderListDelegate
+#pragma mark - OPProviderTableDelegate
 
 - (void) tappedProvider:(OPProvider *)provider {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -523,6 +540,8 @@
     }
     
     self.currentProvider = provider;
+    _searchBar.placeholder = [NSString stringWithFormat:@"%@", self.currentProvider.providerName];
+
     _canLoadMore = NO;
     _isSearching = NO;
     _currentPage = [NSNumber numberWithInteger:1];
@@ -552,6 +571,29 @@
         }
         [currentDefaults synchronize];
     }
+}
+
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [self doSearchWithQuery:searchBar.text];
 }
 
 @end
