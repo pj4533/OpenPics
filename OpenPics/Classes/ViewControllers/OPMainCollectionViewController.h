@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) OPProvider* currentProvider;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *sourceBarButtonItem;
 
 - (void) forceReload;
 

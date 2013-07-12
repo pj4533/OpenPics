@@ -54,8 +54,10 @@
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
 
     
+    self.sourceBarButtonItem.title = [NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName];
+    
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-    _searchBar.placeholder = [NSString stringWithFormat:@"%@", self.currentProvider.providerName];
+    _searchBar.placeholder = @"Enter Search Terms...";
     _searchBar.delegate = self;
     [_searchBar sizeToFit];
     
@@ -77,9 +79,9 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setToolbarHidden:YES animated:NO];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [self.navigationController setToolbarHidden:YES animated:NO];
+//}
 
 - (void) viewDidAppear:(BOOL)animated {
     if (_firstAppearance) {
@@ -540,7 +542,7 @@
     }
     
     self.currentProvider = provider;
-    _searchBar.placeholder = [NSString stringWithFormat:@"%@", self.currentProvider.providerName];
+    self.sourceBarButtonItem.title = [NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName];
 
     _canLoadMore = NO;
     _isSearching = NO;

@@ -66,13 +66,19 @@
                             <outlet property="delegate" destination="OOo-k3-bXi" id="c4M-OL-Czc"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="jIo-vZ-xw9">
-                        <barButtonItem key="leftBarButtonItem" title="Source" id="zh9-KH-BO0">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="STO-zU-Omx"/>
+                        <barButtonItem title="Source:" id="zh9-KH-BO0">
                             <connections>
                                 <segue destination="HoN-9J-J6a" kind="modal" identifier="sourceButtonSegue" id="ApM-z3-u8y"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="nmc-sG-5nj"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="jIo-vZ-xw9"/>
+                    <connections>
+                        <outlet property="sourceBarButtonItem" destination="zh9-KH-BO0" id="yZS-8Q-JgK"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC5-uL-Eyy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

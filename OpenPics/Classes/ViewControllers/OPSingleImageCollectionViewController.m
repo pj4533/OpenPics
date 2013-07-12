@@ -58,7 +58,7 @@
 #pragma mark - possibly move this code to subclass that main & single VC's are derived from?
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self.navigationController setToolbarHidden:NO animated:YES];
+//    [self.navigationController setToolbarHidden:NO animated:YES];
 
     
 #warning THIS GOES AWAY ONCE LAYOUT TO LAYOUT IS FIXED
