@@ -36,6 +36,7 @@
 #import "SVProgressHUD.h"
 #import "OPShareToRedditActivity.h"
 #import "TUSafariActivity.h"
+#import "OPSingleImageCollectionViewController.h"
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
@@ -53,14 +54,8 @@
 - (void) awakeFromNib {
     [super awakeFromNib];
     
-    self.shareBackgroundView.alpha = 0.0f;
-    self.favoriteBackgroundView.alpha = 0.0f;
-    
     self.descriptionView.alpha = 0.0f;
 
-    self.shareBackgroundView.layer.cornerRadius = 7.0f;
-    self.favoriteBackgroundView.layer.cornerRadius = 7.0f;
-    
     UITapGestureRecognizer* doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
     doubleTapGesture.numberOfTapsRequired = 2;
     [self.internalScrollView addGestureRecognizer:doubleTapGesture];
@@ -176,13 +171,13 @@
 #pragma mark - Utility Functions
 
 - (void)setButtonToFavorite {
-    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
-    self.favoriteButtonLabel.text = @"Favorite";
+//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
+//    self.favoriteButtonLabel.text = @"Favorite";
 }
 
 - (void)setButtonToRemoveFavorite {
-    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
-    self.favoriteButtonLabel.text = @"Remove";
+//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
+//    self.favoriteButtonLabel.text = @"Remove";
 }
 
 - (void) setupLabels {
@@ -193,10 +188,13 @@
     self.showingUI = NO;
 
     [UIView animateWithDuration:0.7f animations:^{
-        [UIApplication sharedApplication].statusBarHidden = YES;
-        self.shareBackgroundView.alpha = 0.0f;
-        self.favoriteBackgroundView.alpha = 0.0f;
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
         self.descriptionView.alpha = 0.0;
+        
+        [self.singleImageCollectionViewController.navigationController setToolbarHidden:YES animated:YES];
+        [self.singleImageCollectionViewController.navigationController setNavigationBarHidden:YES animated:YES];
     } completion:^(BOOL finished) {
         if (completion) {
             completion(finished);
@@ -206,10 +204,10 @@
 
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion {
     [UIView animateWithDuration:0.7f animations:^{
-        [UIApplication sharedApplication].statusBarHidden = NO;
-        self.shareBackgroundView.alpha = 1.0f;
-        self.favoriteBackgroundView.alpha = 1.0f;
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
         self.descriptionView.alpha = 1.0;
+        [self.singleImageCollectionViewController.navigationController setToolbarHidden:NO animated:YES];
+        [self.singleImageCollectionViewController.navigationController setNavigationBarHidden:NO animated:YES];
     } completion:^(BOOL finished) {
         self.showingUI = YES;
         if (completion) {

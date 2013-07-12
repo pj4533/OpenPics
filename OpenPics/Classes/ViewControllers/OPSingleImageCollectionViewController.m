@@ -50,10 +50,12 @@
     
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.currentProvider = [[OPProviderController shared] getFirstProvider];
     
 }
 
+#pragma mark - possibly move this code to subclass that main & single VC's are derived from?
 
 - (void) viewDidAppear:(BOOL)animated {
 #warning THIS GOES AWAY ONCE LAYOUT TO LAYOUT IS FIXED
@@ -265,6 +267,7 @@
     //    }
     
     OPContentCell *cell = (OPContentCell*)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.singleImageCollectionViewController = self;
     
     //    // remove activity indicator if present
     //    for (UIView* subview in cell.contentView.subviews) {

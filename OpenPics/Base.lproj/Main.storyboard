@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4457.6" systemVersion="13A476u" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hfF-Ac-qfw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4471.1" systemVersion="13A510d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hfF-Ac-qfw">
     <dependencies>
         <development version="5000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3697.3"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="geV-dn-J6V">
             <objects>
-                <navigationController definesPresentationContext="YES" id="g3b-cw-dcu" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="g3b-cw-dcu" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="frT-ZV-AUN">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="1Dw-Og-bWX">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="OOo-k3-bXi" kind="relationship" relationship="rootViewController" id="y58-Ne-mwK"/>
                     </connections>
@@ -72,6 +76,10 @@
         <scene sceneID="8zc-mg-bDn">
             <objects>
                 <viewController id="hfF-Ac-qfw" customClass="OPCoverViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aso-AD-dhj"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Wr-kR-sIg"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ffd-jQ-nic">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,77 +167,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBe-px-h0h" customClass="OPScrollView">
-                                            <rect key="frame" x="0.0" y="-58" width="320" height="626"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </scrollView>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sLR-OH-kbK" userLabel="Share Button">
-                                            <rect key="frame" x="15" y="169" width="44" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQg-88-0X7">
-                                                    <rect key="frame" x="0.0" y="30" width="44" height="12"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="M40-l7-Zye">
-                                                    <rect key="frame" x="10" y="2" width="25" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1c-HE-xP6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="shareTapped:" destination="aVK-WO-ozv" eventType="touchUpInside" id="4x5-VA-OjR"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQg-9O-QEg" userLabel="Favorite Button">
-                                            <rect key="frame" x="17" y="238" width="44" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-5p-e3G">
-                                                    <rect key="frame" x="0.0" y="30" width="44" height="12"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="heart_plus" translatesAutoresizingMaskIntoConstraints="NO" id="bUU-U5-g9z">
-                                                    <rect key="frame" x="10" y="7" width="25" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcb-zc-SIM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="favoriteTapped:" destination="aVK-WO-ozv" eventType="touchUpInside" id="3ll-cg-bcX"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        </view>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0u-sZ-zOr" userLabel="Description View">
-                                            <rect key="frame" x="0.0" y="384" width="320" height="120"/>
+                                            <rect key="frame" x="0.0" y="404" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="4uh-e4-M0u">
@@ -249,11 +191,7 @@
                                 <size key="customSize" width="320" height="568"/>
                                 <connections>
                                     <outlet property="descriptionView" destination="A0u-sZ-zOr" id="vLe-tg-1gf"/>
-                                    <outlet property="favoriteBackgroundView" destination="xQg-9O-QEg" id="J3h-ho-rSA"/>
-                                    <outlet property="favoriteButtonImageView" destination="bUU-U5-g9z" id="VxA-MS-yB0"/>
-                                    <outlet property="favoriteButtonLabel" destination="fAt-5p-e3G" id="ukL-xE-58b"/>
                                     <outlet property="internalScrollView" destination="HBe-px-h0h" id="eEB-rR-c9t"/>
-                                    <outlet property="shareBackgroundView" destination="sLR-OH-kbK" id="DqS-QZ-6jH"/>
                                     <outlet property="titleLabel" destination="4uh-e4-M0u" id="Koa-HB-7ni"/>
                                 </connections>
                             </collectionViewCell>
@@ -263,6 +201,11 @@
                             <outlet property="delegate" destination="jcd-qb-k4m" id="uLv-nc-Vt3"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem title="Share" id="qp7-fv-qmo"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="32W-UV-YTT"/>
+                        <barButtonItem title="Favorite" id="obG-Ii-eYq"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="xTE-Js-mij"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPL-Ou-VMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,76 +213,6 @@
             <point key="canvasLocation" x="423" y="-675"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="heart_plus" width="64" height="64"/>
-        <image name="share" width="64" height="64"/>
-    </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OPContentCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPContentCell.h"/>
-            <relationships>
-                <relationship kind="action" name="doubleTapped:"/>
-                <relationship kind="action" name="favoriteTapped:"/>
-                <relationship kind="action" name="shareTapped:"/>
-                <relationship kind="action" name="tapped:"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="favoriteBackgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="favoriteButtonImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="favoriteButtonLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="internalScrollView" candidateClass="OPScrollView"/>
-                <relationship kind="outlet" name="shareBackgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="OPCoverViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPCoverViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="coverImage1" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="coverImage2" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageContainerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="slideLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="OPGridCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPGridCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="OPMainCollectionViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPMainCollectionViewController.h"/>
-        </class>
-        <class className="OPScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPScrollView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="OPSingleImageCollectionViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OPSingleImageCollectionViewController.h"/>
-        </class>
-        <class className="SGSStaggeredFlowLayout" superclassName="UICollectionViewFlowLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SGSStaggeredFlowLayout.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

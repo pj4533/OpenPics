@@ -30,19 +30,16 @@
 
 
 @class OPProvider;
+@class OPSingleImageCollectionViewController;
 @interface OPContentCell : UICollectionViewCell <UIActivityItemSource>
 
 @property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;
 @property (strong, nonatomic) OPImageItem* item;
 @property (strong, nonatomic) OPProvider* provider;
 
-@property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
-@property (strong, nonatomic) IBOutlet UIView *favoriteBackgroundView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *favoriteButtonImageView;
-@property (strong, nonatomic) IBOutlet UILabel *favoriteButtonLabel;
+@property (strong, nonatomic) OPSingleImageCollectionViewController* singleImageCollectionViewController;
 
-//@property (strong, nonatomic) OPViewController* mainViewController;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
