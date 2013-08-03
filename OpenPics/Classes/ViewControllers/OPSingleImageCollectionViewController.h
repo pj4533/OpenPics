@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) NSIndexPath* indexPath;
 @property (strong, nonatomic) OPProvider* currentProvider;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *favoritesButton;
 
 
 @end

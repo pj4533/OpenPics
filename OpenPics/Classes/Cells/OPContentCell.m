@@ -149,36 +149,7 @@
 //    }
 }
 
-- (IBAction)favoriteTapped:(id)sender {
-    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-        [[OPBackend shared] removeItem:self.item];
-        [self setButtonToFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = YES;
-        }
-    } else {
-        [[OPBackend shared] saveItem:self.item];
-        [self setButtonToRemoveFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = NO;
-        }
-    }
-    
-}
-
 #pragma mark - Utility Functions
-
-- (void)setButtonToFavorite {
-//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
-//    self.favoriteButtonLabel.text = @"Favorite";
-}
-
-- (void)setButtonToRemoveFavorite {
-//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
-//    self.favoriteButtonLabel.text = @"Remove";
-}
 
 - (void) setupLabels {
     self.titleLabel.text = self.item.title;
@@ -248,11 +219,11 @@
         }];
     }
 
-    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-        [self setButtonToRemoveFavorite];
-    } else {
-        [self setButtonToFavorite];
-    }
+//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+//        [self setButtonToRemoveFavorite];
+//    } else {
+//        [self setButtonToFavorite];
+//    }
     
     [self fadeInUIWithCompletion:nil];
     

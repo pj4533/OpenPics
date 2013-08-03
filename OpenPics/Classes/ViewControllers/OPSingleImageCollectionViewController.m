@@ -21,6 +21,8 @@
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
 #import "UIImage+ImageEffects.h"
+#import "OPBackend.h"
+#import "OPFavoritesProvider.h"
 
 @interface OPSingleImageCollectionViewController () {
     BOOL _canLoadMore;
@@ -65,6 +67,17 @@
 - (void) viewDidAppear:(BOOL)animated {
 #warning THIS GOES AWAY ONCE LAYOUT TO LAYOUT IS FIXED
     [self.collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    
+    
+    
+    // this is still needed
+    OPImageItem* visibleItem = [self visibleImageItem];
+    if ([[OPBackend shared] didUserCreateItem:visibleItem]) {
+        [self setButtonToRemoveFavorite];
+    } else {
+        [self setButtonToFavorite];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,6 +86,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Actions
+
+- (IBAction)favoriteTapped:(id)sender {
+    OPImageItem* visibleItem = [self visibleImageItem];
+    if ([[OPBackend shared] didUserCreateItem:visibleItem]) {
+        [[OPBackend shared] removeItem:visibleItem];
+        [self setButtonToFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+        if ([self.currentProvider.providerType isEqualToString:OPProviderTypeFavorites]) {
+//            _shouldForceReloadOnBack = YES;
+        }
+    } else {
+        [[OPBackend shared] saveItem:visibleItem];
+        [self setButtonToRemoveFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+        if ([self.currentProvider.providerType isEqualToString:OPProviderTypeFavorites]) {
+//            _shouldForceReloadOnBack = NO;
+        }
+    }
+}
+
+#pragma mark - Utility Functions
+
+- (void)setButtonToFavorite {
+//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
+//    self.favoriteButtonLabel.text = @"Favorite";
+    
+    self.favoritesButton.title = @"Favorite";
+}
+
+- (void)setButtonToRemoveFavorite {
+//    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
+//    self.favoriteButtonLabel.text = @"Remove";
+    
+    self.favoritesButton.title = @"Remove Favorite";
+}
+
+- (OPImageItem*) visibleImageItem {
+    CGPoint centerPoint = CGPointMake((self.collectionView.frame.size.width/2.0f) + self.collectionView.contentOffset.x, self.collectionView.frame.size.height/2.0f);
+    NSIndexPath* visibleItem = [self.collectionView indexPathForItemAtPoint:centerPoint];
+    return self.items[visibleItem.item];
+}
 
 #pragma mark - Loading image helper functions
 
