@@ -40,6 +40,7 @@
 #import "OPPopularProvider.h"
 #import "OPFavoritesProvider.h"
 #import "OPFlickrCommonsProvider.h"
+#import "OPRedditProvider.h"
 
 #import "OPAppearance.h"
 #import "AFStatHatClient.h"
@@ -83,6 +84,7 @@
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPTroveProvider alloc] initWithProviderType:OPProviderTypeTrove]];
     [[OPProviderController shared] addProvider:[[OPFlickrCommonsProvider alloc] initWithProviderType:OPProviderTypeFlickrCommons]];
+    [[OPProviderController shared] addProvider:[[OPRedditProvider alloc] initWithProviderType:OPProviderTypeReddit]];
     [[OPProviderController shared] addProvider:[[OPFavoritesProvider alloc] initWithProviderType:OPProviderTypeFavorites]];
 
     return YES;

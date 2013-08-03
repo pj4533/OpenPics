@@ -78,6 +78,7 @@
 		0A74B0861767DB8B0082DEC5 /* AFTroveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B0691767DB8B0082DEC5 /* AFTroveClient.m */; };
 		0A74B0871767DB8B0082DEC5 /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B06B1767DB8B0082DEC5 /* OPTroveProvider.m */; };
 		0A74B0881767DB8B0082DEC5 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74B06E1767DB8B0082DEC5 /* OPImageItem.m */; };
+		0AD1FB6317AD9AB000A845D1 /* OPRedditProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1FB6217AD9AB000A845D1 /* OPRedditProvider.m */; };
 		0AFC93EF1768DF860066C824 /* OPCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC93EE1768DF860066C824 /* OPCoverViewController.m */; };
 		E0199140B8994648AC5E3C7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FA41326AB4472E94D066C5 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -212,6 +213,8 @@
 		0A74B06B1767DB8B0082DEC5 /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
 		0A74B06D1767DB8B0082DEC5 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
 		0A74B06E1767DB8B0082DEC5 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
+		0AD1FB6117AD9AB000A845D1 /* OPRedditProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditProvider.h; sourceTree = "<group>"; };
+		0AD1FB6217AD9AB000A845D1 /* OPRedditProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditProvider.m; sourceTree = "<group>"; };
 		0AFC93ED1768DF860066C824 /* OPCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCoverViewController.h; sourceTree = "<group>"; };
 		0AFC93EE1768DF860066C824 /* OPCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCoverViewController.m; sourceTree = "<group>"; };
 		98FA41326AB4472E94D066C5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,6 +495,7 @@
 		0A74B0381767DB8B0082DEC5 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AD1FB6017AD9A8D00A845D1 /* Reddit */,
 				0A74B0391767DB8B0082DEC5 /* CDL */,
 				0A74B03E1767DB8B0082DEC5 /* DPLA */,
 				0A74B0431767DB8B0082DEC5 /* Europeana */,
@@ -624,6 +628,15 @@
 				0A74B06E1767DB8B0082DEC5 /* OPImageItem.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0AD1FB6017AD9A8D00A845D1 /* Reddit */ = {
+			isa = PBXGroup;
+			children = (
+				0AD1FB6117AD9AB000A845D1 /* OPRedditProvider.h */,
+				0AD1FB6217AD9AB000A845D1 /* OPRedditProvider.m */,
+			);
+			path = Reddit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -820,6 +833,7 @@
 				0A74B0861767DB8B0082DEC5 /* AFTroveClient.m in Sources */,
 				0A74B0881767DB8B0082DEC5 /* OPImageItem.m in Sources */,
 				0A74B0731767DB8B0082DEC5 /* UIImage+Preload.m in Sources */,
+				0AD1FB6317AD9AB000A845D1 /* OPRedditProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
