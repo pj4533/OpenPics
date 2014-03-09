@@ -1,5 +1,7 @@
 platform :ios, '6.0'
-pod 'AFNetworking'
+inhibit_all_warnings!
+
+pod 'AFNetworking', '1.3.2'
 pod 'AFTumblrAPIClient', '~> 0.0.4'
 pod 'AFKissXMLRequestOperation'
 pod 'FormatterKit','1.1.1'

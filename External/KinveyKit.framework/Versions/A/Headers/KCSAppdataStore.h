@@ -4,14 +4,21 @@
 //
 //  Copyright (c) 2012-2013 Kinvey, Inc. All rights reserved.
 //
-//  This software contains valuable confidential and proprietary information of
-//  KINVEY, INC and is subject to applicable licensing agreements.
-//  Unauthorized reproduction, transmission or distribution of this file and its
-//  contents is a violation of applicable laws.
-
+// This software is licensed to you under the Kinvey terms of service located at
+// http://www.kinvey.com/terms-of-use. By downloading, accessing and/or using this
+// software, you hereby accept such terms of service  (and any agreement referenced
+// therein) and agree that you have read, understand and agree to be bound by such
+// terms of service and are of legal age to agree to such terms with Kinvey.
+//
+// This software contains valuable confidential and proprietary information of
+// KINVEY, INC and is subject to applicable licensing agreements.
+// Unauthorized reproduction, transmission or distribution of this file and its
+// contents is a violation of applicable laws.
+//
+ 
 #import <Foundation/Foundation.h>
 #import "KCSStore.h"
-#import "KCSOfflineSaveStore.h"
+#import "KCSBackgroundAppdataStore.h"
 
 @class KCSCollection;
 
@@ -28,7 +35,7 @@
 #define KCSStoreKeyCollectionName @"collectionName"
 
 /**
- KCSStore options dictionary key for the backing collection object class. This can be used instead of suppling a KCSStoreKeyResource. Use with KCSStoreKeyCollectionName. If a KCSStoreKeyCollectionName is supplied, but no KCSStoreKeyCollectionTemplateClass, NSMutableDictionary will be used by default.
+ KCSStore options dictionary key for the backing collection object class.  This can be used instead of suppling a KCSStoreKeyResource. Use with KCSStoreKeyCollectionName. If a KCSStoreKeyCollectionName is supplied, but no KCSStoreKeyCollectionTemplateClass, NSMutableDictionary will be used by default.
  
  @since 1.11.0
  */
@@ -45,9 +52,9 @@
  
  @see KCSCachedStore
  */
-@interface KCSAppdataStore : NSObject <KCSStore> 
+@interface KCSAppdataStore : KCSBackgroundAppdataStore
 
-@property (nonatomic, strong) KCSAuthHandler *authHandler;
+@property (nonatomic, strong) KCSAuthHandler *authHandler KCS_DEPRECATED(Auth handler not used, 1.22.0);
 
 
 /** Initialize an empty store with the given collections, options and the default authentication
@@ -61,7 +68,7 @@
  @see [KCSStore storeWithOptions:]
  @return An autoreleased empty store with configured options and default authentication. 
  */
-+ (id) storeWithCollection:(KCSCollection*)collection options:(NSDictionary*)options;
++ (instancetype) storeWithCollection:(KCSCollection*)collection options:(NSDictionary*)options;
 
 /** Initialize an empty store with the given options and the given authentication
  
@@ -74,10 +81,11 @@
  @param options A dictionary of options to configure the store. (Can be nil if there are no options)
  @param authHandler The Kinvey Authentication Handler used to authenticate backend requests.
  
- @see [KCSStore storeWithAuthHandler:withOptions:]
  @return An autoreleased empty store with configured options and given authentication.
+ @depcratedIn 1.22.0
+ @deprecated Use use storeWithCollection:options: instead
  */
-+ (id)storeWithCollection:(KCSCollection*)collection authHandler:(KCSAuthHandler *)authHandler withOptions: (NSDictionary *)options;
++ (instancetype)storeWithCollection:(KCSCollection*)collection authHandler:(KCSAuthHandler *)authHandler withOptions: (NSDictionary *)options KCS_DEPRECATED(Auth handler not used--use storeWithCollection:options: instead, 1.22.0);
 
 ///---------------------------------------------------------------------------------------
 /// @name Querying/Fetching
@@ -138,7 +146,6 @@
  @param query the query to filter the elements
  @param countBlock the block that receives the response
  @since 1.15.0
- @see countWithBlock:
  */
 - (void)countWithQuery:(KCSQuery*)query completion:(KCSCountBlock)countBlock;
 @end

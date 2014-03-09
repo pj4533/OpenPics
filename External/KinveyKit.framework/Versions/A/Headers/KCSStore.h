@@ -2,12 +2,19 @@
 //  KCSStore.h
 //  KinveyKit
 //
-//  Copyright (c) 2012 Kinvey, Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Kinvey, Inc. All rights reserved.
 //
-//  This software contains valuable confidential and proprietary information of
-//  KINVEY, INC and is subject to applicable licensing agreements.
-//  Unauthorized reproduction, transmission or distribution of this file and its
-//  contents is a violation of applicable laws.
+// This software is licensed to you under the Kinvey terms of service located at
+// http://www.kinvey.com/terms-of-use. By downloading, accessing and/or using this
+// software, you hereby accept such terms of service  (and any agreement referenced
+// therein) and agree that you have read, understand and agree to be bound by such
+// terms of service and are of legal age to agree to such terms with Kinvey.
+//
+// This software contains valuable confidential and proprietary information of
+// KINVEY, INC and is subject to applicable licensing agreements.
+// Unauthorized reproduction, transmission or distribution of this file and its
+// contents is a violation of applicable laws.
+//
 
 #import <Foundation/Foundation.h>
 #import "KCSBlockDefs.h"
@@ -19,6 +26,7 @@
 @class KCSReduceFunction;
 @class KCSGroup;
 
+KCS_DEPRECATED(use [KCSQuery query] instead, 1.26.0)
 @interface KCSAllObjects : KCSQuery
 @end
 
@@ -48,6 +56,7 @@
 ///---------------------------------------------------------------------------------------
 /// @name Initialization
 ///---------------------------------------------------------------------------------------
+
 /*! Initialize an empty Kinvey Store with the default options
  
  This routine is called to return an empty store with default options and default authentication.
@@ -55,7 +64,7 @@
  @return An autoreleased empty store with default options and default authentication.
  
  */
-+ (id)store;
++ (instancetype)store;
 
 /*! Initialize an empty store with the given options and the default authentication
  
@@ -68,7 +77,7 @@
  @return An autoreleased empty store with configured options and default authentication.
  
  */
-+ (id)storeWithOptions: (NSDictionary *)options;
++ (instancetype)storeWithOptions: (NSDictionary *)options;
 
 /*! Initialize an empty store with the given options and the given authentication
  
@@ -81,15 +90,18 @@
  @param authHandler The Kinvey Authentication Handler used to authenticate backend requests. Reserved for future use.
  
  @return An autoreleased empty store with configured options and given authentication.
- 
+ @deprecatedIn 1.22.0
+ @deprecated Use storeWithOptions: instead
  */
-+ (id)storeWithAuthHandler: (KCSAuthHandler *)authHandler withOptions: (NSDictionary *)options;
++ (instancetype)storeWithAuthHandler: (KCSAuthHandler *)authHandler withOptions: (NSDictionary *)options KCS_DEPRECATED(Auth handler not used--use storeWitOptions: instead, 1.22.0);
+
 
 #pragma mark -
 #pragma mark Adding/Updating
 ///---------------------------------------------------------------------------------------
 /// @name Adding/Updating
 ///---------------------------------------------------------------------------------------
+
 /*! Add or update an object (or objects) in the store.
  
  This is the basic method to add or update objects in a Kinvey Store.  Specific stores may
@@ -112,27 +124,27 @@
  
  This method takes a query object and calls the store to provide an array of objects that satisfies the query.
  
- @param query A query to act on a store.  The store defines the type of queries it accepts, an object of type `KCSAllObjects` causes all objects to be returned.
+ @param query A query to act on a store.  The store defines the type of queries it accepts, an object of type `[KCSQuery query]` causes all objects to be returned.
  @param completionBlock A block that gets invoked when the query/fetch is "complete" (as defined by the store)
  @param progressBlock A block that is invoked whenever the store can offer an update on the progress of the operation.
  
 */
 - (void)queryWithQuery: (id)query withCompletionBlock: (KCSCompletionBlock)completionBlock withProgressBlock: (KCSProgressBlock)progressBlock;
 
-#pragma mark -
-#pragma mark Removing
+#pragma mark - Removing
 ///---------------------------------------------------------------------------------------
 /// @name Removing
 ///---------------------------------------------------------------------------------------
+
 /*! Remove an object (or objects) from the store.
  
  @param object An object (or query) to remove from the store (if the object is a NSArray or query, matching objects will be removed)
- @param completionBlock A block that gets invoked when the remove is "complete" (as defined by the store)
+ @param completionBlock A block that gets invoked when the remove is "complete" (as defined by the store). Count is the number of items deleted, if any.
  @param progressBlock A block that is invoked whenever the store can offer an update on the progress of the operation.
- 
+ @updated 1.24.0 completion block is now a count block instead of an object block
  */
 
-- (void)removeObject: (id)object withCompletionBlock: (KCSCompletionBlock)completionBlock withProgressBlock: (KCSProgressBlock)progressBlock;
+- (void)removeObject: (id)object withCompletionBlock:(KCSCountBlock)completionBlock withProgressBlock: (KCSProgressBlock)progressBlock;
 
 
 #pragma mark -
@@ -140,6 +152,7 @@
 ///---------------------------------------------------------------------------------------
 /// @name Configuring
 ///---------------------------------------------------------------------------------------
+
 /*! This is the general configuration routine for a Kinvey Store
  
  This routine is used to pass a Store specific options dictionary to the store
@@ -171,18 +184,19 @@
  This method is used to control how the store authenticates with the backend.
  
  @param handler The Kinvey Auth Handler to be used during requests.
- 
+ @deprecatedIn 1.22.0
  */
-- (void)setAuthHandler: (KCSAuthHandler *)handler;
+- (void)setAuthHandler: (KCSAuthHandler *)handler KCS_DEPRECATED(Auth handler not used, 1.22.0);
+;
 
 /*! Get the currently set Kinvey Auth Handler for this Store
  
  This method is used to find the currently set Kinvey Auth Handler for this Store.
  
  @return The currently set Kinvey Auth Handler.
- 
+ @deprecatedIn 1.22.0
  */
-- (KCSAuthHandler *)authHandler;
+- (KCSAuthHandler *)authHandler KCS_DEPRECATED(Auth handler not used, 1.22.0);
 
 
 @end

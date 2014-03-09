@@ -2,14 +2,23 @@
 //  KinveyPersistable.h
 //  KinveyKit
 //
-//  Copyright (c) 2008-2011, Kinvey, Inc. All rights reserved.
+//  Copyright (c) 2008-2014, Kinvey, Inc. All rights reserved.
 //
-//  This software contains valuable confidential and proprietary information of
-//  KINVEY, INC and is subject to applicable licensing agreements.
-//  Unauthorized reproduction, transmission or distribution of this file and its
-//  contents is a violation of applicable laws.
+// This software is licensed to you under the Kinvey terms of service located at
+// http://www.kinvey.com/terms-of-use. By downloading, accessing and/or using this
+// software, you hereby accept such terms of service  (and any agreement referenced
+// therein) and agree that you have read, understand and agree to be bound by such
+// terms of service and are of legal age to agree to such terms with Kinvey.
+//
+// This software contains valuable confidential and proprietary information of
+// KINVEY, INC and is subject to applicable licensing agreements.
+// Unauthorized reproduction, transmission or distribution of this file and its
+// contents is a violation of applicable laws.
+//
 
 #import <Foundation/Foundation.h>
+
+#import "KinveyHeaderInfo.h"
 
 // Forward declaration to have access to the KCSClient definition in this protocol definition.
 @class KCSCollection;
@@ -18,20 +27,29 @@
 
 Developers interested in performing actions based on the state of a save operation should conform to this protocol.
 
+ @deprecated Use KCSAppdataStore methods instead
+ @depreatedIn 1.26.1
  */
+KCS_DEPRECATED(Use KCSAppdataStore methods instead, 1.26.1)
 @protocol KCSPersistableDelegate <NSObject>
 
 /** Invoked when a save operation fails
  @param entity The Object that was attempting to be saved.
  @param error A detailed description of the error.
+ 
+ @deprecated Use KCSAppdataStore methods instead
+ @depreatedIn 1.26.1
  */
-- (void) entity: (id)entity operationDidFailWithError: (NSError *)error;
+- (void) entity: (id)entity operationDidFailWithError: (NSError *)error KCS_DEPRECATED(Use KCSAppdataStore methods instead, 1.26.1);
 
 /** Invoked when a save operation completes successfully.
  @param entity The Object that was attempting to be saved.
  @param result The result of the operation (NOTE: The value of this result is still changing, do not count on the value yet)
+ 
+ @deprecated Use KCSAppdataStore methods instead
+ @depreatedIn 1.26.1
  */
-- (void) entity:(id)entity operationDidCompleteWithResult: (NSObject *)result;
+- (void) entity:(id)entity operationDidCompleteWithResult: (NSObject *)result KCS_DEPRECATED(Use KCSAppdataStore methods instead, 1.26.1);
 
 @end
 
@@ -105,6 +123,8 @@ implementing these methods.
  Implementing this method allows an object to be saved and loaded, perserving its relations to other entities. The keys are the field names on the _Kinvey_ side, and values is the name of the Kinvey collection where that related data resides.
  
  The actual value stored in backend will be a `KinveyRef` dictionary that stores the related object's `_id` and collection name. When loading the entity where this method is not implemented and not going through a KCSLinkedAppdataStore, the value will be a NSDictionary with the KinveyRef value, and not the associated object.
+ 
+ Binary data (UIImage, NSData, etc) can also be referenced in properties. This is done by mapping those properties to the collection name: `KCSFileStoreCollectionName`.
  
  Use this method with kinveyObjectBuilderOptions `KCS_REFERENCE_MAP_KEY` to specify object types.
  
@@ -184,19 +204,21 @@ implementing these methods.
 /** Override the initializer that KinveyKit uses to build objects of this type
  
  If specified in the kinveyObjectBuilderOptions dictionary, this method will be
- called to build objects instead of [[[self class] alloc] init].  This method
+ called to build objects instead of `[[[self class] alloc] init]`.  This method
  _must_ return an instantiated object of the class that implements this protocol.
  This routine does not release the generated object.
  
+ @updatedIn 1.17.3
+ @param jsonDocument the raw server object. This can be used to fetch an existing object instead of creating a brand new one. E.g. use `jsonDocument[KCSEntityKeyId]` to get the object id and search using a `NSFetchedRequest` to find an existing NSManagedObject in the context.
  @return An instantiated object of the class implementing this protocol
- 
  */
-+ (id)kinveyDesignatedInitializer;
++ (id)kinveyDesignatedInitializer:(NSDictionary*)jsonDocument;
 
 #pragma mark - Don't Override these methods
 ///---------------------------------------------------------------------------------------
 /// @name Save Items
 ///---------------------------------------------------------------------------------------
+
 /**  Save an Entity into KCS for a given KCS client and register a delegate to notify when complete.
  
  When overriding this method an implementer will most likely need to communicate with the KCSClient class,
@@ -208,13 +230,15 @@ implementing these methods.
  @param collection An instance of a KCS collection to use in saving this Entity
  @param delegate The delegate to inform upon the completion of the save operation.
  
- 
+ @deprecated Use KCSAppdataStore methods instead
+ @depreatedIn 1.26.1
  */
-- (void)saveToCollection: (KCSCollection *)collection withDelegate: (id <KCSPersistableDelegate>)delegate;
+- (void)saveToCollection: (KCSCollection *)collection withDelegate: (id <KCSPersistableDelegate>)delegate KCS_DEPRECATED(Use KCSAppdataStore methods instead, 1.26.1);
 
 ///---------------------------------------------------------------------------------------
 /// @name Delete Items
 ///---------------------------------------------------------------------------------------
+
 /** Delete an entity from Kinvey and register a delegate for notification.
  When overriding this method an implementer will most likely need to communicate with the KCSClient class,
  which has a different delegate interface.  An implementer will need to map between these delegates.  This does
@@ -224,8 +248,11 @@ implementing these methods.
  
  @param delegate The delegate to inform upon the completion of the delet operation.
  @param collection The collection to remove the item from.
+ 
+ @deprecated Use KCSAppdataStore methods instead
+ @depreatedIn 1.26.1
  */
 
-- (void)deleteFromCollection: (KCSCollection *)collection withDelegate: (id<KCSPersistableDelegate>)delegate;
+- (void)deleteFromCollection: (KCSCollection *)collection withDelegate: (id<KCSPersistableDelegate>)delegate KCS_DEPRECATED(Use KCSAppdataStore methods instead, 1.26.1);
 
 @end

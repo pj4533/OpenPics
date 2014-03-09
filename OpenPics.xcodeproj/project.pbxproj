@@ -56,6 +56,7 @@
 		0A864E12172D8CFD00BE00C6 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0E172D8CFD00BE00C6 /* map@2x.png */; };
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
+		0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
 		0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6CAC91747E61700DB4C18 /* OPFavoritesProvider.m */; };
 		0AA7C6D417235C72008FDFA6 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7C6D317235C72008FDFA6 /* NSDictionary+DefObject.m */; };
 		0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB0C251719B9FD000790A0 /* OPDPLAProvider.m */; };
@@ -202,6 +203,7 @@
 		0A864E0E172D8CFD00BE00C6 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
+		0A8A81FC18CCBDEE001AED56 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0AA6CAC81747E61700DB4C18 /* OPFavoritesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFavoritesProvider.h; sourceTree = "<group>"; };
 		0AA6CAC91747E61700DB4C18 /* OPFavoritesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFavoritesProvider.m; sourceTree = "<group>"; };
 		0AA7C6D217235C72008FDFA6 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */,
 				0AF34E821745A5D40019DEE0 /* Twitter.framework in Frameworks */,
 				0AF34E801745A5CB0019DEE0 /* SystemConfiguration.framework in Frameworks */,
 				0AF34E7E1745A5C00019DEE0 /* Security.framework in Frameworks */,
@@ -536,6 +539,7 @@
 		0A609EB8171072BD0084735B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A8A81FC18CCBDEE001AED56 /* Social.framework */,
 				0A05EF1D1745A99F00814F0B /* Airship */,
 				0A05EF1F1745A99F00814F0B /* KinveyKit.framework */,
 				0AF34E811745A5D40019DEE0 /* Twitter.framework */,

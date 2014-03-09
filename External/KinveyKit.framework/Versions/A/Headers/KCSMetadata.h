@@ -2,7 +2,18 @@
 //  KCSMetadata.h
 //  KinveyKit
 //
-//  Copyright (c) 2012-2013 Kinvey. All rights reserved.
+//  Copyright (c) 2012-2014 Kinvey. All rights reserved.
+//
+// This software is licensed to you under the Kinvey terms of service located at
+// http://www.kinvey.com/terms-of-use. By downloading, accessing and/or using this
+// software, you hereby accept such terms of service  (and any agreement referenced
+// therein) and agree that you have read, understand and agree to be bound by such
+// terms of service and are of legal age to agree to such terms with Kinvey.
+//
+// This software contains valuable confidential and proprietary information of
+// KINVEY, INC and is subject to applicable licensing agreements.
+// Unauthorized reproduction, transmission or distribution of this file and its
+// contents is a violation of applicable laws.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,21 +23,21 @@
 /** Fieldname to access an object's creator, using KCSQuery.
  @since 1.10.2
  */
-FOUNDATION_EXPORT NSString* KCSMetadataFieldCreator;
+KCS_CONSTANT KCSMetadataFieldCreator;
 /** Fieldname to access an object's last modified time, using KCSQuery.
  @since 1.10.2
  */
-FOUNDATION_EXPORT NSString* KCSMetadataFieldLastModifiedTime;
+KCS_CONSTANT KCSMetadataFieldLastModifiedTime;
 /** Fieldname to access an object's entity creation time, using KCSQuery.
  @since 1.14.2
  */
-FOUNDATION_EXPORT NSString* KCSMetadataFieldCreationTime;
+KCS_CONSTANT KCSMetadataFieldCreationTime;
 
 /** This object represents backend information about the entity, such a timestamp and read/write permissions.
  
  To take advantage of KCSMetadata, map an entity property of this type to field `KCSEntityKeyMetadata`. The object that maps a particular instance is the "associated object." 
  */
-@interface KCSMetadata : NSObject
+@interface KCSMetadata : NSObject <NSCopying, NSCoding>
 
 /** The array of users with explicit read access.
  
@@ -67,49 +78,8 @@ FOUNDATION_EXPORT NSString* KCSMetadataFieldCreationTime;
  */
 - (BOOL) hasWritePermission;
 
-/** A list of users that have explict permission to read this entity. The actual set of users that can read the entity may be greater than this list, depending on the global permissions of the associated object or the object's containing collection. 
- @return an array of user ids that have acess to read this entity
- @see setUsersWithReadAccess:
- @see isGloballyReadable
- @see readers
- @deprecatedIn 1.14.0
- */
-- (NSArray*) usersWithReadAccess KCS_DEPRECATED(Use 'readers' array directly, 1.14.0);
-
-/** Update the array of users with explicit read access. 
- 
- Any change in permissions do not take effect until the associated object is saved to the backend.
- @param readers a non-nil array of string user id's that have explicit read access to the associated object.
- @see usersWithReadAccess
- @see setGloballyReadable:
- @see readers
- @deprecatedIn 1.14.0
- */
-- (void) setUsersWithReadAccess:(NSArray*) readers KCS_DEPRECATED(Use 'readers' array directly, 1.14.0);
-
-/** A list of users that have explict permission to write this entity. The actual set of users that can write the entity may be greater than this list, depending on the global permissions of the associated object or the object's containing collection. 
- @return an array of user ids that have acess to read this entity
- @see setUsersWithWriteAccess:
- @see isGloballyWritable
- @see writers
- @deprecatedIn 1.14.0
- */
-- (NSArray*) usersWithWriteAccess KCS_DEPRECATED(Use 'writers' array directly, 1.14.0);
-
-/** Update the array of users with explicit write access. 
-
- Any change in permissions do not take effect until the associated object is saved to the backend.
- @param writers a non-nil array of string user id's that have explicit write access to the associated object.
- @see usersWithWriteAccess
- @see setGloballyWritable:
- @see writers
- @deprecatedIn 1.14.0
- */
-- (void) setUsersWithWriteAccess:(NSArray*) writers KCS_DEPRECATED(Use 'writers' array directly, 1.14.0);
-
 /** The global read permission for the associated entity. This could be broader or more restrictive than its collection's permissions.
  @return `YES` if the entity can be read by any user
- @see usersWithReadAccess
  @see setGloballyReadable:
  */
 - (BOOL) isGloballyReadable;
@@ -118,14 +88,12 @@ FOUNDATION_EXPORT NSString* KCSMetadataFieldCreationTime;
  
  Any change in permissions do not take effect until the associated object is saved to the backend.
  @param readable `YES` to allow the associated object to be read by any user.
- @see setUsersWithReadAccess:
  @see isGloballyReadable
 */
 - (void) setGloballyReadable:(BOOL)readable;
 
 /** The global write permission for the associated entity. This could be broader or more restrictive than its collection's permissions.
  @return `YES` if the entity can be modified by any user
- @see usersWithWriteAccess
  @see setGloballyWritable:
  */
 - (BOOL) isGloballyWritable;
@@ -134,7 +102,6 @@ FOUNDATION_EXPORT NSString* KCSMetadataFieldCreationTime;
  
  Any change in permissions do not take effect until the associated object is saved to the backend.
  @param writable `YES` to allow the associated object to be modified by any user.
- @see setUsersWithWriteAccess:
  @see isGloballyWritable
  */
 - (void) setGloballyWritable:(BOOL)writable;

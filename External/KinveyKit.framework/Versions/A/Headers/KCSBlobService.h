@@ -1,16 +1,25 @@
 //
 //  KCSBlobService.h
-//  SampleApp
+//  KinveyKit
 //
-//  Copyright (c) 2008-2011, Kinvey, Inc. All rights reserved.
+//  Copyright (c) 2008-2013, Kinvey, Inc. All rights reserved.
 //
-//  This software contains valuable confidential and proprietary information of
-//  KINVEY, INC and is subject to applicable licensing agreements.
-//  Unauthorized reproduction, transmission or distribution of this file and its
-//  contents is a violation of applicable laws.
+// This software is licensed to you under the Kinvey terms of service located at
+// http://www.kinvey.com/terms-of-use. By downloading, accessing and/or using this
+// software, you hereby accept such terms of service  (and any agreement referenced
+// therein) and agree that you have read, understand and agree to be bound by such
+// terms of service and are of legal age to agree to such terms with Kinvey.
+//
+// This software contains valuable confidential and proprietary information of
+// KINVEY, INC and is subject to applicable licensing agreements.
+// Unauthorized reproduction, transmission or distribution of this file and its
+// contents is a violation of applicable laws.
+//
+
 
 #import <Foundation/Foundation.h>
 #import "KCSBlockDefs.h"
+#import "KinveyHeaderInfo.h"
 
 @class KCSClient;
 
@@ -19,6 +28,7 @@
  This represents the results from a Resource request.  Because the resource may be eventually fetched from another sericve that doesn't respond
  in the same fashion as Kinvey, we have a slightly different response format for Resources than for other Kinvey items.
  
+ @deprecatedIn 1.18.0
 */
 @interface KCSResourceResponse : NSObject
 
@@ -27,38 +37,20 @@
 ///---------------------------------------------------------------------------------------
 
 /*! Contains the local filename that the Resource was saved to. */
-@property (copy) NSString *localFileName;
+@property (nonatomic, copy, readonly) NSString *localFileName KCS_DEPRECATED(the new KCSFileStore API returns this as: -[KCSFile localURL], 1.18.0);
 
 /*! Contains the streaming URL if it was requested. */
-@property (copy) NSString *streamingURL;
+@property (nonatomic, copy, readonly) NSString *streamingURL KCS_DEPRECATED(the new KCSFileStore API returns this as: -[KCSFile remoteURL], 1.18.0);
 
 /*! Contains the Resource ID, which is used to uniquely identify this resource .*/
-@property (copy) NSString *resourceId;
+@property (nonatomic, copy, readonly) NSString *resourceId KCS_DEPRECATED(the new KCSFileStore API returns this as: -[KCSFile fileId], 1.18.0);
 
  /*! Contains the actual data for the resources. */
-@property (strong) NSData *resource;
+@property (nonatomic, strong, readonly) NSData *resource KCS_DEPRECATED(the new KCSFileStore API returns this as: -[KCSFile data], 1.18.0);
 
 /*! Contains the "expected" size of the resource. */
-@property NSInteger length;
+@property (readonly) NSInteger length KCS_DEPRECATED(the new KCSFileStore API returns this as: -[KCSFile length], 1.18.0);
 
-///---------------------------------------------------------------------------------------
-/// @name Initialization & disposal
-///---------------------------------------------------------------------------------------
-
-/*! Returns an autoreleased Resource Response.
- 
- Responses can only be built using this method.  There are no facilities for editing a resource, so they are effectively immutable.  The lifetime of
- a response is limited and any data should be retained elsewhere if it is required (such as the NSData representing the resource.
- 
- @param localFile The local filename that this resource was saved inot, nil of no local filename.
- @param resourceId The unique ID that identifies this resource in the Kinvey Cloud.
- @param resource The actual data of the resource.  The data must be converted to a different representation to use.  Nil for an upload/delete response.
- @param streamingURL The URL used to stream the resource, nil if not available for streaming.
- @param length The length of the response.  Should be set to match the expected length as given by the server.
- @return An Autoreleased KCSResourceResponse that can be used to obtain the response information.
- 
- */
-+ (KCSResourceResponse *)responseWithFileName: (NSString *)localFile withResourceId: (NSString *)resourceId withStreamingURL:(NSString *)streamingURL withData: (NSData *)resource withLength: (NSInteger)length;
 
 @end
 
@@ -66,7 +58,7 @@
  
  A client conforming to this protocol can be notified about successful or unsuccessful completion of a resource request to Kinvey.
  */
-@protocol KCSResourceDelegate <NSObject>
+@protocol KCSResourceDelegate <NSObject> 
 
 ///---------------------------------------------------------------------------------------
 /// @name Success
@@ -96,9 +88,9 @@
 
 @end
 
-/*! Kinvey Resource Helper
+/** Kinvey File Service wrapper
  
- This class is used to provide access to all Kinvey Resource services.
+ This class is used to provide access to all Kinvey file services.
  */
 @interface KCSResourceService : NSObject
 
@@ -106,108 +98,121 @@
 /// @name Downloading Resources
 ///---------------------------------------------------------------------------------------
 
-/*! Downloads the given Resource ID into a local NSData object
++ (void)downloadResource: (NSString *)resourceId withResourceDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore downloadDataByName:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)downloadResource: (NSString *)resourceId toFile: (NSString *)filename withResourceDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore downloadFileByName:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)getStreamingURLForResource: (NSString *)resourceId withResourceDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore getStreamingURL(ByName):completionBlock:] instead, 1.18.0);
+
+/** Downloads the given Resource ID into a local NSData object
  
  This method should be used to download a resource from Kinvey into a local NSData object.
  
  @param resourceId The Resource ID to download.
- @param delegate The delegate to be notified upon completion of the request.  The delegate will be provided a KCSResourceResponse that contains the data.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)downloadResource: (NSString *)resourceId withResourceDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)downloadResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)downloadResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore downloadDataByName:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Downloads the given Resource ID into a local file.
+/** Downloads the given Resource ID into a local file.
  
  This method should be used to download a resource from Kinvey into a local File.  The file can then be used to access the resource.
  
  @param resourceId The Resource ID to download.
  @param filename The filename that the resource will use as the download location.  This will be set in the KCSResourceResponse that the delegate receives. 
- @param delegate The delegate to be notified upon completion of the request.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)downloadResource: (NSString *)resourceId toFile: (NSString *)filename withResourceDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)downloadResource: (NSString *)resourceId toFile: (NSString *)filename completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)downloadResource: (NSString *)resourceId toFile: (NSString *)filename completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore downloadFileByName:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Obtain a 30-second time-limited URL for streaming a resource stored on Kinvey.
+/** Obtain a 30-second time-limited URL for streaming a resource stored on Kinvey.
  
  This method is used for large objects stored on the Resource Service.  It's used to get a URL that allows the resource to be
  streamed to the device.
  
  @param resourceId The Resource ID to stream
- @param delegate The delegate to be notified upon completion of the request.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block is NEVER called, so just supply `nil`. 
  */
-+ (void)getStreamingURLForResource: (NSString *)resourceId withResourceDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)getStreamingURLForResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)getStreamingURLForResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore getStreamingURL(ByName):completionBlock:] instead, 1.18.0);
 
 ///---------------------------------------------------------------------------------------
 /// @name Uploading Resources
 ///---------------------------------------------------------------------------------------
 
-/*! Saves the given File to Kinvey.
++ (void)saveLocalResource: (NSString *)filename withDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)saveLocalResourceWithURL: (NSURL *)URL withDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)saveLocalResource: (NSString *)filename toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)saveLocalResourceWithURL: (NSURL *)URL toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate  KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
++ (void)saveData: (NSData *)data toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
+
+/** Saves the given File to Kinvey.
  
  This method is used to upload a local file to Kinvey, the resource ID will be the last path component of the filename with extension.
  
  @param filename The filename of the local file to upload.
- @param delegate The delegate to be notified upon completion of the save.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)saveLocalResource: (NSString *)filename withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)saveLocalResource: (NSString *)filename completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)saveLocalResource: (NSString *)filename completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Saves the given URL to Kinvey.
+
+/** Saves the given URL to Kinvey.
  
  This method is used to upload a local file to Kinvey, the resource ID will be the last path component of the filename with extension.
  
- @param URL The URL of the local file to upload.
- @param delegate The delegate to be notified upon completion of the save.
+ @param URL The file URL of the local file to upload.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)saveLocalResourceWithURL: (NSURL *)URL withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)saveLocalResourceWithURL: (NSURL *)URL  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)saveLocalResourceWithURL: (NSURL *)URL  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Saves the given File into the specified resource.
+/** Saves the given File into the specified resource.
  
  This method is used to upload a local file to Kinvey, use this varient to specify an exact remote resource ID.
  
  @param filename The filename of the local file to upload.
  @param resourceId The resource ID to use for remote storage
- @param delegate The delegate to be notified upon completion of the save.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)saveLocalResource: (NSString *)filename toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)saveLocalResource: (NSString *)filename toResource: (NSString *)resourceId  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)saveLocalResource: (NSString *)filename toResource: (NSString *)resourceId  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Saves the given URL into the specified resource.
+/** Saves the given URL into the specified resource.
  
  This method is used to upload a local file to Kinvey, use this varient to specify an exact remote resource ID.
  
  @param URL The URL of the local file to upload.
  @param resourceId The resource ID to use for remote storage
- @param delegate The delegate to be notified upon completion of the save.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)saveLocalResourceWithURL: (NSURL *)URL toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)saveLocalResourceWithURL: (NSURL *)URL toResource: (NSString *)resourceId  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)saveLocalResourceWithURL: (NSURL *)URL toResource: (NSString *)resourceId  completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadFile:options:completionBlock:progressBlock:] instead, 1.18.0);
 
-/*! Saves the given Data into the specified resource.
+/** Saves the given Data into the specified resource.
  
  This method is used to upload NSData into the Kinvey service.
  
  @param data The Data to upload to Kinvey.
  @param resourceId The resource ID to use for remote storage
- @param delegate The delegate to be notified upon completion of the save.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)saveData: (NSData *)data toResource: (NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)saveData: (NSData *)data toResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)saveData: (NSData *)data toResource: (NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore uploadData:options:completionBlock:progressBlock:] instead, 1.18.0);
 
 ///---------------------------------------------------------------------------------------
 /// @name Deleting Resources
 ///---------------------------------------------------------------------------------------
 
-/*! Delete the given resource from Kinvey.
++ (void)deleteResource:(NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore deleteFile:completionBlock:] instead, 1.18.0);
+
+/** Delete the given resource from Kinvey.
  
  Use this method to delete a given resource from Kinvey.  Additional attempts to access this resource will fail with error code 404.
  
  @param resourceId The resource ID that should be removed.
- @param delegate The delegate to be notified that the deletion action finished.
+ @param completionBlock the block called when the operation completes or fails
+ @param progressBlock the block called 0+ times while the operation is in progress
  */
-+ (void)deleteResource:(NSString *)resourceId withDelegate: (id<KCSResourceDelegate>)delegate;
-+ (void)deleteResource:(NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock;
++ (void)deleteResource:(NSString *)resourceId completionBlock: (KCSCompletionBlock)completionBlock progressBlock: (KCSProgressBlock)progressBlock KCS_DEPRECATED(delegate API is deprecated - use +[KCSFileStore deleteFile:completionBlock:] instead, 1.18.0);
 
 
 @end
