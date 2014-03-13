@@ -33,7 +33,6 @@
     self = [super init];
     if (self) {
         self.providerType = providerType;
-        self.supportsLocationSearching = NO;
         self.supportsInitialSearching = NO;
     }
     return self;
@@ -55,12 +54,6 @@
     
 }
 
-- (void) getItemsWithRegion:(MKCoordinateRegion) region
-                    success:(void (^)(NSArray* items))success
-                    failure:(void (^)(NSError* error))failure {
-    
-}
-
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
 
 }
@@ -77,10 +70,8 @@
                      withURLFormat:(NSString*) urlFormat
                     withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    // TODO: contentDM not implemented
-    
-    
+#warning fix contentDM image
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 //    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
 //    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 //        NSDictionary* imageInfo = JSON[@"imageinfo"];

@@ -139,6 +139,7 @@
 }
 
 - (IBAction)favoriteTapped:(id)sender {
+#warning fix favorite tapping
 //    if ([[OPBackend shared] didUserCreateItem:self.item]) {
 //        [[OPBackend shared] removeItem:self.item];
 //        [self setButtonToFavorite];
@@ -281,7 +282,7 @@
 }
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
-    
+#warning fix uprez
 //    if (_upRezOperation) {
 //        [_upRezOperation cancel];
 //        _upRezOperation = nil;

@@ -32,7 +32,6 @@
 #import "OPProviderController.h"
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
-#import "OPMapViewController.h"
 #import "SVProgressHUD.h"
 #import "TMCache.h"
 #import "UIImage+Preload.h"
@@ -105,6 +104,7 @@
         // this allows for the provider to give us a more passive experience by showing some images, rather than a blank
         // screen.
         //
+#warning revisit this after removing map?
         // if we DO have items, skip it, as this means that we were likely called from the map.
         //
         // i had this in viewDidLoad and got a weird error on app launch:
@@ -432,12 +432,6 @@
     
     header.delegate = self;
 
-    if (self.currentProvider.supportsLocationSearching) {
-        header.mapButton.hidden = NO;
-    } else {
-        header.mapButton.hidden = YES;
-    }
-    
     [header.providerButton setTitle:self.currentProvider.providerName forState:UIControlStateNormal];
 
     return header;
@@ -494,20 +488,6 @@
 }
 
 #pragma mark - OPHeaderDelegate
-
-- (void) flipToMap {
-    OPMapViewController* mapViewController;
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController_iPhone" bundle:nil];
-    } else {
-        mapViewController = [[OPMapViewController alloc] initWithNibName:@"OPMapViewController" bundle:nil];
-    }
-    
-    mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    mapViewController.provider = self.currentProvider;
-    [self presentViewController:mapViewController animated:YES completion:nil];
-}
 
 - (void) providerTappedFromRect:(CGRect) rect inView:(UIView *)view{
     if (_popover) {

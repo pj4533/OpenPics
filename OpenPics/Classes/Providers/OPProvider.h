@@ -33,10 +33,6 @@
 @property (strong, nonatomic) NSString* providerType;
 @property (strong, nonatomic) NSString* providerName;
 
-// This means the provider gives location information for items
-//    DEFAULT:  NO
-@property BOOL supportsLocationSearching;
-
 // This means the provider has an initial search, for a more passive experience of browsing
 //    DEFAULT:  NO
 @property BOOL supportsInitialSearching;
@@ -52,10 +48,6 @@
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure;
-
-- (void) getItemsWithRegion:(MKCoordinateRegion) region
-                    success:(void (^)(NSArray* items))success
-                    failure:(void (^)(NSError* error))failure;
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
 

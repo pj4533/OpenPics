@@ -116,8 +116,6 @@
                                        @"date":[NSDate date],
                                         @"imageUrl": item.imageUrl.absoluteString,
                                         @"providerType": item.providerType,
-                                       @"lat": [NSString stringWithFormat:@"%f", item.location.latitude],
-                                       @"lon": [NSString stringWithFormat:@"%f", item.location.longitude],
                                        @"width": [NSString stringWithFormat:@"%f", item.size.width],
                                        @"height": [NSString stringWithFormat:@"%f", item.size.height]
                                         } mutableCopy];

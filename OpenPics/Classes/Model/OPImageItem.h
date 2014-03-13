@@ -34,7 +34,6 @@
 @property (strong, nonatomic) NSDictionary* providerSpecific;
 @property (strong, nonatomic) NSString* providerType;
 
-@property CLLocationCoordinate2D location;
 @property CGSize size;
 
 - (id) initWithDictionary:(NSDictionary*) dict;

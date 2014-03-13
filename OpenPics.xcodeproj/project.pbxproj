@@ -22,11 +22,6 @@
 		0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F051728901C007378D0 /* OPSingleImageLayout.m */; };
 		0A310F101728901C007378D0 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F071728901C007378D0 /* OPViewController.m */; };
 		0A310F111728901C007378D0 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F081728901C007378D0 /* OPViewController.xib */; };
-		0A310F121728901C007378D0 /* OPMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F0B1728901C007378D0 /* OPMapViewController.m */; };
-		0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F0C1728901C007378D0 /* OPMapViewController.xib */; };
-		0A310F1517289038007378D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A310F1417289038007378D0 /* MapKit.framework */; };
-		0A310F1817289091007378D0 /* OPAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F1717289091007378D0 /* OPAnnotation.m */; };
-		0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F1A172890AA007378D0 /* OPAnnotationView.m */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
 		0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD8171074EF00D7C1B6 /* Default@2x.png */; };
@@ -41,7 +36,6 @@
 		0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A609EC6171072BD0084735B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
-		0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */; };
 		0A864E0F172D8CFD00BE00C6 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0B172D8CFD00BE00C6 /* map.png */; };
 		0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0C172D8CFD00BE00C6 /* mapsearch.png */; };
 		0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */; };
@@ -122,14 +116,7 @@
 		0A310F061728901C007378D0 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
 		0A310F071728901C007378D0 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
 		0A310F081728901C007378D0 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
-		0A310F0A1728901C007378D0 /* OPMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPMapViewController.h; sourceTree = "<group>"; };
-		0A310F0B1728901C007378D0 /* OPMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMapViewController.m; sourceTree = "<group>"; };
-		0A310F0C1728901C007378D0 /* OPMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController.xib; sourceTree = "<group>"; };
 		0A310F1417289038007378D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		0A310F1617289091007378D0 /* OPAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAnnotation.h; sourceTree = "<group>"; };
-		0A310F1717289091007378D0 /* OPAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAnnotation.m; sourceTree = "<group>"; };
-		0A310F19172890AA007378D0 /* OPAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAnnotationView.h; sourceTree = "<group>"; };
-		0A310F1A172890AA007378D0 /* OPAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAnnotationView.m; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A44CBD7171074EF00D7C1B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A44CBD8171074EF00D7C1B6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -152,7 +139,6 @@
 		0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Prefix.pch"; sourceTree = "<group>"; };
 		0A609EC8171072BD0084735B /* OPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OPAppDelegate.h; sourceTree = "<group>"; };
 		0A609EC9171072BD0084735B /* OPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OPAppDelegate.m; sourceTree = "<group>"; };
-		0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPMapViewController_iPhone.xib; sourceTree = "<group>"; };
 		0A864E0B172D8CFD00BE00C6 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		0A864E0C172D8CFD00BE00C6 /* mapsearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapsearch.png; sourceTree = "<group>"; };
 		0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mapsearch@2x.png"; sourceTree = "<group>"; };
@@ -228,7 +214,6 @@
 				0AF34E741745A59B0019DEE0 /* CoreLocation.framework in Frameworks */,
 				0AF34E721745A58F0019DEE0 /* CFNetwork.framework in Frameworks */,
 				0AF34E701745A5780019DEE0 /* Accounts.framework in Frameworks */,
-				0A310F1517289038007378D0 /* MapKit.framework in Frameworks */,
 				0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */,
 				0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */,
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
@@ -295,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				0A310F001728901C007378D0 /* Collection */,
-				0A310F091728901C007378D0 /* Map */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -313,21 +297,6 @@
 				0A310F081728901C007378D0 /* OPViewController.xib */,
 			);
 			path = Collection;
-			sourceTree = "<group>";
-		};
-		0A310F091728901C007378D0 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				0A310F0A1728901C007378D0 /* OPMapViewController.h */,
-				0A310F0B1728901C007378D0 /* OPMapViewController.m */,
-				0A310F0C1728901C007378D0 /* OPMapViewController.xib */,
-				0A864E09172D87A100BE00C6 /* OPMapViewController_iPhone.xib */,
-				0A310F1617289091007378D0 /* OPAnnotation.h */,
-				0A310F1717289091007378D0 /* OPAnnotation.m */,
-				0A310F19172890AA007378D0 /* OPAnnotationView.h */,
-				0A310F1A172890AA007378D0 /* OPAnnotationView.m */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		0A44CBD4171074EF00D7C1B6 /* Images */ = {
@@ -609,8 +578,6 @@
 				0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */,
 				0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */,
 				0A310F111728901C007378D0 /* OPViewController.xib in Resources */,
-				0A310F131728901C007378D0 /* OPMapViewController.xib in Resources */,
-				0A864E0A172D87A100BE00C6 /* OPMapViewController_iPhone.xib in Resources */,
 				0A864E0F172D8CFD00BE00C6 /* map.png in Resources */,
 				0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */,
 				0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */,
@@ -690,9 +657,6 @@
 				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
-				0A310F121728901C007378D0 /* OPMapViewController.m in Sources */,
-				0A310F1817289091007378D0 /* OPAnnotation.m in Sources */,
-				0A310F1B172890AA007378D0 /* OPAnnotationView.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
