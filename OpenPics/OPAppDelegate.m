@@ -28,7 +28,6 @@
 #import "OPAppDelegate.h"
 #import "OPAppTokens.h"
 #import "AFNetworking.h"
-#import "AFOAuth1Client.h"
 #import "OPViewController.h"
 #import "OPProviderController.h"
 
@@ -134,17 +133,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 }
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:nil userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-    return YES;
-}
-
 
 @end

@@ -14,8 +14,4 @@
     #import <UIKit/UIKit.h>
     #import <MapKit/MapKit.h>
     #import <Foundation/Foundation.h>
-    #import <FlatUIKit/FUIAlertView.h>
-    #import <FlatUIKit/UIBarButtonItem+FlatUI.h>
-    #import <FlatUIKit/UIColor+FlatUI.h>
-    #import <FlatUIKit/UIFont+FlatUI.h>
 #endif

@@ -45,21 +45,13 @@ Popular images (recently favorited) are stored using a flexible backend based on
 
 ## Sharing
 
-Sharing (Tumblr, Twitter & Facebook) uses UIActivitys from iOS6.  The Twitter and Facebook are the built in implementations, however the Tumblr is custom.  The tokens for Tumblr are handled the same way as Providers above.  The tokens go in the OPActivityTokens.h file as a define.  I have ifdef'd out that stuff, so you should still be able to run without Tumblr tokens.  (Tumblr just won't show up as a Activity choice)
-
-One fun thing is that the Tumblr UIActivity uses [NSLinguisticTagger](http://nshipster.com/nslinguistictagger/) to generate suggested tags by analyzing the title of the image and attempting to detect proper names, places and dates.  Not always accurate, but it is helpful!
+Sharing (Twitter & Facebook) uses UIActivitys from iOS6.
 
 ## Dependencies
 
 * AFNetworking
 * CocoaPods
 * Heavy use of UICollectionView (currently using my flow layout subclass: [SGSStaggeredFlowLayout](https://github.com/pj4533/SGSStaggeredFlowLayout) )
-
-## To do
-
-* Make Default screen
-* Support showing more metadata (Date, notes, etc)
-* Support showing information about results (current page, total pages)
 
 ## How To Run
 

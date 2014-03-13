@@ -1,18 +1,10 @@
 PODS:
   - AFKissXMLRequestOperation (0.0.1):
-    - AFNetworking
+    - AFNetworking (~> 1.3)
     - KissXML (~> 5.0)
   - AFNetworking (1.3.2)
-  - AFOAuth1Client (0.2.1):
-    - AFNetworking (~> 1.3)
-  - AFRedditAPIClient (0.0.2):
-    - AFNetworking (~> 1.0)
   - AFStatHatClient (0.0.1):
     - AFNetworking (~> 1.0)
-  - AFTumblrAPIClient (0.0.4):
-    - AFOAuth1Client (~> 0.2.0)
-  - DWTagList (0.0.2)
-  - FlatUIKit (1.0)
   - FormatterKit (1.1.1):
     - FormatterKit/AddressFormatter
     - FormatterKit/ArrayFormatter
@@ -30,22 +22,18 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.1.1)
   - KissXML (5.0)
   - SGSStaggeredFlowLayout (0.0.1)
-  - SVProgressHUD (0.9)
-  - TMCache (1.1.2)
+  - SVProgressHUD (1.0)
+  - TMCache (1.2.0)
   - TUSafariActivity (1.0.0)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
   - AFNetworking (= 1.3.2)
-  - AFRedditAPIClient
   - AFStatHatClient
-  - AFTumblrAPIClient (~> 0.0.4)
-  - DWTagList
-  - FlatUIKit
   - FormatterKit
   - FormatterKit (= 1.1.1)
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
-  - SVProgressHUD
+  - SVProgressHUD (~> 1.0)
   - TMCache
   - TUSafariActivity
 
@@ -54,19 +42,14 @@ EXTERNAL SOURCES:
     :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
-  AFKissXMLRequestOperation: c5010fd22d4f03371d9960fd09792f7bc3b32f45
+  AFKissXMLRequestOperation: 6372c0d8ef3dcdec066795f80df6c0b049cee4ba
   AFNetworking: 7f9bcd7c287a75476cd5c61e82fd3380e93e4c54
-  AFOAuth1Client: dcde161501da2c20e6822ee26ce2b4f73f04818d
-  AFRedditAPIClient: 7afb78b38df23db0c2f661adf6d47d6e113cc644
   AFStatHatClient: e2643fe803f646c790573cf24260f20b0b48b94c
-  AFTumblrAPIClient: 2bde5878581439234ae8409deeb64577b7341006
-  DWTagList: 76302ed894130ed285e95eb11e704a55593101ab
-  FlatUIKit: 3d2c6375ed741a8e8ffe663a3c1fe52d84309f04
   FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
   KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
-  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
-  TMCache: f8f51921aa0e4a9740e4565ee6eb32f1336dcc26
+  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
+  TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27
   TUSafariActivity: bd9da588f5f9136ba445d89f8f86b6dccf4d46ba
 
 COCOAPODS: 0.29.0

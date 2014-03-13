@@ -106,7 +106,7 @@
             [self.activityIndicator stopAnimating];
         }];
         
-        NSLog(@"%d ITEMS", items.count);
+        NSLog(@"%lu ITEMS", (unsigned long)items.count);
         
         _items = items;
         _pins = [NSMutableDictionary dictionary];
@@ -124,7 +124,7 @@
             if (_pins[locationValue]) {
                 NSArray* itemsHereAlready = _pins[locationValue];
                 _pins[locationValue] = [itemsHereAlready arrayByAddingObject:thisItem];
-                newAnno.title = [NSString stringWithFormat:@"%d Photos Here", itemsHereAlready.count+1];
+                newAnno.title = [NSString stringWithFormat:@"%u Photos Here", itemsHereAlready.count+1];
                 annotations[locationValue] = newAnno;
             } else {
                 _pins[locationValue] = @[thisItem];

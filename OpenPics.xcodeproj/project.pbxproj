@@ -10,7 +10,6 @@
 		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF1B1745A92000814F0B /* OPBackendKinvey.m */; };
-		0A05EF201745A99F00814F0B /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05EF1E1745A99F00814F0B /* libUAirship-1.4.0.a */; };
 		0A05EF211745A99F00814F0B /* KinveyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05EF1F1745A99F00814F0B /* KinveyKit.framework */; };
 		0A0E021D1747EE1F007610DE /* heart_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E021B1747EE1F007610DE /* heart_plus.png */; };
 		0A0E021E1747EE1F007610DE /* heart_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E021C1747EE1F007610DE /* heart_plus@2x.png */; };
@@ -68,11 +67,6 @@
 		0AB6B8BA1711C647004CF7A5 /* tumblr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B41711C647004CF7A5 /* tumblr@2x.png */; };
 		0AB6B8BB1711C647004CF7A5 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B51711C647004CF7A5 /* checkmark@2x.png */; };
 		0AB6B8BC1711C647004CF7A5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B61711C647004CF7A5 /* checkmark.png */; };
-		0AB6B8C71711C7FF004CF7A5 /* OPTumblrBlogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */; };
-		0AB6B8C81711C7FF004CF7A5 /* OPTumblrBlogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */; };
-		0AB6B8C91711C7FF004CF7A5 /* OPTumblrPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */; };
-		0AB6B8CA1711C7FF004CF7A5 /* OPTumblrPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */; };
-		0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */; };
 		0ABF9E40171097E500C29E84 /* AFNYPLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */; };
 		0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
 		0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E441710A01700C29E84 /* OPLOCProvider.m */; };
@@ -112,16 +106,8 @@
 		0AFC2313171319DD006FFF45 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230B171319DD006FFF45 /* Icon-Small@2x.png */; };
 		0AFC2314171319DD006FFF45 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230C171319DD006FFF45 /* Icon.png */; };
 		0AFC2315171319DD006FFF45 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC230D171319DD006FFF45 /* Icon@2x.png */; };
-		182E81A71751793700B50B07 /* OPRedditPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E81A51751793700B50B07 /* OPRedditPostViewController.m */; };
-		182E81A81751793700B50B07 /* OPRedditPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182E81A61751793700B50B07 /* OPRedditPostViewController.xib */; };
-		182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */; };
-		182E81AD17517C0900B50B07 /* OPRedditAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */; };
-		182E81BE1751C3AD00B50B07 /* OPSubredditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E81BC1751C3AC00B50B07 /* OPSubredditViewController.m */; };
-		182E81BF1751C3AD00B50B07 /* OPSubredditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182E81BD1751C3AD00B50B07 /* OPSubredditViewController.xib */; };
 		1834D90E1751240500986009 /* reddit-alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90C1751240500986009 /* reddit-alien.png */; };
 		1834D90F1751240500986009 /* reddit-alien@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1834D90D1751240500986009 /* reddit-alien@2x.png */; };
-		1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834D9111751243300986009 /* OPShareToRedditActivity.m */; };
-		18DD29571752EFC4001B19AE /* FUIAlertView+ShowAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -220,15 +206,6 @@
 		0AB6B8B41711C647004CF7A5 /* tumblr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B51711C647004CF7A5 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B61711C647004CF7A5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
-		0AB6B8BF1711C7FF004CF7A5 /* OPTumblrBlogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTumblrBlogViewController.h; sourceTree = "<group>"; };
-		0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTumblrBlogViewController.m; sourceTree = "<group>"; };
-		0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPTumblrBlogViewController.xib; sourceTree = "<group>"; };
-		0AB6B8C21711C7FF004CF7A5 /* OPTumblrPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTumblrPostViewController.h; sourceTree = "<group>"; };
-		0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTumblrPostViewController.m; sourceTree = "<group>"; };
-		0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPTumblrPostViewController.xib; sourceTree = "<group>"; };
-		0AB6B8C51711C7FF004CF7A5 /* OPShareToTumblrActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPShareToTumblrActivity.h; sourceTree = "<group>"; };
-		0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OPShareToTumblrActivity.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		0AB6B8CC1711C8CB004CF7A5 /* OPActivityTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPActivityTokens.h; sourceTree = "<group>"; };
 		0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
 		0ABF9E3C171097E500C29E84 /* AFNYPLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNYPLAPIClient.h; sourceTree = "<group>"; };
 		0ABF9E3D171097E500C29E84 /* AFNYPLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLAPIClient.m; sourceTree = "<group>"; };
@@ -277,21 +254,8 @@
 		0AFC230B171319DD006FFF45 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		0AFC230C171319DD006FFF45 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0AFC230D171319DD006FFF45 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		182E81A41751793700B50B07 /* OPRedditPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditPostViewController.h; sourceTree = "<group>"; };
-		182E81A51751793700B50B07 /* OPRedditPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditPostViewController.m; sourceTree = "<group>"; };
-		182E81A61751793700B50B07 /* OPRedditPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPRedditPostViewController.xib; sourceTree = "<group>"; };
-		182E81A917517C0800B50B07 /* OPRedditAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditAuthViewController.h; sourceTree = "<group>"; };
-		182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditAuthViewController.m; sourceTree = "<group>"; };
-		182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPRedditAuthViewController.xib; sourceTree = "<group>"; };
-		182E81BB1751C3AC00B50B07 /* OPSubredditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSubredditViewController.h; sourceTree = "<group>"; };
-		182E81BC1751C3AC00B50B07 /* OPSubredditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSubredditViewController.m; sourceTree = "<group>"; };
-		182E81BD1751C3AD00B50B07 /* OPSubredditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPSubredditViewController.xib; sourceTree = "<group>"; };
 		1834D90C1751240500986009 /* reddit-alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reddit-alien.png"; sourceTree = "<group>"; };
 		1834D90D1751240500986009 /* reddit-alien@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reddit-alien@2x.png"; sourceTree = "<group>"; };
-		1834D9101751243300986009 /* OPShareToRedditActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPShareToRedditActivity.h; sourceTree = "<group>"; };
-		1834D9111751243300986009 /* OPShareToRedditActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPShareToRedditActivity.m; sourceTree = "<group>"; };
-		18DD29551752EFC4001B19AE /* FUIAlertView+ShowAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIAlertView+ShowAlert.h"; sourceTree = "<group>"; };
-		18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIAlertView+ShowAlert.m"; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -318,7 +282,6 @@
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
 				396F3F854DE14ED09163A40D /* libPods.a in Frameworks */,
 				0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */,
-				0A05EF201745A99F00814F0B /* libUAirship-1.4.0.a in Frameworks */,
 				0A05EF211745A99F00814F0B /* KinveyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,7 +420,6 @@
 			children = (
 				0A05EF121745A77400814F0B /* Backend */,
 				0A310EFF1728901C007378D0 /* ViewControllers */,
-				0AB6B8BD1711C7FF004CF7A5 /* Activity */,
 				0A1EF47C17108B3A00AB8B62 /* Providers */,
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
@@ -488,8 +450,6 @@
 				0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */,
 				0A127BF4172D98FE00F6966A /* OPAppearance.h */,
 				0A127BF5172D98FE00F6966A /* OPAppearance.m */,
-				18DD29551752EFC4001B19AE /* FUIAlertView+ShowAlert.h */,
-				18DD29561752EFC4001B19AE /* FUIAlertView+ShowAlert.m */,
 				0A031F9C175136EC008CD564 /* UIImage+Preload.h */,
 				0A031F9D175136EC008CD564 /* UIImage+Preload.m */,
 				0ADFACA5175FEFDB00A35553 /* NSString+MD5.h */,
@@ -648,31 +608,6 @@
 			path = Popular;
 			sourceTree = "<group>";
 		};
-		0AB6B8BD1711C7FF004CF7A5 /* Activity */ = {
-			isa = PBXGroup;
-			children = (
-				1834D90B17511D3400986009 /* Reddit */,
-				0AB6B8BE1711C7FF004CF7A5 /* Tumblr */,
-				0AB6B8CC1711C8CB004CF7A5 /* OPActivityTokens.h */,
-			);
-			path = Activity;
-			sourceTree = "<group>";
-		};
-		0AB6B8BE1711C7FF004CF7A5 /* Tumblr */ = {
-			isa = PBXGroup;
-			children = (
-				0AB6B8BF1711C7FF004CF7A5 /* OPTumblrBlogViewController.h */,
-				0AB6B8C01711C7FF004CF7A5 /* OPTumblrBlogViewController.m */,
-				0AB6B8C11711C7FF004CF7A5 /* OPTumblrBlogViewController.xib */,
-				0AB6B8C21711C7FF004CF7A5 /* OPTumblrPostViewController.h */,
-				0AB6B8C31711C7FF004CF7A5 /* OPTumblrPostViewController.m */,
-				0AB6B8C41711C7FF004CF7A5 /* OPTumblrPostViewController.xib */,
-				0AB6B8C51711C7FF004CF7A5 /* OPShareToTumblrActivity.h */,
-				0AB6B8C61711C7FF004CF7A5 /* OPShareToTumblrActivity.m */,
-			);
-			path = Tumblr;
-			sourceTree = "<group>";
-		};
 		0ABF9E3B171097E500C29E84 /* NYPL */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,24 +672,6 @@
 				0AF2030D17400FAE0006D996 /* OPTroveProvider.m */,
 			);
 			path = Trove;
-			sourceTree = "<group>";
-		};
-		1834D90B17511D3400986009 /* Reddit */ = {
-			isa = PBXGroup;
-			children = (
-				1834D9101751243300986009 /* OPShareToRedditActivity.h */,
-				1834D9111751243300986009 /* OPShareToRedditActivity.m */,
-				182E81A41751793700B50B07 /* OPRedditPostViewController.h */,
-				182E81A51751793700B50B07 /* OPRedditPostViewController.m */,
-				182E81A61751793700B50B07 /* OPRedditPostViewController.xib */,
-				182E81A917517C0800B50B07 /* OPRedditAuthViewController.h */,
-				182E81AA17517C0800B50B07 /* OPRedditAuthViewController.m */,
-				182E81AB17517C0900B50B07 /* OPRedditAuthViewController.xib */,
-				182E81BB1751C3AC00B50B07 /* OPSubredditViewController.h */,
-				182E81BC1751C3AC00B50B07 /* OPSubredditViewController.m */,
-				182E81BD1751C3AD00B50B07 /* OPSubredditViewController.xib */,
-			);
-			path = Reddit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -832,8 +749,6 @@
 				0AB6B8BA1711C647004CF7A5 /* tumblr@2x.png in Resources */,
 				0AB6B8BB1711C647004CF7A5 /* checkmark@2x.png in Resources */,
 				0AB6B8BC1711C647004CF7A5 /* checkmark.png in Resources */,
-				0AB6B8C81711C7FF004CF7A5 /* OPTumblrBlogViewController.xib in Resources */,
-				0AB6B8CA1711C7FF004CF7A5 /* OPTumblrPostViewController.xib in Resources */,
 				0AFC230E171319DD006FFF45 /* Icon-72.png in Resources */,
 				0AFC230F171319DD006FFF45 /* Icon-72@2x.png in Resources */,
 				0AFC2310171319DD006FFF45 /* Icon-Small-50.png in Resources */,
@@ -861,9 +776,6 @@
 				0AE1C5B1174ADE2800BAA804 /* heart_minus@2x.png in Resources */,
 				1834D90E1751240500986009 /* reddit-alien.png in Resources */,
 				1834D90F1751240500986009 /* reddit-alien@2x.png in Resources */,
-				182E81A81751793700B50B07 /* OPRedditPostViewController.xib in Resources */,
-				182E81AD17517C0900B50B07 /* OPRedditAuthViewController.xib in Resources */,
-				182E81BF1751C3AD00B50B07 /* OPSubredditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,9 +841,6 @@
 				0ABF9E451710A01700C29E84 /* OPLOCProvider.m in Sources */,
 				0ABF9E481710A02100C29E84 /* AFLOCAPIClient.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
-				0AB6B8C71711C7FF004CF7A5 /* OPTumblrBlogViewController.m in Sources */,
-				0AB6B8C91711C7FF004CF7A5 /* OPTumblrPostViewController.m in Sources */,
-				0AB6B8CB1711C7FF004CF7A5 /* OPShareToTumblrActivity.m in Sources */,
 				0A612D261715ED61008B6311 /* AFCDLClient.m in Sources */,
 				0A612D291715ED75008B6311 /* OPCDLProvider.m in Sources */,
 				0AAB0C261719B9FD000790A0 /* OPDPLAProvider.m in Sources */,
@@ -955,11 +864,6 @@
 				0AA6CACA1747E61700DB4C18 /* OPFavoritesProvider.m in Sources */,
 				0A5FD3C5174C47DC00C05CD7 /* OPFlickrCommonsProvider.m in Sources */,
 				0A5FD3C8174C489200C05CD7 /* AFFlickrAPIClient.m in Sources */,
-				1834D9121751243300986009 /* OPShareToRedditActivity.m in Sources */,
-				182E81A71751793700B50B07 /* OPRedditPostViewController.m in Sources */,
-				182E81AC17517C0900B50B07 /* OPRedditAuthViewController.m in Sources */,
-				182E81BE1751C3AD00B50B07 /* OPSubredditViewController.m in Sources */,
-				18DD29571752EFC4001B19AE /* FUIAlertView+ShowAlert.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
 				0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */,
 			);
@@ -1004,7 +908,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1030,7 +934,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1052,10 +956,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/External/Airship\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1074,10 +975,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/External/Airship\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

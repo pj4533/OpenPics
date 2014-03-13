@@ -28,13 +28,11 @@
 #import "AFNetworking.h"
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
-#import "OPShareToTumblrActivity.h"
 #import "OPFavoritesProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
 #import "SVProgressHUD.h"
-#import "OPShareToRedditActivity.h"
 #import "TUSafariActivity.h"
 
 @interface OPContentCell () {
@@ -90,16 +88,6 @@
     
     NSMutableArray* appActivities = [NSMutableArray array];
     
-    OPShareToRedditActivity* shareToReddit = [[OPShareToRedditActivity alloc] init];
-    [appActivities addObject:shareToReddit];
-    
-#ifndef kOPACTIVITYTOKEN_TUMBLR
-#warning *** WARNING: Make sure you have added your Tumblr token to OPActivityTokens.h
-#else
-    OPShareToTumblrActivity* shareToTumblr = [[OPShareToTumblrActivity alloc] init];
-    [appActivities addObject:shareToTumblr];
-#endif
-
     TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
     [appActivities addObject:openInSafari];
     
@@ -130,10 +118,6 @@
                 _completedString = @"Sent!";
             } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
                 _completedString = @"Saved!";
-            } else if ([activityType isEqualToString:UIActivityTypeShareToTumblr]) {
-                _completedString = @"Posted!";
-            } else if ([activityType isEqualToString:UIActivityTypeShareToReddit]) {
-                _completedString = @"Posted!";
             }
         } else {
             _completedString = nil;

@@ -156,7 +156,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
             returnCanLoadMore = YES;
         }
         
-        NSLog(@"LAST: %d   TOTAL: %d", lastItem, totalItems);
+        NSLog(@"LAST: %ld   TOTAL: %ld", (long)lastItem, (long)totalItems);
         if (success) {
             success(retArray, returnCanLoadMore);
         }
