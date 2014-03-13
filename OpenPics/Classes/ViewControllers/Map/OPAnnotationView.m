@@ -28,7 +28,7 @@
 #import "OPAnnotationView.h"
 #import "OPAnnotation.h"
 #import "OPImageItem.h"
-#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation OPAnnotationView
 

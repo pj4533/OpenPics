@@ -28,7 +28,7 @@
 #import "OPMapViewController.h"
 #import "OPAnnotation.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 #import "OPProvider.h"
 #import "OPImageItem.h"
 #import "OPViewController.h"
@@ -308,22 +308,26 @@
     
     NSURL *url = [NSURL URLWithString:stringForURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
-        NSArray* resultsArray = [JSON objectForKey:@"results"];
-        
-        if ([resultsArray count] > 0) {
-            NSDictionary* dict = [resultsArray objectAtIndex:0];            
-            double lat = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
-            double lng = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
-            [self.internalMapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lng) animated:YES];
-        }
-        
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-    }];
     
-    [operation start];
+    //TODO: MAP JUMP NOT IMPLEMENTED
+    
+    
+//    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        
+//        NSArray* resultsArray = [JSON objectForKey:@"results"];
+//        
+//        if ([resultsArray count] > 0) {
+//            NSDictionary* dict = [resultsArray objectAtIndex:0];            
+//            double lat = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+//            double lng = [[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+//            [self.internalMapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lng) animated:YES];
+//        }
+//        
+//        
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+//    }];
+//    
+//    [operation start];
     [self hideSearchBar];
 }
 

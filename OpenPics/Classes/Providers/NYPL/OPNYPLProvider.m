@@ -27,9 +27,8 @@
 
 #import "OPNYPLProvider.h"
 #import "OPProviderTokens.h"
-#import "AFNYPLAPIClient.h"
+#import "AFNYPLSessionManager.h"
 #import "OPImageItem.h"
-#import "AFJSONRequestOperation.h"
 
 NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
 
@@ -94,10 +93,10 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
                                  @"page":pageNumber
                                  };
     
-    AFNYPLAPIClient* nyplClient = [AFNYPLAPIClient sharedClientWithToken:kOPPROVIDERTOKEN_NYPL];
+    AFNYPLSessionManager* nyplClient = [AFNYPLSessionManager sharedClientWithToken:kOPPROVIDERTOKEN_NYPL];
     NSLog(@"GET items/search.json %@", parameters);
     
-    [nyplClient getPath:@"items/search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [nyplClient GET:@"items/search.json" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary* responseDict = responseObject[@"nyplAPI"][@"response"];
         id result = responseDict[@"result"];
         NSMutableArray* retArray = [NSMutableArray array];
@@ -127,7 +126,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         if (success) {
             success(retArray, returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }

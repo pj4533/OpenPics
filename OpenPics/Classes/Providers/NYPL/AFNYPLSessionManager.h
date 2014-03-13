@@ -24,10 +24,10 @@
 // THE SOFTWARE.
 
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface AFNYPLAPIClient : AFHTTPClient
+@interface AFNYPLSessionManager : AFHTTPSessionManager
 
-+ (AFNYPLAPIClient *)sharedClientWithToken:(NSString*) token;
++ (AFNYPLSessionManager *)sharedClientWithToken:(NSString*) token;
 
 @end

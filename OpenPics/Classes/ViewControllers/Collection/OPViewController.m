@@ -27,8 +27,6 @@
 
 #import "OPViewController.h"
 #import "OPImageItem.h"
-#import "AFImageRequestOperation.h"
-#import "AFNetworking.h"
 #import "OPContentCell.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
@@ -39,6 +37,7 @@
 #import "TMCache.h"
 #import "UIImage+Preload.h"
 #import "NSString+MD5.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -186,7 +185,10 @@
                         withFailure:(void (^)(void))failure {
     // if not found in cache, create request to download image
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-    AFImageRequestOperation* operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFImageResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        UIImage* image = (UIImage*) responseObject;
         
         // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
         if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
@@ -196,16 +198,16 @@
                 
                 // uses category - will check for assocaited object
                 UIImage* preloadedImage = image.preloadedImage;
-
+                
                 // set the loaded object to the cache
                 [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
-
+                
                 if (success) {
                     success(preloadedImage);
                 }
             });
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error getting image");
         if (failure) {
             failure();

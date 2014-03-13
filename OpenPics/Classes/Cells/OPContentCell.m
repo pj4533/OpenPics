@@ -28,7 +28,7 @@
 #import "AFNetworking.h"
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
-#import "OPFavoritesProvider.h"
+//#import "OPFavoritesProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
@@ -37,7 +37,7 @@
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
-    AFImageRequestOperation* _upRezOperation;
+//    AFImageRequestOperation* _upRezOperation;
     
     NSString* _completedString;
     
@@ -139,21 +139,21 @@
 }
 
 - (IBAction)favoriteTapped:(id)sender {
-    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-        [[OPBackend shared] removeItem:self.item];
-        [self setButtonToFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = YES;
-        }
-    } else {
-        [[OPBackend shared] saveItem:self.item];
-        [self setButtonToRemoveFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = NO;
-        }
-    }
+//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+//        [[OPBackend shared] removeItem:self.item];
+//        [self setButtonToFavorite];
+//        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+//        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+//            _shouldForceReloadOnBack = YES;
+//        }
+//    } else {
+//        [[OPBackend shared] saveItem:self.item];
+//        [self setButtonToRemoveFavorite];
+//        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+//        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+//            _shouldForceReloadOnBack = NO;
+//        }
+//    }
     
 }
 
@@ -282,19 +282,19 @@
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
     
-    if (_upRezOperation) {
-        [_upRezOperation cancel];
-        _upRezOperation = nil;
-    }
-    
-    __weak UIImageView* imageView = self.internalScrollView.imageView;
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
-    
-    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {        
-        imageView.image = image;
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-    }];
-    [_upRezOperation start];
+//    if (_upRezOperation) {
+//        [_upRezOperation cancel];
+//        _upRezOperation = nil;
+//    }
+//    
+//    __weak UIImageView* imageView = self.internalScrollView.imageView;
+//    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+//    
+//    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {        
+//        imageView.image = image;
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+//    }];
+//    [_upRezOperation start];
 }
 
 #pragma mark - gesture stuff
