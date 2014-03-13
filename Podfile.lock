@@ -5,7 +5,7 @@ PODS:
   - AFNetworking (1.3.2)
   - AFStatHatClient (0.0.1):
     - AFNetworking (~> 1.0)
-  - FormatterKit (1.1.1):
+  - FormatterKit (1.1.2):
     - FormatterKit/AddressFormatter
     - FormatterKit/ArrayFormatter
     - FormatterKit/LocationFormatter
@@ -13,13 +13,13 @@ PODS:
     - FormatterKit/TimeIntervalFormatter
     - FormatterKit/UnitOfInformationFormatter
     - FormatterKit/URLRequestFormatter
-  - FormatterKit/AddressFormatter (1.1.1)
-  - FormatterKit/ArrayFormatter (1.1.1)
-  - FormatterKit/LocationFormatter (1.1.1)
-  - FormatterKit/OrdinalNumberFormatter (1.1.1)
-  - FormatterKit/TimeIntervalFormatter (1.1.1)
-  - FormatterKit/UnitOfInformationFormatter (1.1.1)
-  - FormatterKit/URLRequestFormatter (1.1.1)
+  - FormatterKit/AddressFormatter (1.1.2)
+  - FormatterKit/ArrayFormatter (1.1.2)
+  - FormatterKit/LocationFormatter (1.1.2)
+  - FormatterKit/OrdinalNumberFormatter (1.1.2)
+  - FormatterKit/TimeIntervalFormatter (1.1.2)
+  - FormatterKit/UnitOfInformationFormatter (1.1.2)
+  - FormatterKit/URLRequestFormatter (1.1.2)
   - KissXML (5.0)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
@@ -30,8 +30,7 @@ DEPENDENCIES:
   - AFKissXMLRequestOperation
   - AFNetworking (= 1.3.2)
   - AFStatHatClient
-  - FormatterKit
-  - FormatterKit (= 1.1.1)
+  - FormatterKit (~> 1.1.1)
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD (~> 1.0)
   - TMCache
@@ -45,7 +44,7 @@ SPEC CHECKSUMS:
   AFKissXMLRequestOperation: 6372c0d8ef3dcdec066795f80df6c0b049cee4ba
   AFNetworking: 7f9bcd7c287a75476cd5c61e82fd3380e93e4c54
   AFStatHatClient: e2643fe803f646c790573cf24260f20b0b48b94c
-  FormatterKit: b644b98d4495bdf11fc70f8f80867df5864eaf70
+  FormatterKit: bb53f3de30773e6b06f91dee1f82b46f536278d7
   KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
