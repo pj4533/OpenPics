@@ -8,8 +8,6 @@ Public usage stats for the app store version are available [here](https://www.st
 
 ![Screenshot](Screenshots/openpics.png "Screenshot")
 
-![Screenshot](Screenshots/openpics_map.png "Screenshot")
-
 ## Goals
 
 * Always use the latest iOS technology.  (Target only latest OS version)
