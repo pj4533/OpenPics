@@ -22,9 +22,9 @@
 
 #import "OPTroveProvider.h"
 #import "OPImageItem.h"
-#import "AFTroveClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFTroveSessionManager.h"
 #import "OPProviderTokens.h"
+#import "AFHTTPRequestOperation.h"
 
 NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
 
@@ -66,7 +66,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     
     NSLog(@"(Trove GET) %@", parameters);
     
-    [[AFTroveClient sharedClient] getPath:@"result" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFTroveSessionManager sharedClient] GET:@"result" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary* responseDict = responseObject[@"response"];
         NSArray* zoneArray = responseDict[@"zone"];
@@ -77,7 +77,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         NSMutableArray* retArray = [NSMutableArray array];
         if (resultArray) {
             for (NSDictionary* itemDict in resultArray) {
-
+                
                 NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
                 
                 NSString* troveUrlString = itemDict[@"troveUrl"];
@@ -105,7 +105,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                         }
                     }
                 }
-
+                
                 NSArray* identifierArray = itemDict[@"identifier"];
                 if (identifierArray) {
                     
@@ -117,7 +117,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                             imageUrl = [NSURL URLWithString:urlString];
                         }
                     }
-
+                    
                     NSString* titleString = @"";
                     if (itemDict[@"title"]) {
                         titleString = itemDict[@"title"];
@@ -160,7 +160,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
         if (success) {
             success(retArray, returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }

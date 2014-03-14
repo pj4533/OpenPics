@@ -32,6 +32,8 @@
 		0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
 		0A49766018D2A35F009DCAEE /* AFLOCSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765D18D2A35F009DCAEE /* AFLOCSessionManager.m */; };
 		0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */; };
+		0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
+		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
@@ -138,6 +140,10 @@
 		0A49765D18D2A35F009DCAEE /* AFLOCSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLOCSessionManager.m; sourceTree = "<group>"; };
 		0A49765E18D2A35F009DCAEE /* OPLOCProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPLOCProvider.h; sourceTree = "<group>"; };
 		0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPLOCProvider.m; sourceTree = "<group>"; };
+		0A49766318D2A745009DCAEE /* AFTroveSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTroveSessionManager.h; sourceTree = "<group>"; };
+		0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTroveSessionManager.m; sourceTree = "<group>"; };
+		0A49766518D2A745009DCAEE /* OPTroveProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTroveProvider.h; sourceTree = "<group>"; };
+		0A49766618D2A745009DCAEE /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
 		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +287,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A49766218D2A745009DCAEE /* Trove */,
 				0A49765B18D2A35F009DCAEE /* LOC */,
 				0A49765718D2986C009DCAEE /* LIFE */,
 				0A9BEEF118D2962300CF2C08 /* DPLA */,
@@ -415,6 +422,17 @@
 				0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */,
 			);
 			path = LOC;
+			sourceTree = "<group>";
+		};
+		0A49766218D2A745009DCAEE /* Trove */ = {
+			isa = PBXGroup;
+			children = (
+				0A49766318D2A745009DCAEE /* AFTroveSessionManager.h */,
+				0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */,
+				0A49766518D2A745009DCAEE /* OPTroveProvider.h */,
+				0A49766618D2A745009DCAEE /* OPTroveProvider.m */,
+			);
+			path = Trove;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -699,6 +717,7 @@
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
+				0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
 				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
@@ -709,6 +728,7 @@
 				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
+				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,

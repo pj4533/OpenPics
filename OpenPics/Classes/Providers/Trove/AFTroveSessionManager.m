@@ -20,20 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFTroveClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFTroveSessionManager.h"
 #import "OPProviderTokens.h"
 
 static NSString * const kAFTroveBaseURLString = @"http://api.trove.nla.gov.au/";
 
-@implementation AFTroveClient
+@implementation AFTroveSessionManager
 
-+ (AFTroveClient *)sharedClient {
-    static AFTroveClient *_sharedClient = nil;
++ (AFTroveSessionManager *)sharedClient {
+    static AFTroveSessionManager *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        _sharedClient = [[AFTroveClient alloc] initWithBaseURL:[NSURL URLWithString:kAFTroveBaseURLString]];
+        _sharedClient = [[AFTroveSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kAFTroveBaseURLString]];
         
     });
     
@@ -46,21 +45,18 @@ static NSString * const kAFTroveBaseURLString = @"http://api.trove.nla.gov.au/";
         return nil;
     }
     
-    self.parameterEncoding = AFJSONParameterEncoding;
-    
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-	[self setDefaultHeader:@"Accept" value:@"application/json"];
-    
     return self;
 }
 
-- (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-#ifdef kOPPROVIDERTOKEN_TROVE
-    NSMutableDictionary* mutableParams = [parameters mutableCopy];
-    mutableParams[@"key"] = kOPPROVIDERTOKEN_TROVE;
+- (NSURLSessionDataTask *) GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure {
     
-    [super getPath:path parameters:mutableParams success:success failure:failure];
+    NSMutableDictionary* mutableParams = [parameters mutableCopy];
+    
+#ifdef kOPPROVIDERTOKEN_TROVE
+    mutableParams[@"key"] = kOPPROVIDERTOKEN_TROVE;
 #endif
+    
+    return [super GET:URLString parameters:mutableParams success:success failure:failure];
 }
+
 @end
