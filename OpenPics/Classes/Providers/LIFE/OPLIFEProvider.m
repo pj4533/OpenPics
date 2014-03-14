@@ -23,7 +23,7 @@
 #import "OPLIFEProvider.h"
 #import "OPImageItem.h"
 #import "TTTURLRequestFormatter.h"
-#import "AFJSONRequestOperation.h"
+#import "AFHTTPRequestOperation.h"
 
 NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
 
@@ -62,13 +62,13 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
             NSArray* comp2 = [comp[i] componentsSeparatedByString:@".html"];
             NSString* imageId = comp2[0];
             
-            NSArray* comp3 = [comp[i] componentsSeparatedByString:@"&amp;w="];
-            NSArray* comp4 = [comp3[1] componentsSeparatedByString:@"&"];
+            NSArray* comp3 = [comp[i] componentsSeparatedByString:@"width=\""];
+            NSArray* comp4 = [comp3[1] componentsSeparatedByString:@"\""];
 
             NSString* width = comp4[0];
 
-            NSArray* comp5 = [comp[i] componentsSeparatedByString:@"&amp;h="];
-            NSArray* comp6 = [comp5[1] componentsSeparatedByString:@"&"];
+            NSArray* comp5 = [comp[i] componentsSeparatedByString:@"height=\""];
+            NSArray* comp6 = [comp5[1] componentsSeparatedByString:@"\""];
 
             NSString* height = comp6[0];
             

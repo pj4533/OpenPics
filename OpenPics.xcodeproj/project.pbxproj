@@ -29,6 +29,7 @@
 		0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
+		0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
 		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
@@ -129,6 +130,8 @@
 		0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPScrollView.m; sourceTree = "<group>"; };
 		0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
 		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
+		0A49765818D2986C009DCAEE /* OPLIFEProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPLIFEProvider.h; sourceTree = "<group>"; };
+		0A49765918D2986C009DCAEE /* OPLIFEProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPLIFEProvider.m; sourceTree = "<group>"; };
 		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +275,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A49765718D2986C009DCAEE /* LIFE */,
 				0A9BEEF118D2962300CF2C08 /* DPLA */,
 				0ABF9E3B171097E500C29E84 /* NYPL */,
 				0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */,
@@ -384,6 +388,15 @@
 				0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0A49765718D2986C009DCAEE /* LIFE */ = {
+			isa = PBXGroup;
+			children = (
+				0A49765818D2986C009DCAEE /* OPLIFEProvider.h */,
+				0A49765918D2986C009DCAEE /* OPLIFEProvider.m */,
+			);
+			path = LIFE;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -677,6 +690,7 @@
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
+				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
