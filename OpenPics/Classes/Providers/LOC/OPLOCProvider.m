@@ -26,9 +26,9 @@
 
 
 #import "OPLOCProvider.h"
-#import "AFLOCAPIClient.h"
+#import "AFLOCSessionManager.h"
 #import "OPImageItem.h"
-#import "AFJSONRequestOperation.h"
+#import "AFHTTPRequestOperation.h"
 
 NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
 
@@ -55,8 +55,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                              };
 
     
-    [[AFLOCAPIClient sharedClient] getPath:@"search" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+    [[AFLOCSessionManager sharedClient] GET:@"search" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSArray* resultArray = responseObject[@"results"];
         NSMutableArray* retArray = [NSMutableArray array];
@@ -69,7 +68,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                     titleString = itemDict[@"title"];
                 }
                 NSMutableDictionary* providerSpecific = [NSMutableDictionary dictionary];
-
+                
                 NSURL* providerUrl = nil;
                 if (itemDict[@"links"]) {
                     providerSpecific[@"links"] = itemDict[@"links"];
@@ -77,19 +76,19 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                         providerUrl = [NSURL URLWithString:itemDict[@"links"][@"item"]];
                     }
                 }
-
+                
                 NSMutableDictionary* opImageDict = [@{
-                                              @"imageUrl": imageUrl,
-                                              @"title" : titleString,
-                                              @"providerType": self.providerType,
-                                              @"providerSpecific": providerSpecific
-                                              } mutableCopy];
+                                                      @"imageUrl": imageUrl,
+                                                      @"title" : titleString,
+                                                      @"providerType": self.providerType,
+                                                      @"providerSpecific": providerSpecific
+                                                      } mutableCopy];
                 if (providerUrl) {
                     opImageDict[@"providerUrl"] = providerUrl;
                 }
                 
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-                [retArray addObject:item];                
+                [retArray addObject:item];
             }
         }
         
@@ -100,11 +99,11 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         if (thisPage < totalPages) {
             returnCanLoadMore = YES;
         }
-
+        
         if (success) {
             success(retArray,returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }
@@ -124,12 +123,16 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
             NSString* resourceUrlString = [NSString stringWithFormat:@"%@?fo=json",linksDict[@"resource"]];
             NSURL* url = [NSURL URLWithString:resourceUrlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/plain"]];
-            AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
+            
+            AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+            AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+            responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
+            [operation setResponseSerializer:responseSerializer];
+            [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
                 NSString* urlString = item.imageUrl.absoluteString;
-                if (JSON[@"resource"]) {
-                    NSDictionary* resourceDict = JSON[@"resource"];
+                if (responseObject[@"resource"]) {
+                    NSDictionary* resourceDict = responseObject[@"resource"];
                     NSInteger largestSize = [resourceDict[@"largest_s"] intValue];
                     NSInteger largerSize = [resourceDict[@"larger_s"] intValue];
                     NSInteger largeSize = [resourceDict[@"large_s"] intValue];
@@ -142,13 +145,13 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                         urlString = resourceDict[@"large"];
                     }
                 }
-
+                
                 if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
                     if (completion) {
                         completion([NSURL URLWithString:urlString],item);
                     }
                 }
-            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"%@",error);
             }];
             [operation start];
