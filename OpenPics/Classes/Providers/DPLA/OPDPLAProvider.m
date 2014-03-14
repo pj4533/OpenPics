@@ -27,9 +27,8 @@
 
 #import "OPDPLAProvider.h"
 #import "OPImageItem.h"
-#import "AFDPLAClient.h"
+#import "AFDPLASessionManager.h"
 #import "TTTURLRequestFormatter.h"
-#import "AFJSONRequestOperation.h"
 #import "OPProviderTokens.h"
 
 NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
@@ -40,7 +39,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Digital Public Library of America";
-        self.supportsLocationSearching = YES;
     }
     return self;
 }
@@ -52,42 +50,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 #else
     return YES;
 #endif
-}
-
-- (void) getItemsWithRegion:(MKCoordinateRegion) region
-                    success:(void (^)(NSArray* items))success
-                    failure:(void (^)(NSError* error))failure {
-    
-    CLLocationCoordinate2D center = region.center;
-    CLLocationCoordinate2D topLeft, bottomRight;
-    topLeft.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
-    topLeft.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
-    bottomRight.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
-    bottomRight.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
-    
-    NSString* boundingBoxString = [NSString stringWithFormat:@"%f,%f:%f,%f", topLeft.latitude,topLeft.longitude,bottomRight.latitude,bottomRight.longitude];
-
-    NSDictionary* parameters = @{
-                                 @"sourceResource.spatial.coordinates" : boundingBoxString,
-                                 @"sourceResource.type" : @"*image* OR *Image*",
-                                 @"page_size" : @"100"
-                                 };
-    
-    NSLog(@"(DPLA GET) %@", parameters);
-    
-    [[AFDPLAClient sharedClient] getPath:@"items" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* resultArray = responseObject[@"docs"];
-        NSArray* retArray = [self parseDocs:resultArray];
-        
-        if (success) {
-            success(retArray);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
-    }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -106,8 +68,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
     NSLog(@"(DPLA GET) %@", parameters);
     
-    [[AFDPLAClient sharedClient] getPath:@"items" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [[AFDPLASessionManager sharedClient] GET:@"items" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray* resultArray = responseObject[@"docs"];
         NSArray* retArray = [self parseDocs:resultArray];
         
@@ -123,7 +84,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         if (success) {
             success(retArray, returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }

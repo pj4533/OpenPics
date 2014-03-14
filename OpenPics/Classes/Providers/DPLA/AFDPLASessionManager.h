@@ -1,5 +1,5 @@
 //
-//  AFDPLAClient.h
+//  AFDPLASessionManager.h
 //  OpenPics
 //
 //  Created by PJ Gray on 4/13/13.
@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface AFDPLAClient : AFHTTPClient
+@interface AFDPLASessionManager : AFHTTPSessionManager
 
-+ (AFDPLAClient *)sharedClient;
++ (AFDPLASessionManager *)sharedClient;
 
 @end

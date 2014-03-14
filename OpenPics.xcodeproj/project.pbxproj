@@ -43,6 +43,8 @@
 		0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
 		0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
 		0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
+		0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
+		0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
 		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
 		0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B21711C647004CF7A5 /* share@2x.png */; };
 		0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B31711C647004CF7A5 /* tumblr.png */; };
@@ -146,6 +148,10 @@
 		0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPHeaderReusableView_iPhone.xib; sourceTree = "<group>"; };
 		0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell_iPhone.xib; sourceTree = "<group>"; };
 		0A8A81FC18CCBDEE001AED56 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0A9BEEF218D2962300CF2C08 /* AFDPLASessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLASessionManager.h; sourceTree = "<group>"; };
+		0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLASessionManager.m; sourceTree = "<group>"; };
+		0A9BEEF418D2962300CF2C08 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
+		0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPDPLAProvider.m; sourceTree = "<group>"; };
 		0AB6B8B11711C647004CF7A5 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		0AB6B8B21711C647004CF7A5 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B31711C647004CF7A5 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr.png; sourceTree = "<group>"; };
@@ -266,6 +272,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A9BEEF118D2962300CF2C08 /* DPLA */,
 				0ABF9E3B171097E500C29E84 /* NYPL */,
 				0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */,
 				0A1EF47D17108B5400AB8B62 /* OPProvider.h */,
@@ -445,6 +452,17 @@
 				0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A9BEEF118D2962300CF2C08 /* DPLA */ = {
+			isa = PBXGroup;
+			children = (
+				0A9BEEF218D2962300CF2C08 /* AFDPLASessionManager.h */,
+				0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */,
+				0A9BEEF418D2962300CF2C08 /* OPDPLAProvider.h */,
+				0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */,
+			);
+			path = DPLA;
 			sourceTree = "<group>";
 		};
 		0ABF9E3B171097E500C29E84 /* NYPL */ = {
@@ -654,8 +672,10 @@
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
 				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
+				0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */,
 				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
+				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,

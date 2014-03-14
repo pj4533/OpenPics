@@ -1,5 +1,5 @@
 //
-//  AFDPLAClient.m
+//  AFDPLASessionManager.m
 //  OpenPics
 //
 //  Created by PJ Gray on 4/13/13.
@@ -25,20 +25,19 @@
 // THE SOFTWARE.
 
 
-#import "AFDPLAClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFDPLASessionManager.h"
 #import "OPProviderTokens.h"
 
 static NSString * const kAFDPLABaseURLString = @"http://api.dp.la/v2/";
 
-@implementation AFDPLAClient
+@implementation AFDPLASessionManager
 
-+ (AFDPLAClient *)sharedClient {
-    static AFDPLAClient *_sharedClient = nil;
++ (AFDPLASessionManager *)sharedClient {
+    static AFDPLASessionManager *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        _sharedClient = [[AFDPLAClient alloc] initWithBaseURL:[NSURL URLWithString:kAFDPLABaseURLString]];
+        _sharedClient = [[AFDPLASessionManager alloc] initWithBaseURL:[NSURL URLWithString:kAFDPLABaseURLString]];
         
     });
     
@@ -51,21 +50,19 @@ static NSString * const kAFDPLABaseURLString = @"http://api.dp.la/v2/";
         return nil;
     }
     
-    self.parameterEncoding = AFJSONParameterEncoding;
-    
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-	[self setDefaultHeader:@"Accept" value:@"application/json"];
+    [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
     
     return self;
 }
 
-- (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-#ifdef kOPPROVIDERTOKEN_DPLA
+- (NSURLSessionDataTask *) GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure {
+
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
+#ifdef kOPPROVIDERTOKEN_DPLA
     mutableParams[@"api_key"] = kOPPROVIDERTOKEN_DPLA;
-    
-    [super getPath:path parameters:mutableParams success:success failure:failure];
 #endif
+    
+    return [super GET:URLString parameters:mutableParams success:success failure:failure];
 }
+
 @end
