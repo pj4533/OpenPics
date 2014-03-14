@@ -21,9 +21,8 @@
 // THE SOFTWARE.
 
 #import "OPFlickrCommonsProvider.h"
-#import "AFFlickrAPIClient.h"
+#import "AFFlickrSessionManager.h"
 #import "OPImageItem.h"
-#import "AFJSONRequestOperation.h"
 #import "OPProviderTokens.h"
 
 NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons";
@@ -64,7 +63,8 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
                                  };
     
     
-    [[AFFlickrAPIClient sharedClient] getPath:@"services/rest" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         
         NSDictionary* photosDict = responseObject[@"photos"];
         NSMutableArray* retArray = [NSMutableArray array];
@@ -98,7 +98,7 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
         if (success) {
             success(retArray,returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }

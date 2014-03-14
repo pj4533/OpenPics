@@ -20,19 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFFlickrAPIClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFFlickrSessionManager.h"
 #import "OPProviderTokens.h"
 
 static NSString * const kAFFlickrAPIBaseURLString = @"http://api.flickr.com/";
 
-@implementation AFFlickrAPIClient
+@implementation AFFlickrSessionManager
 
-+ (AFFlickrAPIClient *)sharedClient {
-    static AFFlickrAPIClient *_sharedClient = nil;
++ (AFFlickrSessionManager *)sharedClient {
+    static AFFlickrSessionManager *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[AFFlickrAPIClient alloc] initWithBaseURL:[NSURL URLWithString:kAFFlickrAPIBaseURLString]];
+        _sharedClient = [[AFFlickrSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kAFFlickrAPIBaseURLString]];
     });
     
     return _sharedClient;
@@ -43,24 +42,19 @@ static NSString * const kAFFlickrAPIBaseURLString = @"http://api.flickr.com/";
     if (!self) {
         return nil;
     }
-    
-//    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/javascript"]];
-
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-    // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1    
-	[self setDefaultHeader:@"Accept" value:@"application/json"];
-    
+        
     return self;
 }
 
-- (void) getPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-#ifdef kOPPROVIDERTOKEN_FLICKR
+- (NSURLSessionDataTask *) GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure {
+
     NSMutableDictionary* mutableParams = [parameters mutableCopy];
-    mutableParams[@"api_key"] = kOPPROVIDERTOKEN_FLICKR;
     
-    [super getPath:path parameters:mutableParams success:success failure:failure];
+#ifdef kOPPROVIDERTOKEN_FLICKR
+    mutableParams[@"api_key"] = kOPPROVIDERTOKEN_FLICKR;
 #endif
+    
+    return [super GET:URLString parameters:mutableParams success:success failure:failure];
 }
 
 @end

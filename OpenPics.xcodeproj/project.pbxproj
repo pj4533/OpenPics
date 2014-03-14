@@ -34,6 +34,8 @@
 		0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */; };
 		0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
+		0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
+		0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
 		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
@@ -144,6 +146,10 @@
 		0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTroveSessionManager.m; sourceTree = "<group>"; };
 		0A49766518D2A745009DCAEE /* OPTroveProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTroveProvider.h; sourceTree = "<group>"; };
 		0A49766618D2A745009DCAEE /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
+		0A49766A18D2A96B009DCAEE /* AFFlickrSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFlickrSessionManager.h; sourceTree = "<group>"; };
+		0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrSessionManager.m; sourceTree = "<group>"; };
+		0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
+		0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
 		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,6 +293,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A49766918D2A96B009DCAEE /* FlickrCommons */,
 				0A49766218D2A745009DCAEE /* Trove */,
 				0A49765B18D2A35F009DCAEE /* LOC */,
 				0A49765718D2986C009DCAEE /* LIFE */,
@@ -433,6 +440,17 @@
 				0A49766618D2A745009DCAEE /* OPTroveProvider.m */,
 			);
 			path = Trove;
+			sourceTree = "<group>";
+		};
+		0A49766918D2A96B009DCAEE /* FlickrCommons */ = {
+			isa = PBXGroup;
+			children = (
+				0A49766A18D2A96B009DCAEE /* AFFlickrSessionManager.h */,
+				0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */,
+				0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */,
+				0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */,
+			);
+			path = FlickrCommons;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -712,6 +730,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A609EC6171072BD0084735B /* main.m in Sources */,
+				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
@@ -731,6 +750,7 @@
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
+				0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,

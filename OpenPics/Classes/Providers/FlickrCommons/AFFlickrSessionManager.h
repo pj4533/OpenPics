@@ -20,10 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface AFFlickrAPIClient : AFHTTPClient
+@interface AFFlickrSessionManager : AFHTTPSessionManager
 
-+ (AFFlickrAPIClient*) sharedClient;
++ (AFFlickrSessionManager*) sharedClient;
 
 @end
