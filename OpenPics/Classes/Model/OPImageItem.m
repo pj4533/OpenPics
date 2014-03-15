@@ -46,12 +46,7 @@
             self.providerUrl = providerUrlOrString;
         }
         self.title = dict[@"title"];
-
-        NSData* jsonData = [dict[@"providerSpecific"] dataUsingEncoding:NSUTF8StringEncoding];
-        self.providerSpecific = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options: NSJSONReadingMutableContainers
-                                                                  error: nil];
-
+        self.providerSpecific = dict[@"providerSpecific"];
         if (![dict[@"width"] isKindOfClass:[NSNull class]] && ![dict[@"height"] isKindOfClass:[NSNull class]]) {
             self.size = CGSizeMake([dict[@"width"] floatValue], [dict[@"height"] floatValue]);            
         }
