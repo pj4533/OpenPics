@@ -46,6 +46,8 @@
 		0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A609EC6171072BD0084735B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
+		0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */; };
+		0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */; };
 		0A864E0F172D8CFD00BE00C6 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0B172D8CFD00BE00C6 /* map.png */; };
 		0A864E10172D8CFD00BE00C6 /* mapsearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0C172D8CFD00BE00C6 /* mapsearch.png */; };
 		0A864E11172D8CFD00BE00C6 /* mapsearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */; };
@@ -173,6 +175,10 @@
 		0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Prefix.pch"; sourceTree = "<group>"; };
 		0A609EC8171072BD0084735B /* OPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OPAppDelegate.h; sourceTree = "<group>"; };
 		0A609EC9171072BD0084735B /* OPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OPAppDelegate.m; sourceTree = "<group>"; };
+		0A61318F18D4AE0F00FFC2DB /* OPPopularProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPopularProvider.h; sourceTree = "<group>"; };
+		0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPopularProvider.m; sourceTree = "<group>"; };
+		0A61319318D4AE2700FFC2DB /* OPFavoritesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFavoritesProvider.h; sourceTree = "<group>"; };
+		0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFavoritesProvider.m; sourceTree = "<group>"; };
 		0A864E0B172D8CFD00BE00C6 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		0A864E0C172D8CFD00BE00C6 /* mapsearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapsearch.png; sourceTree = "<group>"; };
 		0A864E0D172D8CFD00BE00C6 /* mapsearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mapsearch@2x.png"; sourceTree = "<group>"; };
@@ -308,6 +314,8 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A61319218D4AE2700FFC2DB /* Favorites */,
+				0A61318E18D4AE0F00FFC2DB /* Popular */,
 				0ADFD8BD18D4A29900EB75F6 /* CDL */,
 				0A36FA8218D49EAB00BCA5C1 /* Europeana */,
 				0A49766918D2A96B009DCAEE /* FlickrCommons */,
@@ -551,6 +559,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0A61318E18D4AE0F00FFC2DB /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				0A61318F18D4AE0F00FFC2DB /* OPPopularProvider.h */,
+				0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */,
+			);
+			path = Popular;
+			sourceTree = "<group>";
+		};
+		0A61319218D4AE2700FFC2DB /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0A61319318D4AE2700FFC2DB /* OPFavoritesProvider.h */,
+				0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		0A9BEEF118D2962300CF2C08 /* DPLA */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,6 +799,7 @@
 				0A609EC6171072BD0084735B /* main.m in Sources */,
 				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
+				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
@@ -788,6 +815,7 @@
 				0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */,
 				0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
+				0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */,
 				0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */,
 				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
