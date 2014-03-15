@@ -60,7 +60,6 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
         parameters[@"startDoc"] = startDoc;
     }
 
-//    NSLog(@"(CDL GET) %@", parameters);
     [[AFCDLSessionManager sharedClient] GET:@"search" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSString* responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];

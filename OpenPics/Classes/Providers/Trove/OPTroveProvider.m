@@ -64,8 +64,6 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                                  };
     
     
-    NSLog(@"(Trove GET) %@", parameters);
-    
     [[AFTroveSessionManager sharedClient] GET:@"result" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary* responseDict = responseObject[@"response"];

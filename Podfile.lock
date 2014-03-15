@@ -1,4 +1,6 @@
 PODS:
+  - AFNetworkActivityLogger (2.0.1):
+    - AFNetworking (~> 2.0)
   - AFNetworking (2.2.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
@@ -40,6 +42,7 @@ PODS:
   - TUSafariActivity (1.0.0)
 
 DEPENDENCIES:
+  - AFNetworkActivityLogger
   - AFNetworking
   - FormatterKit (~> 1.1.1)
   - KissXML
@@ -53,6 +56,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
+  AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
   AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
   FormatterKit: bb53f3de30773e6b06f91dee1f82b46f536278d7
   KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615

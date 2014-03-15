@@ -66,8 +66,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                                  };
     
 
-    NSLog(@"(DPLA GET) %@", parameters);
-    
     [[AFDPLASessionManager sharedClient] GET:@"items" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray* resultArray = responseObject[@"docs"];
         NSArray* retArray = [self parseDocs:resultArray];

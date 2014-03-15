@@ -70,8 +70,6 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         parameters[@"start"] = startItem;
     }
 
-    NSLog(@"(EURO GET) %@", parameters);
-
     [[AFEuropeanaSessionManager sharedClient] GET:@"search.json" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray* resultArray = responseObject[@"items"];
         NSArray* retArray = [self parseDocs:resultArray];

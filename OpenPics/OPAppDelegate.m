@@ -28,6 +28,7 @@
 #import "OPAppDelegate.h"
 #import "OPAppTokens.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "AFNetworkActivityLogger.h"
 #import "OPViewController.h"
 #import "OPProviderController.h"
 
@@ -61,7 +62,9 @@
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelInfo;
+    
 #ifdef kOPAPPTOKEN_CRASHLYTICS
     [Crashlytics startWithAPIKey:kOPAPPTOKEN_CRASHLYTICS];
 #endif

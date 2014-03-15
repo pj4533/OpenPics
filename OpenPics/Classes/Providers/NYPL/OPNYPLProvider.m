@@ -94,8 +94,6 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
                                  };
     
     AFNYPLSessionManager* nyplClient = [AFNYPLSessionManager sharedClientWithToken:kOPPROVIDERTOKEN_NYPL];
-    NSLog(@"GET items/search.json %@", parameters);
-    
     [nyplClient GET:@"items/search.json" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary* responseDict = responseObject[@"nyplAPI"][@"response"];
         id result = responseDict[@"result"];

@@ -8,3 +8,4 @@ pod 'SGSStaggeredFlowLayout', :git => 'https://github.com/pj4533/SGSStaggeredFlo
 pod 'TMCache'
 pod 'TUSafariActivity'
 pod 'KissXML'
+pod 'AFNetworkActivityLogger'

@@ -47,8 +47,6 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
     queryUrlString = [queryUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:queryUrlString];
     
-    NSLog(@"(LIFE GET) %@", queryUrlString);
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -84,9 +82,7 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
                                           @"width": width,
                                           @"height": height
                                           };
-            
-            NSLog(@"%@", opImageDict);
-            
+                        
             imageIds[imageId] = opImageDict;
         }
         
