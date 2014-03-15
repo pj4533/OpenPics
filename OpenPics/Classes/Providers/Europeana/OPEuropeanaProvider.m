@@ -27,9 +27,9 @@
 
 #import "OPEuropeanaProvider.h"
 #import "OPProviderTokens.h"
-#import "AFEuropeanaClient.h"
+#import "AFEuropeanaSessionManager.h"
+#import "AFHTTPRequestOperation.h"
 #import "OPImageItem.h"
-#import "AFJSONRequestOperation.h"
 #import "NSDictionary+DefObject.h"
 #import "TTTURLRequestFormatter.h"
 
@@ -42,7 +42,6 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Europeana";
-        self.supportsLocationSearching = YES;
     }
     return self;
 }
@@ -54,44 +53,6 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 #else
     return YES;
 #endif
-}
-
-- (void) getItemsWithRegion:(MKCoordinateRegion) region
-                    success:(void (^)(NSArray* items))success
-                    failure:(void (^)(NSError* error))failure {
-    
-    CLLocationCoordinate2D center = region.center;
-    CLLocationCoordinate2D topLeft, bottomRight;
-    topLeft.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
-    topLeft.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
-    bottomRight.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
-    bottomRight.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
-    
-    NSString* latitudeParameter = [NSString stringWithFormat:@"pl_wgs84_pos_lat:[%f TO %f]", bottomRight.latitude, topLeft.latitude ];
-    NSString* longitudeParameter = [NSString stringWithFormat:@"pl_wgs84_pos_long:[%f TO %f]", topLeft.longitude, bottomRight.longitude];
-    
-    NSDictionary* parameters = @{
-                                 @"qf" : @[latitudeParameter,longitudeParameter,@"image"],
-                                 @"rows" : @"100",
-                                 @"query" : @"*:*"
-                                 };
-    
-    NSLog(@"(EURO LOCATION GET) %@", parameters);
-
-    [[AFEuropeanaClient sharedClient] getPath:@"search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@", [TTTURLRequestFormatter cURLCommandFromURLRequest:operation.request]);
-        NSArray* resultArray = responseObject[@"items"];
-        NSArray* retArray = [self parseDocs:resultArray];
-        
-        if (success) {
-            success(retArray);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
-    }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
@@ -111,8 +72,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 
     NSLog(@"(EURO GET) %@", parameters);
 
-    [[AFEuropeanaClient sharedClient] getPath:@"search.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [[AFEuropeanaSessionManager sharedClient] GET:@"search.json" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray* resultArray = responseObject[@"items"];
         NSArray* retArray = [self parseDocs:resultArray];
         
@@ -122,12 +82,12 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
         if ((itemsCount.integerValue + startItem.integerValue) < totalResults.integerValue) {
             returnCanLoadMore = YES;
         }
-
+        
         NSLog(@"COUNT: %@   TOTAL: %@", itemsCount, totalResults);
         if (success) {
             success(retArray, returnCanLoadMore);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }
@@ -140,10 +100,11 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     NSString* europeanaItem = providerSpecific[@"europeanaItem"];
     NSURL* url = [NSURL URLWithString:europeanaItem];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
+    AFHTTPRequestOperation* httpOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    httpOperation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [httpOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString* urlString = item.imageUrl.absoluteString;
-        NSDictionary* objectDict = JSON[@"object"];
+        NSDictionary* objectDict = responseObject[@"object"];
         if (objectDict) {
             NSArray* aggregationsArray = objectDict[@"aggregations"];
             if (aggregationsArray && aggregationsArray.count) {
@@ -357,11 +318,10 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                 completion([NSURL URLWithString:urlString],item);
             }
         }
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"image info error: %@", error);
     }];
-    [operation start];
+    [httpOperation start];
 }
 
 #pragma mark - Utilities

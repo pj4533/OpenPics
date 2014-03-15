@@ -1,5 +1,5 @@
 //
-//  AFEuropeanaClient.h
+//  AFEuropeanaSessionManager.h
 //  OpenPics
 //
 //  Created by PJ Gray on 4/19/13.
@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface AFEuropeanaClient : AFHTTPClient
+@interface AFEuropeanaSessionManager : AFHTTPSessionManager
 
-+ (AFEuropeanaClient *)sharedClient;
++ (AFEuropeanaSessionManager *)sharedClient;
 
 @end

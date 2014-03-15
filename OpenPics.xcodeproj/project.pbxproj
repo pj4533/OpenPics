@@ -22,6 +22,9 @@
 		0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F051728901C007378D0 /* OPSingleImageLayout.m */; };
 		0A310F101728901C007378D0 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F071728901C007378D0 /* OPViewController.m */; };
 		0A310F111728901C007378D0 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F081728901C007378D0 /* OPViewController.xib */; };
+		0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
+		0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
+		0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
 		0A44CBF5171074EF00D7C1B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */; };
 		0A44CBF6171074EF00D7C1B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD7171074EF00D7C1B6 /* Default.png */; };
 		0A44CBF7171074EF00D7C1B6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBD8171074EF00D7C1B6 /* Default@2x.png */; };
@@ -126,6 +129,12 @@
 		0A310F071728901C007378D0 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
 		0A310F081728901C007378D0 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
 		0A310F1417289038007378D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaSessionManager.h; sourceTree = "<group>"; };
+		0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaSessionManager.m; sourceTree = "<group>"; };
+		0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
+		0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DefObject.m"; sourceTree = "<group>"; };
+		0A36FA8718D49EAB00BCA5C1 /* OPEuropeanaProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPEuropeanaProvider.h; sourceTree = "<group>"; };
+		0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
 		0A44CBD6171074EF00D7C1B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A44CBD7171074EF00D7C1B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A44CBD8171074EF00D7C1B6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -293,6 +302,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A36FA8218D49EAB00BCA5C1 /* Europeana */,
 				0A49766918D2A96B009DCAEE /* FlickrCommons */,
 				0A49766218D2A745009DCAEE /* Trove */,
 				0A49765B18D2A35F009DCAEE /* LOC */,
@@ -329,6 +339,19 @@
 				0A310F081728901C007378D0 /* OPViewController.xib */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		0A36FA8218D49EAB00BCA5C1 /* Europeana */ = {
+			isa = PBXGroup;
+			children = (
+				0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */,
+				0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */,
+				0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */,
+				0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */,
+				0A36FA8718D49EAB00BCA5C1 /* OPEuropeanaProvider.h */,
+				0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */,
+			);
+			path = Europeana;
 			sourceTree = "<group>";
 		};
 		0A44CBD4171074EF00D7C1B6 /* Images */ = {
@@ -731,6 +754,7 @@
 			files = (
 				0A609EC6171072BD0084735B /* main.m in Sources */,
 				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
+				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
@@ -741,6 +765,7 @@
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
 				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
 				0A49766018D2A35F009DCAEE /* AFLOCSessionManager.m in Sources */,
+				0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */,
 				0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
 				0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */,
@@ -755,6 +780,7 @@
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
+				0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */,
 				0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
