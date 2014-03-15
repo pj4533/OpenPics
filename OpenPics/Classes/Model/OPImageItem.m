@@ -46,8 +46,15 @@
             self.providerUrl = providerUrlOrString;
         }
         self.title = dict[@"title"];
-        self.providerSpecific = dict[@"providerSpecific"];
-        self.size = CGSizeMake([dict[@"width"] floatValue], [dict[@"height"] floatValue]);
+
+        NSData* jsonData = [dict[@"providerSpecific"] dataUsingEncoding:NSUTF8StringEncoding];
+        self.providerSpecific = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                options: NSJSONReadingMutableContainers
+                                                                  error: nil];
+
+        if (![dict[@"width"] isKindOfClass:[NSNull class]] && ![dict[@"height"] isKindOfClass:[NSNull class]]) {
+            self.size = CGSizeMake([dict[@"width"] floatValue], [dict[@"height"] floatValue]);            
+        }
         self.providerType = dict[@"providerType"];
     }
     

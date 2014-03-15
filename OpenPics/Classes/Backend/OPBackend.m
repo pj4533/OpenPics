@@ -21,8 +21,8 @@
 // THE SOFTWARE.
 
 #import "OPBackend.h"
-#import "OPBackendKinvey.h"
 #import "OPBackendTokens.h"
+#import "OPBackendDefault.h"
 #import "OPImageItem.h"
 
 @implementation OPBackend
@@ -33,13 +33,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
-#ifndef kOPBACKEND_KINVEY_APP_KEY
-        _shared = [[OPBackend alloc] init];
-        _shared.usingRemoteBackend = NO;
-#else
-        _shared = [[OPBackendKinvey alloc] init];
-        _shared.usingRemoteBackend = YES;
-#endif
+        _shared = [[OPBackendDefault alloc] init];
         
         NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *cachesFolder    = [pathList  objectAtIndex:0];

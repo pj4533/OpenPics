@@ -39,7 +39,7 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 ## Backend
 
-Popular images (recently favorited) are stored using a flexible backend based on the OPBackend class.  The current implementation uses [Kinvey](http://www.kinvey.com).  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
+Popular images (recently favorited) are stored using a flexible backend based on the OPBackend class.  The current implementation uses a simple Ruby Sinatra app running on Heroku with a PostgresSQL store.  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
 
 ## Sharing
 

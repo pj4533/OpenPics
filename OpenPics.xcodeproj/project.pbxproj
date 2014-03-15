@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
-		0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF1B1745A92000814F0B /* OPBackendKinvey.m */; };
-		0A05EF211745A99F00814F0B /* KinveyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05EF1F1745A99F00814F0B /* KinveyKit.framework */; };
 		0A0E021D1747EE1F007610DE /* heart_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E021B1747EE1F007610DE /* heart_plus.png */; };
 		0A0E021E1747EE1F007610DE /* heart_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E021C1747EE1F007610DE /* heart_plus@2x.png */; };
 		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
@@ -57,6 +55,8 @@
 		0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
 		0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
 		0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
+		0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */; };
+		0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
 		0AB6B8B71711C647004CF7A5 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B11711C647004CF7A5 /* share.png */; };
 		0AB6B8B81711C647004CF7A5 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B21711C647004CF7A5 /* share@2x.png */; };
 		0AB6B8B91711C647004CF7A5 /* tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6B8B31711C647004CF7A5 /* tumblr.png */; };
@@ -110,10 +110,7 @@
 		0A031F9D175136EC008CD564 /* UIImage+Preload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Preload.m"; sourceTree = "<group>"; };
 		0A05EF131745A79000814F0B /* OPBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackend.h; sourceTree = "<group>"; };
 		0A05EF141745A79000814F0B /* OPBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackend.m; sourceTree = "<group>"; };
-		0A05EF1A1745A92000814F0B /* OPBackendKinvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendKinvey.h; sourceTree = "<group>"; };
-		0A05EF1B1745A92000814F0B /* OPBackendKinvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackendKinvey.m; sourceTree = "<group>"; };
 		0A05EF1E1745A99F00814F0B /* libUAirship-1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.4.0.a"; sourceTree = "<group>"; };
-		0A05EF1F1745A99F00814F0B /* KinveyKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KinveyKit.framework; path = External/KinveyKit.framework; sourceTree = "<group>"; };
 		0A05EF221745A9D300814F0B /* OPBackendTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendTokens.h; sourceTree = "<group>"; };
 		0A0E021B1747EE1F007610DE /* heart_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_plus.png; sourceTree = "<group>"; };
 		0A0E021C1747EE1F007610DE /* heart_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_plus@2x.png"; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 		0A310F061728901C007378D0 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
 		0A310F071728901C007378D0 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
 		0A310F081728901C007378D0 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
-		0A310F1417289038007378D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaSessionManager.h; sourceTree = "<group>"; };
 		0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaSessionManager.m; sourceTree = "<group>"; };
 		0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -190,6 +186,10 @@
 		0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLASessionManager.m; sourceTree = "<group>"; };
 		0A9BEEF418D2962300CF2C08 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
 		0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPDPLAProvider.m; sourceTree = "<group>"; };
+		0A9D169718D4D37B000DC0BE /* OPBackendDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendDefault.h; sourceTree = "<group>"; };
+		0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackendDefault.m; sourceTree = "<group>"; };
+		0A9D169A18D4D631000DC0BE /* AFDefaultBackendSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefaultBackendSessionManager.h; sourceTree = "<group>"; };
+		0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDefaultBackendSessionManager.m; sourceTree = "<group>"; };
 		0AB6B8B11711C647004CF7A5 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		0AB6B8B21711C647004CF7A5 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		0AB6B8B31711C647004CF7A5 /* tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr.png; sourceTree = "<group>"; };
@@ -267,7 +267,6 @@
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
 				396F3F854DE14ED09163A40D /* libPods.a in Frameworks */,
 				0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */,
-				0A05EF211745A99F00814F0B /* KinveyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,21 +276,12 @@
 		0A05EF121745A77400814F0B /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				0A05EF191745A92000814F0B /* Kinvey */,
+				0A9D169618D4D365000DC0BE /* Default */,
 				0A05EF131745A79000814F0B /* OPBackend.h */,
 				0A05EF141745A79000814F0B /* OPBackend.m */,
 				0A05EF221745A9D300814F0B /* OPBackendTokens.h */,
 			);
 			path = Backend;
-			sourceTree = "<group>";
-		};
-		0A05EF191745A92000814F0B /* Kinvey */ = {
-			isa = PBXGroup;
-			children = (
-				0A05EF1A1745A92000814F0B /* OPBackendKinvey.h */,
-				0A05EF1B1745A92000814F0B /* OPBackendKinvey.m */,
-			);
-			path = Kinvey;
 			sourceTree = "<group>";
 		};
 		0A05EF1D1745A99F00814F0B /* Airship */ = {
@@ -514,7 +504,6 @@
 			children = (
 				0A8A81FC18CCBDEE001AED56 /* Social.framework */,
 				0A05EF1D1745A99F00814F0B /* Airship */,
-				0A05EF1F1745A99F00814F0B /* KinveyKit.framework */,
 				0AF34E811745A5D40019DEE0 /* Twitter.framework */,
 				0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */,
 				0AF34E7D1745A5C00019DEE0 /* Security.framework */,
@@ -526,7 +515,6 @@
 				0AF34E711745A58F0019DEE0 /* CFNetwork.framework */,
 				0AF34E6F1745A5780019DEE0 /* Accounts.framework */,
 				0A4ADA25173B228D00F08A86 /* Crashlytics.framework */,
-				0A310F1417289038007378D0 /* MapKit.framework */,
 				0A609EB9171072BD0084735B /* UIKit.framework */,
 				0A609EBB171072BD0084735B /* Foundation.framework */,
 				0A609EBD171072BD0084735B /* CoreGraphics.framework */,
@@ -586,6 +574,17 @@
 				0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */,
 			);
 			path = DPLA;
+			sourceTree = "<group>";
+		};
+		0A9D169618D4D365000DC0BE /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				0A9D169718D4D37B000DC0BE /* OPBackendDefault.h */,
+				0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */,
+				0A9D169A18D4D631000DC0BE /* AFDefaultBackendSessionManager.h */,
+				0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */,
+			);
+			path = Default;
 			sourceTree = "<group>";
 		};
 		0ABF9E3B171097E500C29E84 /* NYPL */ = {
@@ -798,11 +797,13 @@
 			files = (
 				0A609EC6171072BD0084735B /* main.m in Sources */,
 				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
+				0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */,
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
 				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
+				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
@@ -826,7 +827,6 @@
 				0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
-				0A05EF1C1745A92000814F0B /* OPBackendKinvey.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
 				0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */,
 				0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */,
