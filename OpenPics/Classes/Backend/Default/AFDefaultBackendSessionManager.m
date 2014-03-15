@@ -24,7 +24,9 @@
 // THE SOFTWARE.
 
 #import "AFDefaultBackendSessionManager.h"
+
 static NSString * const kAFDefaultBackendBaseURLString = @"http://openpics.herokuapp.com/";
+//static NSString * const kAFDefaultBackendBaseURLString = @"http://localhost:5000/";
 
 @implementation AFDefaultBackendSessionManager
 
@@ -33,6 +35,7 @@ static NSString * const kAFDefaultBackendBaseURLString = @"http://openpics.herok
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[AFDefaultBackendSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kAFDefaultBackendBaseURLString]];
+        _sharedClient.requestSerializer = [AFJSONRequestSerializer serializer];
     });
     
     return _sharedClient;

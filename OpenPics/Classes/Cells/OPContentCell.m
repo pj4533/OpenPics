@@ -28,7 +28,7 @@
 #import "AFNetworking.h"
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
-//#import "OPFavoritesProvider.h"
+#import "OPFavoritesProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
@@ -139,22 +139,21 @@
 }
 
 - (IBAction)favoriteTapped:(id)sender {
-#warning fix favorite tapping
-//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-//        [[OPBackend shared] removeItem:self.item];
-//        [self setButtonToFavorite];
-//        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-//        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-//            _shouldForceReloadOnBack = YES;
-//        }
-//    } else {
-//        [[OPBackend shared] saveItem:self.item];
-//        [self setButtonToRemoveFavorite];
-//        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-//        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-//            _shouldForceReloadOnBack = NO;
-//        }
-//    }
+    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+        [[OPBackend shared] removeItem:self.item];
+        [self setButtonToFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+            _shouldForceReloadOnBack = YES;
+        }
+    } else {
+        [[OPBackend shared] saveItem:self.item];
+        [self setButtonToRemoveFavorite];
+        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
+            _shouldForceReloadOnBack = NO;
+        }
+    }
     
 }
 

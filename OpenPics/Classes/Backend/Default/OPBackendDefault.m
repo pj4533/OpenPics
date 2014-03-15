@@ -41,32 +41,27 @@
 - (void) saveItem:(OPImageItem*) item {
     [super saveItem:item];
     
-#warning Implement saving item to backend
-//    NSMutableDictionary* kinveyItem = [@{
-//                                         @"date":[NSDate date],
-//                                         @"imageUrl": item.imageUrl.absoluteString,
-//                                         @"providerType": item.providerType,
-//                                         @"width": [NSString stringWithFormat:@"%f", item.size.width],
-//                                         @"height": [NSString stringWithFormat:@"%f", item.size.height]
-//                                         } mutableCopy];
-//    
-//    if (item.providerUrl)
-//        kinveyItem[@"providerUrl"] = item.providerUrl.absoluteString;
-//    
-//    if (item.providerSpecific)
-//        kinveyItem[@"providerSpecific"] = item.providerSpecific;
-//    
-//    if (item.title)
-//        kinveyItem[@"title"] = item.title;
-//    
-//    [_store saveObject:kinveyItem withCompletionBlock:^(NSArray *objectsOrNil, NSError *errorOrNil) {
-//        if (errorOrNil == nil) {
-//            //save was successful
-//            NSLog(@"Successfully saved item (id='%@').", [objectsOrNil[0] kinveyObjectId]);
-//        } else {
-//            NSLog(@"ERROR: %@", errorOrNil);
-//        }
-//    } withProgressBlock:nil];
+    NSMutableDictionary* backendItem = [@{
+                                         @"imageUrl": item.imageUrl.absoluteString,
+                                         @"providerType": item.providerType,
+                                         @"width": [NSString stringWithFormat:@"%f", item.size.width],
+                                         @"height": [NSString stringWithFormat:@"%f", item.size.height]
+                                         } mutableCopy];
+    
+    if (item.providerUrl)
+        backendItem[@"providerUrl"] = item.providerUrl.absoluteString;
+    
+    if (item.providerSpecific)
+        backendItem[@"providerSpecific"] = item.providerSpecific;
+    
+    if (item.title)
+        backendItem[@"title"] = item.title;
+    
+    [[AFDefaultBackendSessionManager sharedClient] POST:@"images" parameters:backendItem success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
