@@ -74,6 +74,8 @@
 		0ABF9E631710C6A800C29E84 /* disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E611710C6A800C29E84 /* disclose.png */; };
 		0ABF9E641710C6A800C29E84 /* disclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E621710C6A800C29E84 /* disclose@2x.png */; };
 		0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */; };
+		0ADFD8C218D4A29900EB75F6 /* AFCDLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8BF18D4A29900EB75F6 /* AFCDLSessionManager.m */; };
+		0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8C118D4A29900EB75F6 /* OPCDLProvider.m */; };
 		0AE1C5B0174ADE2800BAA804 /* heart_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE1C5AE174ADE2800BAA804 /* heart_minus.png */; };
 		0AE1C5B1174ADE2800BAA804 /* heart_minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE1C5AF174ADE2800BAA804 /* heart_minus@2x.png */; };
 		0AEB314E174322A6004102B9 /* image_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEB314C174322A6004102B9 /* image_cancel.png */; };
@@ -206,6 +208,10 @@
 		0ABF9E621710C6A800C29E84 /* disclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclose@2x.png"; sourceTree = "<group>"; };
 		0ADFACA5175FEFDB00A35553 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		0ADFD8BE18D4A29900EB75F6 /* AFCDLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCDLSessionManager.h; sourceTree = "<group>"; };
+		0ADFD8BF18D4A29900EB75F6 /* AFCDLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCDLSessionManager.m; sourceTree = "<group>"; };
+		0ADFD8C018D4A29900EB75F6 /* OPCDLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCDLProvider.h; sourceTree = "<group>"; };
+		0ADFD8C118D4A29900EB75F6 /* OPCDLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCDLProvider.m; sourceTree = "<group>"; };
 		0AE1C5AE174ADE2800BAA804 /* heart_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_minus.png; sourceTree = "<group>"; };
 		0AE1C5AF174ADE2800BAA804 /* heart_minus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_minus@2x.png"; sourceTree = "<group>"; };
 		0AEB314C174322A6004102B9 /* image_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_cancel.png; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0ADFD8BD18D4A29900EB75F6 /* CDL */,
 				0A36FA8218D49EAB00BCA5C1 /* Europeana */,
 				0A49766918D2A96B009DCAEE /* FlickrCommons */,
 				0A49766218D2A745009DCAEE /* Trove */,
@@ -599,6 +606,17 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		0ADFD8BD18D4A29900EB75F6 /* CDL */ = {
+			isa = PBXGroup;
+			children = (
+				0ADFD8BE18D4A29900EB75F6 /* AFCDLSessionManager.h */,
+				0ADFD8BF18D4A29900EB75F6 /* AFCDLSessionManager.m */,
+				0ADFD8C018D4A29900EB75F6 /* OPCDLProvider.h */,
+				0ADFD8C118D4A29900EB75F6 /* OPCDLProvider.m */,
+			);
+			path = CDL;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -759,11 +777,13 @@
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
+				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
 				0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
 				0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */,
+				0ADFD8C218D4A29900EB75F6 /* AFCDLSessionManager.m in Sources */,
 				0A49766018D2A35F009DCAEE /* AFLOCSessionManager.m in Sources */,
 				0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */,
 				0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */,

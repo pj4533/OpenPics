@@ -1,5 +1,5 @@
 //
-//  AFCDLClient.h
+//  AFCDLSessionManager.m
 //  OpenPics
 //
 //  Created by PJ Gray on 4/10/13.
@@ -25,10 +25,34 @@
 // THE SOFTWARE.
 
 
-#import "AFHTTPClient.h"
+#import "AFCDLSessionManager.h"
 
-@interface AFCDLClient : AFHTTPClient
+static NSString * const kAFCDLBaseURLString = @"http://content.cdlib.org/";
 
-+ (AFCDLClient *)sharedClient;
+@implementation AFCDLSessionManager
+
++ (AFCDLSessionManager *)sharedClient {
+    static AFCDLSessionManager *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        _sharedClient = [[AFCDLSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kAFCDLBaseURLString]];
+        
+    });
+    
+    return _sharedClient;
+}
+
+- (id)initWithBaseURL:(NSURL *)url {
+    self = [super initWithBaseURL:url];
+    if (!self) {
+        return nil;
+    }
+    
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.responseSerializer.acceptableContentTypes =  [self.responseSerializer.acceptableContentTypes setByAddingObject:@"text/xml"];
+    
+    return self;
+}
 
 @end
