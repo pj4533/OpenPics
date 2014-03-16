@@ -29,6 +29,7 @@
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OPFavoritesProvider.h"
+#import "OPPopularProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
@@ -143,17 +144,17 @@
         [[OPBackend shared] removeItem:self.item];
         [self setButtonToFavorite];
         [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = YES;
-        }
     } else {
         [[OPBackend shared] saveItem:self.item];
         [self setButtonToRemoveFavorite];
         [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-        if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites]) {
-            _shouldForceReloadOnBack = NO;
-        }
     }
+
+//    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
+        _shouldForceReloadOnBack = YES;
+//    } else {
+//        _shouldForceReloadOnBack = NO;
+//    }
     
 }
 
@@ -171,12 +172,13 @@
 
     [self.mainViewController.flowLayout invalidateLayout];
     
-    [collectionView setCollectionViewLayout:(UICollectionViewLayout*)self.mainViewController.flowLayout animated:YES];
+    [collectionView setCollectionViewLayout:self.mainViewController.flowLayout animated:YES completion:^(BOOL finished) {
+        if (_shouldForceReloadOnBack) {
+            [self.mainViewController forceReload];
+        }
+    }];
     [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
     
-    if (_shouldForceReloadOnBack) {
-        [self.mainViewController forceReload];
-    }
 }
 
 

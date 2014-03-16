@@ -145,6 +145,7 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
 
     urlString = [urlString stringByReplacingOccurrencesOfString:@"w=300" withString:@"w=1200"];
 
+#warning crash here on NSNull objectForKeyedSubscript - on computer moving image
     if (providerSpecific[@"refimage"]) {
         urlString = providerSpecific[@"refimage"];
     }

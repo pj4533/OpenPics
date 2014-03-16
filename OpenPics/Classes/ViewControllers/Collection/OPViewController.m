@@ -236,7 +236,6 @@
         [self getImageForItem:item withSuccess:^(UIImage *image) {
             // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
             if ([self isCellVisibleAtIndexPath:indexPath]) {
-                
                 // then dispatch back to the main thread to set the image
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -282,17 +281,12 @@
     self.items = [@[] mutableCopy];
     [self.internalCollectionView reloadData];
     [self.flowLayout invalidateLayout];
+    
     [self doInitialSearch];
 }
 
 - (void) loadInitialPageWithItems:(NSArray*) items {
     [self.internalCollectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-
-    // TODO: use performBatch when bug is fixed in UICollectionViews with headers
-    NSMutableArray* indexPaths = [NSMutableArray array];
-    for (int i = 0; i < items.count; i++) {
-        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
-    }
 
     [SVProgressHUD dismiss];
     self.items = [items mutableCopy];
@@ -439,7 +433,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     static NSString *cellIdentifier = @"generic";
     OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
