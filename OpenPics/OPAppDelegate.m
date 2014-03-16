@@ -44,7 +44,6 @@
 #import "OPFlickrCommonsProvider.h"
 
 #import "OPAppearance.h"
-#import <Crashlytics/Crashlytics.h>
 #import "OPBackend.h"
 
 #import "TMCache.h"
@@ -64,11 +63,7 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelInfo;
-    
-#ifdef kOPAPPTOKEN_CRASHLYTICS
-    [Crashlytics startWithAPIKey:kOPAPPTOKEN_CRASHLYTICS];
-#endif
-    
+        
     TMCache* sharedCache = [TMCache sharedCache];
 
     // disk limit 100mb

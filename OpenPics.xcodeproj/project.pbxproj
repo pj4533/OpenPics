@@ -37,7 +37,6 @@
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
 		0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
-		0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ADA25173B228D00F08A86 /* Crashlytics.framework */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -159,7 +158,6 @@
 		0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrSessionManager.m; sourceTree = "<group>"; };
 		0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
 		0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
-		0A4ADA25173B228D00F08A86 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -266,7 +264,6 @@
 				0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */,
 				0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */,
 				396F3F854DE14ED09163A40D /* libPods.a in Frameworks */,
-				0A4ADA26173B228D00F08A86 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +511,6 @@
 				0AF34E731745A59B0019DEE0 /* CoreLocation.framework */,
 				0AF34E711745A58F0019DEE0 /* CFNetwork.framework */,
 				0AF34E6F1745A5780019DEE0 /* Accounts.framework */,
-				0A4ADA25173B228D00F08A86 /* Crashlytics.framework */,
 				0A609EB9171072BD0084735B /* UIKit.framework */,
 				0A609EBB171072BD0084735B /* Foundation.framework */,
 				0A609EBD171072BD0084735B /* CoreGraphics.framework */,
@@ -654,7 +650,6 @@
 				0A609EB3171072BD0084735B /* Frameworks */,
 				0A609EB4171072BD0084735B /* Resources */,
 				811ED3184DA5491EA4541985 /* Copy Pods Resources */,
-				0A4ADA24173B226400F08A86 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -748,19 +743,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A4ADA24173B226400F08A86 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 8c95b6fdd8883915ed918c51131016451ca2e1db";
-		};
 		0A5C19371711BB5D00979A7C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
