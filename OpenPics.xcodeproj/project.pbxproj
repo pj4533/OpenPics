@@ -754,7 +754,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/Classes/Activity/OPActivityTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\n";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\n";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
