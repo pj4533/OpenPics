@@ -144,14 +144,14 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
             urlString = [NSString stringWithFormat:@"http://128.192.128.20/lizardtech/iserv/getimage?cat=%@&item=%@.sid&lev=2", collectionCode, idCode];
         }
         
-    } else if ([providerName isEqualToString:@"Digital Commonwealth"]) {
-        NSLog(@"KNOWN: %@", providerName);
-        NSString* isShownAt = providerSpecific[@"dplaIsShownAt"];
-        NSString* lastPathComponent = [isShownAt lastPathComponent];
-        NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
-        NSString* collectionString = itemComponents[0];
-        NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
-        urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
+//    } else if ([providerName isEqualToString:@"Digital Commonwealth"]) {
+//        NSLog(@"KNOWN: %@", providerName);
+//        NSString* isShownAt = providerSpecific[@"dplaIsShownAt"];
+//        NSString* lastPathComponent = [isShownAt lastPathComponent];
+//        NSArray* itemComponents = [lastPathComponent componentsSeparatedByString:@","];
+//        NSString* collectionString = itemComponents[0];
+//        NSString* fullItemString = [NSString stringWithFormat:@"%d",[itemComponents[1] integerValue] + 1];
+//        urlString = [NSString stringWithFormat:@"http://dlib.cwmars.org/cdm4/images/full_size/%@/%@.jpg", collectionString, fullItemString];
     } else if ([providerName isEqualToString:@"Mountain West Digital Library"]) {
         NSLog(@"KNOWN: %@", providerName);
         NSDictionary* originalRecord = providerSpecific[@"dplaOriginalRecord"];
@@ -273,7 +273,11 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                 NSRange textRange;
                 textRange =[mimeType rangeOfString:@"image"];
                 if(textRange.location != NSNotFound) {
-                    providerSpecific[@"dplaHasView"] = firstObject[@"url"];
+                    if (firstObject[@"url"]) {
+                        providerSpecific[@"dplaHasView"] = firstObject[@"url"];
+                    } else if (firstObject[@"@id"]) {
+                        providerSpecific[@"dplaHasView"] = firstObject[@"@id"];                        
+                    }
                 }
             }
             

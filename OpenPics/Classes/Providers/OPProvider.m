@@ -26,6 +26,7 @@
 
 
 #import "OPProvider.h"
+#import "AFHTTPRequestOperation.h"
 
 @implementation OPProvider
 
@@ -70,40 +71,41 @@
                      withURLFormat:(NSString*) urlFormat
                     withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
     
-#warning fix contentDM image
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-//    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//        NSDictionary* imageInfo = JSON[@"imageinfo"];
-//        if (imageInfo) {
-//            NSString* widthString = imageInfo[@"width"];
-//            NSString* heightString = imageInfo[@"height"];
-//            if (widthString && heightString) {
-//                NSInteger width = widthString.integerValue;
-//                NSInteger height = heightString.integerValue;
-//                
-//                NSString* scaledUrlString;
-//                CGFloat scalePercent = 100;
-//                if (width > height) {
-//                    if (width > 2048) {
-//                        scalePercent = (2048.0 / width) * 100.0;
-//                    }
-//                    scaledUrlString = [NSString stringWithFormat:urlFormat, hostName, collectionString,idString, scalePercent];
-//                } else {
-//                    if (height > 2048) {
-//                        scalePercent = (2048.0 / height) * 100.0;
-//                    }
-//                    scaledUrlString = [NSString stringWithFormat:urlFormat, hostName, collectionString,idString, scalePercent];
-//                }
-//                if (completion) {
-//                    completion([NSURL URLWithString:scaledUrlString], item);
-//                }
-//            }
-//        }
-//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-//        NSLog(@"image info error: %@", error);
-//    }];
-//    [operation start];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    operation.responseSerializer.acceptableContentTypes = [operation.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* imageInfo = responseObject[@"imageinfo"];
+        if (imageInfo) {
+            NSString* widthString = imageInfo[@"width"];
+            NSString* heightString = imageInfo[@"height"];
+            if (widthString && heightString) {
+                NSInteger width = widthString.integerValue;
+                NSInteger height = heightString.integerValue;
+                
+                NSString* scaledUrlString;
+                CGFloat scalePercent = 100;
+                if (width > height) {
+                    if (width > 2048) {
+                        scalePercent = (2048.0 / width) * 100.0;
+                    }
+                    scaledUrlString = [NSString stringWithFormat:urlFormat, hostName, collectionString,idString, scalePercent];
+                } else {
+                    if (height > 2048) {
+                        scalePercent = (2048.0 / height) * 100.0;
+                    }
+                    scaledUrlString = [NSString stringWithFormat:urlFormat, hostName, collectionString,idString, scalePercent];
+                }
+                if (completion) {
+                    completion([NSURL URLWithString:scaledUrlString], item);
+                }
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"image info error: %@", error);
+    }];
+    [operation start];
 }
 
 @end

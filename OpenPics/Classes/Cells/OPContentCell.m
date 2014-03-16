@@ -38,7 +38,7 @@
 
 @interface OPContentCell () {
     UIPopoverController* _popover;
-//    AFImageRequestOperation* _upRezOperation;
+    AFHTTPRequestOperation* _upRezOperation;
     
     NSString* _completedString;
     
@@ -283,20 +283,21 @@
 }
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
-#warning fix uprez
-//    if (_upRezOperation) {
-//        [_upRezOperation cancel];
-//        _upRezOperation = nil;
-//    }
-//    
-//    __weak UIImageView* imageView = self.internalScrollView.imageView;
-//    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
-//    
-//    _upRezOperation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {        
-//        imageView.image = image;
-//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-//    }];
-//    [_upRezOperation start];
+    if (_upRezOperation) {
+        [_upRezOperation cancel];
+        _upRezOperation = nil;
+    }
+    
+    __weak UIImageView* imageView = self.internalScrollView.imageView;
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+    _upRezOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    _upRezOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [_upRezOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        imageView.image = (UIImage*) responseObject;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    [_upRezOperation start];
 }
 
 #pragma mark - gesture stuff

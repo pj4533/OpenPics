@@ -69,9 +69,11 @@
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
 
-#warning  implement querying backend by title keyword
+    NSMutableDictionary* parameters = @{@"page" : @(pageNumber.integerValue-1) }.mutableCopy;
     
-    NSDictionary* parameters = @{@"page" : @(pageNumber.integerValue-1) };
+    if (queryString) {
+        parameters[@"query"] = queryString;
+    }
     
     [[AFDefaultBackendSessionManager sharedClient] GET:@"images" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSNumber* thisPage = responseObject[@"paging"][@"page"];
