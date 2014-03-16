@@ -150,11 +150,11 @@
         [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
     }
 
-//    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
+    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
         _shouldForceReloadOnBack = YES;
-//    } else {
-//        _shouldForceReloadOnBack = NO;
-//    }
+    } else {
+        _shouldForceReloadOnBack = NO;
+    }
     
 }
 
