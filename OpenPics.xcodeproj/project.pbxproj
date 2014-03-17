@@ -109,7 +109,6 @@
 		0A031F9D175136EC008CD564 /* UIImage+Preload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Preload.m"; sourceTree = "<group>"; };
 		0A05EF131745A79000814F0B /* OPBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackend.h; sourceTree = "<group>"; };
 		0A05EF141745A79000814F0B /* OPBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackend.m; sourceTree = "<group>"; };
-		0A05EF1E1745A99F00814F0B /* libUAirship-1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.4.0.a"; sourceTree = "<group>"; };
 		0A05EF221745A9D300814F0B /* OPBackendTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendTokens.h; sourceTree = "<group>"; };
 		0A0E021B1747EE1F007610DE /* heart_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_plus.png; sourceTree = "<group>"; };
 		0A0E021C1747EE1F007610DE /* heart_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_plus@2x.png"; sourceTree = "<group>"; };
@@ -279,15 +278,6 @@
 				0A05EF221745A9D300814F0B /* OPBackendTokens.h */,
 			);
 			path = Backend;
-			sourceTree = "<group>";
-		};
-		0A05EF1D1745A99F00814F0B /* Airship */ = {
-			isa = PBXGroup;
-			children = (
-				0A05EF1E1745A99F00814F0B /* libUAirship-1.4.0.a */,
-			);
-			name = Airship;
-			path = External/Airship;
 			sourceTree = "<group>";
 		};
 		0A127BF7172D9AAC00F6966A /* Background */ = {
@@ -500,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				0A8A81FC18CCBDEE001AED56 /* Social.framework */,
-				0A05EF1D1745A99F00814F0B /* Airship */,
 				0AF34E811745A5D40019DEE0 /* Twitter.framework */,
 				0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */,
 				0AF34E7D1745A5C00019DEE0 /* Security.framework */,

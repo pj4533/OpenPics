@@ -68,12 +68,12 @@
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 117.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 86.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 86.0f);
         } else {
             self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
-            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
-            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 169.0f);
+            self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 149.0f);
+            self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 149.0f);
         }    
 
         _firstAppearance = YES;
@@ -85,7 +85,7 @@
 {
     
     [super viewDidLoad];
-
+    
     self.internalCollectionView.collectionViewLayout = self.flowLayout;
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -98,6 +98,10 @@
     
     [self doInitialSearch];
 
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
