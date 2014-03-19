@@ -49,7 +49,6 @@
 #import "TMCache.h"
 
 @interface OPAppDelegate () {
-    NSDate* _appBecameActiveDate;
 }
 
 @end
@@ -99,12 +98,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-#if !TARGET_IPHONE_SIMULATOR
-#ifdef kOPAPPTOKEN_STATHAT
-    AFStatHatClient* stathat = [[AFStatHatClient alloc] initWithEZKey:kOPAPPTOKEN_STATHAT];
-    [stathat postEZStat:@"Seconds using OpenPics" withValue:@([[NSDate date] timeIntervalSinceDate:_appBecameActiveDate])];
-#endif
-#endif
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -117,15 +110,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-
-    _appBecameActiveDate = [NSDate date];
-    
-#if !TARGET_IPHONE_SIMULATOR
-#ifdef kOPAPPTOKEN_STATHAT
-    AFStatHatClient* stathat = [[AFStatHatClient alloc] initWithEZKey:kOPAPPTOKEN_STATHAT];
-    [stathat postEZStat:@"OpenPics Launches" withCount:@1];
-#endif
-#endif
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

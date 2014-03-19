@@ -42,7 +42,7 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
     
-    NSString* startValue = [NSString stringWithFormat:@"%d", (pageNumber.integerValue - 1) * 20];
+    NSString* startValue = [NSString stringWithFormat:@"%ld", (pageNumber.integerValue - 1) * 20];
     NSString* queryUrlString = [NSString stringWithFormat:@"http://images.google.com/search?q=%@ source:life&tbm=isch&sout=1&biw=1899&bih=1077&sa=N&start=%@&tbs=isz:m", queryString,startValue];
     queryUrlString = [queryUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:queryUrlString];
