@@ -49,6 +49,8 @@
     BOOL _isSearching;
         
     BOOL _firstAppearance;
+    
+    NSMutableDictionary* _imageOperations;
 }
 @end
 
@@ -77,6 +79,7 @@
         }    
 
         _firstAppearance = YES;
+        _imageOperations = @{}.mutableCopy;
     }
     return self;
 }
@@ -127,6 +130,18 @@
 
 #pragma mark - Loading image helper functions
 
++ (NSOperationQueue *)imageRequestOperationQueue {
+    static NSOperationQueue *_imageRequestOperationQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _imageRequestOperationQueue = [[NSOperationQueue alloc] init];
+        _imageRequestOperationQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+    });
+    
+    return _imageRequestOperationQueue;
+}
+
+
 - (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath {
     for (NSIndexPath* thisIndexPath in self.internalCollectionView.indexPathsForVisibleItems) {
         if (indexPath.item == thisIndexPath.item) {
@@ -168,6 +183,7 @@
 }
 
 - (void) getImageWithRequestForItem:(OPImageItem*) item
+                      withIndexPath:(NSIndexPath*) indexPath
                         withSuccess:(void (^)(UIImage* image))success
                         withFailure:(void (^)(void))failure {
     // if not found in cache, create request to download image
@@ -195,32 +211,38 @@
             });
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error getting image");
-        if (failure) {
-            failure();
+        if (!operation.isCancelled) {
+            NSLog(@"error getting image");
+            if (failure) {
+                failure();
+            }            
         }
     }];
-    [operation start];
+    _imageOperations[indexPath] = operation;
+    [[OPViewController imageRequestOperationQueue] addOperation:operation];
 }
 
 - (void) getImageForItem:(OPImageItem*) item
+           withIndexPath:(NSIndexPath*) indexPath
              withSuccess:(void (^)(UIImage* image))success
              withFailure:(void (^)(void))failure {
     // Then, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+    
+    // This was causing weird behavior, when quickly scrolling down a bunch of pages, then back to top  almost like it was deadlocking and not going into this dispatch_asyn
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
         if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
             [self getImageFromCacheWithItem:item withCompletion:success];
         } else {
-            [self getImageWithRequestForItem:item withSuccess:success withFailure:failure];
+            [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
         }
-    });
+//    });
 }
 
 // this loads an image to an imageview in a cell.  called from cellForIndexPath
 - (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
     [self fadeInHourglassToImageView:imageView withCompletion:^{
-        [self getImageForItem:item withSuccess:^(UIImage *image) {
+        [self getImageForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
             // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
             if ([self isCellVisibleAtIndexPath:indexPath]) {
                 // then dispatch back to the main thread to set the image
@@ -247,14 +269,16 @@
                 });
             }            
         } withFailure:^{
-            [UIView animateWithDuration:0.25 animations:^{
-                imageView.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                imageView.image = [UIImage imageNamed:@"image_cancel"];
-                [UIView animateWithDuration:0.5 animations:^{
-                    imageView.alpha = 1.0;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:0.25 animations:^{
+                    imageView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    imageView.image = [UIImage imageNamed:@"image_cancel"];
+                    [UIView animateWithDuration:0.5 animations:^{
+                        imageView.alpha = 1.0;
+                    }];
                 }];
-            }];            
+            });
         }];
     }];
 }
@@ -381,6 +405,16 @@
 
 #pragma mark - UICollectionViewDelegate
 
+- (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([collectionView.indexPathsForVisibleItems indexOfObject:indexPath] == NSNotFound) {
+        AFHTTPRequestOperation* operation = _imageOperations[indexPath];
+        if (operation.isExecuting) {
+            NSLog(@"Not visible, cancelling operation for row: %ld", indexPath.row);
+            [operation cancel];
+        }
+    }
+}
+
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (!self.items.count) {
@@ -431,7 +465,10 @@
         }
     }
     
-    cell.internalScrollView.imageView.image = nil;
+    cell.internalScrollView.imageView.image = [UIImage imageNamed:@"transparent"];
+    cell.provider = nil;
+    cell.item = nil;
+    cell.indexPath = nil;
     
     if (indexPath.item == self.items.count) {
         if (self.items.count) {
