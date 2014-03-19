@@ -97,15 +97,6 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"ERROR: %@", error);
     }];
-//    KCSQuery* query;
-//    
-//    if (queryString) {
-//        query = [KCSQuery queryOnField:@"title" withRegex:queryString];
-//    } else {
-//        query = [KCSQuery query];
-//    }
-//    
-//    [self getItemsWithKCSQuery:query withPageNumber:pageNumber success:success failure:failure];
 }
 
 @end
