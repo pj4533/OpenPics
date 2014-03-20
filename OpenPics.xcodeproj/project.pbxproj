@@ -32,6 +32,8 @@
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
 		0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
+		0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
+		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -115,6 +117,10 @@
 		0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrSessionManager.m; sourceTree = "<group>"; };
 		0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
 		0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
+		0A4A0CCE18DA8A3B0002E8E8 /* UIImageView+Hourglass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Hourglass.h"; sourceTree = "<group>"; };
+		0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Hourglass.m"; sourceTree = "<group>"; };
+		0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageManager.h; sourceTree = "<group>"; };
+		0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageManager.m; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -303,6 +309,10 @@
 				0A031F9D175136EC008CD564 /* UIImage+Preload.m */,
 				0ADFACA5175FEFDB00A35553 /* NSString+MD5.h */,
 				0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */,
+				0A4A0CCE18DA8A3B0002E8E8 /* UIImageView+Hourglass.h */,
+				0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */,
+				0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */,
+				0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -598,6 +608,7 @@
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
+				0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */,
 				0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
@@ -613,6 +624,7 @@
 				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
+				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */,

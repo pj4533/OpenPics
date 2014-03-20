@@ -33,10 +33,7 @@
 #import "OPHeaderReusableView.h"
 #import "OPProviderListViewController.h"
 #import "SVProgressHUD.h"
-#import "TMCache.h"
-#import "UIImage+Preload.h"
-#import "NSString+MD5.h"
-#import "AFHTTPRequestOperation.h"
+#import "OPImageManager.h"
 
 @interface OPViewController () {
     BOOL _canLoadMore;
@@ -50,7 +47,7 @@
         
     BOOL _firstAppearance;
     
-    NSMutableDictionary* _imageOperations;
+    OPImageManager* _imageManager;
 }
 @end
 
@@ -79,7 +76,8 @@
         }    
 
         _firstAppearance = YES;
-        _imageOperations = @{}.mutableCopy;
+        _imageManager = [[OPImageManager alloc] init];
+        _imageManager.delegate = self;
     }
     return self;
 }
@@ -107,20 +105,6 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    NSLog(@"WILL ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
-    
-}
-
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    NSLog(@"DID ROTATE: %@", NSStringFromCGSize(self.internalCollectionView.frame.size));
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    [self.internalCollectionView.collectionViewLayout invalidateLayout];
-    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -128,21 +112,8 @@
 }
 
 
-#pragma mark - Loading image helper functions
-
-+ (NSOperationQueue *)imageRequestOperationQueue {
-    static NSOperationQueue *_imageRequestOperationQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _imageRequestOperationQueue = [[NSOperationQueue alloc] init];
-        _imageRequestOperationQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
-    });
-    
-    return _imageRequestOperationQueue;
-}
-
-
-- (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath {
+#pragma mark - OPImageManagerDelegate
+- (BOOL) isVisibileIndexPath:(NSIndexPath*) indexPath {
     for (NSIndexPath* thisIndexPath in self.internalCollectionView.indexPathsForVisibleItems) {
         if (indexPath.item == thisIndexPath.item) {
             return YES;
@@ -152,135 +123,8 @@
     return NO;
 }
 
-- (void) fadeInHourglassToImageView:(UIImageView*) imageView withCompletion:(void (^)(void))completion {
-    imageView.alpha = 0.0f;
-    
-    // First, go to the main thread and set the imageview to hourglass, start with alpha at 0?
-    dispatch_async(dispatch_get_main_queue(), ^{
-        imageView.contentMode = UIViewContentModeCenter;
-        imageView.image = [UIImage imageNamed:@"hourglass_white"];
-        
-        if (completion) {
-            completion();
-        }
-        
-        // fade in the hourglass
-        [UIView animateWithDuration:0.5 animations:^{
-            imageView.alpha = 1.0;
-        }];
-    });
-}
-
-- (void) getImageFromCacheWithItem:(OPImageItem*) item withCompletion:(void (^)(UIImage* cachedImage))completion {
-    // If found in cache, load the image
-    UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-    
-    // Use the category to get the preloaded image (will check for associated object)
-    cacheImage = cacheImage.preloadedImage;
-    if (completion) {
-        completion(cacheImage);
-    }
-}
-
-- (void) getImageWithRequestForItem:(OPImageItem*) item
-                      withIndexPath:(NSIndexPath*) indexPath
-                        withSuccess:(void (^)(UIImage* image))success
-                        withFailure:(void (^)(void))failure {
-    // if not found in cache, create request to download image
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFImageResponseSerializer serializer];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        UIImage* image = (UIImage*) responseObject;
-        
-        // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
-        if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
-            
-            // dispatch to a background thread for preloading
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                // uses category - will check for assocaited object
-                UIImage* preloadedImage = image.preloadedImage;
-                
-                // set the loaded object to the cache
-                [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
-                
-                if (success) {
-                    success(preloadedImage);
-                }
-            });
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (!operation.isCancelled) {
-            NSLog(@"error getting image");
-            if (failure) {
-                failure();
-            }            
-        }
-    }];
-    _imageOperations[indexPath] = operation;
-    [[OPViewController imageRequestOperationQueue] addOperation:operation];
-}
-
-- (void) getImageForItem:(OPImageItem*) item
-           withIndexPath:(NSIndexPath*) indexPath
-             withSuccess:(void (^)(UIImage* image))success
-             withFailure:(void (^)(void))failure {
-    // Then, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
-    
-    // This was causing weird behavior, when quickly scrolling down a bunch of pages, then back to top  almost like it was deadlocking and not going into this dispatch_asyn
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-        if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
-            [self getImageFromCacheWithItem:item withCompletion:success];
-        } else {
-            [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
-        }
-//    });
-}
-
-// this loads an image to an imageview in a cell.  called from cellForIndexPath
-- (void) loadImageFromItem:(OPImageItem*) item intoImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
-    [self fadeInHourglassToImageView:imageView withCompletion:^{
-        [self getImageForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
-            // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
-            if ([self isCellVisibleAtIndexPath:indexPath]) {
-                // then dispatch back to the main thread to set the image
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    // fade out the hourglass image
-                    [UIView animateWithDuration:0.25 animations:^{
-                        imageView.alpha = 0.0;
-                    } completion:^(BOOL finished) {
-                        imageView.contentMode = UIViewContentModeScaleAspectFill;
-                        imageView.image = image;
-                        
-                        // fade in image
-                        [UIView animateWithDuration:0.5 animations:^{
-                            imageView.alpha = 1.0;
-                        }];
-                        
-                        // if we have no size information yet, save the information in item, and force a re-layout
-                        if (!item.size.height) {
-                            item.size = image.size;
-                            [self.internalCollectionView.collectionViewLayout invalidateLayout];
-                        }
-                    }];
-                });
-            }            
-        } withFailure:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIView animateWithDuration:0.25 animations:^{
-                    imageView.alpha = 0.0;
-                } completion:^(BOOL finished) {
-                    imageView.image = [UIImage imageNamed:@"image_cancel"];
-                    [UIView animateWithDuration:0.5 animations:^{
-                        imageView.alpha = 1.0;
-                    }];
-                }];
-            });
-        }];
-    }];
+- (void) invalidateLayout {
+    [self.internalCollectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - Loading Data Helper Functions
@@ -407,11 +251,7 @@
 
 - (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([collectionView.indexPathsForVisibleItems indexOfObject:indexPath] == NSNotFound) {
-        AFHTTPRequestOperation* operation = _imageOperations[indexPath];
-        if (operation.isExecuting) {
-            NSLog(@"Not visible, cancelling operation for row: %ld", indexPath.row);
-            [operation cancel];
-        }
+        [_imageManager cancelImageOperationAtIndexPath:indexPath];
     }
 }
 
@@ -500,7 +340,7 @@
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
     
-    [self loadImageFromItem:item intoImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
+    [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
     return cell;
 }
