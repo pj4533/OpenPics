@@ -107,32 +107,41 @@
     [[[self class] imageRequestOperationQueue] addOperation:operation];
 }
 
-- (void) getImageFromCacheWithItem:(OPImageItem*) item withCompletion:(void (^)(UIImage* cachedImage))completion {
-    // If found in cache, load the image
-    UIImage* cacheImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-    
-    // Use the category to get the preloaded image (will check for associated object)
-    cacheImage = cacheImage.preloadedImage;
-    if (completion) {
-        completion(cacheImage);
-    }
-}
-
 - (void) getImageForItem:(OPImageItem*) item
            withIndexPath:(NSIndexPath*) indexPath
              withSuccess:(void (^)(UIImage* image))success
              withFailure:(void (^)(void))failure {
     // Then, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
     
-    // This was causing weird behavior, when quickly scrolling down a bunch of pages, then back to top  almost like it was deadlocking and not going into this dispatch_asyn
-    //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // This was causing weird behavior, when quickly scrolling down a bunch of pages, then back to top  almost like it was deadlocking and not going into this dispatch_async
+    //
+    // just commenting this all out for now.   below is the other way, which causes
+    // unbutteryness during fast scrolling, cause it is reading from disk for cached
+    // images.
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        __block UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (cachedImage) {
+//                cachedImage = cachedImage.preloadedImage;
+//                if (success) {
+//                    success(cachedImage);
+//                }
+//            } else {
+//                [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
+//            }
+//        });
+//    });
     
-    if ([[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String]) {
-        [self getImageFromCacheWithItem:item withCompletion:success];
+    UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
+    if (cachedImage) {
+        cachedImage = cachedImage.preloadedImage;
+        if (success) {
+            success(cachedImage);
+        }
     } else {
         [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
     }
-    //    });
+
 }
 
 - (void) loadImageFromItem:(OPImageItem*) item toImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
