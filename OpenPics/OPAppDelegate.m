@@ -47,6 +47,7 @@
 #import "OPBackend.h"
 
 #import "TMCache.h"
+#import <Appsee/Appsee.h>
 
 @interface OPAppDelegate () {
 }
@@ -57,6 +58,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#ifdef DEBUG
+#ifdef kOPAPPTOKEN_APPSEE_DEBUG
+    [Appsee start:kOPAPPTOKEN_APPSEE_DEBUG];
+#endif
+#else
+#ifdef kOPAPPTOKEN_APPSEE_RELEASE
+    [Appsee start:kOPAPPTOKEN_APPSEE_RELEASE];
+#endif
+#endif
+    
+    
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
