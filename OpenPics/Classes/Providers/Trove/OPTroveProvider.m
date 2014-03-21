@@ -60,7 +60,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                                  @"l-availability": @"y/f",
                                  @"l-australian": @"y",
                                  @"include": @"holdings,links,subscribinglibs,workversions",
-                                 @"s":[NSString stringWithFormat:@"%d", (pageNumber.integerValue - 1) * 20]
+                                 @"s":[NSString stringWithFormat:@"%ld", (pageNumber.integerValue - 1) * 20]
                                  };
     
     
