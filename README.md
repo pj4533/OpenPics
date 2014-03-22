@@ -1,6 +1,5 @@
-![Icon](OpenPics/Images/Application/Icon@2x.png "Icon")
 
-# OpenPics
+# OpenPics [![Build Status](https://travis-ci.org/pj4533/OpenPics.png?branch=master)](https://travis-ci.org/pj4533/OpenPics?branch=master)
 
 An open source iOS application for viewing images from multiple remote sources. Get it on the [app store](https://itunes.apple.com/us/app/openpics/id633423505?ls=1&mt=8).
 
@@ -62,9 +61,6 @@ Sharing (Twitter & Facebook) uses UIActivitys from iOS6.
 ## Contribute
 
 If you wish to contribute, send some pull requests!  I'll update the app in the App Store whenever we get awesome pull requests merged in.
-
-## Build Status
-[![Build Status](https://travis-ci.org/pj4533/OpenPics.png?branch=master)](https://travis-ci.org/pj4533/OpenPics?branch=master)
 
 ## Contact
 
