@@ -10,14 +10,17 @@
 		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
+		0A1DCDE918DDE6F0003F4418 /* Main_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */; };
+		0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */; };
+		0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
+		0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */; };
+		0A1DCDFA18DDE720003F4418 /* OPRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */; };
+		0A1DCDFB18DDE720003F4418 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */; };
+		0A1DCDFC18DDE720003F4418 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF518DDE720003F4418 /* OPViewController.m */; };
+		0A1DCDFD18DDE720003F4418 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF618DDE720003F4418 /* OPViewController.xib */; };
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A25C00118D9251000123D04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A25C00018D9251000123D04 /* Images.xcassets */; };
-		0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F021728901C007378D0 /* OPProviderListViewController.m */; };
-		0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F031728901C007378D0 /* OPProviderListViewController.xib */; };
-		0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F051728901C007378D0 /* OPSingleImageLayout.m */; };
-		0A310F101728901C007378D0 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A310F071728901C007378D0 /* OPViewController.m */; };
-		0A310F111728901C007378D0 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A310F081728901C007378D0 /* OPViewController.xib */; };
 		0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
 		0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
 		0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
@@ -66,6 +69,7 @@
 		0AF34E7E1745A5C00019DEE0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7D1745A5C00019DEE0 /* Security.framework */; };
 		0AF34E801745A5CB0019DEE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */; };
 		0AF34E821745A5D40019DEE0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E811745A5D40019DEE0 /* Twitter.framework */; };
+		0AF4CB2318DDF18700B10441 /* OPCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -77,19 +81,24 @@
 		0A05EF221745A9D300814F0B /* OPBackendTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendTokens.h; sourceTree = "<group>"; };
 		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
 		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
+		0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone.storyboard; sourceTree = "<group>"; };
+		0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageCollectionViewController.h; sourceTree = "<group>"; };
+		0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageCollectionViewController.m; sourceTree = "<group>"; };
+		0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
+		0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
+		0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
+		0A1DCDF018DDE720003F4418 /* OPRootCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRootCollectionViewController.h; sourceTree = "<group>"; };
+		0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRootCollectionViewController.m; sourceTree = "<group>"; };
+		0A1DCDF218DDE720003F4418 /* OPSingleImageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageLayout.h; sourceTree = "<group>"; };
+		0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageLayout.m; sourceTree = "<group>"; };
+		0A1DCDF418DDE720003F4418 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
+		0A1DCDF518DDE720003F4418 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
+		0A1DCDF618DDE720003F4418 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
 		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
 		0A1EF47E17108B5400AB8B62 /* OPProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProvider.m; sourceTree = "<group>"; };
 		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
 		0A1EF48417108D6D00AB8B62 /* OPProviderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderController.m; sourceTree = "<group>"; };
 		0A25C00018D9251000123D04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A310F011728901C007378D0 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
-		0A310F021728901C007378D0 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
-		0A310F031728901C007378D0 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
-		0A310F041728901C007378D0 /* OPSingleImageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageLayout.h; sourceTree = "<group>"; };
-		0A310F051728901C007378D0 /* OPSingleImageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageLayout.m; sourceTree = "<group>"; };
-		0A310F061728901C007378D0 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
-		0A310F071728901C007378D0 /* OPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPViewController.m; sourceTree = "<group>"; };
-		0A310F081728901C007378D0 /* OPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPViewController.xib; sourceTree = "<group>"; };
 		0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaSessionManager.h; sourceTree = "<group>"; };
 		0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaSessionManager.m; sourceTree = "<group>"; };
 		0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -171,6 +180,8 @@
 		0AF34E7D1745A5C00019DEE0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0AF34E811745A5D40019DEE0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		0AF4CB2118DDF18700B10441 /* OPCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCollectionViewController.h; sourceTree = "<group>"; };
+		0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCollectionViewController.m; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,6 +223,27 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
+		0A1DCDEA18DDE720003F4418 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */,
+				0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */,
+				0A1DCDF018DDE720003F4418 /* OPRootCollectionViewController.h */,
+				0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */,
+				0AF4CB2118DDF18700B10441 /* OPCollectionViewController.h */,
+				0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */,
+				0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */,
+				0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */,
+				0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */,
+				0A1DCDF218DDE720003F4418 /* OPSingleImageLayout.h */,
+				0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */,
+				0A1DCDF418DDE720003F4418 /* OPViewController.h */,
+				0A1DCDF518DDE720003F4418 /* OPViewController.m */,
+				0A1DCDF618DDE720003F4418 /* OPViewController.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,29 +266,6 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		0A310EFF1728901C007378D0 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0A310F001728901C007378D0 /* Collection */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		0A310F001728901C007378D0 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				0A310F011728901C007378D0 /* OPProviderListViewController.h */,
-				0A310F021728901C007378D0 /* OPProviderListViewController.m */,
-				0A310F031728901C007378D0 /* OPProviderListViewController.xib */,
-				0A310F041728901C007378D0 /* OPSingleImageLayout.h */,
-				0A310F051728901C007378D0 /* OPSingleImageLayout.m */,
-				0A310F061728901C007378D0 /* OPViewController.h */,
-				0A310F071728901C007378D0 /* OPViewController.m */,
-				0A310F081728901C007378D0 /* OPViewController.xib */,
-			);
-			path = Collection;
-			sourceTree = "<group>";
-		};
 		0A36FA8218D49EAB00BCA5C1 /* Europeana */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +282,8 @@
 		0A44CBDF171074EF00D7C1B6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0A1DCDEA18DDE720003F4418 /* ViewControllers */,
 				0A05EF121745A77400814F0B /* Backend */,
-				0A310EFF1728901C007378D0 /* ViewControllers */,
 				0A1EF47C17108B3A00AB8B62 /* Providers */,
 				0A44CBE0171074EF00D7C1B6 /* Cells */,
 				0A44CBE4171074EF00D7C1B6 /* Helpers */,
@@ -415,6 +424,7 @@
 				0A609EC8171072BD0084735B /* OPAppDelegate.h */,
 				0A609EC9171072BD0084735B /* OPAppDelegate.m */,
 				0A4ADA27173B284000F08A86 /* OPAppTokens.h */,
+				0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */,
 				0A25C00018D9251000123D04 /* Images.xcassets */,
 				0A609EC0171072BD0084735B /* Supporting Files */,
 			);
@@ -551,11 +561,12 @@
 				0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */,
 				0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */,
 				0ABF9E531710AF7E00C29E84 /* OPHeaderReusableView.xib in Resources */,
+				0A1DCDFD18DDE720003F4418 /* OPViewController.xib in Resources */,
 				0A25C00118D9251000123D04 /* Images.xcassets in Resources */,
+				0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */,
 				0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */,
 				0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */,
-				0A310F0E1728901C007378D0 /* OPProviderListViewController.xib in Resources */,
-				0A310F111728901C007378D0 /* OPViewController.xib in Resources */,
+				0A1DCDE918DDE6F0003F4418 /* Main_iphone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,18 +608,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A609EC6171072BD0084735B /* main.m in Sources */,
+				0AF4CB2318DDF18700B10441 /* OPCollectionViewController.m in Sources */,
 				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
 				0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */,
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
 				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
+				0A1DCDFA18DDE720003F4418 /* OPRootCollectionViewController.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
+				0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */,
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
 				0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */,
+				0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */,
 				0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
 				0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */,
@@ -619,13 +634,12 @@
 				0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */,
 				0ABF9E511710AF5800C29E84 /* OPHeaderReusableView.m in Sources */,
 				0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */,
+				0A1DCDFB18DDE720003F4418 /* OPSingleImageLayout.m in Sources */,
 				0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */,
-				0A310F0D1728901C007378D0 /* OPProviderListViewController.m in Sources */,
-				0A310F0F1728901C007378D0 /* OPSingleImageLayout.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
+				0A1DCDFC18DDE720003F4418 /* OPViewController.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
-				0A310F101728901C007378D0 /* OPViewController.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
