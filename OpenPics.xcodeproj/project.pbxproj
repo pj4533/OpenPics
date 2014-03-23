@@ -70,6 +70,7 @@
 		0AF34E801745A5CB0019DEE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */; };
 		0AF34E821745A5D40019DEE0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E811745A5D40019DEE0 /* Twitter.framework */; };
 		0AF4CB2318DDF18700B10441 /* OPCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */; };
+		0AF4CB2518DF5E2600B10441 /* Main_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		0AF34E811745A5D40019DEE0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		0AF4CB2118DDF18700B10441 /* OPCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCollectionViewController.h; sourceTree = "<group>"; };
 		0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCollectionViewController.m; sourceTree = "<group>"; };
+		0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_ipad.storyboard; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -425,6 +427,7 @@
 				0A609EC9171072BD0084735B /* OPAppDelegate.m */,
 				0A4ADA27173B284000F08A86 /* OPAppTokens.h */,
 				0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */,
+				0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */,
 				0A25C00018D9251000123D04 /* Images.xcassets */,
 				0A609EC0171072BD0084735B /* Supporting Files */,
 			);
@@ -563,6 +566,7 @@
 				0ABF9E531710AF7E00C29E84 /* OPHeaderReusableView.xib in Resources */,
 				0A1DCDFD18DDE720003F4418 /* OPViewController.xib in Resources */,
 				0A25C00118D9251000123D04 /* Images.xcassets in Resources */,
+				0AF4CB2518DF5E2600B10441 /* Main_ipad.storyboard in Resources */,
 				0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */,
 				0A8721A1171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib in Resources */,
 				0A8721A3171B7BC500EC8B25 /* OPContentCell_iPhone.xib in Resources */,

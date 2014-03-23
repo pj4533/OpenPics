@@ -39,6 +39,10 @@
 	<string>2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile~ipad</key>
+	<string>Main_ipad</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>Main_ipad</string>
 	<key>UIMainStoryboardFile~iphone</key>
 	<string>Main_iphone</string>
 	<key>UIPrerenderedIcon</key>
