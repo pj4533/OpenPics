@@ -12,6 +12,7 @@
 #import "OPProvider.h"
 #import "OPImageItem.h"
 #import "SGSStaggeredFlowLayout.h"
+#import "OPContentCell.h"
 
 @interface OPRootCollectionViewController () <UINavigationControllerDelegate> {
     BOOL _canLoadMore;
@@ -199,5 +200,12 @@
 //        [self switchToSingleImageWithIndexPath:indexPath];
 //    }
 //}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
+    [cell setupForSingleImageLayoutAnimated:YES];
+}
 
 @end

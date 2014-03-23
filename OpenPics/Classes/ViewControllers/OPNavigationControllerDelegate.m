@@ -9,6 +9,7 @@
 #import "OPNavigationControllerDelegate.h"
 #import "OPImageCollectionViewController.h"
 #import "OPRootCollectionViewController.h"
+#import "OPContentCell.h"
 
 @implementation OPNavigationControllerDelegate
 
@@ -24,6 +25,10 @@
 
 #pragma mark - UINavigationControllerDelegate
 
+// These functions enable functionality to be specific to the UICollectionViewController on display during a layout to layout transition
+//
+// It feels like it should pay attention to what is in the storyboard, but it doesn't.  For example, if I set paging off in the root, and transition to
+// the image VC, it doesn't work, and vice-versa.   I have to make sure to set it properly here.   Same thing for layouts and insets.  I think it has something to do with the sharing of the collectionView, but I am not sure.
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
     // Have to manually adjust the contentInsets here, cause it seems like this isn't done
@@ -58,6 +63,18 @@
     if ([viewController isKindOfClass:[UICollectionViewController class]]) {
         UICollectionViewController* collectionViewController = (UICollectionViewController*) viewController;
         [collectionViewController.collectionViewLayout invalidateLayout];
+        
+        if ([viewController isMemberOfClass:[OPRootCollectionViewController class]]) {
+            for (OPContentCell* cell in collectionViewController.collectionView.visibleCells) {
+                cell.internalScrollView.userInteractionEnabled = NO;
+                if (cell.internalScrollView.zoomScale != 1.0f) {
+                    [cell.internalScrollView setZoomScale:1.0f animated:NO];
+                }
+                cell.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+            }
+        }
+
 //        NSLog(@"layout: %@", NSStringFromClass([collectionViewController.collectionViewLayout class]));
     }
     

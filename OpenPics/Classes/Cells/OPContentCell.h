@@ -59,7 +59,7 @@
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion;
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion;
 
-//- (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
+- (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
 //- (void) setupForGridLayout;
 
 

@@ -163,7 +163,7 @@
 //    if (self.internalScrollView.zoomScale != 1.0f) {
 //        [self.internalScrollView setZoomScale:1.0f animated:YES];
 //    }
-//    
+//
 //    UICollectionView* collectionView = self.mainViewController.internalCollectionView;
 //        
 //    [self setupForGridLayout];
@@ -229,15 +229,15 @@
     }];
 }
 
-//- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
+- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
 //    [self setupLabels];
-//    
-//    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    
+    
+    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
 //    _shouldForceReloadOnBack = NO;
-//    
-//    self.internalScrollView.userInteractionEnabled = YES;
-//
+    
+    self.internalScrollView.userInteractionEnabled = YES;
+
 //    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
 //    NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
 //    
@@ -273,7 +273,7 @@
 //    } else {
 //        self.showingUI = YES;
 //    }
-//}
+}
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
     if (_upRezOperation) {
