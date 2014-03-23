@@ -193,28 +193,28 @@
     }];
 }
 
-#pragma mark - Switching layout helper functions
-
-- (void) switchToGridWithIndexPath:(NSIndexPath*) indexPath {
-    self.internalCollectionView.scrollEnabled = YES;
-    
-    [self.flowLayout invalidateLayout];
-    [self.internalCollectionView setCollectionViewLayout:self.flowLayout animated:YES];
-    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-    [cell setupForGridLayout];
-    
-    [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-}
-
-- (void) switchToSingleImageWithIndexPath:(NSIndexPath*) indexPath {
-    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
-    
-    self.internalCollectionView.scrollEnabled = NO;
-    [self.singleImageLayout invalidateLayout];
-    [self.internalCollectionView setCollectionViewLayout:self.singleImageLayout animated:YES];
-    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
-    [cell setupForSingleImageLayoutAnimated:NO];
-}
+//#pragma mark - Switching layout helper functions
+//
+//- (void) switchToGridWithIndexPath:(NSIndexPath*) indexPath {
+//    self.internalCollectionView.scrollEnabled = YES;
+//    
+//    [self.flowLayout invalidateLayout];
+//    [self.internalCollectionView setCollectionViewLayout:self.flowLayout animated:YES];
+//    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
+//    [cell setupForGridLayout];
+//    
+//    [self.internalCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+//}
+//
+//- (void) switchToSingleImageWithIndexPath:(NSIndexPath*) indexPath {
+//    self.singleImageLayout.itemSize = CGSizeMake(self.internalCollectionView.frame.size.width, self.internalCollectionView.frame.size.height);
+//    
+//    self.internalCollectionView.scrollEnabled = NO;
+//    [self.singleImageLayout invalidateLayout];
+//    [self.internalCollectionView setCollectionViewLayout:self.singleImageLayout animated:YES];
+//    OPContentCell* cell = (OPContentCell*) [self.internalCollectionView cellForItemAtIndexPath:indexPath];
+//    [cell setupForSingleImageLayoutAnimated:NO];
+//}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
@@ -255,20 +255,20 @@
     }
 }
 
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (!self.items.count) {
-        return;
-    }
-    
-    [self.view endEditing:YES];
-    
-    if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
-        [self switchToGridWithIndexPath:indexPath];
-    } else {
-        [self switchToSingleImageWithIndexPath:indexPath];
-    }
-}
+//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    if (!self.items.count) {
+//        return;
+//    }
+//    
+//    [self.view endEditing:YES];
+//    
+//    if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
+//        [self switchToGridWithIndexPath:indexPath];
+//    } else {
+//        [self switchToSingleImageWithIndexPath:indexPath];
+//    }
+//}
 
 #pragma mark - UICollectionViewDataSource
 

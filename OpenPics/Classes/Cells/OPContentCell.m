@@ -85,101 +85,101 @@
 
 #pragma mark - Actions
 
-- (IBAction)shareTapped:(id)sender {
-    
-    NSMutableArray* appActivities = [NSMutableArray array];
-    
-    TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
-    [appActivities addObject:openInSafari];
-    
+//- (IBAction)shareTapped:(id)sender {
+//    
+//    NSMutableArray* appActivities = [NSMutableArray array];
+//    
+//    TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
+//    [appActivities addObject:openInSafari];
+//    
+//
+//    UIActivityViewController *shareSheet;
+//    if (self.item.providerUrl) {
+//        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self,self.item.providerUrl]
+//                                                       applicationActivities:appActivities];
+//    } else {
+//        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
+//                                                       applicationActivities:appActivities];
+//    }
+//    
+//    
+////    SHOW ONLY AFTER VC GOES AWAY
+//    [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
+//        if (completed) {
+//            [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                     selector:@selector(keyboardDidHide:)
+//                                                         name:UIKeyboardDidHideNotification
+//                                                       object:nil];
+//
+//            if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+//                _completedString = @"Posted!";
+//            } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+//                _completedString = @"Posted!";
+//            } else if ([activityType isEqualToString:UIActivityTypeMail]) {
+//                _completedString = @"Sent!";
+//            } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
+//                _completedString = @"Saved!";
+//            }
+//        } else {
+//            _completedString = nil;
+//        }
+//    }];
+//    
+//    shareSheet.excludedActivityTypes = @[UIActivityTypeMail,UIActivityTypeCopyToPasteboard,UIActivityTypePostToWeibo,UIActivityTypeAssignToContact, UIActivityTypeMessage, UIActivityTypePrint];
+//    
+//    if (_popover) {
+//        [_popover dismissPopoverAnimated:YES];
+//    }
+//    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//        [self.mainViewController presentViewController:shareSheet animated:YES completion:nil];
+//    } else {
+//        _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
+//        [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//    }
+//}
+//
+//- (IBAction)favoriteTapped:(id)sender {
+//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+//        [[OPBackend shared] removeItem:self.item];
+//        [self setButtonToFavorite];
+//        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+//    } else {
+//        [[OPBackend shared] saveItem:self.item];
+//        [self setButtonToRemoveFavorite];
+//        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+//    }
+//
+//    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
+//        _shouldForceReloadOnBack = YES;
+//    } else {
+//        _shouldForceReloadOnBack = NO;
+//    }
+//    
+//}
 
-    UIActivityViewController *shareSheet;
-    if (self.item.providerUrl) {
-        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self,self.item.providerUrl]
-                                                       applicationActivities:appActivities];
-    } else {
-        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
-                                                       applicationActivities:appActivities];
-    }
-    
-    
-//    SHOW ONLY AFTER VC GOES AWAY
-    [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        if (completed) {
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(keyboardDidHide:)
-                                                         name:UIKeyboardDidHideNotification
-                                                       object:nil];
-
-            if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-                _completedString = @"Posted!";
-            } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
-                _completedString = @"Posted!";
-            } else if ([activityType isEqualToString:UIActivityTypeMail]) {
-                _completedString = @"Sent!";
-            } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
-                _completedString = @"Saved!";
-            }
-        } else {
-            _completedString = nil;
-        }
-    }];
-    
-    shareSheet.excludedActivityTypes = @[UIActivityTypeMail,UIActivityTypeCopyToPasteboard,UIActivityTypePostToWeibo,UIActivityTypeAssignToContact, UIActivityTypeMessage, UIActivityTypePrint];
-    
-    if (_popover) {
-        [_popover dismissPopoverAnimated:YES];
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self.mainViewController presentViewController:shareSheet animated:YES completion:nil];
-    } else {
-        _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
-        [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    }
-}
-
-- (IBAction)favoriteTapped:(id)sender {
-    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-        [[OPBackend shared] removeItem:self.item];
-        [self setButtonToFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-    } else {
-        [[OPBackend shared] saveItem:self.item];
-        [self setButtonToRemoveFavorite];
-        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-    }
-
-    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
-        _shouldForceReloadOnBack = YES;
-    } else {
-        _shouldForceReloadOnBack = NO;
-    }
-    
-}
-
-- (IBAction)backTapped:(id)sender {
-
-    if (self.internalScrollView.zoomScale != 1.0f) {
-        [self.internalScrollView setZoomScale:1.0f animated:YES];
-    }
-    
-    UICollectionView* collectionView = self.mainViewController.internalCollectionView;
-        
-    [self setupForGridLayout];
-    
-    collectionView.scrollEnabled = YES;
-
-    [self.mainViewController.flowLayout invalidateLayout];
-    
-    [collectionView setCollectionViewLayout:self.mainViewController.flowLayout animated:YES completion:^(BOOL finished) {
-        if (_shouldForceReloadOnBack) {
-            [self.mainViewController forceReload];
-        }
-    }];
-    [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-    
-}
+//- (IBAction)backTapped:(id)sender {
+//
+//    if (self.internalScrollView.zoomScale != 1.0f) {
+//        [self.internalScrollView setZoomScale:1.0f animated:YES];
+//    }
+//    
+//    UICollectionView* collectionView = self.mainViewController.internalCollectionView;
+//        
+//    [self setupForGridLayout];
+//    
+//    collectionView.scrollEnabled = YES;
+//
+//    [self.mainViewController.flowLayout invalidateLayout];
+//    
+//    [collectionView setCollectionViewLayout:self.mainViewController.flowLayout animated:YES completion:^(BOOL finished) {
+//        if (_shouldForceReloadOnBack) {
+//            [self.mainViewController forceReload];
+//        }
+//    }];
+//    [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+//    
+//}
 
 
 #pragma mark - Utility Functions
@@ -273,13 +273,6 @@
     } else {
         self.showingUI = YES;
     }
-}
-
-- (void) setupForGridLayout {
-    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.internalScrollView.userInteractionEnabled = NO;
-    [self fadeOutUIWithCompletion:nil];
-    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 - (void) upRezToImageWithUrl:(NSURL*) url {

@@ -157,7 +157,8 @@
                         [UIView animateWithDuration:0.25 animations:^{
                             imageView.alpha = 0.0;
                         } completion:^(BOOL finished) {
-                            imageView.contentMode = UIViewContentModeScaleAspectFill;
+#warning AspectFit or fill?
+                            imageView.contentMode = UIViewContentModeScaleAspectFit;
                             imageView.image = image;
                             
                             // fade in image

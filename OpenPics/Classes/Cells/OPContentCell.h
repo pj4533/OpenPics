@@ -52,15 +52,15 @@
 
 @property BOOL showingUI;
 
-- (IBAction)backTapped:(id)sender;
-- (IBAction)shareTapped:(id)sender;
-- (IBAction)favoriteTapped:(id)sender;
+//- (IBAction)backTapped:(id)sender;
+//- (IBAction)shareTapped:(id)sender;
+//- (IBAction)favoriteTapped:(id)sender;
 
 - (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion;
 - (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion;
 
-- (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
-- (void) setupForGridLayout;
+//- (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
+//- (void) setupForGridLayout;
 
 
 @end
