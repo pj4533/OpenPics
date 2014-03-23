@@ -35,8 +35,10 @@
 
         CGFloat topInset = 0.0f;
         if ([viewController isMemberOfClass:[OPImageCollectionViewController class]]) {
+            collectionViewController.collectionView.pagingEnabled = YES;
             viewController.automaticallyAdjustsScrollViewInsets = NO;
         } else if ([viewController isMemberOfClass:[OPRootCollectionViewController class]]) {
+            collectionViewController.collectionView.pagingEnabled = NO;
             topInset = 64.0f;
             viewController.automaticallyAdjustsScrollViewInsets = YES;
         }
