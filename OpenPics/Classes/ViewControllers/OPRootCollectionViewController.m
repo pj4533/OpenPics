@@ -10,8 +10,10 @@
 #import "OPImageCollectionViewController.h"
 #import "SVProgressHUD.h"
 #import "OPProvider.h"
+#import "OPImageItem.h"
+#import "SGSStaggeredFlowLayout.h"
 
-@interface OPRootCollectionViewController () {
+@interface OPRootCollectionViewController () <UINavigationControllerDelegate> {
     BOOL _canLoadMore;
     
     NSNumber* _currentPage;
@@ -32,6 +34,39 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*) collectionViewLayout;
+    CGSize cellSize = flowLayout.itemSize;
+    
+    if ([collectionViewLayout isKindOfClass:[SGSStaggeredFlowLayout class]]) {
+        CGSize imageSize = CGSizeZero;
+        if (indexPath.item < self.items.count) {
+            OPImageItem* item = self.items[indexPath.item];
+            if (item.size.height) {
+                imageSize = item.size;
+            }
+            
+            if (imageSize.height) {
+                CGFloat deviceCellSizeConstant = flowLayout.itemSize.height;
+                CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
+                CGFloat maxWidth = collectionView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right;
+                if (newWidth > maxWidth) {
+                    newWidth = maxWidth;
+                }
+                cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
+            }
+        }
+    }
+
+    return cellSize;
+//    }
+//    
+//    return self.singleImageLayout.itemSize;
 }
 
 #pragma mark - Navigation
@@ -164,6 +199,5 @@
 //        [self switchToSingleImageWithIndexPath:indexPath];
 //    }
 //}
-
 
 @end

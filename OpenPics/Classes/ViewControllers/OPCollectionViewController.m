@@ -12,8 +12,9 @@
 #import "OPContentCell.h"
 #import "OPImageManager.h"
 #import "SVProgressHUD.h"
+#import "OPNavigationControllerDelegate.h"
 
-@interface OPCollectionViewController () {
+@interface OPCollectionViewController () <UINavigationControllerDelegate> {
 //    NSString* _currentQueryString;
 //    
 //    UIPopoverController* _popover;
@@ -33,6 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationController.delegate = [OPNavigationControllerDelegate shared];
+    
     self.items = [NSMutableArray array];
     self.currentProvider = [[OPProviderController shared] getFirstProvider];
     

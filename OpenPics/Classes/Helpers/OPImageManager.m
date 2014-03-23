@@ -158,7 +158,7 @@
                             imageView.alpha = 0.0;
                         } completion:^(BOOL finished) {
 #warning AspectFit or fill?
-                            imageView.contentMode = UIViewContentModeScaleAspectFit;
+                            imageView.contentMode = UIViewContentModeScaleAspectFill;
                             imageView.image = image;
                             
                             // fade in image

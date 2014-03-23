@@ -229,51 +229,51 @@
     }];
 }
 
-- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
-    [self setupLabels];
-    
-    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    _shouldForceReloadOnBack = NO;
-    
-    self.internalScrollView.userInteractionEnabled = YES;
-
-    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
-    
-    OPProvider* thisItemProvider = [[OPProviderController shared] getProviderWithType:self.item.providerType];
-    if (uprezMode && uprezMode.boolValue) {
-        // this is kind of weird cause in some cases the item is modified by the provider on uprezing
-        // I should probably somehow change the main reference to the object so we don't have different
-        // versions?
-        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
-            NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
-            self.item = item;
-            self.titleLabel.text = item.title;
-            [self upRezToImageWithUrl:uprezImageUrl];
-        }];
-    } else {
-        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
-            NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
-            self.item = item;
-            self.titleLabel.text = item.title;
-            [self upRezToImageWithUrl:uprezImageUrl];
-        }];
-    }
-
-    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-        [self setButtonToRemoveFavorite];
-    } else {
-        [self setButtonToFavorite];
-    }
-    
-    [self fadeInUIWithCompletion:nil];
-    
-    if (animated) {
-    } else {
-        self.showingUI = YES;
-    }
-}
+//- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
+//    [self setupLabels];
+//    
+//    self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    
+//    _shouldForceReloadOnBack = NO;
+//    
+//    self.internalScrollView.userInteractionEnabled = YES;
+//
+//    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+//    NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+//    
+//    OPProvider* thisItemProvider = [[OPProviderController shared] getProviderWithType:self.item.providerType];
+//    if (uprezMode && uprezMode.boolValue) {
+//        // this is kind of weird cause in some cases the item is modified by the provider on uprezing
+//        // I should probably somehow change the main reference to the object so we don't have different
+//        // versions?
+//        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+//            NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
+//            self.item = item;
+//            self.titleLabel.text = item.title;
+//            [self upRezToImageWithUrl:uprezImageUrl];
+//        }];
+//    } else {
+//        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+//            NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
+//            self.item = item;
+//            self.titleLabel.text = item.title;
+//            [self upRezToImageWithUrl:uprezImageUrl];
+//        }];
+//    }
+//
+//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
+//        [self setButtonToRemoveFavorite];
+//    } else {
+//        [self setButtonToFavorite];
+//    }
+//    
+//    [self fadeInUIWithCompletion:nil];
+//    
+//    if (animated) {
+//    } else {
+//        self.showingUI = YES;
+//    }
+//}
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
     if (_upRezOperation) {
