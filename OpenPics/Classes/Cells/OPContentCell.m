@@ -198,37 +198,6 @@
     self.titleLabel.text = self.item.title;
 }
 
-- (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion {
-    self.showingUI = NO;
-
-    [UIView animateWithDuration:0.7f animations:^{
-        [UIApplication sharedApplication].statusBarHidden = YES;
-        self.backBackgroundView.alpha = 0.0f;
-        self.shareBackgroundView.alpha = 0.0f;
-        self.favoriteBackgroundView.alpha = 0.0f;
-        self.descriptionView.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        if (completion) {
-            completion(finished);
-        }
-    }];
-}
-
-- (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion {
-    [UIView animateWithDuration:0.7f animations:^{
-        [UIApplication sharedApplication].statusBarHidden = NO;
-        self.backBackgroundView.alpha = 1.0f;
-        self.shareBackgroundView.alpha = 1.0f;
-        self.favoriteBackgroundView.alpha = 1.0f;
-        self.descriptionView.alpha = 1.0;
-    } completion:^(BOOL finished) {
-        self.showingUI = YES;
-        if (completion) {
-            completion(finished);
-        }
-    }];
-}
-
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
 //    [self setupLabels];
     
@@ -296,10 +265,8 @@
 #pragma mark - gesture stuff
 
 - (IBAction)tapped:(id)sender {
-    if (self.showingUI) {
-        [self fadeOutUIWithCompletion:nil];
-    } else {
-        [self fadeInUIWithCompletion:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singleTappedCell)]) {
+        [self.delegate singleTappedCell];
     }
 }
 

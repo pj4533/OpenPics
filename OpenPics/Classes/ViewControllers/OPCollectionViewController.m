@@ -24,7 +24,6 @@
 //    BOOL _firstAppearance;
     
     OPImageManager* _imageManager;
-    
 }
 
 @end

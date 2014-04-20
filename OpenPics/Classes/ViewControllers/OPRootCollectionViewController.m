@@ -18,6 +18,7 @@
     BOOL _canLoadMore;
     
     NSNumber* _currentPage;
+    
 }
 
 @end

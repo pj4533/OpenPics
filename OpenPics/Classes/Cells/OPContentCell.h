@@ -29,11 +29,18 @@
 #import "OPScrollView.h"
 #import "OPViewController.h"
 
+@protocol OPContentCellDelegate <NSObject>
+@optional
+- (void) singleTappedCell;
+@end
+
 
 @class OPProvider;
 @interface OPContentCell : UICollectionViewCell <UIActivityItemSource>
 
+// used for zooming of image
 @property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;
+
 @property (strong, nonatomic) OPImageItem* item;
 @property (strong, nonatomic) OPProvider* provider;
 
@@ -50,14 +57,11 @@
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property BOOL showingUI;
+@property (strong, nonatomic) id delegate;
 
 //- (IBAction)backTapped:(id)sender;
 //- (IBAction)shareTapped:(id)sender;
 //- (IBAction)favoriteTapped:(id)sender;
-
-- (void) fadeOutUIWithCompletion:(void (^)(BOOL finished))completion;
-- (void) fadeInUIWithCompletion:(void (^)(BOOL finished))completion;
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
 //- (void) setupForGridLayout;

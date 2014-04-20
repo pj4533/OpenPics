@@ -7,8 +7,9 @@
 //
 
 #import "OPImageCollectionViewController.h"
+#import "OPContentCell.h"
 
-@interface OPImageCollectionViewController ()
+@interface OPImageCollectionViewController () <OPContentCellDelegate> 
 
 @end
 
@@ -29,6 +30,13 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // set all the delegates here
+    for (OPContentCell* cell in self.collectionView.visibleCells) {
+        cell.delegate = self;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -45,5 +53,47 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)prefersStatusBarHidden {
+    return self.hidesUI;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    
+    return UIStatusBarAnimationFade;
+}
+
+
+#pragma mark OPContentCellDelegate
+
+- (void) singleTappedCell {
+    self.hidesUI = !self.hidesUI;
+    
+//    CGRect barFrame = self.navigationController.navigationBar.frame;
+    
+    CGFloat alpha = (self.hidesUI) ? 0.0 : 1.0;
+    
+    [UIView animateWithDuration:0.33 animations:^(void) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }];
+    
+    [UIView animateWithDuration:0.33 animations:^(void) {
+        
+        [self.navigationController.navigationBar setAlpha:alpha];
+        
+    }];
+
+    
+//    [UIView animateWithDuration:0.33 animations:^{
+//        [self setNeedsStatusBarAppearanceUpdate];
+//        self.navigationController.navigationBar.alpha = alpha;
+//    }];
+//    
+//    self.navigationController.navigationBar.frame = CGRectZero;
+//    self.navigationController.navigationBar.frame = barFrame;
+}
+
 
 @end

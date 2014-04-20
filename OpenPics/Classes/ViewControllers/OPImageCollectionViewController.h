@@ -11,4 +11,6 @@
 
 @interface OPImageCollectionViewController : OPCollectionViewController
 
+@property BOOL hidesUI;
+
 @end
