@@ -288,8 +288,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
         }
         
         NSString* titleString = @"";
-        NSString* latitude = nil;
-        NSString* longitude = nil;
         if (sourceResourceDict) {
             id title = sourceResourceDict[@"title"];
             
@@ -301,27 +299,6 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                 else
                     NSLog(@"ERROR TITLE IS: %@", [title class]);
             }
-            
-            id spatial = sourceResourceDict[@"spatial"];
-            
-            if (spatial) {
-                if ([spatial isKindOfClass:[NSArray class]]) {
-                    NSString* coordinates = spatial[0][@"coordinates"];
-                    if (coordinates) {
-                        NSArray* commaComponents = [coordinates componentsSeparatedByString:@", "];
-                        latitude = commaComponents[0];
-                        longitude = commaComponents[1];
-                    }
-                } else if ([spatial isKindOfClass:[NSDictionary class]]) {
-                    NSString* coordinates = spatial[@"coordinates"];
-                    if (coordinates) {
-                        NSArray* commaComponents = [coordinates componentsSeparatedByString:@", "];
-                        latitude = commaComponents[0];
-                        longitude = commaComponents[1];
-                    }
-                } else
-                    NSLog(@"ERROR SPATIAL IS: %@", [spatial class]);
-            }
         }
         if (imageUrl) {
             NSMutableDictionary* opImageDict = [@{
@@ -330,12 +307,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                                           @"providerSpecific" : providerSpecific,
                                           @"providerType": self.providerType
                                           } mutableCopy];
-            
-            if (latitude && longitude) {
-                opImageDict[@"latitude"] = latitude;
-                opImageDict[@"longitude"] = longitude;
-            }
-            
+                        
             if (providerUrl) {
                 opImageDict[@"providerUrl"] = providerUrl;
             }
