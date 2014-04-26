@@ -14,6 +14,7 @@
     NSNumber* _currentPage;
     BOOL _isSearching;
     NSString* _currentQueryString;
+    UIPopoverController* _popover;
 }
 
 @property (strong, nonatomic) NSMutableArray* items;

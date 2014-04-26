@@ -17,7 +17,6 @@
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
-    UIPopoverController* _popover;    
 }
 
 @end

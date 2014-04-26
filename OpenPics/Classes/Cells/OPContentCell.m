@@ -33,14 +33,9 @@
 #import "OPProvider.h"
 #import "OPProviderController.h"
 #import "OPBackend.h"
-#import "SVProgressHUD.h"
-#import "TUSafariActivity.h"
 
 @interface OPContentCell () {
-    UIPopoverController* _popover;
     AFHTTPRequestOperation* _upRezOperation;
-    
-    NSString* _completedString;
     
     BOOL _shouldForceReloadOnBack;
 }
@@ -85,59 +80,6 @@
 
 #pragma mark - Actions
 
-//- (IBAction)shareTapped:(id)sender {
-//    
-//    NSMutableArray* appActivities = [NSMutableArray array];
-//    
-//    TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
-//    [appActivities addObject:openInSafari];
-//    
-//
-//    UIActivityViewController *shareSheet;
-//    if (self.item.providerUrl) {
-//        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self,self.item.providerUrl]
-//                                                       applicationActivities:appActivities];
-//    } else {
-//        shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self]
-//                                                       applicationActivities:appActivities];
-//    }
-//    
-//    
-////    SHOW ONLY AFTER VC GOES AWAY
-//    [shareSheet setCompletionHandler:^(NSString *activityType, BOOL completed) {
-//        if (completed) {
-//            [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                     selector:@selector(keyboardDidHide:)
-//                                                         name:UIKeyboardDidHideNotification
-//                                                       object:nil];
-//
-//            if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-//                _completedString = @"Posted!";
-//            } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
-//                _completedString = @"Posted!";
-//            } else if ([activityType isEqualToString:UIActivityTypeMail]) {
-//                _completedString = @"Sent!";
-//            } else if ([activityType isEqualToString:UIActivityTypeSaveToCameraRoll]) {
-//                _completedString = @"Saved!";
-//            }
-//        } else {
-//            _completedString = nil;
-//        }
-//    }];
-//    
-//    shareSheet.excludedActivityTypes = @[UIActivityTypeMail,UIActivityTypeCopyToPasteboard,UIActivityTypePostToWeibo,UIActivityTypeAssignToContact, UIActivityTypeMessage, UIActivityTypePrint];
-//    
-//    if (_popover) {
-//        [_popover dismissPopoverAnimated:YES];
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        [self.mainViewController presentViewController:shareSheet animated:YES completion:nil];
-//    } else {
-//        _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
-//        [_popover presentPopoverFromRect:self.shareBackgroundView.frame inView:self.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//    }
-//}
 //
 //- (IBAction)favoriteTapped:(id)sender {
 //    if ([[OPBackend shared] didUserCreateItem:self.item]) {
@@ -298,57 +240,6 @@
         } else {
             self.internalScrollView.imageView.contentMode = UIViewContentModeCenter;
         }
-    }
-}
-
-#pragma mark - UIActivityDataSource
-
-- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
-    return self.internalScrollView.imageView.image;
-}
-
-- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
-    
-    if ([activityType isEqualToString:NSStringFromClass([TUSafariActivity class])]) {
-        return self.item.providerUrl;
-    }
-    
-    if (self.internalScrollView.zoomScale == 1.0) {
-        NSDictionary* returnItem = @{
-                                     @"image":self.internalScrollView.imageView.image,
-                                     @"title":self.item.title,
-                                     @"imageUrl":self.item.imageUrl
-                                     };
-        return returnItem;
-    }
-    
-    CGRect rect = CGRectMake(0, 0, self.internalScrollView.frame.size.width, self.internalScrollView.frame.size.height);
-    CGSize pageSize = rect.size;
-    UIGraphicsBeginImageContext(pageSize);
-    
-    CGContextRef resizedContext = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(resizedContext, -self.internalScrollView.contentOffset.x, -self.internalScrollView.contentOffset.y);
-    [self.internalScrollView.layer renderInContext:resizedContext];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSDictionary* returnItem = @{
-                                 @"image":image,
-                                 @"title":self.item.title
-                                 };
-    return returnItem;
-    
-}
-
-#pragma mark Notifications
-
-- (void) keyboardDidHide:(id) note {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    if (_completedString) {
-        [SVProgressHUD showSuccessWithStatus:_completedString];
-    } else {
-        [SVProgressHUD showErrorWithStatus:@"Failed"];
     }
 }
 
