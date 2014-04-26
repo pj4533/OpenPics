@@ -44,7 +44,6 @@
 #warning fit or fill?
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
-        self.imageView.backgroundColor = [UIColor blackColor];
         [self addSubview:self.imageView];
     }
     
@@ -67,7 +66,6 @@
 #warning fit or fill
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
-        self.imageView.backgroundColor = [UIColor blackColor];
         [self addSubview:self.imageView];
     }
     

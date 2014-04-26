@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class OPProvider;
-@interface OPCollectionViewController : UICollectionViewController
+@interface OPCollectionViewController : UICollectionViewController {
+    BOOL _canLoadMore;
+    NSNumber* _currentPage;
+    BOOL _isSearching;
+    NSString* _currentQueryString;
+}
 
 @property (strong, nonatomic) NSMutableArray* items;
 @property (strong, nonatomic) OPProvider* currentProvider;
+
+- (void) doInitialSearch;
+- (void) getMoreItems;
 
 @end

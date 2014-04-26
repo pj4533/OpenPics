@@ -14,7 +14,7 @@
 		0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */; };
 		0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
 		0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */; };
-		0A1DCDFA18DDE720003F4418 /* OPRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */; };
+		0A1DCDFA18DDE720003F4418 /* OPProviderCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */; };
 		0A1DCDFB18DDE720003F4418 /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */; };
 		0A1DCDFC18DDE720003F4418 /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF518DDE720003F4418 /* OPViewController.m */; };
 		0A1DCDFD18DDE720003F4418 /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF618DDE720003F4418 /* OPViewController.xib */; };
@@ -90,8 +90,8 @@
 		0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
 		0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
 		0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
-		0A1DCDF018DDE720003F4418 /* OPRootCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRootCollectionViewController.h; sourceTree = "<group>"; };
-		0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRootCollectionViewController.m; sourceTree = "<group>"; };
+		0A1DCDF018DDE720003F4418 /* OPProviderCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderCollectionViewController.h; sourceTree = "<group>"; };
+		0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderCollectionViewController.m; sourceTree = "<group>"; };
 		0A1DCDF218DDE720003F4418 /* OPSingleImageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSingleImageLayout.h; sourceTree = "<group>"; };
 		0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSingleImageLayout.m; sourceTree = "<group>"; };
 		0A1DCDF418DDE720003F4418 /* OPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPViewController.h; sourceTree = "<group>"; };
@@ -236,8 +236,8 @@
 			children = (
 				0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */,
 				0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */,
-				0A1DCDF018DDE720003F4418 /* OPRootCollectionViewController.h */,
-				0A1DCDF118DDE720003F4418 /* OPRootCollectionViewController.m */,
+				0A1DCDF018DDE720003F4418 /* OPProviderCollectionViewController.h */,
+				0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */,
 				0AF4CB2118DDF18700B10441 /* OPCollectionViewController.h */,
 				0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */,
 				0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */,
@@ -642,7 +642,7 @@
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
 				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
-				0A1DCDFA18DDE720003F4418 /* OPRootCollectionViewController.m in Sources */,
+				0A1DCDFA18DDE720003F4418 /* OPProviderCollectionViewController.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,

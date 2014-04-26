@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Say Goodnight Software. All rights reserved.
 //
 
-#import "OPRootCollectionViewController.h"
+#import "OPProviderCollectionViewController.h"
 #import "OPImageCollectionViewController.h"
 #import "SVProgressHUD.h"
 #import "OPProvider.h"
@@ -14,20 +14,29 @@
 #import "SGSStaggeredFlowLayout.h"
 #import "OPContentCell.h"
 
-@interface OPRootCollectionViewController () <UINavigationControllerDelegate> {
-    BOOL _canLoadMore;
-    
-    NSNumber* _currentPage;
-    
+@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate> {
+    UISearchBar* _searchBar;
+    UIBarButtonItem* _sourceButton;
+    UIPopoverController* _popover;    
 }
 
 @end
 
-@implementation OPRootCollectionViewController
+@implementation OPProviderCollectionViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 1024.0f, 44.0f)];
+    _searchBar.delegate = self;
+    _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName]
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(sourceTapped)],
+
+    self.navigationItem.titleView = _searchBar;
+    self.navigationItem.rightBarButtonItem = _sourceButton;
     
     [self doInitialSearch];
 }
@@ -36,6 +45,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - actions
+
+- (void) sourceTapped {
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
+    providerListViewController.delegate = self;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:providerListViewController animated:YES completion:nil];
+    } else {
+        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+        [_popover presentPopoverFromBarButtonItem:_sourceButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -82,8 +109,6 @@
     imageVC.currentProvider = self.currentProvider;
 }
 
-#pragma mark - Loading Data Helper Functions
-
 //- (void) forceReload {
 //    _canLoadMore = NO;
 //    _currentPage = [NSNumber numberWithInteger:1];
@@ -95,58 +120,6 @@
 //    [self doInitialSearch];
 //}
 //
-- (void) loadInitialPageWithItems:(NSArray*) items {
-    [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-    
-    [SVProgressHUD dismiss];
-    self.items = [items mutableCopy];
-    [self.collectionView reloadData];
-}
-
-- (void) doInitialSearch {
-    if (self.currentProvider.supportsInitialSearching) {
-        _currentPage = [NSNumber numberWithInteger:1];
-        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
-        [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
-            _canLoadMore = canLoadMore;
-            [self loadInitialPageWithItems:items];
-        } failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"Search failed."];
-        }];
-    }
-}
-
-//- (void) getMoreItems {
-//    _canLoadMore = NO;
-//    _isSearching = YES;
-//    OPProvider* providerSearched = self.currentProvider;
-//    [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
-//        if ([_currentPage isEqual:@1]) {
-//            _canLoadMore = canLoadMore;
-//            _isSearching = NO;
-//            [self loadInitialPageWithItems:items];
-//        } else {
-//            NSInteger offset = [self.items count];
-//            
-//            // TODO: use performBatch when bug is fixed in UICollectionViews with headers
-//            NSMutableArray* indexPaths = [NSMutableArray array];
-//            for (int i = 0; i < items.count; i++) {
-//                [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
-//            }
-//            
-//            [SVProgressHUD dismiss];
-//            _isSearching = NO;
-//            if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
-//                [self.items addObjectsFromArray:items];
-//                [self.internalCollectionView insertItemsAtIndexPaths:indexPaths];
-//            }
-//            _canLoadMore = canLoadMore;
-//            
-//        }
-//    } failure:^(NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"Search failed."];
-//    }];
-//}
 
 //#pragma mark - UICollectionViewDelegateFlowLayout
 //
@@ -207,6 +180,85 @@
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
     [cell setupForSingleImageLayoutAnimated:YES];
+}
+
+#pragma mark - OPProviderListDelegate
+
+- (void)tappedProvider:(OPProvider *)provider {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerName];
+    
+    self.currentProvider = provider;
+    _canLoadMore = NO;
+    _isSearching = NO;
+    _currentPage = [NSNumber numberWithInteger:1];
+    _currentQueryString = @"";
+    self.items = [@[] mutableCopy];
+    [self.collectionView reloadData];
+    [self doInitialSearch];
+    
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+}
+
+#pragma mark Notifications
+
+- (void) keyboardDidHide:(id) note {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    _canLoadMore = NO;
+    _currentPage = [NSNumber numberWithInteger:1];
+    _currentQueryString = _searchBar.text;
+    self.items = [@[] mutableCopy];
+    [self.collectionView reloadData];
+    
+    //    [self.flowLayout invalidateLayout];
+    
+    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
+    [self getMoreItems];
+}
+
+#pragma mark - DERPIN
+
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake ) {
+        [self.view endEditing:YES];
+        
+        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+        NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
+        if (uprezMode && uprezMode.boolValue) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BOOM!"
+                                                            message:@"Exiting full uprez mode."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [currentDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"uprezMode"];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BOOM!"
+                                                            message:@"Entering full uprez mode."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [currentDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"uprezMode"];
+        }
+        [currentDefaults synchronize];
+    }
 }
 
 @end

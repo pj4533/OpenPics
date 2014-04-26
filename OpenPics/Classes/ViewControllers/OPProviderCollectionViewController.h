@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "OPCollectionViewController.h"
 
-@interface OPRootCollectionViewController : OPCollectionViewController
+@interface OPProviderCollectionViewController : OPCollectionViewController
 
 @end

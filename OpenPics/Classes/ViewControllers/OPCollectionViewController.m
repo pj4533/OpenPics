@@ -68,6 +68,7 @@
 //        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
 //        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 //    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +87,61 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Loading Data Helper Functions
+
+- (void) doInitialSearch {
+    if (self.currentProvider.supportsInitialSearching) {
+        _currentPage = [NSNumber numberWithInteger:1];
+        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
+        [self.currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
+            _canLoadMore = canLoadMore;
+            [self loadInitialPageWithItems:items];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Search failed."];
+        }];
+    }
+}
+
+- (void) loadInitialPageWithItems:(NSArray*) items {
+    [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+    
+    [SVProgressHUD dismiss];
+    self.items = [items mutableCopy];
+    [self.collectionView reloadData];
+}
+
+- (void) getMoreItems {
+    _canLoadMore = NO;
+    _isSearching = YES;
+    OPProvider* providerSearched = self.currentProvider;
+    [self.currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
+        if ([_currentPage isEqual:@1]) {
+            _canLoadMore = canLoadMore;
+            _isSearching = NO;
+            [self loadInitialPageWithItems:items];
+        } else {
+            NSInteger offset = [self.items count];
+            
+            // TODO: use performBatch when bug is fixed in UICollectionViews with headers
+            NSMutableArray* indexPaths = [NSMutableArray array];
+            for (int i = 0; i < items.count; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
+            }
+            
+            [SVProgressHUD dismiss];
+            _isSearching = NO;
+            if ([providerSearched.providerType isEqualToString:self.currentProvider.providerType]) {
+                [self.items addObjectsFromArray:items];
+                [self.collectionView insertItemsAtIndexPaths:indexPaths];
+            }
+            _canLoadMore = canLoadMore;
+            
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"Search failed."];
+    }];
+}
 
 #pragma mark - OPImageManagerDelegate
 
@@ -159,10 +215,10 @@
 //                [cell.contentView addSubview:activity];
 //            }
 //        }
-        
-        cell.internalScrollView.userInteractionEnabled = NO;
-        cell.internalScrollView.imageView.image = nil;
-        return cell;
+//        
+//        cell.internalScrollView.userInteractionEnabled = NO;
+//        cell.internalScrollView.imageView.image = nil;
+//        return cell;
     }
     
     OPImageItem* item = self.items[indexPath.item];

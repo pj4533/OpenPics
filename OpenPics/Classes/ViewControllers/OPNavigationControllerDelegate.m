@@ -8,7 +8,7 @@
 
 #import "OPNavigationControllerDelegate.h"
 #import "OPImageCollectionViewController.h"
-#import "OPRootCollectionViewController.h"
+#import "OPProviderCollectionViewController.h"
 #import "OPContentCell.h"
 
 @implementation OPNavigationControllerDelegate
@@ -42,7 +42,7 @@
         if ([viewController isMemberOfClass:[OPImageCollectionViewController class]]) {
             collectionViewController.collectionView.pagingEnabled = YES;
             viewController.automaticallyAdjustsScrollViewInsets = NO;
-        } else if ([viewController isMemberOfClass:[OPRootCollectionViewController class]]) {
+        } else if ([viewController isMemberOfClass:[OPProviderCollectionViewController class]]) {
             collectionViewController.collectionView.pagingEnabled = NO;
             topInset = 64.0f;
             viewController.automaticallyAdjustsScrollViewInsets = YES;
@@ -64,7 +64,7 @@
         UICollectionViewController* collectionViewController = (UICollectionViewController*) viewController;
         [collectionViewController.collectionViewLayout invalidateLayout];
         
-        if ([viewController isMemberOfClass:[OPRootCollectionViewController class]]) {
+        if ([viewController isMemberOfClass:[OPProviderCollectionViewController class]]) {
             for (OPContentCell* cell in collectionViewController.collectionView.visibleCells) {
                 cell.internalScrollView.userInteractionEnabled = NO;
                 if (cell.internalScrollView.zoomScale != 1.0f) {
