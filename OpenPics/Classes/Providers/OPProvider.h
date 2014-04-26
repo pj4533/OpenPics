@@ -32,6 +32,7 @@
 
 @property (strong, nonatomic) NSString* providerType;
 @property (strong, nonatomic) NSString* providerName;
+@property (strong, nonatomic) NSString* providerShortName;
 
 // This means the provider has an initial search, for a more passive experience of browsing
 //    DEFAULT:  NO

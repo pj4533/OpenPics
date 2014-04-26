@@ -39,6 +39,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Digital Public Library of America";
+        self.providerShortName = @"DPLA";
     }
     return self;
 }

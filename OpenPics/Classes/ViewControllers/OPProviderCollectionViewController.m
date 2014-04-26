@@ -17,6 +17,7 @@
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
+    UIToolbar* _toolbar;
 }
 
 @end
@@ -29,13 +30,30 @@
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 1024.0f, 44.0f)];
     _searchBar.delegate = self;
-    _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", self.currentProvider.providerName]
+    _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", self.currentProvider.providerShortName]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(sourceTapped)],
 
     self.navigationItem.titleView = _searchBar;
-    self.navigationItem.rightBarButtonItem = _sourceButton;
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        CGRect frame, remain;
+        CGRectDivide(self.view.bounds, &frame, &remain, 44, CGRectMaxYEdge);
+        _toolbar = [[UIToolbar alloc] initWithFrame:frame];
+        [_toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+        _toolbar.items = @[
+                          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                          _sourceButton,
+                          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]
+                          ];
+        [self.view addSubview:_toolbar];
+    } else {
+        self.navigationItem.rightBarButtonItem = _sourceButton;
+    }
+    
+    
     
     [self doInitialSearch];
 }
@@ -44,6 +62,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.view bringSubviewToFront:_toolbar];
 }
 
 #pragma mark - actions
@@ -190,7 +212,7 @@
         [_popover dismissPopoverAnimated:YES];
     }
     
-    _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerName];
+    _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerShortName];
     
     self.currentProvider = provider;
     _canLoadMore = NO;
@@ -204,6 +226,18 @@
 }
 
 #pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];

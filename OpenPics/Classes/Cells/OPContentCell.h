@@ -36,7 +36,7 @@
 
 
 @class OPProvider;
-@interface OPContentCell : UICollectionViewCell <UIActivityItemSource>
+@interface OPContentCell : UICollectionViewCell
 
 // used for zooming of image
 @property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;

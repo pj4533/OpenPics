@@ -43,6 +43,14 @@
     return YES;
 }
 
+- (NSString*) providerShortName {
+    if (!_providerShortName) {
+        return self.providerName;
+    }
+    
+    return _providerShortName;
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success

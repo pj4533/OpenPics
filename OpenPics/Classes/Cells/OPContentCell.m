@@ -32,7 +32,6 @@
 #import "OPPopularProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
-#import "OPBackend.h"
 
 @interface OPContentCell () {
     AFHTTPRequestOperation* _upRezOperation;
@@ -79,26 +78,6 @@
 */
 
 #pragma mark - Actions
-
-//
-//- (IBAction)favoriteTapped:(id)sender {
-//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-//        [[OPBackend shared] removeItem:self.item];
-//        [self setButtonToFavorite];
-//        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
-//    } else {
-//        [[OPBackend shared] saveItem:self.item];
-//        [self setButtonToRemoveFavorite];
-//        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
-//    }
-//
-//    if ([self.provider.providerType isEqualToString:OPProviderTypeFavorites] || [self.provider.providerType isEqualToString:OPProviderTypePopular]) {
-//        _shouldForceReloadOnBack = YES;
-//    } else {
-//        _shouldForceReloadOnBack = NO;
-//    }
-//    
-//}
 
 //- (IBAction)backTapped:(id)sender {
 //

@@ -10,9 +10,12 @@
 #import "OPContentCell.h"
 #import "TUSafariActivity.h"
 #import "SVProgressHUD.h"
+#import "OPBackend.h"
 
-@interface OPImageCollectionViewController () <OPContentCellDelegate>  {
+@interface OPImageCollectionViewController () <OPContentCellDelegate, UIActivityItemSource>  {
     NSString* _completedString;
+    UIToolbar* _toolbar;
+    UIBarButtonItem* _favoriteButton;
 }
 
 @end
@@ -32,11 +35,33 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)];
+    CGRect frame, remain;
+    CGRectDivide(self.view.bounds, &frame, &remain, 44, CGRectMaxYEdge);
+    _toolbar = [[UIToolbar alloc] initWithFrame:frame];
+    [_toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    _favoriteButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Favorite" style:UIBarButtonItemStylePlain target:self action:@selector(favoriteTapped:)];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        _toolbar.items = @[
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           _favoriteButton
+                           ];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)];
 
+        _toolbar.items = @[
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           _favoriteButton
+                           ];
+    }
+
+    [self.view addSubview:_toolbar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self.view bringSubviewToFront:_toolbar];
+
     // set all the delegates here
     for (OPContentCell* cell in self.collectionView.visibleCells) {
         cell.delegate = self;
@@ -67,6 +92,24 @@
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     
     return UIStatusBarAnimationFade;
+}
+
+
+- (IBAction)favoriteTapped:(id)sender {
+    if (self.collectionView.visibleCells.count != 1)
+        return;
+    
+    OPContentCell* cell = (OPContentCell*) self.collectionView.visibleCells[0];
+
+    if ([[OPBackend shared] didUserCreateItem:cell.item]) {
+        [[OPBackend shared] removeItem:cell.item];
+        _favoriteButton.title = @"Add Favorite";
+        [SVProgressHUD showSuccessWithStatus:@"Removed Favorite."];
+    } else {
+        [[OPBackend shared] saveItem:cell.item];
+        _favoriteButton.title = @"Remove Favorite";
+        [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
+    }
 }
 
 - (IBAction)actionTapped:(id)sender {

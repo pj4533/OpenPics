@@ -34,6 +34,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"National Library of Australia - Trove";
+        self.providerShortName = @"NLA - Trove";
     }
     return self;
 }
