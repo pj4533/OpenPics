@@ -48,6 +48,7 @@
 
 #import "TMCache.h"
 #import <Appsee/Appsee.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface OPAppDelegate () {
 }
@@ -66,6 +67,10 @@
 #ifdef kOPAPPTOKEN_APPSEE_RELEASE
     [Appsee start:kOPAPPTOKEN_APPSEE_RELEASE];
 #endif
+#endif
+    
+#ifdef kOPAPPTOKEN_CRASHLYTICS_APP
+    [Crashlytics startWithAPIKey:kOPAPPTOKEN_CRASHLYTICS_APP];
 #endif
     
     

@@ -24,6 +24,7 @@
 		0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
 		0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
 		0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
+		0A445B0E190C05F300D31FC6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A445B0D190C05F300D31FC6 /* Crashlytics.framework */; };
 		0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */; };
 		0A44CBFD171074EF00D7C1B6 /* OPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
@@ -107,6 +108,7 @@
 		0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DefObject.m"; sourceTree = "<group>"; };
 		0A36FA8718D49EAB00BCA5C1 /* OPEuropeanaProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPEuropeanaProvider.h; sourceTree = "<group>"; };
 		0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPEuropeanaProvider.m; sourceTree = "<group>"; };
+		0A445B0D190C05F300D31FC6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0A44CBE1171074EF00D7C1B6 /* OPContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPContentCell.h; sourceTree = "<group>"; };
 		0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPContentCell.m; sourceTree = "<group>"; };
 		0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPContentCell.xib; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				0AF34E761745A5A20019DEE0 /* CoreTelephony.framework in Frameworks */,
 				0AF34E741745A59B0019DEE0 /* CoreLocation.framework in Frameworks */,
 				0AF34E721745A58F0019DEE0 /* CFNetwork.framework in Frameworks */,
+				0A445B0E190C05F300D31FC6 /* Crashlytics.framework in Frameworks */,
 				0AF34E701745A5780019DEE0 /* Accounts.framework in Frameworks */,
 				0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */,
 				0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */,
@@ -405,6 +408,7 @@
 		0A609EB8171072BD0084735B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A445B0D190C05F300D31FC6 /* Crashlytics.framework */,
 				0A8A81FC18CCBDEE001AED56 /* Social.framework */,
 				0AF34E811745A5D40019DEE0 /* Twitter.framework */,
 				0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */,
@@ -524,6 +528,7 @@
 				0A609EB3171072BD0084735B /* Frameworks */,
 				0A609EB4171072BD0084735B /* Resources */,
 				811ED3184DA5491EA4541985 /* Copy Pods Resources */,
+				0A445B0C190C05A300D31FC6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -582,6 +587,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A445B0C190C05A300D31FC6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Scripts/crashlytics.sh;
+		};
 		0A5C19371711BB5D00979A7C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -593,7 +611,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\n";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch Scripts/crashlytics.sh\nchmod +x Scripts/crashlytics.sh\n";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -745,7 +763,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
@@ -768,7 +787,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
