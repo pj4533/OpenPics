@@ -14,7 +14,7 @@
 #import "SGSStaggeredFlowLayout.h"
 #import "OPContentCell.h"
 
-@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate> {
+@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
     UIToolbar* _toolbar;
@@ -195,6 +195,15 @@
 //        [self switchToSingleImageWithIndexPath:indexPath];
 //    }
 //}
+
+#pragma mark OPContentCellDelegate
+
+- (void) singleTappedCell {
+    if ([self.navigationController.topViewController isKindOfClass:[OPImageCollectionViewController class]]) {
+        OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) self.navigationController.topViewController;
+        [imageVC toggleUIHidden];
+    }
+}
 
 #pragma mark - UICollectionViewDelegate
 

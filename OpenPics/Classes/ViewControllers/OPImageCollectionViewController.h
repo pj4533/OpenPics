@@ -11,6 +11,6 @@
 
 @interface OPImageCollectionViewController : OPCollectionViewController
 
-@property BOOL hidesUI;
+- (void)toggleUIHidden;
 
 @end

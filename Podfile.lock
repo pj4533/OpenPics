@@ -37,6 +37,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.1.2)
   - FormatterKit/URLRequestFormatter (1.1.2)
   - KissXML (5.0)
+  - Reveal-iOS-SDK (1.0.3)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
   - TMCache (1.2.0)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - Appsee (~> 2.0.8)
   - FormatterKit (~> 1.1.1)
   - KissXML
+  - Reveal-iOS-SDK
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD (~> 1.0)
   - TMCache
@@ -60,12 +62,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
   AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
-  Appsee: 5409a98432989245698ea839dcb9a62e1229ba55
+  Appsee: a23de1c9b8a53aaef7b085b76492810155309673
   FormatterKit: bb53f3de30773e6b06f91dee1f82b46f536278d7
   KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
+  Reveal-iOS-SDK: 8e6a6f22a9520437e4a180fe1d4e99f43b75430e
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
   TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27
   TUSafariActivity: bd9da588f5f9136ba445d89f8f86b6dccf4d46ba
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1

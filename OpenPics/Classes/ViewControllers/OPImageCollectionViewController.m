@@ -12,10 +12,11 @@
 #import "SVProgressHUD.h"
 #import "OPBackend.h"
 
-@interface OPImageCollectionViewController () <OPContentCellDelegate, UIActivityItemSource>  {
+@interface OPImageCollectionViewController () <UIActivityItemSource>  {
     NSString* _completedString;
     UIToolbar* _toolbar;
     UIBarButtonItem* _favoriteButton;
+    BOOL _hidesUI;
 }
 
 @end
@@ -61,11 +62,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.view bringSubviewToFront:_toolbar];
-
-    // set all the delegates here
-    for (OPContentCell* cell in self.collectionView.visibleCells) {
-        cell.delegate = self;
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,8 +81,28 @@
 }
 */
 
+- (void)toggleUIHidden {
+    _hidesUI = !_hidesUI;
+    
+    //    CGRect barFrame = self.navigationController.navigationBar.frame;
+    
+    CGFloat alpha = (_hidesUI) ? 0.0 : 1.0;
+
+    // TODO: This makes the cell
+    [self setNeedsStatusBarAppearanceUpdate];
+    self.collectionView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+    self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+    self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, 0.0);
+    
+    [UIView animateWithDuration:0.33 animations:^(void) {
+        
+        [self.navigationController.navigationBar setAlpha:alpha];
+        [_toolbar setAlpha:alpha];
+    }];
+}
+
 - (BOOL)prefersStatusBarHidden {
-    return self.hidesUI;
+    return _hidesUI;
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
@@ -168,37 +184,6 @@
         _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
         [_popover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-}
-
-#pragma mark OPContentCellDelegate
-
-- (void) singleTappedCell {
-    self.hidesUI = !self.hidesUI;
-    
-//    CGRect barFrame = self.navigationController.navigationBar.frame;
-    
-    CGFloat alpha = (self.hidesUI) ? 0.0 : 1.0;
-    
-    [UIView animateWithDuration:0.33 animations:^(void) {
-        
-        [self setNeedsStatusBarAppearanceUpdate];
-        
-    }];
-    
-    [UIView animateWithDuration:0.33 animations:^(void) {
-        
-        [self.navigationController.navigationBar setAlpha:alpha];
-        
-    }];
-
-    
-//    [UIView animateWithDuration:0.33 animations:^{
-//        [self setNeedsStatusBarAppearanceUpdate];
-//        self.navigationController.navigationBar.alpha = alpha;
-//    }];
-//    
-//    self.navigationController.navigationBar.frame = CGRectZero;
-//    self.navigationController.navigationBar.frame = barFrame;
 }
 
 #pragma mark - UIActivityDataSource

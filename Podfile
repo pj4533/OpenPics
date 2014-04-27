@@ -10,3 +10,7 @@ pod 'TUSafariActivity'
 pod 'KissXML'
 pod 'AFNetworkActivityLogger'
 pod 'Appsee', '~> 2.0.8'
+
+target :OpenPicsReveal do
+      pod 'Reveal-iOS-SDK'
+end

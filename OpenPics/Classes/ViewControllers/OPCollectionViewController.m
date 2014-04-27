@@ -228,7 +228,7 @@
     cell.item = item;
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
-
+    cell.delegate = self;
 
     if ([cv.collectionViewLayout class] == [UICollectionViewFlowLayout class]) {
         [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFit];

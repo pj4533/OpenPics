@@ -10,6 +10,72 @@
 		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
+		0A190003190DA1AF00922EDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
+		0A190004190DA1AF00922EDD /* OPCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2218DDF18700B10441 /* OPCollectionViewController.m */; };
+		0A190005190DA1AF00922EDD /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
+		0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
+		0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */; };
+		0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
+		0A190009190DA1AF00922EDD /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */; };
+		0A19000A190DA1AF00922EDD /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
+		0A19000B190DA1AF00922EDD /* OPProviderCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */; };
+		0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */; };
+		0A19000D190DA1AF00922EDD /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
+		0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */; };
+		0A19000F190DA1AF00922EDD /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
+		0A190010190DA1AF00922EDD /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
+		0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8C118D4A29900EB75F6 /* OPCDLProvider.m */; };
+		0A190012190DA1AF00922EDD /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
+		0A190013190DA1AF00922EDD /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
+		0A190014190DA1AF00922EDD /* OPImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */; };
+		0A190015190DA1AF00922EDD /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
+		0A190016190DA1AF00922EDD /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
+		0A190017190DA1AF00922EDD /* AFNYPLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLSessionManager.m */; };
+		0A190018190DA1AF00922EDD /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
+		0A190019190DA1AF00922EDD /* AFCDLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8BF18D4A29900EB75F6 /* AFCDLSessionManager.m */; };
+		0A19001A190DA1AF00922EDD /* AFLOCSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765D18D2A35F009DCAEE /* AFLOCSessionManager.m */; };
+		0A19001B190DA1AF00922EDD /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
+		0A19001C190DA1AF00922EDD /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */; };
+		0A19001D190DA1AF00922EDD /* OPHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E501710AF5800C29E84 /* OPHeaderReusableView.m */; };
+		0A19001E190DA1AF00922EDD /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */; };
+		0A19001F190DA1AF00922EDD /* OPSingleImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF318DDE720003F4418 /* OPSingleImageLayout.m */; };
+		0A190020190DA1AF00922EDD /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
+		0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
+		0A190022190DA1AF00922EDD /* OPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF518DDE720003F4418 /* OPViewController.m */; };
+		0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
+		0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
+		0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
+		0A190026190DA1AF00922EDD /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
+		0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
+		0A190028190DA1AF00922EDD /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
+		0A190029190DA1AF00922EDD /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
+		0A19002A190DA1AF00922EDD /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
+		0A19002B190DA1AF00922EDD /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFACA6175FEFDB00A35553 /* NSString+MD5.m */; };
+		0A19002D190DA1AF00922EDD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
+		0A19002E190DA1AF00922EDD /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E811745A5D40019DEE0 /* Twitter.framework */; };
+		0A19002F190DA1AF00922EDD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7F1745A5CB0019DEE0 /* SystemConfiguration.framework */; };
+		0A190030190DA1AF00922EDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7D1745A5C00019DEE0 /* Security.framework */; };
+		0A190031190DA1AF00922EDD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E7B1745A5B90019DEE0 /* MobileCoreServices.framework */; };
+		0A190032190DA1AF00922EDD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E791745A5B10019DEE0 /* libz.dylib */; };
+		0A190033190DA1AF00922EDD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E771745A5AA0019DEE0 /* libsqlite3.dylib */; };
+		0A190034190DA1AF00922EDD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E751745A5A20019DEE0 /* CoreTelephony.framework */; };
+		0A190035190DA1AF00922EDD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E731745A59B0019DEE0 /* CoreLocation.framework */; };
+		0A190036190DA1AF00922EDD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E711745A58F0019DEE0 /* CFNetwork.framework */; };
+		0A190037190DA1AF00922EDD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A445B0D190C05F300D31FC6 /* Crashlytics.framework */; };
+		0A190038190DA1AF00922EDD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF34E6F1745A5780019DEE0 /* Accounts.framework */; };
+		0A190039190DA1AF00922EDD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
+		0A19003A190DA1AF00922EDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
+		0A19003B190DA1AF00922EDD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
+		0A19003E190DA1AF00922EDD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
+		0A19003F190DA1AF00922EDD /* OPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A44CBE3171074EF00D7C1B6 /* OPContentCell.xib */; };
+		0A190040190DA1AF00922EDD /* OPHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABF9E521710AF7E00C29E84 /* OPHeaderReusableView.xib */; };
+		0A190041190DA1AF00922EDD /* OPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF618DDE720003F4418 /* OPViewController.xib */; };
+		0A190042190DA1AF00922EDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A25C00018D9251000123D04 /* Images.xcassets */; };
+		0A190043190DA1AF00922EDD /* Main_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */; };
+		0A190044190DA1AF00922EDD /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */; };
+		0A190045190DA1AF00922EDD /* OPHeaderReusableView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A0171B78B000EC8B25 /* OPHeaderReusableView_iPhone.xib */; };
+		0A190046190DA1AF00922EDD /* OPContentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8721A2171B7BC500EC8B25 /* OPContentCell_iPhone.xib */; };
+		0A190047190DA1AF00922EDD /* Main_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */; };
 		0A1DCDE918DDE6F0003F4418 /* Main_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */; };
 		0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */; };
 		0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
@@ -74,6 +140,7 @@
 		0AF4CB2518DF5E2600B10441 /* Main_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */; };
 		0AF4CB2818DF779000B10441 /* OPNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */; };
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
+		774678537CC9415FA25EEC98 /* libPods-OpenPicsReveal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9346E9B4B1744301944A3BB9 /* libPods-OpenPicsReveal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +151,7 @@
 		0A05EF221745A9D300814F0B /* OPBackendTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendTokens.h; sourceTree = "<group>"; };
 		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
 		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
+		0A19004D190DA1AF00922EDD /* OpenPicsReveal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPicsReveal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone.storyboard; sourceTree = "<group>"; };
 		0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageCollectionViewController.h; sourceTree = "<group>"; };
 		0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageCollectionViewController.m; sourceTree = "<group>"; };
@@ -189,11 +257,36 @@
 		0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_ipad.storyboard; sourceTree = "<group>"; };
 		0AF4CB2618DF779000B10441 /* OPNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNavigationControllerDelegate.h; sourceTree = "<group>"; };
 		0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNavigationControllerDelegate.m; sourceTree = "<group>"; };
+		20C8DD13B4014AECACC8B8EE /* Pods-OpenPicsReveal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenPicsReveal.xcconfig"; path = "Pods/Pods-OpenPicsReveal.xcconfig"; sourceTree = "<group>"; };
 		2655F4B36C704F96B3CB86FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		2ABE70FF37354750A3E9054B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9346E9B4B1744301944A3BB9 /* libPods-OpenPicsReveal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenPicsReveal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A19002C190DA1AF00922EDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A19002D190DA1AF00922EDD /* Social.framework in Frameworks */,
+				0A19002E190DA1AF00922EDD /* Twitter.framework in Frameworks */,
+				0A19002F190DA1AF00922EDD /* SystemConfiguration.framework in Frameworks */,
+				0A190030190DA1AF00922EDD /* Security.framework in Frameworks */,
+				0A190031190DA1AF00922EDD /* MobileCoreServices.framework in Frameworks */,
+				0A190032190DA1AF00922EDD /* libz.dylib in Frameworks */,
+				0A190033190DA1AF00922EDD /* libsqlite3.dylib in Frameworks */,
+				0A190034190DA1AF00922EDD /* CoreTelephony.framework in Frameworks */,
+				0A190035190DA1AF00922EDD /* CoreLocation.framework in Frameworks */,
+				0A190036190DA1AF00922EDD /* CFNetwork.framework in Frameworks */,
+				0A190037190DA1AF00922EDD /* Crashlytics.framework in Frameworks */,
+				0A190038190DA1AF00922EDD /* Accounts.framework in Frameworks */,
+				0A190039190DA1AF00922EDD /* UIKit.framework in Frameworks */,
+				0A19003A190DA1AF00922EDD /* Foundation.framework in Frameworks */,
+				0A19003B190DA1AF00922EDD /* CoreGraphics.framework in Frameworks */,
+				774678537CC9415FA25EEC98 /* libPods-OpenPicsReveal.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB3171072BD0084735B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,6 +487,7 @@
 				0A609EB8171072BD0084735B /* Frameworks */,
 				0A609EB7171072BD0084735B /* Products */,
 				2655F4B36C704F96B3CB86FC /* Pods.xcconfig */,
+				20C8DD13B4014AECACC8B8EE /* Pods-OpenPicsReveal.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -401,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				0A609EB6171072BD0084735B /* OpenPics.app */,
+				0A19004D190DA1AF00922EDD /* OpenPicsReveal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -424,6 +519,7 @@
 				0A609EBB171072BD0084735B /* Foundation.framework */,
 				0A609EBD171072BD0084735B /* CoreGraphics.framework */,
 				2ABE70FF37354750A3E9054B /* libPods.a */,
+				9346E9B4B1744301944A3BB9 /* libPods-OpenPicsReveal.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -519,6 +615,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A190000190DA1AF00922EDD /* OpenPicsReveal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A19004A190DA1AF00922EDD /* Build configuration list for PBXNativeTarget "OpenPicsReveal" */;
+			buildPhases = (
+				4BEF80E14BC64729B86FE25D /* Check Pods Manifest.lock */,
+				0A190001190DA1AF00922EDD /* ShellScript */,
+				0A190002190DA1AF00922EDD /* Sources */,
+				0A19002C190DA1AF00922EDD /* Frameworks */,
+				0A19003D190DA1AF00922EDD /* Resources */,
+				0A190048190DA1AF00922EDD /* Copy Pods Resources */,
+				0A190049190DA1AF00922EDD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenPicsReveal;
+			productName = OpenPics;
+			productReference = 0A19004D190DA1AF00922EDD /* OpenPicsReveal.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0A609EB5171072BD0084735B /* OpenPics */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A609ED9171072BE0084735B /* Build configuration list for PBXNativeTarget "OpenPics" */;
@@ -562,11 +679,29 @@
 			projectRoot = "";
 			targets = (
 				0A609EB5171072BD0084735B /* OpenPics */,
+				0A190000190DA1AF00922EDD /* OpenPicsReveal */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A19003D190DA1AF00922EDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A19003E190DA1AF00922EDD /* InfoPlist.strings in Resources */,
+				0A19003F190DA1AF00922EDD /* OPContentCell.xib in Resources */,
+				0A190040190DA1AF00922EDD /* OPHeaderReusableView.xib in Resources */,
+				0A190041190DA1AF00922EDD /* OPViewController.xib in Resources */,
+				0A190042190DA1AF00922EDD /* Images.xcassets in Resources */,
+				0A190043190DA1AF00922EDD /* Main_ipad.storyboard in Resources */,
+				0A190044190DA1AF00922EDD /* OPProviderListViewController.xib in Resources */,
+				0A190045190DA1AF00922EDD /* OPHeaderReusableView_iPhone.xib in Resources */,
+				0A190046190DA1AF00922EDD /* OPContentCell_iPhone.xib in Resources */,
+				0A190047190DA1AF00922EDD /* Main_iphone.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB4171072BD0084735B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,6 +722,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A190001190DA1AF00922EDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch crashlytics.sh\nchmod +x crashlytics.sh\n";
+		};
+		0A190048190DA1AF00922EDD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-OpenPicsReveal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0A190049190DA1AF00922EDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./crashlytics.sh;
+		};
 		0A445B0C190C05A300D31FC6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -613,6 +789,21 @@
 			shellPath = /bin/sh;
 			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch crashlytics.sh\nchmod +x crashlytics.sh\n";
 		};
+		4BEF80E14BC64729B86FE25D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -630,6 +821,54 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A190002190DA1AF00922EDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A190003190DA1AF00922EDD /* main.m in Sources */,
+				0A190004190DA1AF00922EDD /* OPCollectionViewController.m in Sources */,
+				0A190005190DA1AF00922EDD /* AFFlickrSessionManager.m in Sources */,
+				0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */,
+				0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */,
+				0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */,
+				0A190009190DA1AF00922EDD /* OPPopularProvider.m in Sources */,
+				0A19000A190DA1AF00922EDD /* OPAppDelegate.m in Sources */,
+				0A19000B190DA1AF00922EDD /* OPProviderCollectionViewController.m in Sources */,
+				0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */,
+				0A19000D190DA1AF00922EDD /* OPScrollView.m in Sources */,
+				0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */,
+				0A19000F190DA1AF00922EDD /* OPImageItem.m in Sources */,
+				0A190010190DA1AF00922EDD /* OPProviderListViewController.m in Sources */,
+				0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */,
+				0A190012190DA1AF00922EDD /* OPProvider.m in Sources */,
+				0A190013190DA1AF00922EDD /* OPImageManager.m in Sources */,
+				0A190014190DA1AF00922EDD /* OPImageCollectionViewController.m in Sources */,
+				0A190015190DA1AF00922EDD /* OPTroveProvider.m in Sources */,
+				0A190016190DA1AF00922EDD /* OPProviderController.m in Sources */,
+				0A190017190DA1AF00922EDD /* AFNYPLSessionManager.m in Sources */,
+				0A190018190DA1AF00922EDD /* OPNYPLProvider.m in Sources */,
+				0A190019190DA1AF00922EDD /* AFCDLSessionManager.m in Sources */,
+				0A19001A190DA1AF00922EDD /* AFLOCSessionManager.m in Sources */,
+				0A19001B190DA1AF00922EDD /* AFEuropeanaSessionManager.m in Sources */,
+				0A19001C190DA1AF00922EDD /* OPLOCProvider.m in Sources */,
+				0A19001D190DA1AF00922EDD /* OPHeaderReusableView.m in Sources */,
+				0A19001E190DA1AF00922EDD /* OPFavoritesProvider.m in Sources */,
+				0A19001F190DA1AF00922EDD /* OPSingleImageLayout.m in Sources */,
+				0A190020190DA1AF00922EDD /* OPDPLAProvider.m in Sources */,
+				0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */,
+				0A190022190DA1AF00922EDD /* OPViewController.m in Sources */,
+				0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */,
+				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
+				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
+				0A190026190DA1AF00922EDD /* OPFlickrCommonsProvider.m in Sources */,
+				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
+				0A190028190DA1AF00922EDD /* OPBackend.m in Sources */,
+				0A190029190DA1AF00922EDD /* UIImage+Preload.m in Sources */,
+				0A19002A190DA1AF00922EDD /* OPEuropeanaProvider.m in Sources */,
+				0A19002B190DA1AF00922EDD /* NSString+MD5.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB2171072BD0084735B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -692,6 +931,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A19004B190DA1AF00922EDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C8DD13B4014AECACC8B8EE /* Pods-OpenPicsReveal.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
+				INFOPLIST_FILE = "OpenPicsReveal-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = OpenPicsReveal;
+				PROVISIONING_PROFILE = "168810AC-96CC-41A5-ACE0-262ABCAC8C15";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0A19004C190DA1AF00922EDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C8DD13B4014AECACC8B8EE /* Pods-OpenPicsReveal.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
+				INFOPLIST_FILE = "OpenPicsReveal-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = OpenPicsReveal;
+				PROVISIONING_PROFILE = "168810AC-96CC-41A5-ACE0-262ABCAC8C15";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		0A609ED7171072BE0084735B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -805,6 +1092,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A19004A190DA1AF00922EDD /* Build configuration list for PBXNativeTarget "OpenPicsReveal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A19004B190DA1AF00922EDD /* Debug */,
+				0A19004C190DA1AF00922EDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0A609EB1171072BD0084735B /* Build configuration list for PBXProject "OpenPics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
