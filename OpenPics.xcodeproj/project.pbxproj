@@ -598,7 +598,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./Scripts/crashlytics.sh;
+			shellScript = ./crashlytics.sh;
 		};
 		0A5C19371711BB5D00979A7C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -611,7 +611,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch Scripts/crashlytics.sh\nchmod +x Scripts/crashlytics.sh\n";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch crashlytics.sh\nchmod +x crashlytics.sh\n";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
