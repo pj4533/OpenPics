@@ -123,7 +123,7 @@
 //    [self setupLabels];
     
     self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
+    
 //    _shouldForceReloadOnBack = NO;
     
     self.internalScrollView.userInteractionEnabled = YES;

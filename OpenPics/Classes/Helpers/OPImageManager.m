@@ -144,7 +144,8 @@
 
 }
 
-- (void) loadImageFromItem:(OPImageItem*) item toImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath {
+- (void) loadImageFromItem:(OPImageItem*) item toImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath withContentMode:(UIViewContentMode)contentMode
+{
     [imageView fadeInHourglassWithCompletion:^{
         [self getImageForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
 // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
@@ -157,8 +158,7 @@
                         [UIView animateWithDuration:0.25 animations:^{
                             imageView.alpha = 0.0;
                         } completion:^(BOOL finished) {
-#warning AspectFit or fill?
-                            imageView.contentMode = UIViewContentModeScaleAspectFill;
+                            imageView.contentMode = contentMode;
                             imageView.image = image;
                             
                             // fade in image

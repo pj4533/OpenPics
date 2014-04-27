@@ -36,7 +36,8 @@
 
 - (void) loadImageFromItem:(OPImageItem*)item
                toImageView:(UIImageView*)imageView
-               atIndexPath:(NSIndexPath*)indexPath;
+               atIndexPath:(NSIndexPath*)indexPath
+           withContentMode:(UIViewContentMode)contentMode;
 
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath;
 

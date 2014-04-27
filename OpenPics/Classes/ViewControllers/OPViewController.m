@@ -340,7 +340,7 @@
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
     
-    [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
+//    [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
     
     return cell;
 }

@@ -228,8 +228,14 @@
     cell.item = item;
     cell.indexPath = indexPath;
     cell.internalScrollView.userInteractionEnabled = NO;
-    
-    [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath];
+
+
+    if ([cv.collectionViewLayout class] == [UICollectionViewFlowLayout class]) {
+        [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFit];
+        [cell setupForSingleImageLayoutAnimated:NO];
+    } else {
+        [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFill];
+    }
     
     return cell;
 }
