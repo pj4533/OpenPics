@@ -240,7 +240,7 @@
     cell.internalScrollView.userInteractionEnabled = NO;
     cell.delegate = self;
 
-    if ([cv.collectionViewLayout class] == [UICollectionViewFlowLayout class]) {
+    if (cell.frame.size.width > 200) {
         [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFit];
         [cell setupForSingleImageLayoutAnimated:NO];
     } else {
