@@ -29,7 +29,6 @@
 #import "OPAppTokens.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "AFNetworkActivityLogger.h"
-#import "OPViewController.h"
 #import "OPProviderController.h"
 
 #import "OPNYPLProvider.h"

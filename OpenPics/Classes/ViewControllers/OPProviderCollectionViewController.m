@@ -7,6 +7,7 @@
 //
 
 #import "OPProviderCollectionViewController.h"
+#import "OPProviderListViewController.h"
 #import "OPImageCollectionViewController.h"
 #import "SVProgressHUD.h"
 #import "OPProvider.h"
@@ -86,39 +87,6 @@
     }
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*) collectionViewLayout;
-    CGSize cellSize = flowLayout.itemSize;
-    
-    if ([collectionViewLayout isKindOfClass:[SGSStaggeredFlowLayout class]]) {
-        CGSize imageSize = CGSizeZero;
-        if (indexPath.item < self.items.count) {
-            OPImageItem* item = self.items[indexPath.item];
-            if (item.size.height) {
-                imageSize = item.size;
-            }
-            
-            if (imageSize.height) {
-                CGFloat deviceCellSizeConstant = flowLayout.itemSize.height;
-                CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
-                CGFloat maxWidth = collectionView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right;
-                if (newWidth > maxWidth) {
-                    newWidth = maxWidth;
-                }
-                cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
-            }
-        }
-    }
-
-    return cellSize;
-//    }
-//    
-//    return self.singleImageLayout.itemSize;
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -129,72 +97,6 @@
     imageVC.items = self.items;
     imageVC.currentProvider = self.currentProvider;
 }
-
-//- (void) forceReload {
-//    _canLoadMore = NO;
-//    _currentPage = [NSNumber numberWithInteger:1];
-//    _currentQueryString = @"";
-//    self.items = [@[] mutableCopy];
-//    [self.internalCollectionView reloadData];
-//    [self.flowLayout invalidateLayout];
-//    
-//    [self doInitialSearch];
-//}
-//
-
-//#pragma mark - UICollectionViewDelegateFlowLayout
-//
-//- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (collectionViewLayout == self.flowLayout) {
-//        CGSize cellSize = self.flowLayout.itemSize;
-//        
-//        CGSize imageSize = CGSizeZero;
-//        if (indexPath.item < self.items.count) {
-//            OPImageItem* item = self.items[indexPath.item];
-//            if (item.size.height) {
-//                imageSize = item.size;
-//            }
-//            
-//            if (imageSize.height) {
-//                CGFloat deviceCellSizeConstant = self.flowLayout.itemSize.height;
-//                CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
-//                CGFloat maxWidth = self.internalCollectionView.frame.size.width - self.flowLayout.sectionInset.left - self.flowLayout.sectionInset.right;
-//                if (newWidth > maxWidth) {
-//                    newWidth = maxWidth;
-//                }
-//                cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
-//            }
-//        }
-//        
-//        return cellSize;
-//    }
-//    
-//    return self.singleImageLayout.itemSize;
-//}
-//
-//#pragma mark - UICollectionViewDelegate
-//
-//- (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([collectionView.indexPathsForVisibleItems indexOfObject:indexPath] == NSNotFound) {
-//        [_imageManager cancelImageOperationAtIndexPath:indexPath];
-//    }
-//}
-//
-//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (!self.items.count) {
-//        return;
-//    }
-//    
-//    [self.view endEditing:YES];
-//    
-//    if (self.internalCollectionView.collectionViewLayout == self.singleImageLayout) {
-//        [self switchToGridWithIndexPath:indexPath];
-//    } else {
-//        [self switchToSingleImageWithIndexPath:indexPath];
-//    }
-//}
 
 #pragma mark OPContentCellDelegate
 

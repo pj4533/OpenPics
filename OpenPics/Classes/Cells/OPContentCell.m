@@ -77,54 +77,12 @@
 }
 */
 
-#pragma mark - Actions
-
-//- (IBAction)backTapped:(id)sender {
-//
-//    if (self.internalScrollView.zoomScale != 1.0f) {
-//        [self.internalScrollView setZoomScale:1.0f animated:YES];
-//    }
-//
-//    UICollectionView* collectionView = self.mainViewController.internalCollectionView;
-//        
-//    [self setupForGridLayout];
-//    
-//    collectionView.scrollEnabled = YES;
-//
-//    [self.mainViewController.flowLayout invalidateLayout];
-//    
-//    [collectionView setCollectionViewLayout:self.mainViewController.flowLayout animated:YES completion:^(BOOL finished) {
-//        if (_shouldForceReloadOnBack) {
-//            [self.mainViewController forceReload];
-//        }
-//    }];
-//    [collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-//    
-//}
-
-
 #pragma mark - Utility Functions
-
-- (void)setButtonToFavorite {
-    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_plus"];
-    self.favoriteButtonLabel.text = @"Favorite";
-}
-
-- (void)setButtonToRemoveFavorite {
-    self.favoriteButtonImageView.image = [UIImage imageNamed:@"heart_minus"];
-    self.favoriteButtonLabel.text = @"Remove";
-}
-
-- (void) setupLabels {
-    self.titleLabel.text = self.item.title;
-}
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
 //    [self setupLabels];
     
     self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-//    _shouldForceReloadOnBack = NO;
     
     self.internalScrollView.userInteractionEnabled = YES;
 

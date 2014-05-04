@@ -27,7 +27,6 @@
 #import <UIKit/UIKit.h>
 #import "OPImageItem.h"
 #import "OPScrollView.h"
-#import "OPViewController.h"
 
 @protocol OPContentCellDelegate <NSObject>
 @optional
@@ -51,7 +50,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *favoriteButtonImageView;
 @property (strong, nonatomic) IBOutlet UILabel *favoriteButtonLabel;
 
-@property (strong, nonatomic) OPViewController* mainViewController;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;

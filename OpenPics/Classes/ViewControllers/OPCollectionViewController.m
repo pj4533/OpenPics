@@ -15,14 +15,6 @@
 #import "OPNavigationControllerDelegate.h"
 
 @interface OPCollectionViewController () <UINavigationControllerDelegate> {
-//    NSString* _currentQueryString;
-//    
-//    UIPopoverController* _popover;
-//    
-//    BOOL _isSearching;
-//    
-//    BOOL _firstAppearance;
-    
     OPImageManager* _imageManager;
 }
 
@@ -39,36 +31,8 @@
     self.items = [NSMutableArray array];
     self.currentProvider = [[OPProviderController shared] getFirstProvider];
     
-//    self.flowLayout = [[SGSStaggeredFlowLayout alloc] init];
-//    self.flowLayout.minimumLineSpacing = 2.0f;
-//    self.flowLayout.minimumInteritemSpacing = 2.0f;
-//    self.flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
-//    self.singleImageLayout = [[OPSingleImageLayout alloc] init];
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        self.flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
-//        self.flowLayout.headerReferenceSize = CGSizeMake(320.0f, 86.0f);
-//        self.singleImageLayout.headerReferenceSize = CGSizeMake(320.0f, 86.0f);
-//    } else {
-//        self.flowLayout.itemSize = CGSizeMake(200.0f, 200.0f);
-//        self.flowLayout.headerReferenceSize = CGSizeMake(1024.0f, 149.0f);
-//        self.singleImageLayout.headerReferenceSize = CGSizeMake(1024.0f, 149.0f);
-//    }
-//    
-//    _firstAppearance = YES;
     _imageManager = [[OPImageManager alloc] init];
     _imageManager.delegate = self;
-    
-//    self.internalCollectionView.collectionViewLayout = self.flowLayout;
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell_iPhone" bundle:nil] forCellWithReuseIdentifier:@"generic"];
-//        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView_iPhone" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-//    } else {
-//        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPContentCell" bundle:nil] forCellWithReuseIdentifier:@"generic"];
-//        [self.internalCollectionView registerNib:[UINib nibWithNibName:@"OPHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-//    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,17 +133,6 @@
 {
     return [self.items count]+1;
 }
-
-//- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-//    
-//    OPHeaderReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-//    
-//    header.delegate = self;
-//    
-//    [header.providerButton setTitle:self.currentProvider.providerName forState:UIControlStateNormal];
-//    
-//    return header;
-//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
