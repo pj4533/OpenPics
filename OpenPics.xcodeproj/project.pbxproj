@@ -65,12 +65,10 @@
 		0A19003E190DA1AF00922EDD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A190042190DA1AF00922EDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A25C00018D9251000123D04 /* Images.xcassets */; };
 		0A190043190DA1AF00922EDD /* Main_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2418DF5E2600B10441 /* Main_ipad.storyboard */; };
-		0A190044190DA1AF00922EDD /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */; };
 		0A190047190DA1AF00922EDD /* Main_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */; };
 		0A1DCDE918DDE6F0003F4418 /* Main_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */; };
 		0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */; };
 		0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
-		0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */; };
 		0A1DCDFA18DDE720003F4418 /* OPProviderCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */; };
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
@@ -139,7 +137,6 @@
 		0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageCollectionViewController.m; sourceTree = "<group>"; };
 		0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderListViewController.h; sourceTree = "<group>"; };
 		0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderListViewController.m; sourceTree = "<group>"; };
-		0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OPProviderListViewController.xib; sourceTree = "<group>"; };
 		0A1DCDF018DDE720003F4418 /* OPProviderCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderCollectionViewController.h; sourceTree = "<group>"; };
 		0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderCollectionViewController.m; sourceTree = "<group>"; };
 		0A1EF47D17108B5400AB8B62 /* OPProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProvider.h; sourceTree = "<group>"; };
@@ -302,7 +299,6 @@
 				0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */,
 				0A1DCDED18DDE720003F4418 /* OPProviderListViewController.h */,
 				0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */,
-				0A1DCDEF18DDE720003F4418 /* OPProviderListViewController.xib */,
 				0AF4CB2618DF779000B10441 /* OPNavigationControllerDelegate.h */,
 				0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */,
 			);
@@ -648,7 +644,6 @@
 				0A19003E190DA1AF00922EDD /* InfoPlist.strings in Resources */,
 				0A190042190DA1AF00922EDD /* Images.xcassets in Resources */,
 				0A190043190DA1AF00922EDD /* Main_ipad.storyboard in Resources */,
-				0A190044190DA1AF00922EDD /* OPProviderListViewController.xib in Resources */,
 				0A190047190DA1AF00922EDD /* Main_iphone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,7 +655,6 @@
 				0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */,
 				0A25C00118D9251000123D04 /* Images.xcassets in Resources */,
 				0AF4CB2518DF5E2600B10441 /* Main_ipad.storyboard in Resources */,
-				0A1DCDF918DDE720003F4418 /* OPProviderListViewController.xib in Resources */,
 				0A1DCDE918DDE6F0003F4418 /* Main_iphone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

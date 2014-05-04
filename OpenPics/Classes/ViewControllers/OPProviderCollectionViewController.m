@@ -94,7 +94,9 @@
         [_popover dismissPopoverAnimated:YES];
     }
     
-    OPProviderListViewController* providerListViewController = [[OPProviderListViewController alloc] initWithNibName:@"OPProviderListViewController" bundle:nil];
+    UIStoryboard *storyboard = self.storyboard;
+    OPProviderListViewController* providerListViewController =
+    [storyboard instantiateViewControllerWithIdentifier:@"OPProviderListViewController"];
     providerListViewController.delegate = self;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
