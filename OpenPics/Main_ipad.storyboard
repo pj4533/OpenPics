@@ -80,13 +80,14 @@
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="4G1-Pw-azQ" id="kVv-Mu-9l9"/>
+                            <outlet property="dataSource" destination="pEd-fl-ntv" id="3Da-8L-Ulc"/>
                             <outlet property="delegate" destination="4G1-Pw-azQ" id="f3N-af-Q3p"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="kw4-ZC-QU2"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5c-Wk-d6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="pEd-fl-ntv" customClass="OPCollectionViewDataSource"/>
             </objects>
             <point key="canvasLocation" x="-726" y="-1203"/>
         </scene>

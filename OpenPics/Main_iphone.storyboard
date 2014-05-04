@@ -93,13 +93,14 @@
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="RAh-TI-Pms" id="Kg7-ip-ZgV"/>
+                            <outlet property="dataSource" destination="XMP-Qh-a8P" id="SgF-oL-AJz"/>
                             <outlet property="delegate" destination="RAh-TI-Pms" id="gMj-pP-yjE"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="y9G-qM-h1h"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9BQ-5S-nQu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="XMP-Qh-a8P" customClass="OPCollectionViewDataSource"/>
             </objects>
             <point key="canvasLocation" x="326" y="125"/>
         </scene>

@@ -26,17 +26,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol OPImageManagerDelegate <NSObject>
-- (BOOL) isVisibileIndexPath:(NSIndexPath*) indexPath;
-- (void) invalidateLayout;
-@end
-
 @class OPImageItem;
 @interface OPImageManager : NSObject
 
-- (void) loadImageFromItem:(OPImageItem*)item
-               toImageView:(UIImageView*)imageView
-               atIndexPath:(NSIndexPath*)indexPath
+- (void) loadImageFromItem:(OPImageItem*) item
+               toImageView:(UIImageView*) imageView
+               atIndexPath:(NSIndexPath*) indexPath
+          onCollectionView:(UICollectionView*) cv
            withContentMode:(UIViewContentMode)contentMode;
 
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath;

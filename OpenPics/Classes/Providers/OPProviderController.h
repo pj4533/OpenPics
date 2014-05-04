@@ -34,6 +34,10 @@
 
 - (void) addProvider:(OPProvider*) provider;
 
+- (OPProvider*) getSelectedProvider;
+- (void) selectFirstProvider;
+- (void) selectProvider:(OPProvider*) provider;
+
 - (OPProvider*) getFirstProvider;
 - (OPProvider*) getProviderWithType:(NSString*) providerType;
 - (NSArray*) getProviders;

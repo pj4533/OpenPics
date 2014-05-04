@@ -30,6 +30,7 @@
 
 @interface OPProviderController () {
     NSMutableArray* _providers;
+    OPProvider* _selectedProvider;
 }
 @end
 
@@ -53,6 +54,18 @@
     if ([provider isConfigured]) {
         [_providers addObject:provider];
     }
+}
+
+- (OPProvider*) getSelectedProvider {
+    return _selectedProvider;
+}
+
+- (void) selectFirstProvider {
+    _selectedProvider = _providers[0];
+}
+
+- (void) selectProvider:(OPProvider*) provider {
+    _selectedProvider = provider;
 }
 
 - (OPProvider*) getFirstProvider {

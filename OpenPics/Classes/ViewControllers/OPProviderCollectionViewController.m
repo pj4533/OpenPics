@@ -9,26 +9,19 @@
 #import "OPProviderCollectionViewController.h"
 #import "OPProviderListViewController.h"
 #import "OPImageCollectionViewController.h"
-#import "OPImageManager.h"
 #import "SVProgressHUD.h"
 #import "OPNavigationControllerDelegate.h"
-#import "OPProvider.h"
-#import "OPProviderController.h"
 #import "OPImageItem.h"
 #import "OPContentCell.h"
+#import "OPProviderController.h"
+#import "OPProvider.h"
+#import "OPCollectionViewDataSource.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
     UIToolbar* _toolbar;
-    OPImageManager* _imageManager;
-    BOOL _canLoadMore;
-    NSNumber* _currentPage;
-    BOOL _isSearching;
-    NSString* _currentQueryString;
     UIPopoverController* _popover;
-    NSMutableArray* _items;
-    OPProvider* _currentProvider;
 }
 
 @end
@@ -38,18 +31,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationController.delegate = [OPNavigationControllerDelegate shared];
-    
-    _items = [NSMutableArray array];
-    _currentProvider = [[OPProviderController shared] getFirstProvider];
-    
-    _imageManager = [[OPImageManager alloc] init];
-    _imageManager.delegate = self;
 
+    [[OPProviderController shared] selectFirstProvider];
+    OPProvider* selectedProvider = [[OPProviderController shared] getSelectedProvider];
+
+    self.navigationController.delegate = [OPNavigationControllerDelegate shared];
+        
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 1024.0f, 44.0f)];
     _searchBar.delegate = self;
-    _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", _currentProvider.providerShortName]
+    _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", selectedProvider.providerShortName]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(sourceTapped)],
@@ -72,8 +62,6 @@
         self.navigationItem.rightBarButtonItem = _sourceButton;
     }
     
-    
-    
     [self doInitialSearch];
 }
 
@@ -87,6 +75,42 @@
     [self.view bringSubviewToFront:_toolbar];
 }
 
+#pragma mark - Loading Data Helper Functions
+
+- (void) doInitialSearch {
+    OPProvider* selectedProvider = [[OPProviderController shared] getSelectedProvider];
+    
+    if (selectedProvider.supportsInitialSearching) {
+        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
+
+        OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+        [dataSource doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
+#warning do i really need the items/canloadmore here?
+            [SVProgressHUD dismiss];
+            [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+            [self.collectionView reloadData];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Search failed."];
+        }];
+    }
+}
+
+
+- (void) getMoreItems {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    
+    [dataSource getMoreItemsWithSuccess:^(NSArray *indexPaths) {
+        [SVProgressHUD dismiss];
+        if (indexPaths) {
+            [self.collectionView insertItemsAtIndexPaths:indexPaths];
+        } else {
+            [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
+            [self.collectionView reloadData];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"Search failed."];        
+    }];
+}
 #pragma mark - actions
 
 - (void) sourceTapped {
@@ -125,157 +149,6 @@
     }
 }
 
-#pragma mark - Loading Data Helper Functions
-
-- (void) doInitialSearch {
-    if (_currentProvider.supportsInitialSearching) {
-        _currentPage = [NSNumber numberWithInteger:1];
-        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
-        [_currentProvider doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
-            _canLoadMore = canLoadMore;
-            [self loadInitialPageWithItems:items];
-        } failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"Search failed."];
-        }];
-    }
-}
-
-- (void) loadInitialPageWithItems:(NSArray*) items {
-    [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-    
-    [SVProgressHUD dismiss];
-    _items = [items mutableCopy];
-    [self.collectionView reloadData];
-}
-
-- (void) getMoreItems {
-    _canLoadMore = NO;
-    _isSearching = YES;
-    OPProvider* providerSearched = _currentProvider;
-    [_currentProvider getItemsWithQuery:_currentQueryString withPageNumber:_currentPage success:^(NSArray *items, BOOL canLoadMore) {
-        if ([_currentPage isEqual:@1]) {
-            _canLoadMore = canLoadMore;
-            _isSearching = NO;
-            [self loadInitialPageWithItems:items];
-        } else {
-            NSInteger offset = [_items count];
-            
-            // TODO: use performBatch when bug is fixed in UICollectionViews with headers
-            NSMutableArray* indexPaths = [NSMutableArray array];
-            for (int i = 0; i < items.count; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForItem:i+offset inSection:0]];
-            }
-            
-            [SVProgressHUD dismiss];
-            _isSearching = NO;
-            if ([providerSearched.providerType isEqualToString:_currentProvider.providerType]) {
-                [_items addObjectsFromArray:items];
-                [self.collectionView insertItemsAtIndexPaths:indexPaths];
-            }
-            _canLoadMore = canLoadMore;
-            
-        }
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"Search failed."];
-    }];
-}
-
-#pragma mark - OPImageManagerDelegate
-
-- (BOOL) isVisibileIndexPath:(NSIndexPath*) indexPath {
-    for (NSIndexPath* thisIndexPath in self.collectionView.indexPathsForVisibleItems) {
-        if (indexPath.item == thisIndexPath.item) {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
-- (void) invalidateLayout {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-}
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
-{
-    return [_items count]+1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *cellIdentifier = @"generic";
-    OPContentCell *cell = (OPContentCell *)[cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    // remove activity indicator if present
-    for (UIView* subview in cell.contentView.subviews) {
-        if (subview.tag == -1) {
-            [subview removeFromSuperview];
-        }
-    }
-    
-    cell.internalScrollView.imageView.image = [UIImage imageNamed:@"transparent"];
-    cell.provider = nil;
-    cell.item = nil;
-    cell.indexPath = nil;
-    
-    if (indexPath.item == _items.count) {
-        if (_items.count) {
-            if (_canLoadMore) {
-                NSInteger currentPageInt = [_currentPage integerValue];
-                _currentPage = [NSNumber numberWithInteger:currentPageInt+1];
-                [self getMoreItems];
-            }
-            
-            if (_isSearching) {
-                UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                activity.center = CGPointMake(100.0f, 100.0f);
-                [activity startAnimating];
-                activity.tag = -1;
-                [cell.contentView addSubview:activity];
-            }
-        }
-        
-        cell.internalScrollView.userInteractionEnabled = NO;
-        cell.internalScrollView.imageView.image = nil;
-        return cell;
-    }
-    
-    OPImageItem* item = _items[indexPath.item];
-    
-    // remove the IB constraints cause they don't seem to work right - but I don't want them autogenerated
-    [cell removeConstraints:cell.constraints];
-    
-    // set the frame to the contentView frame
-    cell.internalScrollView.frame = cell.contentView.frame;
-    
-    // create constraints from autosizing
-    cell.internalScrollView.translatesAutoresizingMaskIntoConstraints = YES;
-    [cell.internalScrollView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    
-    
-    cell.provider = _currentProvider;
-    cell.item = item;
-    cell.indexPath = indexPath;
-    cell.internalScrollView.userInteractionEnabled = NO;
-    cell.delegate = self;
-    
-    if (cell.frame.size.width > 200) {
-        [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFit];
-        [cell setupForSingleImageLayoutAnimated:NO];
-    } else {
-        [_imageManager loadImageFromItem:item toImageView:cell.internalScrollView.imageView atIndexPath:indexPath withContentMode:UIViewContentModeScaleAspectFill];
-    }
-    
-    return cell;
-}
-
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -294,15 +167,12 @@
     
     _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerShortName];
     
-    _currentProvider = provider;
-    _canLoadMore = NO;
-    _isSearching = NO;
-    _currentPage = [NSNumber numberWithInteger:1];
-    _currentQueryString = @"";
-    _items = [@[] mutableCopy];
-    [self.collectionView reloadData];
-    [self doInitialSearch];
+    [[OPProviderController shared] selectProvider:provider];
     
+    OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
+    self.collectionView.dataSource = dataSource;
+    [self.collectionView reloadData];
+    [self doInitialSearch];    
 }
 
 #pragma mark - UISearchBarDelegate
@@ -333,13 +203,10 @@
 - (void) keyboardDidHide:(id) note {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    _canLoadMore = NO;
-    _currentPage = [NSNumber numberWithInteger:1];
-    _currentQueryString = _searchBar.text;
-    _items = [@[] mutableCopy];
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    dataSource.currentQueryString = _searchBar.text;
+
     [self.collectionView reloadData];
-    
-    //    [self.flowLayout invalidateLayout];
     
     [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
     [self getMoreItems];

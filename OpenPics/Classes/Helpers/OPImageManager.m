@@ -144,36 +144,48 @@
 
 }
 
-- (void) loadImageFromItem:(OPImageItem*) item toImageView:(UIImageView*) imageView atIndexPath:(NSIndexPath*) indexPath withContentMode:(UIViewContentMode)contentMode
+- (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath forCollectionView:(UICollectionView*) collectionView {
+    for (NSIndexPath* thisIndexPath in collectionView.indexPathsForVisibleItems) {
+        if (indexPath.item == thisIndexPath.item) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void) loadImageFromItem:(OPImageItem*) item
+               toImageView:(UIImageView*) imageView
+               atIndexPath:(NSIndexPath*) indexPath
+          onCollectionView:(UICollectionView*) cv
+           withContentMode:(UIViewContentMode)contentMode
 {
     [imageView fadeInHourglassWithCompletion:^{
         [self getImageForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
 // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
-            if (self.delegate) {
-                if ([self.delegate isVisibileIndexPath:indexPath]) {
-                    // then dispatch back to the main thread to set the image
-                    dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
+                // then dispatch back to the main thread to set the image
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // fade out the hourglass image
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageView.alpha = 0.0;
+                    } completion:^(BOOL finished) {
+                        imageView.contentMode = contentMode;
+                        imageView.image = image;
                         
-                        // fade out the hourglass image
-                        [UIView animateWithDuration:0.25 animations:^{
-                            imageView.alpha = 0.0;
-                        } completion:^(BOOL finished) {
-                            imageView.contentMode = contentMode;
-                            imageView.image = image;
-                            
-                            // fade in image
-                            [UIView animateWithDuration:0.5 animations:^{
-                                imageView.alpha = 1.0;
-                            }];
-                            
-                            //if we have no size information yet, save the information in item, and force a re-layout
-                            if (!item.size.height) {
-                                item.size = image.size;
-                                [self.delegate invalidateLayout];
-                            }
+                        // fade in image
+                        [UIView animateWithDuration:0.5 animations:^{
+                            imageView.alpha = 1.0;
                         }];
-                    });
-                }
+                        
+                        //if we have no size information yet, save the information in item, and force a re-layout
+                        if (!item.size.height) {
+                            item.size = image.size;
+                            [cv.collectionViewLayout invalidateLayout];
+                        }
+                    }];
+                });
             }
         } withFailure:^{
             dispatch_async(dispatch_get_main_queue(), ^{
