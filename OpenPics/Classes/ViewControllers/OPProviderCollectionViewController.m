@@ -205,7 +205,7 @@
     
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
     dataSource.currentQueryString = _searchBar.text;
-
+    [dataSource clearData];
     [self.collectionView reloadData];
     
     [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
