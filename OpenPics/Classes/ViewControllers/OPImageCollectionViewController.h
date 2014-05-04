@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OPCollectionViewController.h"
 
-@interface OPImageCollectionViewController : OPCollectionViewController
+@interface OPImageCollectionViewController : UICollectionViewController
 
 - (void)toggleUIHidden;
 

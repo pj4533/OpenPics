@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OPCollectionViewController.h"
 
-@interface OPProviderCollectionViewController : OPCollectionViewController
+@interface OPProviderCollectionViewController : UICollectionViewController
 
 @end

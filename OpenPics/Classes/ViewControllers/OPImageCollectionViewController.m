@@ -17,6 +17,7 @@
     UIToolbar* _toolbar;
     UIBarButtonItem* _favoriteButton;
     BOOL _hidesUI;
+    UIPopoverController* _popover;
 }
 
 @end
