@@ -35,10 +35,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="cmn-rt-OMD" firstAttribute="top" secondItem="s2Z-hV-T89" secondAttribute="top" id="hTu-yH-D17"/>
-                                    <constraint firstAttribute="trailing" secondItem="cmn-rt-OMD" secondAttribute="trailing" id="j7C-7q-vpR"/>
-                                    <constraint firstAttribute="bottom" secondItem="cmn-rt-OMD" secondAttribute="bottom" id="mZE-Yo-8IS"/>
-                                    <constraint firstItem="cmn-rt-OMD" firstAttribute="leading" secondItem="s2Z-hV-T89" secondAttribute="leading" id="tod-aN-0cm"/>
+                                    <constraint firstItem="cmn-rt-OMD" firstAttribute="leading" secondItem="s2Z-hV-T89" secondAttribute="leading" id="K1x-rB-5ZE"/>
+                                    <constraint firstAttribute="trailing" secondItem="cmn-rt-OMD" secondAttribute="trailing" id="PH8-aM-3gF"/>
+                                    <constraint firstItem="cmn-rt-OMD" firstAttribute="top" secondItem="s2Z-hV-T89" secondAttribute="top" id="uUM-pa-n5W"/>
+                                    <constraint firstAttribute="bottom" secondItem="cmn-rt-OMD" secondAttribute="bottom" id="uyG-Wc-4ji"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="internalScrollView" destination="cmn-rt-OMD" id="fWu-GF-y6W"/>
