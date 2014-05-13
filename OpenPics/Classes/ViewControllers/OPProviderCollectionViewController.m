@@ -173,6 +173,7 @@
     [[OPProviderController shared] selectProvider:provider];
     
     OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
+    dataSource.delegate = self;
     self.collectionView.dataSource = dataSource;
     [self.collectionView reloadData];
     [self doInitialSearch];    
