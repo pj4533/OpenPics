@@ -12,8 +12,9 @@
 #import "OPProvider.h"
 #import "OPImageManager.h"
 #import "OPImageCollectionViewController.h"
+#import "OPNavigationControllerDelegate.h"
 
-@interface OPCollectionViewDataSource () {
+@interface OPCollectionViewDataSource () <OPContentCellDelegate> {
     NSNumber* _currentPage;
     BOOL _canLoadMore;
     BOOL _isSearching;
@@ -168,7 +169,7 @@
     cell.internalScrollView.userInteractionEnabled = NO;
     cell.delegate = self;
     
-    if (cell.frame.size.width > 200) {
+    if ((cell.frame.size.width > 250) && ![[OPNavigationControllerDelegate shared] transitioning]) {
         [_imageManager loadImageFromItem:item
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath
@@ -184,6 +185,14 @@
     }
     
     return cell;
+}
+
+#pragma mark OPContentCellDelegate
+
+- (void) singleTappedCell {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(singleTappedCell)]) {
+        [self.delegate singleTappedCell];
+    }
 }
 
 @end

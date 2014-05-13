@@ -12,4 +12,6 @@
 
 + (OPNavigationControllerDelegate *)shared;
 
+@property BOOL transitioning;
+
 @end

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OPContentCell.h"
 
 @interface OPCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
 @property (strong, nonatomic) NSString* currentQueryString;
+@property (strong, nonatomic) id<OPContentCellDelegate> delegate;
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure;

@@ -31,6 +31,8 @@
 // the image VC, it doesn't work, and vice-versa.   I have to make sure to set it properly here.   Same thing for layouts and insets.  I think it has something to do with the sharing of the collectionView, but I am not sure.
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
+    self.transitioning = YES;
+    
     // Have to manually adjust the contentInsets here, cause it seems like this isn't done
     // automatically, when doing layout to layout transitions, regardless of what the
     // 'automaticallyAdjustsScrollViewInsets' is set to.  Possibly cause of the
@@ -58,6 +60,8 @@
 }
 
 - (void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    self.transitioning = NO;
     
     // when doing a layout to layout transition, you have to manually invalidate the layout on back
     if ([viewController isKindOfClass:[UICollectionViewController class]]) {

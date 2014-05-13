@@ -32,6 +32,9 @@
 {
     [super viewDidLoad];
 
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    dataSource.delegate = self;
+
     [[OPProviderController shared] selectFirstProvider];
     OPProvider* selectedProvider = [[OPProviderController shared] getSelectedProvider];
 
