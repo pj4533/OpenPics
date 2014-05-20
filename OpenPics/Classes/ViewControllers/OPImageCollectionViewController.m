@@ -74,6 +74,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
+    layout.itemSize = CGSizeMake(self.collectionView.bounds.size.height,self.collectionView.bounds.size.width);
+
+    NSIndexPath *indexPath = [[self.collectionView indexPathsForVisibleItems] firstObject];
+    CGPoint contentOffsetAfterRotation = CGPointMake(indexPath.item * [self.view bounds].size.height, 0);
+    [self.collectionView setContentOffset:contentOffsetAfterRotation];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -249,6 +261,5 @@
         [SVProgressHUD showErrorWithStatus:@"Failed"];
     }
 }
-
 
 @end
