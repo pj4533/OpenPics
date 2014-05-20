@@ -86,6 +86,11 @@
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    if (_hidesUI) {
+        [self.navigationController.navigationBar setAlpha:0.0];
+    }
+}
 /*
 #pragma mark - Navigation
 
