@@ -17,7 +17,7 @@
 #import "OPProvider.h"
 #import "OPCollectionViewDataSource.h"
 
-@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate> {
+@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
     UIToolbar* _toolbar;
@@ -243,6 +243,12 @@
         }
         [currentDefaults synchronize];
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    
+    return [dataSource collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
 }
 
 @end

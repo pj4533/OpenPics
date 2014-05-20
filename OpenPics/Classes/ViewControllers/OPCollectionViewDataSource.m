@@ -13,6 +13,7 @@
 #import "OPImageManager.h"
 #import "OPImageCollectionViewController.h"
 #import "OPNavigationControllerDelegate.h"
+#import "SGSStaggeredFlowLayout.h"
 
 @interface OPCollectionViewDataSource () <OPContentCellDelegate> {
     NSNumber* _currentPage;
@@ -169,7 +170,7 @@
     cell.internalScrollView.userInteractionEnabled = NO;
     cell.delegate = self;
     
-    if ((cell.frame.size.width > 250) && ![[OPNavigationControllerDelegate shared] transitioning]) {
+    if ((![cv.collectionViewLayout isKindOfClass:[SGSStaggeredFlowLayout class]]) && ![[OPNavigationControllerDelegate shared] transitioning]) {
         [_imageManager loadImageFromItem:item
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath
@@ -193,6 +194,39 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(singleTappedCell)]) {
         [self.delegate singleTappedCell];
     }
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*) collectionViewLayout;
+    CGSize cellSize = flowLayout.itemSize;
+    
+    if ([collectionViewLayout isKindOfClass:[SGSStaggeredFlowLayout class]]) {
+        CGSize imageSize = CGSizeZero;
+        if (indexPath.item < _items.count) {
+            OPImageItem* item = _items[indexPath.item];
+            if (item.size.height) {
+                imageSize = item.size;
+            }
+            
+            if (imageSize.height) {
+                CGFloat deviceCellSizeConstant = flowLayout.itemSize.height;
+                CGFloat newWidth = (imageSize.width*deviceCellSizeConstant)/imageSize.height;
+                CGFloat maxWidth = collectionView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right;
+                if (newWidth > maxWidth) {
+                    newWidth = maxWidth;
+                }
+                cellSize = CGSizeMake(newWidth, deviceCellSizeConstant);
+            }
+        }
+    }
+    
+    return cellSize;
+    //    }
+    //
+    //    return self.singleImageLayout.itemSize;
 }
 
 @end
