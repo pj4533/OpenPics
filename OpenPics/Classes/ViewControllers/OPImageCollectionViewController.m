@@ -37,6 +37,9 @@
 {
     [super viewDidLoad];
     
+    UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
+    layout.itemSize = self.collectionView.bounds.size;
+
     CGRect frame, remain;
     CGRectDivide(self.view.bounds, &frame, &remain, 44, CGRectMaxYEdge);
     _toolbar = [[UIToolbar alloc] initWithFrame:frame];
