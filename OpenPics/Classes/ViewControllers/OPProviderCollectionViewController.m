@@ -245,10 +245,10 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-    
-    return [dataSource collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+//    
+//    return [dataSource collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
+//}
 
 @end
