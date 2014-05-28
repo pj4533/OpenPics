@@ -20,6 +20,8 @@
 - (void) getMoreItemsWithSuccess:(void (^)(NSArray* indexPaths))success
                          failure:(void (^)(NSError* error))failure;
 
+- (OPImageItem*)itemAtIndexPath:(NSIndexPath*)indexPath;
+
 - (void) clearData;
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;

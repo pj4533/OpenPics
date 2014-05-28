@@ -60,15 +60,15 @@ EXTERNAL SOURCES:
     :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
-  AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
-  Appsee: a23de1c9b8a53aaef7b085b76492810155309673
-  FormatterKit: bb53f3de30773e6b06f91dee1f82b46f536278d7
-  KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
-  Reveal-iOS-SDK: 8e6a6f22a9520437e4a180fe1d4e99f43b75430e
+  AFNetworkActivityLogger: 01dde83938bf509742ad4c21f25d43a0fa019dd6
+  AFNetworking: 5f2538aa2d150b71d4e6cca3a420d796e1e1c374
+  Appsee: 80082e036888fbc7c81ddd2a14ce190553eee2f4
+  FormatterKit: a7d9076e2923f272d098028f086822c329fcb410
+  KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
+  Reveal-iOS-SDK: 5f69f357d5a18a2f13db71730bc6b7973a21cf3e
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
-  TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27
-  TUSafariActivity: bd9da588f5f9136ba445d89f8f86b6dccf4d46ba
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  TMCache: ea1c509badaf9a1245422aabf3c975b3277ab138
+  TUSafariActivity: afff9b1d2eacf7cbace752c5f2bf56db852714de
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

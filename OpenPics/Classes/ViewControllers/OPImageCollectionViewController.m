@@ -11,11 +11,15 @@
 #import "TUSafariActivity.h"
 #import "SVProgressHUD.h"
 #import "OPBackend.h"
+#import "math.h"
+#import "OPCollectionViewDataSource.h"
 
-@interface OPImageCollectionViewController () <UIActivityItemSource>  {
+@interface OPImageCollectionViewController () <UIActivityItemSource,UIScrollViewDelegate>  {
     NSString* _completedString;
     UIToolbar* _toolbar;
     UIBarButtonItem* _favoriteButton;
+    UIBarButtonItem* _actionButton;
+    UIBarButtonItem* _infoButton;
     BOOL _hidesUI;
     UIPopoverController* _popover;
 }
@@ -46,25 +50,27 @@
     [_toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
     _favoriteButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Favorite" style:UIBarButtonItemStylePlain target:self action:@selector(favoriteTapped:)];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        _toolbar.items = @[
-                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)],
-                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           _favoriteButton
-                           ];
-    } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)];
+    _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionTapped:)];
 
-        _toolbar.items = @[
-                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           _favoriteButton
-                           ];
-    }
+    _infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStylePlain target:self action:@selector(infoTapped:)];
+
+    self.navigationItem.rightBarButtonItem = _infoButton;
+
+    _toolbar.items = @[
+                       _actionButton,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                       _favoriteButton
+                       ];
 
     [self.view addSubview:_toolbar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
+    if (self.collectionView.indexPathsForSelectedItems.count == 1) {
+        [self updateUIForIndexPath:self.collectionView.indexPathsForSelectedItems[0]];
+    }
+
     [self.view bringSubviewToFront:_toolbar];
 }
 
@@ -101,6 +107,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)updateUIForIndexPath:(NSIndexPath*)indexPath {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
+    OPImageItem* item = [dataSource itemAtIndexPath:indexPath];
+    
+    self.navigationItem.title = item.title;
+    if ([[OPBackend shared] didUserCreateItem:item]) {
+        _favoriteButton.title = @"Remove Favorite";
+    } else {
+        _favoriteButton.title = @"Add Favorite";
+    }
+}
 
 - (void)toggleUIHidden {
     _hidesUI = !_hidesUI;
@@ -147,6 +164,16 @@
         _favoriteButton.title = @"Remove Favorite";
         [SVProgressHUD showSuccessWithStatus:@"Favorited!"];
     }
+}
+
+- (IBAction)infoTapped:(id)sender {
+    
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
+    OPImageItem* item = [dataSource itemAtIndexPath:self.collectionView.indexPathsForVisibleItems[0]];
+
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:item.title delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (IBAction)actionTapped:(id)sender {
@@ -203,7 +230,7 @@
         [self presentViewController:shareSheet animated:YES completion:nil];
     } else {
         _popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
-        [_popover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [_popover presentPopoverFromBarButtonItem:_actionButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 
@@ -264,6 +291,18 @@
         [SVProgressHUD showSuccessWithStatus:_completedString];
     } else {
         [SVProgressHUD showErrorWithStatus:@"Failed"];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*) self.collectionView.collectionViewLayout;
+    
+    NSInteger item = roundf(scrollView.contentOffset.x / flowLayout.itemSize.width);
+    
+    for (NSIndexPath* indexPath in self.collectionView.indexPathsForVisibleItems) {
+        if (indexPath.item == item) {
+            [self updateUIForIndexPath:indexPath];
+        }
     }
 }
 

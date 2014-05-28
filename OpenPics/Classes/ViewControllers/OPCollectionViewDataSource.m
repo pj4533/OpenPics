@@ -229,4 +229,8 @@
 //    //    return self.singleImageLayout.itemSize;
 //}
 
+- (OPImageItem*)itemAtIndexPath:(NSIndexPath*)indexPath {
+    return _items[indexPath.item];
+}
+
 @end
