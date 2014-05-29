@@ -44,9 +44,8 @@ Sharing (Twitter & Facebook) uses UIActivitys from iOS6.
 
 ## Dependencies
 
-* AFNetworking
+* AFNetworking 2.x
 * CocoaPods
-* Heavy use of UICollectionView (currently using my flow layout subclass: [SGSStaggeredFlowLayout](https://github.com/pj4533/SGSStaggeredFlowLayout) )
 
 ## How To Run
 
@@ -59,6 +58,19 @@ Sharing (Twitter & Facebook) uses UIActivitys from iOS6.
 ## Contribute
 
 If you wish to contribute, send some pull requests!  I'll update the app in the App Store whenever we get awesome pull requests merged in.
+
+## Versions
+
+* 2.1
+	* Redesigned for more iOS7 look
+	* Using layout-to-layout collectionview transitions
+	* Preparing to add new iOS8 features after WWDC
+
+* 2.0
+	* Support for iOS7
+
+* 1.x
+	* Original version(s)
 
 ## Contact
 
