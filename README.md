@@ -65,6 +65,7 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 	* Redesigned for more iOS7 look
 	* Using layout-to-layout collectionview transitions
 	* Preparing to add new iOS8 features after WWDC
+	* Removed SGSStaggeredLayout for animation debugging...  :unamused:
 
 * 2.0
 	* Support for iOS7
