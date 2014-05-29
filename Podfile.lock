@@ -36,6 +36,7 @@ PODS:
   - FormatterKit/TimeIntervalFormatter (1.1.2)
   - FormatterKit/UnitOfInformationFormatter (1.1.2)
   - FormatterKit/URLRequestFormatter (1.1.2)
+  - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
   - Reveal-iOS-SDK (1.0.3)
   - SGSStaggeredFlowLayout (0.0.1)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - AFNetworking
   - Appsee (~> 2.0.8)
   - FormatterKit (~> 1.1.1)
+  - FRDLivelyButton (~> 1.1.2)
   - KissXML
   - Reveal-iOS-SDK
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
@@ -64,6 +66,7 @@ SPEC CHECKSUMS:
   AFNetworking: 5f2538aa2d150b71d4e6cca3a420d796e1e1c374
   Appsee: 80082e036888fbc7c81ddd2a14ce190553eee2f4
   FormatterKit: a7d9076e2923f272d098028f086822c329fcb410
+  FRDLivelyButton: 717c6907bd6bb588f775a50580e216fe83abcade
   KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
   Reveal-iOS-SDK: 5f69f357d5a18a2f13db71730bc6b7973a21cf3e
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a

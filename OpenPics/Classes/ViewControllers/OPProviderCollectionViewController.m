@@ -16,10 +16,12 @@
 #import "OPProviderController.h"
 #import "OPProvider.h"
 #import "OPCollectionViewDataSource.h"
+#import "FRDLivelyButton.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
+    UIBarButtonItem* _sourceCaret;
     UIToolbar* _toolbar;
     UIPopoverController* _popover;
 }
@@ -42,10 +44,19 @@
         
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 1024.0f, 44.0f)];
     _searchBar.delegate = self;
+    
     _sourceButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Source: %@", selectedProvider.providerShortName]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
-                                                                             action:@selector(sourceTapped)],
+                                                    action:@selector(sourceTapped)];
+    FRDLivelyButton *button = [[FRDLivelyButton alloc] initWithFrame:CGRectMake(0,0,36,28)];
+    [button setStyle:kFRDLivelyButtonStyleCaretDown animated:NO];
+    [button addTarget:self action:@selector(sourceTapped) forControlEvents:UIControlEventTouchUpInside];
+    [button setOptions:@{ kFRDLivelyButtonLineWidth: @(1.0f),
+                          kFRDLivelyButtonHighlightedColor: [UIColor colorWithRed:0.5 green:0.8 blue:1.0 alpha:1.0],
+                          kFRDLivelyButtonColor: [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]
+                          }];
+    _sourceCaret = [[UIBarButtonItem alloc] initWithCustomView:button];
 
     self.navigationItem.titleView = _searchBar;
     
@@ -55,14 +66,16 @@
         CGRectDivide(self.view.bounds, &frame, &remain, 44, CGRectMaxYEdge);
         _toolbar = [[UIToolbar alloc] initWithFrame:frame];
         [_toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+        [button setStyle:kFRDLivelyButtonStyleCaretUp animated:NO];
         _toolbar.items = @[
                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                           _sourceButton,
+                          _sourceCaret,
                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]
                           ];
         [self.view addSubview:_toolbar];
     } else {
-        self.navigationItem.rightBarButtonItem = _sourceButton;
+        self.navigationItem.rightBarButtonItems = @[_sourceCaret, _sourceButton];
     }
     
     [self doInitialSearch];
