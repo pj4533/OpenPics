@@ -38,8 +38,15 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"California Digital Library";
+        self.supportsInitialSearching = YES;
     }
     return self;
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
+    [self getItemsWithQuery:@"california" withPageNumber:@1 success:success failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

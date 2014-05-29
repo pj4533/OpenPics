@@ -40,6 +40,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
     if (self) {
         self.providerName = @"Digital Public Library of America";
         self.providerShortName = @"DPLA";
+        self.supportsInitialSearching = YES;
     }
     return self;
 }
@@ -51,6 +52,12 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 #else
     return YES;
 #endif
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
+    [self getItemsWithQuery:@"" withPageNumber:@1 success:success failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

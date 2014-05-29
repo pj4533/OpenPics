@@ -42,6 +42,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"Europeana";
+        self.supportsInitialSearching = YES;
     }
     return self;
 }
@@ -53,6 +54,12 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
 #else
     return YES;
 #endif
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
+    [self getItemsWithQuery:@"photos" withPageNumber:@1 success:success failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

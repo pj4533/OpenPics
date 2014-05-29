@@ -35,6 +35,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     if (self) {
         self.providerName = @"National Library of Australia - Trove";
         self.providerShortName = @"NLA - Trove";
+        self.supportsInitialSearching = YES;
     }
     return self;
 }
@@ -46,6 +47,12 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
 #else
     return YES;
 #endif
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
+    [self getItemsWithQuery:@"photos" withPageNumber:@1 success:success failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

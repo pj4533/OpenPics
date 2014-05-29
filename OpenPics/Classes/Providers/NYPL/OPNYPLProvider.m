@@ -38,8 +38,15 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     self = [super initWithProviderType:providerType];
     if (self) {
         self.providerName = @"New York Public Library";
+        self.supportsInitialSearching = YES;
     }
     return self;
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+
+    [self getItemsWithQuery:@"new york subway" withPageNumber:@1 success:success failure:failure];
 }
 
 - (OPImageItem*) getItemFromDict:(NSDictionary*) itemDict {
