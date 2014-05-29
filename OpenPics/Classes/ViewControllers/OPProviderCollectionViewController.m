@@ -88,7 +88,6 @@
 
         OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
         [dataSource doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
-#warning do i really need the items/canloadmore here?
             [SVProgressHUD dismiss];
             [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
             [self.collectionView reloadData];
