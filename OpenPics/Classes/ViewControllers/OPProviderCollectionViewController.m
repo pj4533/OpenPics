@@ -187,8 +187,14 @@
     OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
     dataSource.delegate = self;
     self.collectionView.dataSource = dataSource;
-    [self.collectionView reloadData];
-    [self doInitialSearch];    
+    
+    if (_searchBar.text && ![_searchBar.text isEqualToString:@""]) {
+        dataSource.currentQueryString = _searchBar.text;
+        [self.collectionView reloadData];
+    } else {
+        [self.collectionView reloadData];
+        [self doInitialSearch];
+    }
 }
 
 #pragma mark - UISearchBarDelegate
