@@ -111,11 +111,13 @@
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
     OPImageItem* item = [dataSource itemAtIndexPath:indexPath];
     
-    self.navigationItem.title = item.title;
-    if ([[OPBackend shared] didUserCreateItem:item]) {
-        _favoriteButton.title = @"Remove Favorite";
-    } else {
-        _favoriteButton.title = @"Add Favorite";
+    if (item) {
+        self.navigationItem.title = item.title;
+        if ([[OPBackend shared] didUserCreateItem:item]) {
+            _favoriteButton.title = @"Remove Favorite";
+        } else {
+            _favoriteButton.title = @"Add Favorite";
+        }
     }
 }
 

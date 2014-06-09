@@ -230,7 +230,11 @@
 //}
 
 - (OPImageItem*)itemAtIndexPath:(NSIndexPath*)indexPath {
-    return _items[indexPath.item];
+    if (indexPath.item < _items.count) {
+        return _items[indexPath.item];
+    }
+    
+    return nil;
 }
 
 @end
