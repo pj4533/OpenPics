@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
 		0A05EF151745A79000814F0B /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
+		0A0E2F42194694AB00B82B86 /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F40194694AB00B82B86 /* AFFlickrSessionManager.m */; };
+		0A0E2F43194694AB00B82B86 /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F40194694AB00B82B86 /* AFFlickrSessionManager.m */; };
+		0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F44194694DD00B82B86 /* OPFlickrProvider.m */; };
+		0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F44194694DD00B82B86 /* OPFlickrProvider.m */; };
+		0A0E2F4A1946950F00B82B86 /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */; };
+		0A0E2F4B1946950F00B82B86 /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */; };
+		0A0E2F4F1946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */; };
+		0A0E2F501946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */; };
 		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
 		0A190003190DA1AF00922EDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
-		0A190005190DA1AF00922EDD /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
 		0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
 		0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */; };
 		0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
@@ -41,7 +48,6 @@
 		0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
 		0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
-		0A190026190DA1AF00922EDD /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
 		0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
 		0A190028190DA1AF00922EDD /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A190029190DA1AF00922EDD /* UIImage+Preload.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A031F9D175136EC008CD564 /* UIImage+Preload.m */; };
@@ -85,8 +91,6 @@
 		0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */; };
 		0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
-		0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */; };
-		0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */; };
 		0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
@@ -131,6 +135,14 @@
 		0A05EF131745A79000814F0B /* OPBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackend.h; sourceTree = "<group>"; };
 		0A05EF141745A79000814F0B /* OPBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackend.m; sourceTree = "<group>"; };
 		0A05EF221745A9D300814F0B /* OPBackendTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackendTokens.h; sourceTree = "<group>"; };
+		0A0E2F40194694AB00B82B86 /* AFFlickrSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrSessionManager.m; sourceTree = "<group>"; };
+		0A0E2F41194694AB00B82B86 /* AFFlickrSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFlickrSessionManager.h; sourceTree = "<group>"; };
+		0A0E2F44194694DD00B82B86 /* OPFlickrProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrProvider.m; sourceTree = "<group>"; };
+		0A0E2F45194694DD00B82B86 /* OPFlickrProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrProvider.h; sourceTree = "<group>"; };
+		0A0E2F481946950F00B82B86 /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
+		0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
+		0A0E2F4D1946983A00B82B86 /* OPFlickrBPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrBPLProvider.h; sourceTree = "<group>"; };
+		0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrBPLProvider.m; sourceTree = "<group>"; };
 		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
 		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
 		0A19004D190DA1AF00922EDD /* OpenPicsReveal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPicsReveal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,10 +181,6 @@
 		0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTroveSessionManager.m; sourceTree = "<group>"; };
 		0A49766518D2A745009DCAEE /* OPTroveProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPTroveProvider.h; sourceTree = "<group>"; };
 		0A49766618D2A745009DCAEE /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
-		0A49766A18D2A96B009DCAEE /* AFFlickrSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFlickrSessionManager.h; sourceTree = "<group>"; };
-		0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFlickrSessionManager.m; sourceTree = "<group>"; };
-		0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCommonsProvider.h; sourceTree = "<group>"; };
-		0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
 		0A4A0CCE18DA8A3B0002E8E8 /* UIImageView+Hourglass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Hourglass.h"; sourceTree = "<group>"; };
 		0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Hourglass.m"; sourceTree = "<group>"; };
 		0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageManager.h; sourceTree = "<group>"; };
@@ -294,6 +302,37 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
+		0A0E2F361946947000B82B86 /* Flickr */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E2F371946947000B82B86 /* Commons */,
+				0A0E2F4C1946981900B82B86 /* BPL */,
+				0A0E2F44194694DD00B82B86 /* OPFlickrProvider.m */,
+				0A0E2F45194694DD00B82B86 /* OPFlickrProvider.h */,
+				0A0E2F40194694AB00B82B86 /* AFFlickrSessionManager.m */,
+				0A0E2F41194694AB00B82B86 /* AFFlickrSessionManager.h */,
+			);
+			path = Flickr;
+			sourceTree = "<group>";
+		};
+		0A0E2F371946947000B82B86 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E2F481946950F00B82B86 /* OPFlickrCommonsProvider.h */,
+				0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		0A0E2F4C1946981900B82B86 /* BPL */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E2F4D1946983A00B82B86 /* OPFlickrBPLProvider.h */,
+				0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */,
+			);
+			path = BPL;
+			sourceTree = "<group>";
+		};
 		0A1DCDEA18DDE720003F4418 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,11 +353,11 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0A0E2F361946947000B82B86 /* Flickr */,
 				0A61319218D4AE2700FFC2DB /* Favorites */,
 				0A61318E18D4AE0F00FFC2DB /* Popular */,
 				0ADFD8BD18D4A29900EB75F6 /* CDL */,
 				0A36FA8218D49EAB00BCA5C1 /* Europeana */,
-				0A49766918D2A96B009DCAEE /* FlickrCommons */,
 				0A49766218D2A745009DCAEE /* Trove */,
 				0A49765B18D2A35F009DCAEE /* LOC */,
 				0A49765718D2986C009DCAEE /* LIFE */,
@@ -425,17 +464,6 @@
 				0A49766618D2A745009DCAEE /* OPTroveProvider.m */,
 			);
 			path = Trove;
-			sourceTree = "<group>";
-		};
-		0A49766918D2A96B009DCAEE /* FlickrCommons */ = {
-			isa = PBXGroup;
-			children = (
-				0A49766A18D2A96B009DCAEE /* AFFlickrSessionManager.h */,
-				0A49766B18D2A96B009DCAEE /* AFFlickrSessionManager.m */,
-				0A49766C18D2A96B009DCAEE /* OPFlickrCommonsProvider.h */,
-				0A49766D18D2A96B009DCAEE /* OPFlickrCommonsProvider.m */,
-			);
-			path = FlickrCommons;
 			sourceTree = "<group>";
 		};
 		0A609EAD171072BD0084735B = {
@@ -772,7 +800,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A190003190DA1AF00922EDD /* main.m in Sources */,
-				0A190005190DA1AF00922EDD /* AFFlickrSessionManager.m in Sources */,
 				0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */,
 				0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */,
 				0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */,
@@ -798,13 +825,16 @@
 				0A19001C190DA1AF00922EDD /* OPLOCProvider.m in Sources */,
 				0A19001E190DA1AF00922EDD /* OPFavoritesProvider.m in Sources */,
 				0A190020190DA1AF00922EDD /* OPDPLAProvider.m in Sources */,
+				0A0E2F43194694AB00B82B86 /* AFFlickrSessionManager.m in Sources */,
+				0A0E2F4B1946950F00B82B86 /* OPFlickrCommonsProvider.m in Sources */,
 				0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */,
 				0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */,
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
-				0A190026190DA1AF00922EDD /* OPFlickrCommonsProvider.m in Sources */,
+				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
 				0A190028190DA1AF00922EDD /* OPBackend.m in Sources */,
+				0A0E2F501946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A190029190DA1AF00922EDD /* UIImage+Preload.m in Sources */,
 				0A19002A190DA1AF00922EDD /* OPEuropeanaProvider.m in Sources */,
 				0AB6D4251916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */,
@@ -817,7 +847,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A609EC6171072BD0084735B /* main.m in Sources */,
-				0A49766E18D2A96B009DCAEE /* AFFlickrSessionManager.m in Sources */,
 				0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */,
 				0AF4CB2818DF779000B10441 /* OPNavigationControllerDelegate.m in Sources */,
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
@@ -843,13 +872,16 @@
 				0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */,
 				0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */,
 				0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */,
+				0A0E2F42194694AB00B82B86 /* AFFlickrSessionManager.m in Sources */,
+				0A0E2F4A1946950F00B82B86 /* OPFlickrCommonsProvider.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
-				0A49766F18D2A96B009DCAEE /* OPFlickrCommonsProvider.m in Sources */,
+				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
+				0A0E2F4F1946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
 				0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */,
 				0AB6D4241916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */,

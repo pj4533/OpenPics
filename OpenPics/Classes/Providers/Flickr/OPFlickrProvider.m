@@ -20,23 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "OPFlickrCommonsProvider.h"
+#import "OPFlickrProvider.h"
 #import "AFFlickrSessionManager.h"
 #import "OPImageItem.h"
 #import "OPProviderTokens.h"
 
-NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons";
+@interface OPFlickrProvider ()
 
-@implementation OPFlickrCommonsProvider
+@end
 
-- (id) initWithProviderType:(NSString*) providerType {
-    self = [super initWithProviderType:providerType];
-    if (self) {
-        self.providerName = @"Flickr Commons Project";
-        self.supportsInitialSearching = YES;
-    }
-    return self;
-}
+@implementation OPFlickrProvider
 
 - (BOOL) isConfigured {
 #ifndef kOPPROVIDERTOKEN_FLICKR
@@ -47,28 +40,43 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
 #endif
 }
 
-- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
-                            failure:(void (^)(NSError* error))failure {
+- (void) doInitialSearchWithUserId:(NSString*)userId
+                         isCommons:(BOOL)isCommons
+                           success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                           failure:(void (^)(NSError* error))failure {
     
-    [self getItemsWithQuery:@"" withPageNumber:@1 success:success failure:failure];
+    [self getItemsWithQuery:@""
+             withPageNumber:@1
+                 withUserId:userId
+                  isCommons:isCommons
+                    success:success
+                    failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
+                withUserId:(NSString*) userId
+                 isCommons:(BOOL)isCommons
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
     
-    NSDictionary* parameters = @{
+    NSMutableDictionary* parameters = @{
                                  @"text" : queryString,
                                  @"page": pageNumber,
                                  @"nojsoncallback": @"1",
                                  @"method" : @"flickr.photos.search",
                                  @"format" : @"json",
-                                 @"is_commons": @"true",
                                  @"extras": @"url_b,url_o,o_dims",
                                  @"per_page": @"20"
-                                 };
+                                 }.mutableCopy;
     
+    if (isCommons) {
+        parameters[@"is_commons"] = @"true";
+    }
+    
+    if (userId) {
+        parameters[@"user_id"] = userId;
+    }
     
     [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -83,14 +91,20 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
             NSString* photoSecret = itemDict[@"secret"];
             
             NSString* imageUrlString = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@.jpg",farmId,serverId,photoId,photoSecret];
-            NSDictionary* opImageDict = @{
+            NSMutableDictionary* opImageDict = @{
                                           @"imageUrl": [NSURL URLWithString:imageUrlString],
                                           @"title" : itemDict[@"title"],
                                           @"providerType": self.providerType,
                                           @"providerSpecific": itemDict,
-                                          @"width": itemDict[@"width_o"],
-                                          @"height": itemDict[@"height_o"]
-                                          };
+                                          }.mutableCopy;
+
+            if (itemDict[@"width_o"]) {
+                opImageDict[@"width"] = itemDict[@"width_o"];
+            }
+            if (itemDict[@"height_o"]) {
+                opImageDict[@"height"] = itemDict[@"height_o"];
+            }
+
             OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }

@@ -22,8 +22,18 @@
 
 #import "OPProvider.h"
 
-extern NSString* const OPProviderTypeFlickrCommons;
+@interface OPFlickrProvider : OPProvider
 
-@interface OPFlickrCommonsProvider : OPProvider
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                withUserId:(NSString*) userId
+                 isCommons:(BOOL)isCommons
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure;
+
+- (void) doInitialSearchWithUserId:(NSString*)userId
+                         isCommons:(BOOL)isCommons
+                           success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                           failure:(void (^)(NSError* error))failure;
 
 @end
