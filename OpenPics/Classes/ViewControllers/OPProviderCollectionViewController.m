@@ -93,6 +93,17 @@
 
 #pragma mark - Loading Data Helper Functions
 
+- (void) searchForQuery:(NSString*) searchQuery {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+
+    dataSource.currentQueryString = searchQuery;
+    [dataSource clearData];
+    [self.collectionView reloadData];
+    
+    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
+    [self getMoreItems];
+}
+
 - (void) doInitialSearch {
     OPProvider* selectedProvider = [[OPProviderController shared] getSelectedProvider];
     
@@ -189,8 +200,7 @@
     self.collectionView.dataSource = dataSource;
     
     if (_searchBar.text && ![_searchBar.text isEqualToString:@""]) {
-        dataSource.currentQueryString = _searchBar.text;
-        [self.collectionView reloadData];
+        [self searchForQuery:_searchBar.text];
     } else {
         [self.collectionView reloadData];
         [self doInitialSearch];
@@ -224,14 +234,7 @@
 
 - (void) keyboardDidHide:(id) note {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-    dataSource.currentQueryString = _searchBar.text;
-    [dataSource clearData];
-    [self.collectionView reloadData];
-    
-    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
-    [self getMoreItems];
+    [self searchForQuery:_searchBar.text];
 }
 
 #pragma mark - DERPIN
