@@ -106,6 +106,12 @@
 		0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
 		0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */; };
 		0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
+		0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5519493ADD00A9F9BD /* OPRedditProvider.m */; };
+		0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5519493ADD00A9F9BD /* OPRedditProvider.m */; };
+		0AB49E5B19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5A19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m */; };
+		0AB49E5C19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5A19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m */; };
+		0AB49E60194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */; };
+		0AB49E61194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */; };
 		0AB6D4241916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */; };
 		0AB6D4251916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */; };
 		0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLSessionManager.m */; };
@@ -209,6 +215,12 @@
 		0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackendDefault.m; sourceTree = "<group>"; };
 		0A9D169A18D4D631000DC0BE /* AFDefaultBackendSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefaultBackendSessionManager.h; sourceTree = "<group>"; };
 		0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDefaultBackendSessionManager.m; sourceTree = "<group>"; };
+		0AB49E5419493ADD00A9F9BD /* OPRedditProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditProvider.h; sourceTree = "<group>"; };
+		0AB49E5519493ADD00A9F9BD /* OPRedditProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditProvider.m; sourceTree = "<group>"; };
+		0AB49E5919493EDF00A9F9BD /* OPRedditHistoryPornProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditHistoryPornProvider.h; sourceTree = "<group>"; };
+		0AB49E5A19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditHistoryPornProvider.m; sourceTree = "<group>"; };
+		0AB49E5E194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditOldSchoolCoolProvider.h; sourceTree = "<group>"; };
+		0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditOldSchoolCoolProvider.m; sourceTree = "<group>"; };
 		0AB6D4221916A39300CD59FC /* OPCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCollectionViewDataSource.h; sourceTree = "<group>"; };
 		0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCollectionViewDataSource.m; sourceTree = "<group>"; };
 		0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
@@ -353,6 +365,7 @@
 		0A1EF47C17108B3A00AB8B62 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				0AB49E5319493AC600A9F9BD /* Reddit */,
 				0A0E2F361946947000B82B86 /* Flickr */,
 				0A61319218D4AE2700FFC2DB /* Favorites */,
 				0A61318E18D4AE0F00FFC2DB /* Popular */,
@@ -574,6 +587,35 @@
 				0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */,
 			);
 			path = Default;
+			sourceTree = "<group>";
+		};
+		0AB49E5319493AC600A9F9BD /* Reddit */ = {
+			isa = PBXGroup;
+			children = (
+				0AB49E5D194946AC00A9F9BD /* OldSchoolCool */,
+				0AB49E5819493EC800A9F9BD /* HistoryPorn */,
+				0AB49E5419493ADD00A9F9BD /* OPRedditProvider.h */,
+				0AB49E5519493ADD00A9F9BD /* OPRedditProvider.m */,
+			);
+			path = Reddit;
+			sourceTree = "<group>";
+		};
+		0AB49E5819493EC800A9F9BD /* HistoryPorn */ = {
+			isa = PBXGroup;
+			children = (
+				0AB49E5919493EDF00A9F9BD /* OPRedditHistoryPornProvider.h */,
+				0AB49E5A19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m */,
+			);
+			path = HistoryPorn;
+			sourceTree = "<group>";
+		};
+		0AB49E5D194946AC00A9F9BD /* OldSchoolCool */ = {
+			isa = PBXGroup;
+			children = (
+				0AB49E5E194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.h */,
+				0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */,
+			);
+			path = OldSchoolCool;
 			sourceTree = "<group>";
 		};
 		0ABF9E3B171097E500C29E84 /* NYPL */ = {
@@ -806,6 +848,7 @@
 				0A190009190DA1AF00922EDD /* OPPopularProvider.m in Sources */,
 				0A19000A190DA1AF00922EDD /* OPAppDelegate.m in Sources */,
 				0A19000B190DA1AF00922EDD /* OPProviderCollectionViewController.m in Sources */,
+				0AB49E5C19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */,
 				0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */,
 				0A19000D190DA1AF00922EDD /* OPScrollView.m in Sources */,
 				0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */,
@@ -830,12 +873,14 @@
 				0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */,
 				0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */,
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
+				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
 				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
 				0A190028190DA1AF00922EDD /* OPBackend.m in Sources */,
 				0A0E2F501946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A190029190DA1AF00922EDD /* UIImage+Preload.m in Sources */,
+				0AB49E61194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m in Sources */,
 				0A19002A190DA1AF00922EDD /* OPEuropeanaProvider.m in Sources */,
 				0AB6D4251916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */,
 				0A19002B190DA1AF00922EDD /* NSString+MD5.m in Sources */,
@@ -853,6 +898,7 @@
 				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A1DCDFA18DDE720003F4418 /* OPProviderCollectionViewController.m in Sources */,
+				0AB49E5B19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */,
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,
@@ -877,12 +923,14 @@
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
+				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A0E2F4F1946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A031F9E175136EC008CD564 /* UIImage+Preload.m in Sources */,
+				0AB49E60194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m in Sources */,
 				0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */,
 				0AB6D4241916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */,
 				0ADFACA7175FEFDB00A35553 /* NSString+MD5.m in Sources */,

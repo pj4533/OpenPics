@@ -97,7 +97,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (!operation.isCancelled) {
-            NSLog(@"error getting image");
+            NSLog(@"error getting image: %@", operation.request.URL);
             if (failure) {
                 failure();
             }
