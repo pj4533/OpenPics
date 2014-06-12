@@ -147,12 +147,15 @@
     UIStoryboard *storyboard = self.storyboard;
     OPProviderListViewController* providerListViewController =
     [storyboard instantiateViewControllerWithIdentifier:@"OPProviderListViewController"];
+    providerListViewController.title = @"Choose Image Source";
     providerListViewController.delegate = self;
     
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:providerListViewController];
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:providerListViewController animated:YES completion:nil];
+        [self presentViewController:navController animated:YES completion:nil];
     } else {
-        _popover = [[UIPopoverController alloc] initWithContentViewController:providerListViewController];
+        _popover = [[UIPopoverController alloc] initWithContentViewController:navController];
         [_popover presentPopoverFromBarButtonItem:_sourceButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
