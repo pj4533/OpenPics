@@ -15,6 +15,7 @@
 
 // Reddit API uses 'after' hashes rather than page numbers, this is a mapping
 @property (strong, nonatomic) NSMutableDictionary* pageNumberAfters;
+@property (strong, nonatomic) NSString* currentQuery;
 
 @end
 
@@ -24,6 +25,7 @@
     self = [super initWithProviderType:providerType];
     if (self) {
         self.pageNumberAfters = @{}.mutableCopy;
+        self.currentQuery = @"";
     }
     return self;
 }
@@ -48,15 +50,29 @@
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
     
-    NSString* path = [NSString stringWithFormat:@"/r/%@.json", subreddit];
+    if (![queryString isEqualToString:self.currentQuery]) {
+        self.pageNumberAfters = @{}.mutableCopy;
+    }
     
-    NSDictionary* parameters = nil;
+    self.currentQuery = queryString;
+    
+    NSMutableDictionary* parameters = nil;
     
     if (pageNumber.integerValue > 1) {
         NSString* thisPageAfter = self.pageNumberAfters[pageNumber];
         if (thisPageAfter) {
-            parameters = @{@"after" : thisPageAfter};
+            parameters = @{@"after" : thisPageAfter}.mutableCopy;
         }
+    }
+
+    NSString* path = [NSString stringWithFormat:@"/r/%@", subreddit];
+    if (![queryString isEqualToString:@""]) {
+        path = [path stringByAppendingString:@"/search.json"];
+        if (!parameters) {
+            parameters = @{@"q" : queryString, @"restrict_sr":@"on"}.mutableCopy;
+        }
+    } else {
+        path = [path stringByAppendingString:@".json"];
     }
 
     NSURL* baseUrl = [[NSURL alloc] initWithString:@"http://www.reddit.com"];
