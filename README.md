@@ -25,6 +25,9 @@ Each remote image source gets a OPProvider class.  Providers can be easily added
 * LIFE Magazine (http://images.google.com/hosted/life)
 * National Library of Australia - Trove (http://trove.nla.gov.au/general/api)
 * Flickr Commons Project (http://www.flickr.com/commons)
+* Boston Public Library Flickr Feed (https://www.flickr.com/photos/boston_public_library/)
+* Reddit: /r/HistoryPorn (http://www.reddit.com/r/historyporn)
+* Reddit: /r/OldSchoolCool (http://www.reddit.com/r/oldschoolcool)
 
 For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:
 
