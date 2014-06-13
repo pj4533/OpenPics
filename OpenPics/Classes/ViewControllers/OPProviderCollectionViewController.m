@@ -17,6 +17,7 @@
 #import "OPProvider.h"
 #import "OPCollectionViewDataSource.h"
 #import "FRDLivelyButton.h"
+#import "OPImageManager.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
@@ -183,6 +184,11 @@
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
     [cell setupForSingleImageLayoutAnimated:YES];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    [dataSource cancelRequestAtIndexPath:indexPath];
 }
 
 #pragma mark - OPProviderListDelegate

@@ -237,4 +237,8 @@
     return nil;
 }
 
+- (void) cancelRequestAtIndexPath:(NSIndexPath*)indexPath {
+    [_imageManager cancelImageOperationAtIndexPath:indexPath];
+}
+
 @end

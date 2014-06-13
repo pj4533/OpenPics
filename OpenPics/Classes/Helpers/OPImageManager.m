@@ -26,10 +26,7 @@
 
 #import "OPImageManager.h"
 #import "UIImageView+Hourglass.h"
-#import "TMCache.h"
 #import "OPImageItem.h"
-#import "NSString+MD5.h"
-#import "UIImage+Preload.h"
 #import "AFHTTPRequestOperation.h"
 
 @interface OPImageManager () {
@@ -62,8 +59,9 @@
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath {
     AFHTTPRequestOperation* operation = _imageOperations[indexPath];
     if (operation.isExecuting) {
-        NSLog(@"Not visible, cancelling operation for row: %ld", (long)indexPath.row);
+        NSLog(@"Not visible, cancelling operation for item: %ld", (long)indexPath.item);
         [operation cancel];
+        
     }
 }
 
@@ -80,20 +78,9 @@
         
         // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
         if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
-            
-            // dispatch to a background thread for preloading
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                // uses category - will check for assocaited object
-                UIImage* preloadedImage = image.preloadedImage;
-                
-                // set the loaded object to the cache
-                [[TMCache sharedCache] setObject:preloadedImage forKey:item.imageUrl.absoluteString.MD5String];
-                
-                if (success) {
-                    success(preloadedImage);
-                }
-            });
+            if (success) {
+                success(image);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (!operation.isCancelled) {
@@ -105,43 +92,6 @@
     }];
     _imageOperations[indexPath] = operation;
     [[[self class] imageRequestOperationQueue] addOperation:operation];
-}
-
-- (void) getImageForItem:(OPImageItem*) item
-           withIndexPath:(NSIndexPath*) indexPath
-             withSuccess:(void (^)(UIImage* image))success
-             withFailure:(void (^)(void))failure {
-    // Then, dispatch async to another thread to check the cache for this image (might read from disk which is slow while scrolling
-    
-    // This was causing weird behavior, when quickly scrolling down a bunch of pages, then back to top  almost like it was deadlocking and not going into this dispatch_async
-    //
-    // just commenting this all out for now.   below is the other way, which causes
-    // unbutteryness during fast scrolling, cause it is reading from disk for cached
-    // images.
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        __block UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (cachedImage) {
-//                cachedImage = cachedImage.preloadedImage;
-//                if (success) {
-//                    success(cachedImage);
-//                }
-//            } else {
-//                [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
-//            }
-//        });
-//    });
-    
-    UIImage* cachedImage = [[TMCache sharedCache] objectForKey:item.imageUrl.absoluteString.MD5String];
-    if (cachedImage) {
-        cachedImage = cachedImage.preloadedImage;
-        if (success) {
-            success(cachedImage);
-        }
-    } else {
-        [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:success withFailure:failure];
-    }
-
 }
 
 - (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath forCollectionView:(UICollectionView*) collectionView {
@@ -161,8 +111,8 @@
            withContentMode:(UIViewContentMode)contentMode
 {
     [imageView fadeInHourglassWithCompletion:^{
-        [self getImageForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
-// if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
+        [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
+            // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
             if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
                 // then dispatch back to the main thread to set the image
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -199,7 +149,7 @@
                 }];
             });
         }];
-    }];    
+    }];
 }
 
 @end
