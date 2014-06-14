@@ -91,7 +91,7 @@
         for (NSDictionary* itemDict in childrenArray) {
             NSDictionary* itemDataDict = itemDict[@"data"];
             
-            NSString* urlString = itemDataDict[@"url"];
+            NSString* urlString = itemDataDict[@"thumbnail"];
             NSString* domain = itemDataDict[@"domain"];
             if (domain && [domain isEqualToString:@"imgur.com"] && ![urlString hasSuffix:@".jpg"]) {
                 urlString = [urlString stringByAppendingString:@".jpg"];
@@ -128,6 +128,17 @@
 }
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+    
+    NSString* upRezzedUrlString = item.imageUrl.absoluteString;
+    
+    if (item.providerSpecific[@"url"]) {
+        upRezzedUrlString = item.providerSpecific[@"url"];
+    }
+    
+    if (completion && ![upRezzedUrlString isEqualToString:item.imageUrl.absoluteString]) {
+        completion([NSURL URLWithString:upRezzedUrlString], item);
+    }
+
 }
 
 @end
