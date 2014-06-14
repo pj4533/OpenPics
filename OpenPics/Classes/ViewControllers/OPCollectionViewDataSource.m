@@ -175,14 +175,17 @@
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath
                         onCollectionView:cv
-                         withContentMode:UIViewContentModeScaleAspectFit];
-        [cell setupForSingleImageLayoutAnimated:NO];
+                         withContentMode:UIViewContentModeScaleAspectFit
+                          withCompletion:^{
+                              [cell setupForSingleImageLayoutAnimated:NO];
+                          }];
     } else {
         [_imageManager loadImageFromItem:item
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath
                         onCollectionView:cv
-                         withContentMode:UIViewContentModeScaleAspectFill];
+                         withContentMode:UIViewContentModeScaleAspectFill
+                          withCompletion:nil];
     }
     
     return cell;

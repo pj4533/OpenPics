@@ -109,6 +109,7 @@
                atIndexPath:(NSIndexPath*) indexPath
           onCollectionView:(UICollectionView*) cv
            withContentMode:(UIViewContentMode)contentMode
+            withCompletion:(void (^)())completion
 {
     [imageView fadeInHourglassWithCompletion:^{
         [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
@@ -127,13 +128,18 @@
                         // fade in image
                         [UIView animateWithDuration:0.5 animations:^{
                             imageView.alpha = 1.0;
+                        } completion:^(BOOL finished) {
+                            //if we have no size information yet, save the information in item, and force a re-layout
+                            if (!item.size.height) {
+                                item.size = image.size;
+                                [cv.collectionViewLayout invalidateLayout];
+                            }
+                            
+                            if (completion) {
+                                completion();
+                            }
                         }];
                         
-                        //if we have no size information yet, save the information in item, and force a re-layout
-                        if (!item.size.height) {
-                            item.size = image.size;
-                            [cv.collectionViewLayout invalidateLayout];
-                        }
                     }];
                 });
             }

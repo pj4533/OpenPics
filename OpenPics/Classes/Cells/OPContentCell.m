@@ -136,7 +136,7 @@
     [_upRezOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         imageView.image = (UIImage*) responseObject;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"UPREZ FAILED: %@", error.localizedDescription);
     }];
     [_upRezOperation start];
 }

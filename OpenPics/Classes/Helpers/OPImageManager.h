@@ -33,7 +33,8 @@
                toImageView:(UIImageView*) imageView
                atIndexPath:(NSIndexPath*) indexPath
           onCollectionView:(UICollectionView*) cv
-           withContentMode:(UIViewContentMode)contentMode;
+           withContentMode:(UIViewContentMode)contentMode
+            withCompletion:(void (^)())completion;
 
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath;
 

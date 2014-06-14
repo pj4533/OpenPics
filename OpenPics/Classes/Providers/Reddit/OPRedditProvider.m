@@ -132,7 +132,12 @@
     NSString* upRezzedUrlString = item.imageUrl.absoluteString;
     
     if (item.providerSpecific[@"url"]) {
-        upRezzedUrlString = item.providerSpecific[@"url"];
+        NSString* domain = item.providerSpecific[@"domain"];
+        NSString* urlString = item.providerSpecific[@"url"];
+        if (domain && [domain isEqualToString:@"imgur.com"] && ![urlString hasSuffix:@".jpg"]) {
+            urlString = [urlString stringByAppendingString:@".jpg"];
+        }
+        upRezzedUrlString = urlString;
     }
     
     if (completion && ![upRezzedUrlString isEqualToString:item.imageUrl.absoluteString]) {
