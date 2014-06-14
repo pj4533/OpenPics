@@ -39,6 +39,7 @@ PODS:
   - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
   - Reveal-iOS-SDK (1.0.3)
+  - SGNavigationProgress (1.2)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
   - TMCache (1.2.0)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - FRDLivelyButton (~> 1.1.2)
   - KissXML
   - Reveal-iOS-SDK
+  - SGNavigationProgress
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD (~> 1.0)
   - TMCache
@@ -69,6 +71,7 @@ SPEC CHECKSUMS:
   FRDLivelyButton: 717c6907bd6bb588f775a50580e216fe83abcade
   KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
   Reveal-iOS-SDK: 5f69f357d5a18a2f13db71730bc6b7973a21cf3e
+  SGNavigationProgress: 6c38006ca3c652618411c67d493b263343d5aece
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   TMCache: ea1c509badaf9a1245422aabf3c975b3277ab138

@@ -11,6 +11,7 @@ pod 'KissXML'
 pod 'AFNetworkActivityLogger'
 pod 'Appsee', '~> 2.0.8'
 pod 'FRDLivelyButton', '~> 1.1.2'
+pod 'SGNavigationProgress'
 
 target :OpenPicsReveal do
       pod 'Reveal-iOS-SDK'

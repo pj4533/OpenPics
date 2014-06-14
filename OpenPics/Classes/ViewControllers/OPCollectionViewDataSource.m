@@ -199,6 +199,15 @@
     }
 }
 
+- (void) showProgressWithBytesRead:(NSUInteger) bytesRead
+                withTotalBytesRead:(NSInteger) totalBytesRead
+      withTotalBytesExpectedToRead:(NSInteger) totalBytesExpectedToRead {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showProgressWithBytesRead:withTotalBytesRead:withTotalBytesExpectedToRead:)]) {
+        [self.delegate showProgressWithBytesRead:bytesRead withTotalBytesRead:totalBytesRead withTotalBytesExpectedToRead:totalBytesExpectedToRead];
+    }
+}
+
+
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 //- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

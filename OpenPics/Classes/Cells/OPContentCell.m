@@ -129,10 +129,18 @@
         _upRezOperation = nil;
     }
     
+    __weak __typeof(self)weakSelf = self;
     __weak UIImageView* imageView = self.internalScrollView.imageView;
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
     _upRezOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     _upRezOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [_upRezOperation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(showProgressWithBytesRead:withTotalBytesRead:withTotalBytesExpectedToRead:)]) {
+            [weakSelf.delegate showProgressWithBytesRead:bytesRead
+                                      withTotalBytesRead:totalBytesRead
+                            withTotalBytesExpectedToRead:totalBytesExpectedToRead];
+        }
+    }];
     [_upRezOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         imageView.image = (UIImage*) responseObject;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

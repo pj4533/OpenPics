@@ -18,6 +18,7 @@
 #import "OPCollectionViewDataSource.h"
 #import "FRDLivelyButton.h"
 #import "OPImageManager.h"
+#import "UINavigationController+SGProgress.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
@@ -177,6 +178,14 @@
         OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) self.navigationController.topViewController;
         [imageVC toggleUIHidden];
     }
+}
+
+- (void) showProgressWithBytesRead:(NSUInteger) bytesRead
+                withTotalBytesRead:(NSInteger) totalBytesRead
+      withTotalBytesExpectedToRead:(NSInteger) totalBytesExpectedToRead {
+    
+    float percentage = (float) ((totalBytesRead/totalBytesExpectedToRead) * 100);
+    [self.navigationController setSGProgressPercentage:percentage];
 }
 
 #pragma mark - UICollectionViewDelegate

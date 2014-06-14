@@ -31,6 +31,9 @@
 @protocol OPContentCellDelegate <NSObject>
 @optional
 - (void) singleTappedCell;
+- (void) showProgressWithBytesRead:(NSUInteger) bytesRead
+                withTotalBytesRead:(NSInteger) totalBytesRead
+      withTotalBytesExpectedToRead:(NSInteger) totalBytesExpectedToRead;
 @end
 
 
