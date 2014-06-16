@@ -10,6 +10,7 @@
 #import "OPImageItem.h"
 #import "OPProviderTokens.h"
 #import "AFHTTPSessionManager.h"
+#import "NSString+ContainsSubstring.h"
 
 @interface OPRedditProvider ()
 
@@ -91,10 +92,20 @@
         for (NSDictionary* itemDict in childrenArray) {
             NSDictionary* itemDataDict = itemDict[@"data"];
             
-            NSString* urlString = itemDataDict[@"thumbnail"];
+            NSString* urlString = itemDataDict[@"url"];
             NSString* domain = itemDataDict[@"domain"];
-            if (domain && [domain isEqualToString:@"imgur.com"] && ![urlString hasSuffix:@".jpg"]) {
-                urlString = [urlString stringByAppendingString:@".jpg"];
+            
+            // Only use imgur photos that aren't an album
+            if (![urlString containsSubstring:@"imgur.com/a/"] && ![urlString containsSubstring:@"imgur.com/gallery"]) {
+                if (domain && [domain containsSubstring:@"imgur.com"]) {
+                    if (![urlString hasSuffix:@".jpg"]) {
+                        urlString = [urlString stringByAppendingString:@"l.jpg"];
+                    } else {
+                        if (![urlString hasSuffix:@"l.jpg"]) {
+                            urlString = [urlString stringByReplacingOccurrencesOfString:@".jpg" withString:@"l.jpg"];
+                        }
+                    }
+                }
             }
             
             if ([urlString hasSuffix:@".jpg"]) {
@@ -104,7 +115,6 @@
                                                      @"providerType": self.providerType,
                                                      @"providerSpecific": itemDataDict,
                                                      }.mutableCopy;
-                
                 
                 OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];                

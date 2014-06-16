@@ -98,6 +98,8 @@
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */; };
 		0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */; };
+		0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
+		0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
 		0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
 		0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
 		0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
@@ -200,6 +202,8 @@
 		0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPopularProvider.m; sourceTree = "<group>"; };
 		0A61319318D4AE2700FFC2DB /* OPFavoritesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFavoritesProvider.h; sourceTree = "<group>"; };
 		0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFavoritesProvider.m; sourceTree = "<group>"; };
+		0A81125E194FB6FD008B56A9 /* NSString+ContainsSubstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ContainsSubstring.h"; sourceTree = "<group>"; };
+		0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ContainsSubstring.m"; sourceTree = "<group>"; };
 		0A8A81FC18CCBDEE001AED56 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0A9BEEF218D2962300CF2C08 /* AFDPLASessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLASessionManager.h; sourceTree = "<group>"; };
 		0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLASessionManager.m; sourceTree = "<group>"; };
@@ -415,6 +419,8 @@
 		0A44CBE4171074EF00D7C1B6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0A81125E194FB6FD008B56A9 /* NSString+ContainsSubstring.h */,
+				0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */,
 				0A44CBE7171074EF00D7C1B6 /* OPScrollView.h */,
 				0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */,
 				0A127BF4172D98FE00F6966A /* OPAppearance.h */,
@@ -863,6 +869,7 @@
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
+				0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
 				0A190028190DA1AF00922EDD /* OPBackend.m in Sources */,
@@ -911,6 +918,7 @@
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
+				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
