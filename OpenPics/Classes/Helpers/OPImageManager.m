@@ -30,7 +30,7 @@
 #import "AFHTTPRequestOperation.h"
 
 @interface OPImageManager () {
-    NSMutableDictionary* _imageOperations;
+    NSCache* _imageOperations;
 }
 
 @end
@@ -40,7 +40,7 @@
 -(id) init {
     self = [super init];
     if (self) {
-        _imageOperations = @{}.mutableCopy;
+        _imageOperations = [[NSCache alloc] init];
     }
     return self;
 }
@@ -56,9 +56,13 @@
     return _imageRequestOperationQueue;
 }
 
+- (void) removeCachedImageOperations {
+    [_imageOperations removeAllObjects];
+}
+
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath {
-    AFHTTPRequestOperation* operation = _imageOperations[indexPath];
-    if (operation.isExecuting) {
+    AFHTTPRequestOperation* operation = [_imageOperations objectForKey:indexPath];
+    if (operation && operation.isExecuting) {
         [operation cancel];
         
         if (operation.isCancelled) {
@@ -95,7 +99,7 @@
             }
         }
     }];
-    _imageOperations[indexPath] = operation;
+    [_imageOperations setObject:operation forKey:indexPath];
     [[[self class] imageRequestOperationQueue] addOperation:operation];
 }
 

@@ -41,6 +41,7 @@
 }
 
 - (void) clearData {
+    [self removeCachedImageOperations];
     _canLoadMore = NO;
     _currentPage = [NSNumber numberWithInteger:1];
     _items = [@[] mutableCopy];
@@ -247,6 +248,10 @@
     }
     
     return nil;
+}
+
+- (void) removeCachedImageOperations {
+    [_imageManager removeCachedImageOperations];
 }
 
 - (void) cancelRequestAtIndexPath:(NSIndexPath*)indexPath {

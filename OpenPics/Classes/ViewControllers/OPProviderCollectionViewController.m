@@ -210,25 +210,33 @@
         [_popover dismissPopoverAnimated:YES];
     }
     
-    _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerShortName];
-    
-    [[OPProviderController shared] selectProvider:provider];
-    
-    OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
-    dataSource.delegate = self;
-    self.collectionView.dataSource = dataSource;
-    
-    // if we have search bar text, it isn't empty and we aren't switching to popular,
-    // continue to search with the same search string -- this is a usablity thing
-    // for quickly finding similar images among several providers
-    if (_searchBar.text &&
-         ![_searchBar.text isEqualToString:@""] &&
-         ![provider.providerType isEqualToString:OPProviderTypePopular]) {
-        [self searchForQuery:_searchBar.text];
-    } else {
-        [self.collectionView reloadData];
-        _searchBar.text = @"";
-        [self doInitialSearch];
+    OPProvider* currentProvider = [[OPProviderController shared] getSelectedProvider];
+    if (![provider.providerType isEqualToString:currentProvider.providerType]) {
+        
+        // may not need to do this since I alloc/init a new one below?
+        OPCollectionViewDataSource* currentDataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+        [currentDataSource removeCachedImageOperations];
+        
+        _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerShortName];
+        
+        [[OPProviderController shared] selectProvider:provider];
+        
+        OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
+        dataSource.delegate = self;
+        self.collectionView.dataSource = dataSource;
+        
+        // if we have search bar text, it isn't empty and we aren't switching to popular,
+        // continue to search with the same search string -- this is a usablity thing
+        // for quickly finding similar images among several providers
+        if (_searchBar.text &&
+            ![_searchBar.text isEqualToString:@""] &&
+            ![provider.providerType isEqualToString:OPProviderTypePopular]) {
+            [self searchForQuery:_searchBar.text];
+        } else {
+            [self.collectionView reloadData];
+            _searchBar.text = @"";
+            [self doInitialSearch];
+        }
     }
 }
 
