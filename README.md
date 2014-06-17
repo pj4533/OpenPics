@@ -64,6 +64,18 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 
 ## Versions
 
+* 2.2.3
+	* Fixed HUGE memory leak
+	* Fixed orientation issues
+* 2.2.2
+	* Fixed memory issues on Reddit provider
+* 2.2.1
+	* Fixed buttery scrolling
+	* Fixed some memory issues
+* 2.2
+	* Added Reddit providers
+	* Added BPL provider
+	* Crash fixes
 * 2.1
 	* Redesigned for more iOS7 look
 	* Using layout-to-layout collectionview transitions
