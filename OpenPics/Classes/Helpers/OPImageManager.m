@@ -59,9 +59,14 @@
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath {
     AFHTTPRequestOperation* operation = _imageOperations[indexPath];
     if (operation.isExecuting) {
-        NSLog(@"Not visible, cancelling operation for item: %ld", (long)indexPath.item);
         [operation cancel];
         
+        if (operation.isCancelled) {
+            [_imageOperations removeObjectForKey:indexPath];
+        }
+        
+    } else {
+        [_imageOperations removeObjectForKey:indexPath];
     }
 }
 
