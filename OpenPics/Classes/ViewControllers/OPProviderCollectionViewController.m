@@ -19,6 +19,7 @@
 #import "FRDLivelyButton.h"
 #import "OPImageManager.h"
 #import "UINavigationController+SGProgress.h"
+#import "OPPopularProvider.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
@@ -217,15 +218,27 @@
     dataSource.delegate = self;
     self.collectionView.dataSource = dataSource;
     
-    if (_searchBar.text && ![_searchBar.text isEqualToString:@""]) {
+    // if we have search bar text, it isn't empty and we aren't switching to popular,
+    // continue to search with the same search string -- this is a usablity thing
+    // for quickly finding similar images among several providers
+    if (_searchBar.text &&
+         ![_searchBar.text isEqualToString:@""] &&
+         ![provider.providerType isEqualToString:OPProviderTypePopular]) {
         [self searchForQuery:_searchBar.text];
     } else {
         [self.collectionView reloadData];
+        _searchBar.text = @"";
         [self doInitialSearch];
     }
 }
 
 #pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText isEqualToString:@""]) {
+        [self doInitialSearch];
+    }
+}
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:YES animated:YES];
