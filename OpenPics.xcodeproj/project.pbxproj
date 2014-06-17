@@ -113,6 +113,8 @@
 		0AB49E61194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */; };
 		0AB6D4241916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */; };
 		0AB6D4251916A39300CD59FC /* OPCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */; };
+		0ABA1293194FC511005FD417 /* OPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA1292194FC511005FD417 /* OPNavigationController.m */; };
+		0ABA1294194FC511005FD417 /* OPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA1292194FC511005FD417 /* OPNavigationController.m */; };
 		0ABF9E40171097E500C29E84 /* AFNYPLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3D171097E500C29E84 /* AFNYPLSessionManager.m */; };
 		0ABF9E41171097E500C29E84 /* OPNYPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF9E3F171097E500C29E84 /* OPNYPLProvider.m */; };
 		0ADFD8C218D4A29900EB75F6 /* AFCDLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8BF18D4A29900EB75F6 /* AFCDLSessionManager.m */; };
@@ -221,6 +223,8 @@
 		0AB49E5F194946C200A9F9BD /* OPRedditOldSchoolCoolProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditOldSchoolCoolProvider.m; sourceTree = "<group>"; };
 		0AB6D4221916A39300CD59FC /* OPCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPCollectionViewDataSource.h; sourceTree = "<group>"; };
 		0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPCollectionViewDataSource.m; sourceTree = "<group>"; };
+		0ABA1291194FC511005FD417 /* OPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPNavigationController.h; sourceTree = "<group>"; };
+		0ABA1292194FC511005FD417 /* OPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPNavigationController.m; sourceTree = "<group>"; };
 		0ABF9E3A171097DC00C29E84 /* OPProviderTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderTokens.h; sourceTree = "<group>"; };
 		0ABF9E3C171097E500C29E84 /* AFNYPLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNYPLSessionManager.h; sourceTree = "<group>"; };
 		0ABF9E3D171097E500C29E84 /* AFNYPLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNYPLSessionManager.m; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 				0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */,
 				0AB6D4221916A39300CD59FC /* OPCollectionViewDataSource.h */,
 				0AB6D4231916A39300CD59FC /* OPCollectionViewDataSource.m */,
+				0ABA1291194FC511005FD417 /* OPNavigationController.h */,
+				0ABA1292194FC511005FD417 /* OPNavigationController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -848,6 +854,7 @@
 				0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */,
 				0A19000F190DA1AF00922EDD /* OPImageItem.m in Sources */,
 				0A190010190DA1AF00922EDD /* OPProviderListViewController.m in Sources */,
+				0ABA1294194FC511005FD417 /* OPNavigationController.m in Sources */,
 				0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */,
 				0A190012190DA1AF00922EDD /* OPProvider.m in Sources */,
 				0A190013190DA1AF00922EDD /* OPImageManager.m in Sources */,
@@ -897,6 +904,7 @@
 				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,
 				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
 				0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */,
+				0ABA1293194FC511005FD417 /* OPNavigationController.m in Sources */,
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
 				0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */,

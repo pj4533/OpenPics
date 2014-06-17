@@ -7,7 +7,7 @@
         <!--Navigation Controller-->
         <scene sceneID="23s-45-0HR">
             <objects>
-                <navigationController definesPresentationContext="YES" id="AIg-zs-Xae" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="AIg-zs-Xae" customClass="OPNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dkL-b5-Lst">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

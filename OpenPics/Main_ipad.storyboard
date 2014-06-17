@@ -137,7 +137,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jLs-Z0-TrU">
             <objects>
-                <navigationController definesPresentationContext="YES" id="v5c-p9-u7Y" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="v5c-p9-u7Y" customClass="OPNavigationController" sceneMemberID="viewController">
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hOF-dM-7m4">
                         <autoresizingMask key="autoresizingMask"/>
