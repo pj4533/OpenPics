@@ -236,6 +236,10 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if ([searchText isEqualToString:@""]) {
+        OPCollectionViewDataSource* dataSource = [[OPCollectionViewDataSource alloc] init];
+        dataSource.delegate = self;
+        self.collectionView.dataSource = dataSource;
+
         [self doInitialSearch];
     }
 }
