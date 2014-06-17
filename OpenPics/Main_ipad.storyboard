@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="urW-Pk-FOF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="urW-Pk-FOF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,6 +27,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="urW-Pk-FOF" firstAttribute="top" secondItem="ehL-0i-aPA" secondAttribute="top" id="SdH-lu-DqD"/>
+                            <constraint firstItem="ua5-pw-0wp" firstAttribute="top" secondItem="urW-Pk-FOF" secondAttribute="bottom" id="XZ2-Eg-TIQ"/>
+                            <constraint firstItem="urW-Pk-FOF" firstAttribute="leading" secondItem="ehL-0i-aPA" secondAttribute="leading" id="cxH-aG-yH6"/>
+                            <constraint firstAttribute="trailing" secondItem="urW-Pk-FOF" secondAttribute="trailing" id="yHn-1T-yux"/>
+                        </constraints>
                     </view>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>

@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="elw-Wp-yMP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="elw-Wp-yMP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,6 +42,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="elw-Wp-yMP" firstAttribute="leading" secondItem="2sG-5B-qFw" secondAttribute="leading" id="AI7-ED-4mZ"/>
+                            <constraint firstItem="elw-Wp-yMP" firstAttribute="top" secondItem="2sG-5B-qFw" secondAttribute="top" id="Ppa-h9-dwt"/>
+                            <constraint firstItem="0Xj-zA-bh5" firstAttribute="top" secondItem="elw-Wp-yMP" secondAttribute="bottom" id="WBS-V5-GGk"/>
+                            <constraint firstAttribute="trailing" secondItem="elw-Wp-yMP" secondAttribute="trailing" id="cux-3L-AGv"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="internalTableView" destination="elw-Wp-yMP" id="0Yi-ZH-pHa"/>
