@@ -23,7 +23,7 @@
 #import "AFFlickrSessionManager.h"
 #import "OPProviderTokens.h"
 
-static NSString * const kAFFlickrAPIBaseURLString = @"http://api.flickr.com/";
+static NSString * const kAFFlickrAPIBaseURLString = @"https://api.flickr.com/";
 
 @implementation AFFlickrSessionManager
 
