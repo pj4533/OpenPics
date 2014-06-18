@@ -67,6 +67,7 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 * 2.2.3
 	* Fixed HUGE memory leak
 	* Fixed orientation issues
+	* Flickr requires SSL
 * 2.2.2
 	* Fixed memory issues on Reddit provider
 * 2.2.1
