@@ -22,40 +22,26 @@ class PopularProvider: OPProvider {
         OPBackend.shared().getItemsCreatedByUserWithQuery(queryString, withPageNumber: pageNumber, success: success, failure: failure);
     }
     
-    override func doInitialSearchWithSuccess(success: ((AnyObject[]!,Bool) -> Void)!, failure: ((NSError!) -> Void)!) {
+    override func doInitialSearchWithSuccess(success: ((AnyObject[]!, Bool) -> Void)!, failure: ((NSError!) -> Void)!) {
         var cachedQuery = TMCache.sharedCache().objectForKey("initial_popular_query") as NSDictionary
-
-        var items = NSDictionary()
-        success(items: items, canLoadMore: false)
         
+        if  (cachedQuery != nil) {
+            if (success != nil) {
+                var items = cachedQuery["items"] as NSArray
+                var canLoadMore = cachedQuery["canLoadMore"] as NSNumber
+                success(items, canLoadMore.boolValue)
+            }
+        }
+        
+        self.getItemsWithQuery(nil, withPageNumber: 1, success: {(items: AnyObject[]!, canLoadMore: Bool) in
+            if ((cachedQuery != nil) && (cachedQuery["items"] as NSArray).isEqualToArray(items)) {
+                return
+            }
+            var newCachedQuery = ["items": items, "canLoadMore": NSNumber(bool: canLoadMore)]
+            TMCache.sharedCache().setObject(newCachedQuery, forKey: "initial_popular_query")
+            if (success != nil) {
+                success(items, canLoadMore)
+            }
+        }, failure: failure);
     }
-
-//    - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
-//    failure:(void (^)(NSError* error))failure {
-//    
-//    NSDictionary* cachedQuery = [[TMCache sharedCache] objectForKey:@"initial_popular_query"];
-//    
-//    if (cachedQuery) {
-//    if (success) {
-//    success(cachedQuery[@"items"],[cachedQuery[@"canLoadMore"] boolValue]);
-//    }
-//    }
-//    
-//    [self getItemsWithQuery:nil
-//    withPageNumber:@1
-//    success:^(NSArray *items, BOOL canLoadMore) {
-//    
-//    if (cachedQuery && [cachedQuery[@"items"] isEqualToArray:items]) {
-//    return;
-//    }
-//    
-//    NSDictionary* newCachedQuery = @{@"items": items, @"canLoadMore":[NSNumber numberWithBool:canLoadMore]};
-//    [[TMCache sharedCache] setObject:newCachedQuery forKey:@"initial_popular_query"];
-//    if (success) {
-//    success(items,canLoadMore);
-//    }
-//    }
-//    failure:failure];
-//    }
-
 }
