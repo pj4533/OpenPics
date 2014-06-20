@@ -38,7 +38,6 @@
 #import "OPEuropeanaProvider.h"
 #import "OPLIFEProvider.h"
 #import "OPTroveProvider.h"
-#import "OPPopularProvider.h"
 #import "OPFavoritesProvider.h"
 #import "OPFlickrCommonsProvider.h"
 #import "OPFlickrBPLProvider.h"
@@ -51,6 +50,8 @@
 #import "TMCache.h"
 #import <Appsee/Appsee.h>
 #import <Crashlytics/Crashlytics.h>
+
+#import "OpenPics-Swift.h"
 
 @interface OPAppDelegate () {
 }
@@ -91,7 +92,9 @@
     
     if ([[OPBackend shared] usingRemoteBackend]) {
         NSLog(@"Using Remote Backend");
-        [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:OPProviderTypePopular]];
+        
+#warning WTF
+        [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:@"com.saygoodnight.Popular"]];
     } else {
         NSLog(@"No Remote Backend");
     }

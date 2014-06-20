@@ -29,7 +29,6 @@
 #import "OPImageItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OPFavoritesProvider.h"
-#import "OPPopularProvider.h"
 #import "OPProvider.h"
 #import "OPProviderController.h"
 

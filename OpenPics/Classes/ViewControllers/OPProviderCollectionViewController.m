@@ -19,7 +19,7 @@
 #import "FRDLivelyButton.h"
 #import "OPImageManager.h"
 #import "UINavigationController+SGProgress.h"
-#import "OPPopularProvider.h"
+#import "OPenPics-Swift.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
@@ -228,9 +228,10 @@
         // if we have search bar text, it isn't empty and we aren't switching to popular,
         // continue to search with the same search string -- this is a usablity thing
         // for quickly finding similar images among several providers
+#warning WTF
         if (_searchBar.text &&
             ![_searchBar.text isEqualToString:@""] &&
-            ![provider.providerType isEqualToString:OPProviderTypePopular]) {
+            ![provider.providerType isEqualToString:@"com.saygoodnight.Popular"]) {
             [self searchForQuery:_searchBar.text];
         } else {
             [self.collectionView reloadData];

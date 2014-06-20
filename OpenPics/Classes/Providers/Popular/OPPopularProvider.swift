@@ -8,9 +8,9 @@
 
 import UIKit
 
-let OPProviderTypePopular = "com.saygoodnight.loc"
+let OPProviderTypePopular = "com.saygoodnight.Popular"
 
-class PopularProvider: OPProvider {
+class OPPopularProvider: OPProvider {
 
     init(providerType: String) {
         super.init(providerType: providerType)

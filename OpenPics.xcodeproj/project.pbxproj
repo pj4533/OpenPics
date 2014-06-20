@@ -21,7 +21,6 @@
 		0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
 		0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */; };
 		0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
-		0A190009190DA1AF00922EDD /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */; };
 		0A19000A190DA1AF00922EDD /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
 		0A19000B190DA1AF00922EDD /* OPProviderCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */; };
 		0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */; };
@@ -90,15 +89,14 @@
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
-		0A518C021953CD2E007F7836 /* PopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* PopularProvider.swift */; };
-		0A518C031953CD2E007F7836 /* PopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* PopularProvider.swift */; };
+		0A518C021953CD2E007F7836 /* OPPopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* OPPopularProvider.swift */; };
+		0A518C031953CD2E007F7836 /* OPPopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* OPPopularProvider.swift */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
 		0A609EC4171072BD0084735B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A609EC2171072BD0084735B /* InfoPlist.strings */; };
 		0A609EC6171072BD0084735B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC9171072BD0084735B /* OPAppDelegate.m */; };
-		0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */; };
 		0A61319518D4AE2700FFC2DB /* OPFavoritesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */; };
 		0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
 		0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
@@ -192,7 +190,7 @@
 		0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageManager.h; sourceTree = "<group>"; };
 		0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageManager.m; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
-		0A518C011953CD2E007F7836 /* PopularProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularProvider.swift; sourceTree = "<group>"; };
+		0A518C011953CD2E007F7836 /* OPPopularProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OPPopularProvider.swift; sourceTree = "<group>"; };
 		0A518C041953CD56007F7836 /* OpenPics-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A518C051953CD56007F7836 /* OpenPicsReveal-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenPicsReveal-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,8 +203,6 @@
 		0A609EC7171072BD0084735B /* OpenPics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Prefix.pch"; sourceTree = "<group>"; };
 		0A609EC8171072BD0084735B /* OPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OPAppDelegate.h; sourceTree = "<group>"; };
 		0A609EC9171072BD0084735B /* OPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OPAppDelegate.m; sourceTree = "<group>"; };
-		0A61318F18D4AE0F00FFC2DB /* OPPopularProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPopularProvider.h; sourceTree = "<group>"; };
-		0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPopularProvider.m; sourceTree = "<group>"; };
 		0A61319318D4AE2700FFC2DB /* OPFavoritesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFavoritesProvider.h; sourceTree = "<group>"; };
 		0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFavoritesProvider.m; sourceTree = "<group>"; };
 		0A81125E194FB6FD008B56A9 /* NSString+ContainsSubstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ContainsSubstring.h"; sourceTree = "<group>"; };
@@ -559,9 +555,7 @@
 		0A61318E18D4AE0F00FFC2DB /* Popular */ = {
 			isa = PBXGroup;
 			children = (
-				0A61318F18D4AE0F00FFC2DB /* OPPopularProvider.h */,
-				0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */,
-				0A518C011953CD2E007F7836 /* PopularProvider.swift */,
+				0A518C011953CD2E007F7836 /* OPPopularProvider.swift */,
 			);
 			path = Popular;
 			sourceTree = "<group>";
@@ -853,7 +847,6 @@
 				0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */,
 				0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */,
 				0A190008190DA1AF00922EDD /* NSDictionary+DefObject.m in Sources */,
-				0A190009190DA1AF00922EDD /* OPPopularProvider.m in Sources */,
 				0A19000A190DA1AF00922EDD /* OPAppDelegate.m in Sources */,
 				0A19000B190DA1AF00922EDD /* OPProviderCollectionViewController.m in Sources */,
 				0AB49E5C19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */,
@@ -884,7 +877,7 @@
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
-				0A518C031953CD2E007F7836 /* PopularProvider.swift in Sources */,
+				0A518C031953CD2E007F7836 /* OPPopularProvider.swift in Sources */,
 				0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
@@ -904,7 +897,6 @@
 				0A9D169C18D4D631000DC0BE /* AFDefaultBackendSessionManager.m in Sources */,
 				0AF4CB2818DF779000B10441 /* OPNavigationControllerDelegate.m in Sources */,
 				0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */,
-				0A61319118D4AE0F00FFC2DB /* OPPopularProvider.m in Sources */,
 				0A609ECA171072BD0084735B /* OPAppDelegate.m in Sources */,
 				0A1DCDFA18DDE720003F4418 /* OPProviderCollectionViewController.m in Sources */,
 				0AB49E5B19493EDF00A9F9BD /* OPRedditHistoryPornProvider.m in Sources */,
@@ -935,7 +927,7 @@
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
-				0A518C021953CD2E007F7836 /* PopularProvider.swift in Sources */,
+				0A518C021953CD2E007F7836 /* OPPopularProvider.swift in Sources */,
 				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
