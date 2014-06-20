@@ -90,6 +90,8 @@
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
+		0A518C021953CD2E007F7836 /* PopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* PopularProvider.swift */; };
+		0A518C031953CD2E007F7836 /* PopularProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A518C011953CD2E007F7836 /* PopularProvider.swift */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -190,6 +192,9 @@
 		0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageManager.h; sourceTree = "<group>"; };
 		0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageManager.m; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
+		0A518C011953CD2E007F7836 /* PopularProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularProvider.swift; sourceTree = "<group>"; };
+		0A518C041953CD56007F7836 /* OpenPics-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenPics-Bridging-Header.h"; sourceTree = "<group>"; };
+		0A518C051953CD56007F7836 /* OpenPicsReveal-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenPicsReveal-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A609EBB171072BD0084735B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -541,6 +546,8 @@
 		0A609EC0171072BD0084735B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A518C041953CD56007F7836 /* OpenPics-Bridging-Header.h */,
+				0A518C051953CD56007F7836 /* OpenPicsReveal-Bridging-Header.h */,
 				0A609EC1171072BD0084735B /* OpenPics-Info.plist */,
 				0A609EC2171072BD0084735B /* InfoPlist.strings */,
 				0A609EC5171072BD0084735B /* main.m */,
@@ -554,6 +561,7 @@
 			children = (
 				0A61318F18D4AE0F00FFC2DB /* OPPopularProvider.h */,
 				0A61319018D4AE0F00FFC2DB /* OPPopularProvider.m */,
+				0A518C011953CD2E007F7836 /* PopularProvider.swift */,
 			);
 			path = Popular;
 			sourceTree = "<group>";
@@ -876,6 +884,7 @@
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
+				0A518C031953CD2E007F7836 /* PopularProvider.swift in Sources */,
 				0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
@@ -926,6 +935,7 @@
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
+				0A518C021953CD2E007F7836 /* PopularProvider.swift in Sources */,
 				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
@@ -957,6 +967,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 8;
@@ -968,9 +979,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPicsReveal-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = OpenPicsReveal;
 				PROVISIONING_PROFILE = "168810AC-96CC-41A5-ACE0-262ABCAC8C15";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenPics/OpenPicsReveal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -983,6 +997,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 8;
@@ -994,9 +1009,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPicsReveal-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = OpenPicsReveal;
 				PROVISIONING_PROFILE = "168810AC-96CC-41A5-ACE0-262ABCAC8C15";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenPics/OpenPicsReveal-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -1071,6 +1088,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 8;
@@ -1082,9 +1100,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "99053B9B-AEC0-4E4E-97CF-D7E3C3CA7089";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenPics/OpenPics-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -1097,6 +1118,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 8;
@@ -1108,9 +1130,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenPics/OpenPics-Prefix.pch";
 				INFOPLIST_FILE = "OpenPics/OpenPics-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "B39BF673-A734-4AE4-AA70-1C8FDED1ADB4";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenPics/OpenPics-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
