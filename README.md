@@ -8,6 +8,7 @@ An open source iOS application for viewing images from multiple remote sources. 
 ## Goals
 
 * Always use the latest iOS technology.  (Target only latest OS version)
+* **ALL NEW CODE IN SWIFT**
 * Keep all image source knowledge inside corresponding 'Provider' class
 * Make it flippin sweet with awesome animations and stuff.
 
@@ -64,6 +65,8 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 
 ## Versions
 
+* 3.0 (in progress)
+	* iOS8 Release
 * 2.2.3
 	* Fixed HUGE memory leak
 	* Fixed orientation issues

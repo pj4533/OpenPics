@@ -93,7 +93,7 @@
     if ([[OPBackend shared] usingRemoteBackend]) {
         NSLog(@"Using Remote Backend");
         
-#warning WTF
+#warning WTF - how to use constants?
         [[OPProviderController shared] addProvider:[[OPPopularProvider alloc] initWithProviderType:@"com.saygoodnight.Popular"]];
     } else {
         NSLog(@"No Remote Backend");

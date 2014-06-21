@@ -228,7 +228,7 @@
         // if we have search bar text, it isn't empty and we aren't switching to popular,
         // continue to search with the same search string -- this is a usablity thing
         // for quickly finding similar images among several providers
-#warning WTF
+#warning WTF - how to use constants?
         if (_searchBar.text &&
             ![_searchBar.text isEqualToString:@""] &&
             ![provider.providerType isEqualToString:@"com.saygoodnight.Popular"]) {

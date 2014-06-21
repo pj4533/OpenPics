@@ -19,11 +19,11 @@ class OPPopularProvider: OPProvider {
     }
     
     override func getItemsWithQuery(queryString: String!, withPageNumber pageNumber: NSNumber!, success: ((AnyObject[]!, Bool) -> Void)!, failure: ((NSError!) -> Void)!) {
-        OPBackend.shared().getItemsCreatedByUserWithQuery(queryString, withPageNumber: pageNumber, success: success, failure: failure);
+        OPBackend.shared().getItemsWithQuery(queryString, withPageNumber: pageNumber, success: success, failure: failure);
     }
     
     override func doInitialSearchWithSuccess(success: ((AnyObject[]!, Bool) -> Void)!, failure: ((NSError!) -> Void)!) {
-        var cachedQuery = TMCache.sharedCache().objectForKey("initial_popular_query") as NSDictionary
+        var cachedQuery = TMCache.sharedCache().objectForKey("initial_popular_query") as NSDictionary!
         
         if  (cachedQuery != nil) {
             if (success != nil) {
