@@ -90,7 +90,7 @@
             NSString* photoId = itemDict[@"id"];
             NSString* photoSecret = itemDict[@"secret"];
             
-            NSString* imageUrlString = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@.jpg",farmId,serverId,photoId,photoSecret];
+            NSString* imageUrlString = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmId,serverId,photoId,photoSecret];
             NSMutableDictionary* opImageDict = @{
                                           @"imageUrl": [NSURL URLWithString:imageUrlString],
                                           @"title" : itemDict[@"title"],
