@@ -182,7 +182,7 @@
                                         @"nojsoncallback": @"1",
                                         @"method" : @"flickr.photosets.getphotos",
                                         @"format" : @"json",
-                                        @"extras": @"url_b,url_o,o_dims",
+                                        @"extras": @"url_b,url_o,o_dims,url_l",
                                         @"per_page": @"20"
                                         }.mutableCopy;
     
@@ -210,7 +210,7 @@
                                  @"nojsoncallback": @"1",
                                  @"method" : @"flickr.photos.search",
                                  @"format" : @"json",
-                                 @"extras": @"url_b,url_o,o_dims",
+                                 @"extras": @"url_b,url_o,o_dims,url_l",
                                  @"per_page": @"20"
                                  }.mutableCopy;
     
@@ -241,6 +241,8 @@
         upRezzedUrlString = item.providerSpecific[@"url_o"];
     } else if (item.providerSpecific[@"url_b"]) {
         upRezzedUrlString = item.providerSpecific[@"url_b"];
+    } else if (item.providerSpecific[@"url_l"]) {
+        upRezzedUrlString = item.providerSpecific[@"url_l"];
     }
 
     if (completion && ![upRezzedUrlString isEqualToString:item.imageUrl.absoluteString]) {
