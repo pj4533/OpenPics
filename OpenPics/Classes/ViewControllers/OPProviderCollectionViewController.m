@@ -18,11 +18,10 @@
 #import "OPCollectionViewDataSource.h"
 #import "FRDLivelyButton.h"
 #import "OPImageManager.h"
-#import "UINavigationController+SGProgress.h"
 #import "OPPopularProvider.h"
 #import "OPSetCollectionViewController.h"
 
-@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
+@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
     UIBarButtonItem* _sourceCaret;
@@ -108,39 +107,6 @@
     [self getMoreItems];
 }
 
-- (void) doInitialSearch {
-    OPProvider* selectedProvider = [[OPProviderController shared] getSelectedProvider];
-    
-    if (selectedProvider.supportsInitialSearching) {
-        [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeClear];
-
-        OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-        [dataSource doInitialSearchWithSuccess:^(NSArray *items, BOOL canLoadMore) {
-            [SVProgressHUD dismiss];
-            [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            [self.collectionView reloadData];
-        } failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"Search failed."];
-        }];
-    }
-}
-
-
-- (void) getMoreItems {
-    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-    
-    [dataSource getMoreItemsWithSuccess:^(NSArray *indexPaths) {
-        [SVProgressHUD dismiss];
-        if (indexPaths) {
-            [self.collectionView insertItemsAtIndexPaths:indexPaths];
-        } else {
-            [self.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1, 1) animated:NO];
-            [self.collectionView reloadData];
-        }
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"Search failed."];        
-    }];
-}
 #pragma mark - actions
 
 - (void) sourceTapped {
@@ -162,39 +128,6 @@
         _popover = [[UIPopoverController alloc] initWithContentViewController:navController];
         [_popover presentPopoverFromBarButtonItem:_sourceButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"imageitem"]) {
-        OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) segue.destinationViewController;
-        imageVC.useLayoutToLayoutNavigationTransitions = YES;
-    } else if ([segue.identifier isEqualToString:@"setitem"]) {
-        OPContentCell* cell = (OPContentCell*) sender;
-        OPSetCollectionViewController* viewController = (OPSetCollectionViewController*) segue.destinationViewController;
-        viewController.setItem = cell.item;
-        
-    }
-}
-
-#pragma mark OPContentCellDelegate / datasource delegate
-
-- (void) singleTappedCell {
-    if ([self.navigationController.topViewController isKindOfClass:[OPImageCollectionViewController class]]) {
-        OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) self.navigationController.topViewController;
-        [imageVC toggleUIHidden];
-    }
-}
-
-- (void) showProgressWithBytesRead:(NSUInteger) bytesRead
-                withTotalBytesRead:(NSInteger) totalBytesRead
-      withTotalBytesExpectedToRead:(NSInteger) totalBytesExpectedToRead {
-    
-    float percentage = (float) ((totalBytesRead/totalBytesExpectedToRead) * 100);
-    [self.navigationController setSGProgressPercentage:percentage];
 }
 
 #pragma mark - UICollectionViewDelegate

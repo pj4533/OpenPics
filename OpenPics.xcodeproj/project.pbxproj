@@ -105,6 +105,8 @@
 		0A8E911A195716ED0074CAB8 /* OPSetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E9118195716ED0074CAB8 /* OPSetCollectionViewController.m */; };
 		0A8E911D19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E911C19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m */; };
 		0A8E911E19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E911C19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m */; };
+		0A8E9121195747930074CAB8 /* OPItemCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E9120195747930074CAB8 /* OPItemCollectionViewController.m */; };
+		0A8E9122195747930074CAB8 /* OPItemCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E9120195747930074CAB8 /* OPItemCollectionViewController.m */; };
 		0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
 		0A9BEEF718D2962300CF2C08 /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
 		0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */; };
@@ -215,6 +217,8 @@
 		0A8E9118195716ED0074CAB8 /* OPSetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSetCollectionViewController.m; sourceTree = "<group>"; };
 		0A8E911B19571DEB0074CAB8 /* OPSetCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSetCollectionViewDataSource.h; sourceTree = "<group>"; };
 		0A8E911C19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSetCollectionViewDataSource.m; sourceTree = "<group>"; };
+		0A8E911F195747930074CAB8 /* OPItemCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPItemCollectionViewController.h; sourceTree = "<group>"; };
+		0A8E9120195747930074CAB8 /* OPItemCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPItemCollectionViewController.m; sourceTree = "<group>"; };
 		0A9BEEF218D2962300CF2C08 /* AFDPLASessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDPLASessionManager.h; sourceTree = "<group>"; };
 		0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDPLASessionManager.m; sourceTree = "<group>"; };
 		0A9BEEF418D2962300CF2C08 /* OPDPLAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPDPLAProvider.h; sourceTree = "<group>"; };
@@ -358,6 +362,8 @@
 			children = (
 				0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */,
 				0A1DCDEC18DDE720003F4418 /* OPImageCollectionViewController.m */,
+				0A8E911F195747930074CAB8 /* OPItemCollectionViewController.h */,
+				0A8E9120195747930074CAB8 /* OPItemCollectionViewController.m */,
 				0A1DCDF018DDE720003F4418 /* OPProviderCollectionViewController.h */,
 				0A1DCDF118DDE720003F4418 /* OPProviderCollectionViewController.m */,
 				0A8E9117195716ED0074CAB8 /* OPSetCollectionViewController.h */,
@@ -887,6 +893,7 @@
 				0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */,
 				0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */,
 				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
+				0A8E9122195747930074CAB8 /* OPItemCollectionViewController.m in Sources */,
 				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
 				0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
@@ -939,6 +946,7 @@
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
 				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
+				0A8E9121195747930074CAB8 /* OPItemCollectionViewController.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,

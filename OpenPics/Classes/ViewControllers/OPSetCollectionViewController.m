@@ -24,22 +24,18 @@
     return self;
 }
 
-// REFACTOR SHARED CODE FROM PROVIDER/SET COLLECTION VIEW CONTROLLER TO BASE CLASS
-//
-// Should be all the code needed to show images, the segue stuff, the delegates etc.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    OPSetCollectionViewDataSource* dataSource = [[OPSetCollectionViewDataSource alloc] init];
-    dataSource.setItem = self.setItem;
-//    dataSource.delegate = self;
-    self.collectionView.dataSource = dataSource;
     
-    // if we have search bar text, it isn't empty and we aren't switching to popular,
-    // continue to search with the same search string -- this is a usablity thing
-    // for quickly finding similar images among several providers
-//    [self.collectionView reloadData];
-//    [self doInitialSearch];
+    self.title = self.setItem.title;
+    
+    OPSetCollectionViewDataSource* dataSource = (OPSetCollectionViewDataSource*) self.collectionView.dataSource;
+    dataSource.setItem = self.setItem;
+    dataSource.delegate = self;
+    
+    [self.collectionView reloadData];
+    [self doInitialSearch];
 }
 
 - (void)didReceiveMemoryWarning

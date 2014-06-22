@@ -208,19 +208,19 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="internalScrollView" destination="Nu4-PN-hMT" id="KdL-0M-oFy"/>
-                                    <segue destination="fDq-mU-bXX" kind="push" id="dNV-v5-Czx"/>
+                                    <segue destination="fDq-mU-bXX" kind="push" identifier="imageitem" id="dNV-v5-Czx"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="XMP-Qh-a8P" id="jhj-hr-xF7"/>
+                            <outlet property="dataSource" destination="H8f-fa-6q6" id="w8U-BE-KJN"/>
                             <outlet property="delegate" destination="Avp-pm-43b" id="XtS-dp-oOQ"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="FcO-23-ogf"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7O-NK-GwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="H8f-fa-6q6" customClass="OPCollectionViewDataSource"/>
+                <customObject id="H8f-fa-6q6" customClass="OPSetCollectionViewDataSource"/>
             </objects>
             <point key="canvasLocation" x="819" y="505"/>
         </scene>
@@ -231,6 +231,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8S5-CH-VuA"/>
+        <segue reference="dNV-v5-Czx"/>
     </inferredMetricsTieBreakers>
 </document>

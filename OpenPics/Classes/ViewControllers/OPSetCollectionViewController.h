@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OPItemCollectionViewController.h"
 
 @class OPImageItem;
-@interface OPSetCollectionViewController : UICollectionViewController
+@interface OPSetCollectionViewController : OPItemCollectionViewController
 
 @property (strong, nonatomic) OPImageItem* setItem;
 
