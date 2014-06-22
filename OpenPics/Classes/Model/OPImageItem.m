@@ -51,6 +51,12 @@
             self.size = CGSizeMake([dict[@"width"] floatValue], [dict[@"height"] floatValue]);            
         }
         self.providerType = dict[@"providerType"];
+        
+        if (dict[@"isImageSet"]) {
+            self.isImageSet = dict[@"isImageSet"];
+        } else {
+            self.isImageSet = @NO;
+        }
     }
     
     return self;
@@ -70,6 +76,7 @@
     self.providerSpecific = [decoder decodeObjectForKey:@"providerSpecific"];
     self.providerType = [decoder decodeObjectForKey:@"providerType"];
     self.size = [decoder decodeCGSizeForKey:@"size"];
+    self.isImageSet = [decoder decodeObjectForKey:@"isImageSet"];
     
     return self;
 }
@@ -81,6 +88,7 @@
     [encoder encodeObject:self.providerSpecific forKey:@"providerSpecific"];
     [encoder encodeObject:self.providerType forKey:@"providerType"];
     [encoder encodeCGSize:self.size forKey:@"size"];
+    [encoder encodeObject:self.isImageSet forKey:@"isImageSet"];
 }
 
 - (BOOL)isEqual:(OPImageItem *)item {

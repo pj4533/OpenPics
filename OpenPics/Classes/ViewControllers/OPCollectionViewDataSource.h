@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "OPContentCell.h"
 
-@interface OPCollectionViewDataSource : NSObject <UICollectionViewDataSource>
+@interface OPCollectionViewDataSource : NSObject <UICollectionViewDataSource> {
+    NSNumber* _currentPage;
+    BOOL _canLoadMore;
+    NSMutableArray* _items;
+}
 
 @property (strong, nonatomic) NSString* currentQueryString;
 @property (strong, nonatomic) id<OPContentCellDelegate> delegate;

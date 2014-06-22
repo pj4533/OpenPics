@@ -38,12 +38,18 @@
 //    DEFAULT:  NO
 @property BOOL supportsInitialSearching;
 
+@property BOOL supportsImageSets;
+
 - (id) initWithProviderType:(NSString*) providerType;
 
 - (BOOL) isConfigured;
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure;
+
+- (void) doInitialSearchInSet:(OPImageItem*) setItem
+                  withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure;
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber

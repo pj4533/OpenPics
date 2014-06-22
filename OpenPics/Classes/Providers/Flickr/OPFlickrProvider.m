@@ -53,6 +53,150 @@
                     failure:failure];
 }
 
+- (NSString*) getHighestResUrlFromDictionary:(NSDictionary*) dict {
+    if (dict[@"url_o"]) {
+        return dict[@"url_o"];
+    } else if (dict[@"url_b"]) {
+        return dict[@"url_b"];
+    } else if (dict[@"url_l"]) {
+        return dict[@"url_l"];
+    } else if (dict[@"url_m"]) {
+        return dict[@"url_m"];
+    } else if (dict[@"url_s"]) {
+        return dict[@"url_s"];
+    }
+    
+    return nil;
+}
+
+- (void) getImageSetsWithPageNumber:(NSNumber*) pageNumber
+                         withUserId:(NSString*) userId
+                            success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    NSMutableDictionary* parameters = @{
+                                        @"page": pageNumber,
+                                        @"nojsoncallback": @"1",
+                                        @"method" : @"flickr.photosets.getlist",
+                                        @"format" : @"json",
+                                        @"primary_photo_extras": @"url_b,url_o,o_dims,url_m,url_s",
+                                        @"per_page": @"20"
+                                        }.mutableCopy;
+    
+    if (userId) {
+        parameters[@"user_id"] = userId;
+    }
+    
+    [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        
+        NSDictionary* photosetsDict = responseObject[@"photosets"];
+        NSMutableArray* retArray = [NSMutableArray array];
+        NSArray* photosetArray = photosetsDict[@"photoset"];
+        for (NSDictionary* itemDict in photosetArray) {
+            NSString* imageUrlString = [self getHighestResUrlFromDictionary:itemDict[@"primary_photo_extras"]];
+            NSMutableDictionary* opImageDict = @{
+                                                 @"imageUrl": [NSURL URLWithString:imageUrlString],
+                                                 @"title" : [itemDict valueForKeyPath:@"title._content"],
+                                                 @"providerType": self.providerType,
+                                                 @"providerSpecific": itemDict,
+                                                 @"isImageSet": @YES
+                                                 }.mutableCopy;
+            
+            if ([itemDict valueForKeyPath:@"primary_photo_extras.width_o"]) {
+                opImageDict[@"width"] = [itemDict valueForKeyPath:@"primary_photo_extras.width_o"];
+            }
+            if ([itemDict valueForKeyPath:@"primary_photo_extras.height_o"]) {
+                opImageDict[@"height"] = [itemDict valueForKeyPath:@"primary_photo_extras.height_o"];
+            }
+            
+            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            [retArray addObject:item];
+        }
+        
+        BOOL returnCanLoadMore = NO;
+        NSInteger thisPage = [photosetsDict[@"page"] integerValue];
+        NSInteger totalPages = [photosetsDict[@"pages"] integerValue];
+        if (thisPage < totalPages) {
+            returnCanLoadMore = YES;
+        }
+        
+        if (success) {
+            success(retArray,returnCanLoadMore);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
+    }];
+}
+
+- (void) parseResponseDictionary:(NSDictionary*) dict
+                         success:(void (^)(NSArray* items, BOOL canLoadMore))success {
+    NSArray* photoArray = dict[@"photo"];
+    NSMutableArray* retArray = @[].mutableCopy;
+    for (NSDictionary* itemDict in photoArray) {
+        NSString* farmId = itemDict[@"farm"];
+        NSString* serverId = itemDict[@"server"];
+        NSString* photoId = itemDict[@"id"];
+        NSString* photoSecret = itemDict[@"secret"];
+        
+        NSString* imageUrlString = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmId,serverId,photoId,photoSecret];
+        NSMutableDictionary* opImageDict = @{
+                                             @"imageUrl": [NSURL URLWithString:imageUrlString],
+                                             @"title" : itemDict[@"title"],
+                                             @"providerType": self.providerType,
+                                             @"providerSpecific": itemDict,
+                                             }.mutableCopy;
+        
+        if (itemDict[@"width_o"]) {
+            opImageDict[@"width"] = itemDict[@"width_o"];
+        }
+        if (itemDict[@"height_o"]) {
+            opImageDict[@"height"] = itemDict[@"height_o"];
+        }
+        
+        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+        [retArray addObject:item];
+    }
+    
+    BOOL returnCanLoadMore = NO;
+    NSInteger thisPage = [dict[@"page"] integerValue];
+    NSInteger totalPages = [dict[@"pages"] integerValue];
+    if (thisPage < totalPages) {
+        returnCanLoadMore = YES;
+    }
+    
+    if (success) {
+        success(retArray,returnCanLoadMore);
+    }
+}
+
+- (void) getItemsInSetWithId:(NSString*) setId
+              withPageNumber:(NSNumber*) pageNumber
+                     success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                     failure:(void (^)(NSError* error))failure {
+    NSMutableDictionary* parameters = @{
+                                        @"photoset_id": setId,
+                                        @"page": pageNumber,
+                                        @"nojsoncallback": @"1",
+                                        @"method" : @"flickr.photosets.getphotos",
+                                        @"format" : @"json",
+                                        @"extras": @"url_b,url_o,o_dims",
+                                        @"per_page": @"20"
+                                        }.mutableCopy;
+    
+    [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary* photosDict = responseObject[@"photoset"];
+        [self parseResponseDictionary:photosDict success:success];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
+    }];
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 withUserId:(NSString*) userId
@@ -79,46 +223,8 @@
     }
     
     [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        
         NSDictionary* photosDict = responseObject[@"photos"];
-        NSMutableArray* retArray = [NSMutableArray array];
-        NSArray* photoArray = photosDict[@"photo"];
-        for (NSDictionary* itemDict in photoArray) {
-            NSString* farmId = itemDict[@"farm"];
-            NSString* serverId = itemDict[@"server"];
-            NSString* photoId = itemDict[@"id"];
-            NSString* photoSecret = itemDict[@"secret"];
-            
-            NSString* imageUrlString = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmId,serverId,photoId,photoSecret];
-            NSMutableDictionary* opImageDict = @{
-                                          @"imageUrl": [NSURL URLWithString:imageUrlString],
-                                          @"title" : itemDict[@"title"],
-                                          @"providerType": self.providerType,
-                                          @"providerSpecific": itemDict,
-                                          }.mutableCopy;
-
-            if (itemDict[@"width_o"]) {
-                opImageDict[@"width"] = itemDict[@"width_o"];
-            }
-            if (itemDict[@"height_o"]) {
-                opImageDict[@"height"] = itemDict[@"height_o"];
-            }
-
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
-            [retArray addObject:item];
-        }
-        
-        BOOL returnCanLoadMore = NO;
-        NSInteger thisPage = [photosDict[@"page"] integerValue];
-        NSInteger totalPages = [photosDict[@"pages"] integerValue];
-        if (thisPage < totalPages) {
-            returnCanLoadMore = YES;
-        }
-        
-        if (success) {
-            success(retArray,returnCanLoadMore);
-        }
+        [self parseResponseDictionary:photosDict success:success];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);

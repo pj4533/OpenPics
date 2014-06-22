@@ -35,6 +35,7 @@
     if (self) {
         self.providerType = providerType;
         self.supportsInitialSearching = NO;
+        self.supportsImageSets = NO;
     }
     return self;
 }
@@ -61,6 +62,11 @@
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
     
+}
+
+- (void) doInitialSearchInSet:(OPImageItem*) setItem
+                  withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure {
 }
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {

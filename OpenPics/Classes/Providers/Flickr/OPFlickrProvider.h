@@ -24,6 +24,11 @@
 
 @interface OPFlickrProvider : OPProvider
 
+- (void) getItemsInSetWithId:(NSString*) setId
+              withPageNumber:(NSNumber*) pageNumber
+                     success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                     failure:(void (^)(NSError* error))failure;
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                 withUserId:(NSString*) userId
@@ -35,5 +40,10 @@
                          isCommons:(BOOL)isCommons
                            success:(void (^)(NSArray* items, BOOL canLoadMore))success
                            failure:(void (^)(NSError* error))failure;
+
+- (void) getImageSetsWithPageNumber:(NSNumber*) pageNumber
+                         withUserId:(NSString*) userId
+                            success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure;
 
 @end

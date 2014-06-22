@@ -20,6 +20,7 @@
 #import "OPImageManager.h"
 #import "UINavigationController+SGProgress.h"
 #import "OPPopularProvider.h"
+#import "OPSetCollectionViewController.h"
 
 @interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,OPContentCellDelegate,UICollectionViewDelegateFlowLayout> {
     UISearchBar* _searchBar;
@@ -168,11 +169,18 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) segue.destinationViewController;
-    imageVC.useLayoutToLayoutNavigationTransitions = YES;
+    if ([segue.identifier isEqualToString:@"imageitem"]) {
+        OPImageCollectionViewController* imageVC = (OPImageCollectionViewController*) segue.destinationViewController;
+        imageVC.useLayoutToLayoutNavigationTransitions = YES;
+    } else if ([segue.identifier isEqualToString:@"setitem"]) {
+        OPContentCell* cell = (OPContentCell*) sender;
+        OPSetCollectionViewController* viewController = (OPSetCollectionViewController*) segue.destinationViewController;
+        viewController.setItem = cell.item;
+        
+    }
 }
 
-#pragma mark OPContentCellDelegate
+#pragma mark OPContentCellDelegate / datasource delegate
 
 - (void) singleTappedCell {
     if ([self.navigationController.topViewController isKindOfClass:[OPImageCollectionViewController class]]) {

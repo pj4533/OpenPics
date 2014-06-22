@@ -7,6 +7,7 @@
 //
 
 #import "OPFlickrBPLProvider.h"
+#import "OPImageItem.h"
 
 NSString * const OPProviderTypeFlickrBPL = @"com.saygoodnight.flickrbpl";
 
@@ -18,13 +19,22 @@ NSString * const OPProviderTypeFlickrBPL = @"com.saygoodnight.flickrbpl";
         self.providerName = @"Boston Public Library Flickr";
         self.providerShortName = @"BPL Flickr";
         self.supportsInitialSearching = YES;
+        self.supportsImageSets = YES;
     }
     return self;
 }
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
-    [self doInitialSearchWithUserId:@"24029425@N06" isCommons:NO success:success failure:failure];
+    
+    [self getImageSetsWithPageNumber:@1 withUserId:@"24029425@N06" success:success failure:failure];
+}
+
+- (void) doInitialSearchInSet:(OPImageItem*) setItem
+                  withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure {
+    NSString* setId = setItem.providerSpecific[@"id"];
+    [self getItemsInSetWithId:setId withPageNumber:@1 success:success failure:failure];
 }
 
 - (void) getItemsWithQuery:(NSString*) queryString

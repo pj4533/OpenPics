@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSDictionary* providerSpecific;
 @property (strong, nonatomic) NSString* providerType;
+@property (strong, nonatomic) NSNumber* isImageSet;
 
 @property CGSize size;
 
