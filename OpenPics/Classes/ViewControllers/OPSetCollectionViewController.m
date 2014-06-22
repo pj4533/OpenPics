@@ -8,6 +8,7 @@
 
 #import "OPSetCollectionViewController.h"
 #import "OPSetCollectionViewDataSource.h"
+#import "OPNavigationControllerDelegate.h"
 
 @interface OPSetCollectionViewController ()
 
@@ -30,6 +31,8 @@
     
     self.title = self.setItem.title;
     
+    self.navigationController.delegate = [OPNavigationControllerDelegate shared];
+
     OPSetCollectionViewDataSource* dataSource = (OPSetCollectionViewDataSource*) self.collectionView.dataSource;
     dataSource.setItem = self.setItem;
     dataSource.delegate = self;

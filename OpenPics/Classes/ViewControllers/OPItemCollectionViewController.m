@@ -123,5 +123,18 @@
     [self.navigationController setSGProgressPercentage:percentage];
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
+    [cell setupForSingleImageLayoutAnimated:YES];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    [dataSource cancelRequestAtIndexPath:indexPath];
+}
+
+
 
 @end

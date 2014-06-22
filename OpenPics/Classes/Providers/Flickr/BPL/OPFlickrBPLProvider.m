@@ -37,16 +37,28 @@ NSString * const OPProviderTypeFlickrBPL = @"com.saygoodnight.flickrbpl";
     [self getItemsInSetWithId:setId withPageNumber:@1 success:success failure:failure];
 }
 
+- (void) getItemsInSet:(OPImageItem*) setItem
+        withPageNumber:(NSNumber*) pageNumber
+               success:(void (^)(NSArray* items, BOOL canLoadMore))success
+               failure:(void (^)(NSError* error))failure {
+    NSString* setId = setItem.providerSpecific[@"id"];
+    [self getItemsInSetWithId:setId withPageNumber:pageNumber success:success failure:failure];
+}
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
-    [self getItemsWithQuery:queryString
-             withPageNumber:pageNumber
-                 withUserId:@"24029425@N06"
-                  isCommons:NO
-                    success:success
-                    failure:failure];
+    if (!queryString || [queryString isEqualToString:@""]) {
+        [self getImageSetsWithPageNumber:pageNumber withUserId:@"24029425@N06" success:success failure:failure];
+    } else {
+        [self getItemsWithQuery:queryString
+                 withPageNumber:pageNumber
+                     withUserId:@"24029425@N06"
+                      isCommons:NO
+                        success:success
+                        failure:failure];
+    }
 }
 
 

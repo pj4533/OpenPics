@@ -59,6 +59,13 @@
     
 }
 
+- (void) getItemsInSet:(OPImageItem*) setItem
+        withPageNumber:(NSNumber*) pageNumber
+               success:(void (^)(NSArray* items, BOOL canLoadMore))success
+               failure:(void (^)(NSError* error))failure {
+    
+}
+
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
     

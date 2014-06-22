@@ -51,6 +51,11 @@
                   withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure;
 
+- (void) getItemsInSet:(OPImageItem*) setItem
+        withPageNumber:(NSNumber*) pageNumber
+               success:(void (^)(NSArray* items, BOOL canLoadMore))success
+               failure:(void (^)(NSError* error))failure;
+
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
