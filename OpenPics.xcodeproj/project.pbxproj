@@ -101,6 +101,8 @@
 		0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
 		0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */; };
 		0A8A81FD18CCBDEE001AED56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
+		0A8E074A195761DB00C1A73E /* OPFlickrCHSProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E0749195761DB00C1A73E /* OPFlickrCHSProvider.m */; };
+		0A8E074B195761DB00C1A73E /* OPFlickrCHSProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E0749195761DB00C1A73E /* OPFlickrCHSProvider.m */; };
 		0A8E9119195716ED0074CAB8 /* OPSetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E9118195716ED0074CAB8 /* OPSetCollectionViewController.m */; };
 		0A8E911A195716ED0074CAB8 /* OPSetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E9118195716ED0074CAB8 /* OPSetCollectionViewController.m */; };
 		0A8E911D19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E911C19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m */; };
@@ -213,6 +215,8 @@
 		0A81125E194FB6FD008B56A9 /* NSString+ContainsSubstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ContainsSubstring.h"; sourceTree = "<group>"; };
 		0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ContainsSubstring.m"; sourceTree = "<group>"; };
 		0A8A81FC18CCBDEE001AED56 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0A8E0748195761DB00C1A73E /* OPFlickrCHSProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrCHSProvider.h; sourceTree = "<group>"; };
+		0A8E0749195761DB00C1A73E /* OPFlickrCHSProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCHSProvider.m; sourceTree = "<group>"; };
 		0A8E9117195716ED0074CAB8 /* OPSetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSetCollectionViewController.h; sourceTree = "<group>"; };
 		0A8E9118195716ED0074CAB8 /* OPSetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPSetCollectionViewController.m; sourceTree = "<group>"; };
 		0A8E911B19571DEB0074CAB8 /* OPSetCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPSetCollectionViewDataSource.h; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 		0A0E2F361946947000B82B86 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				0A8E0747195761C400C1A73E /* CHS */,
 				0A0E2F371946947000B82B86 /* Commons */,
 				0A0E2F4C1946981900B82B86 /* BPL */,
 				0A0E2F44194694DD00B82B86 /* OPFlickrProvider.m */,
@@ -583,6 +588,15 @@
 				0A61319418D4AE2700FFC2DB /* OPFavoritesProvider.m */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		0A8E0747195761C400C1A73E /* CHS */ = {
+			isa = PBXGroup;
+			children = (
+				0A8E0748195761DB00C1A73E /* OPFlickrCHSProvider.h */,
+				0A8E0749195761DB00C1A73E /* OPFlickrCHSProvider.m */,
+			);
+			path = CHS;
 			sourceTree = "<group>";
 		};
 		0A9BEEF118D2962300CF2C08 /* DPLA */ = {
@@ -876,6 +890,7 @@
 				0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */,
 				0A190012190DA1AF00922EDD /* OPProvider.m in Sources */,
 				0A190013190DA1AF00922EDD /* OPImageManager.m in Sources */,
+				0A8E074B195761DB00C1A73E /* OPFlickrCHSProvider.m in Sources */,
 				0A190014190DA1AF00922EDD /* OPImageCollectionViewController.m in Sources */,
 				0A190015190DA1AF00922EDD /* OPTroveProvider.m in Sources */,
 				0A190016190DA1AF00922EDD /* OPProviderController.m in Sources */,
@@ -929,6 +944,7 @@
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,
 				0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */,
 				0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */,
+				0A8E074A195761DB00C1A73E /* OPFlickrCHSProvider.m in Sources */,
 				0A1DCDF718DDE720003F4418 /* OPImageCollectionViewController.m in Sources */,
 				0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */,
 				0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */,
