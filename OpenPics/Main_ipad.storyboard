@@ -41,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yu-yZ-H6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1906" y="-2738"/>
+            <point key="canvasLocation" x="-3910" y="-1642"/>
         </scene>
         <!--Provider Collection View Controller-->
         <scene sceneID="Z6m-gv-ZHS">
@@ -59,7 +59,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="generic" id="s2Z-hV-T89" customClass="OPContentCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageitem" id="s2Z-hV-T89" customClass="OPContentCell">
                                 <rect key="frame" x="0.0" y="64" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -81,7 +81,32 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="internalScrollView" destination="cmn-rt-OMD" id="fWu-GF-y6W"/>
-                                    <segue destination="dab-Nr-DC7" kind="push" id="dYM-0K-IWc"/>
+                                    <segue destination="dab-Nr-DC7" kind="push" identifier="imageitem" id="dYM-0K-IWc"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="setitem" id="rTP-5R-Wzz" customClass="OPContentCell">
+                                <rect key="frame" x="258" y="64" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNq-AU-eQO" customClass="OPScrollView">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </scrollView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dNq-AU-eQO" secondAttribute="bottom" id="6sW-PR-2ax"/>
+                                    <constraint firstItem="dNq-AU-eQO" firstAttribute="leading" secondItem="rTP-5R-Wzz" secondAttribute="leading" id="coG-Ng-d24"/>
+                                    <constraint firstItem="dNq-AU-eQO" firstAttribute="top" secondItem="rTP-5R-Wzz" secondAttribute="top" id="xEG-GA-wFc"/>
+                                    <constraint firstAttribute="trailing" secondItem="dNq-AU-eQO" secondAttribute="trailing" id="z4m-BC-bo5"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="internalScrollView" destination="dNq-AU-eQO" id="5An-l9-XZq"/>
+                                    <segue destination="row-Ib-QHl" kind="push" identifier="setitem" id="fo9-x9-k8C"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -95,7 +120,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5c-Wk-d6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="pEd-fl-ntv" customClass="OPCollectionViewDataSource"/>
             </objects>
-            <point key="canvasLocation" x="-726" y="-1203"/>
+            <point key="canvasLocation" x="-3046" y="-396"/>
         </scene>
         <!--Image Collection View Controller-->
         <scene sceneID="pFB-AW-kaW">
@@ -132,7 +157,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGr-at-h5M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826" y="-1095"/>
+            <point key="canvasLocation" x="-430" y="-1591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jLs-Z0-TrU">
@@ -148,7 +173,61 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVR-YA-c4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2015" y="-1124"/>
+            <point key="canvasLocation" x="-4223" y="-396"/>
+        </scene>
+        <!--Set Collection View Controller-->
+        <scene sceneID="jeE-kG-X35">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="row-Ib-QHl" customClass="OPSetCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="BLU-iM-y15">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="4Ez-Wu-3zc">
+                            <size key="itemSize" width="250" height="250"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageitem" id="dA4-WG-jQy" customClass="OPContentCell">
+                                <rect key="frame" x="0.0" y="64" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIm-o0-xVY" customClass="OPScrollView">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </scrollView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UIm-o0-xVY" secondAttribute="trailing" id="S0l-F4-Fr6"/>
+                                    <constraint firstItem="UIm-o0-xVY" firstAttribute="leading" secondItem="dA4-WG-jQy" secondAttribute="leading" id="aep-M5-xg0"/>
+                                    <constraint firstAttribute="bottom" secondItem="UIm-o0-xVY" secondAttribute="bottom" id="bIN-3p-luE"/>
+                                    <constraint firstItem="UIm-o0-xVY" firstAttribute="top" secondItem="dA4-WG-jQy" secondAttribute="top" id="e0b-Tj-Huc"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="internalScrollView" destination="UIm-o0-xVY" id="0t1-B3-jrx"/>
+                                    <segue destination="dab-Nr-DC7" kind="push" identifier="imageitem" id="KFb-EQ-y1z"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="tVh-CP-Dfa" id="TSR-8K-Elu"/>
+                            <outlet property="delegate" destination="row-Ib-QHl" id="Bdz-GF-wwD"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Cif-nK-Ehw"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bee-ZG-s4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="tVh-CP-Dfa" customClass="OPSetCollectionViewDataSource"/>
+            </objects>
+            <point key="canvasLocation" x="-1710" y="-116"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -156,4 +235,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="KFb-EQ-y1z"/>
+    </inferredMetricsTieBreakers>
 </document>
