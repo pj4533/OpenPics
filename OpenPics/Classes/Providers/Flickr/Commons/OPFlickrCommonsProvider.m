@@ -46,7 +46,11 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
                success:(void (^)(NSArray* items, BOOL canLoadMore))success
                failure:(void (^)(NSError* error))failure {
     NSString* setId = setItem.providerSpecific[@"id"];
-    [self getItemsInSetWithId:setId withPageNumber:pageNumber success:success failure:failure];
+    if (setId) {
+        [self getItemsInSetWithId:setId withPageNumber:pageNumber success:success failure:failure];
+    } else if (setItem.providerSpecific[@"nsid"]) {
+        [self getItemsInSetWithId:setItem.providerSpecific[@"nsid"] withPageNumber:pageNumber success:success failure:failure];
+    }
 }
 
 
