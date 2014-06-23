@@ -38,8 +38,6 @@
 //    DEFAULT:  NO
 @property BOOL supportsInitialSearching;
 
-@property BOOL supportsImageSets;
-
 - (id) initWithProviderType:(NSString*) providerType;
 
 - (BOOL) isConfigured;

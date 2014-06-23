@@ -211,6 +211,31 @@
                                     <segue destination="fDq-mU-bXX" kind="push" identifier="imageitem" id="dNV-v5-Czx"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="setitem" id="I0F-uz-S7f" customClass="OPContentCell">
+                                <rect key="frame" x="110" y="64" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Nw-Xq-KuU" customClass="OPScrollView">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </scrollView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="7Nw-Xq-KuU" firstAttribute="leading" secondItem="I0F-uz-S7f" secondAttribute="leading" id="70p-Ir-TZd"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Nw-Xq-KuU" secondAttribute="trailing" id="c4L-ZY-le5"/>
+                                    <constraint firstItem="7Nw-Xq-KuU" firstAttribute="top" secondItem="I0F-uz-S7f" secondAttribute="top" id="jUe-Io-JUi"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Nw-Xq-KuU" secondAttribute="bottom" id="x5T-Lw-mzr"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="internalScrollView" destination="7Nw-Xq-KuU" id="aRR-eO-Ipz"/>
+                                    <segue destination="Avp-pm-43b" kind="push" identifier="setitem" id="BfN-cY-O2Z"/>
+                                </connections>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="H8f-fa-6q6" id="w8U-BE-KJN"/>
@@ -232,5 +257,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="dNV-v5-Czx"/>
+        <segue reference="sUP-c8-pvT"/>
     </inferredMetricsTieBreakers>
 </document>

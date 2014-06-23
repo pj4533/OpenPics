@@ -35,7 +35,6 @@
     if (self) {
         self.providerType = providerType;
         self.supportsInitialSearching = NO;
-        self.supportsImageSets = NO;
     }
     return self;
 }

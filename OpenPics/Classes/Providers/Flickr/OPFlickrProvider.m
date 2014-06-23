@@ -54,11 +54,7 @@
 }
 
 - (NSString*) getHighestResUrlFromDictionary:(NSDictionary*) dict {
-    if (dict[@"url_o"]) {
-        return dict[@"url_o"];
-    } else if (dict[@"url_b"]) {
-        return dict[@"url_b"];
-    } else if (dict[@"url_l"]) {
+    if (dict[@"url_l"]) {
         return dict[@"url_l"];
     } else if (dict[@"url_m"]) {
         return dict[@"url_m"];
@@ -78,7 +74,7 @@
                                         @"nojsoncallback": @"1",
                                         @"method" : @"flickr.photosets.getlist",
                                         @"format" : @"json",
-                                        @"primary_photo_extras": @"url_b,url_o,o_dims,url_m,url_s",
+                                        @"primary_photo_extras": @"url_l,o_dims,url_m,url_s",
                                         @"per_page": @"20"
                                         }.mutableCopy;
     
@@ -170,6 +166,51 @@
     if (success) {
         success(retArray,returnCanLoadMore);
     }
+}
+
+- (void) getInstitutionsWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    NSMutableDictionary* parameters = @{
+                                        @"nojsoncallback": @"1",
+                                        @"method" : @"flickr.commons.getinstitutions",
+                                        @"format" : @"json"
+                                        }.mutableCopy;
+    
+    [[AFFlickrSessionManager sharedClient] GET:@"services/rest" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary* institutionsDict = responseObject[@"institutions"];
+        NSArray* institutionArray = institutionsDict[@"institution"];
+        NSMutableArray* retArray = @[].mutableCopy;
+        for (NSDictionary* itemDict in institutionArray) {
+            NSString* nsid = itemDict[@"nsid"];
+            
+            NSString* imageUrlString = [NSString stringWithFormat:@"https://flickr.com/buddyicons/%@.jpg",nsid];
+            
+            NSString* instName = @"";
+            if ([itemDict valueForKeyPath:@"name._content"]) {
+                instName = [itemDict valueForKeyPath:@"name._content"];
+            }
+            NSMutableDictionary* opImageDict = @{
+                                                 @"imageUrl": [NSURL URLWithString:imageUrlString],
+                                                 @"title" : instName,
+                                                 @"providerType": self.providerType,
+                                                 @"providerSpecific": itemDict,
+                                                 @"isImageSet": @YES
+                                                 }.mutableCopy;
+            
+            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            [retArray addObject:item];
+        }
+        
+        if (success) {
+            success(retArray,NO);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
+    }];
+    
 }
 
 - (void) getItemsInSetWithId:(NSString*) setId

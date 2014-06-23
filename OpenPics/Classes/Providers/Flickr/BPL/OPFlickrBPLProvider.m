@@ -19,7 +19,6 @@ NSString * const OPProviderTypeFlickrBPL = @"com.saygoodnight.flickrbpl";
         self.providerName = @"Boston Public Library Flickr";
         self.providerShortName = @"BPL Flickr";
         self.supportsInitialSearching = YES;
-        self.supportsImageSets = YES;
     }
     return self;
 }

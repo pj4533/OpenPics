@@ -7,6 +7,7 @@
 //
 
 #import "OPFlickrCommonsProvider.h"
+#import "OPImageItem.h"
 
 NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons";
 
@@ -23,8 +24,31 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
-    [self doInitialSearchWithUserId:nil isCommons:YES success:success failure:failure];
+//    [self getItemsWithQuery:@"" withPageNumber:@1 withUserId:nil isCommons:YES success:success failure:failure];
+    
+    
+    [self getInstitutionsWithSuccess:success failure:failure];
 }
+
+- (void) doInitialSearchInSet:(OPImageItem*) setItem
+                  withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure {
+    NSString* setId = setItem.providerSpecific[@"id"];
+    if (setId) {
+        [self getItemsInSetWithId:setId withPageNumber:@1 success:success failure:failure];
+    } else if (setItem.providerSpecific[@"nsid"]) {
+        [self getImageSetsWithPageNumber:@1 withUserId:setItem.providerSpecific[@"nsid"] success:success failure:failure];
+    }
+}
+
+- (void) getItemsInSet:(OPImageItem*) setItem
+        withPageNumber:(NSNumber*) pageNumber
+               success:(void (^)(NSArray* items, BOOL canLoadMore))success
+               failure:(void (^)(NSError* error))failure {
+    NSString* setId = setItem.providerSpecific[@"id"];
+    [self getItemsInSetWithId:setId withPageNumber:pageNumber success:success failure:failure];
+}
+
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber

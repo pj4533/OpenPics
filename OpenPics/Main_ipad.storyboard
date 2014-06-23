@@ -216,6 +216,31 @@
                                     <segue destination="dab-Nr-DC7" kind="push" identifier="imageitem" id="KFb-EQ-y1z"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="setitem" id="lvw-2X-v7x" customClass="OPContentCell">
+                                <rect key="frame" x="258" y="64" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohC-1Y-6MR" customClass="OPScrollView">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </scrollView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ohC-1Y-6MR" secondAttribute="trailing" id="O5U-sV-tvp"/>
+                                    <constraint firstItem="ohC-1Y-6MR" firstAttribute="leading" secondItem="lvw-2X-v7x" secondAttribute="leading" id="dFS-hH-Ynw"/>
+                                    <constraint firstAttribute="bottom" secondItem="ohC-1Y-6MR" secondAttribute="bottom" id="hUt-45-P9b"/>
+                                    <constraint firstItem="ohC-1Y-6MR" firstAttribute="top" secondItem="lvw-2X-v7x" secondAttribute="top" id="uFe-58-zfD"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="internalScrollView" destination="ohC-1Y-6MR" id="KGQ-uY-gJk"/>
+                                    <segue destination="row-Ib-QHl" kind="push" identifier="setitem" id="FW5-il-ANL"/>
+                                </connections>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="tVh-CP-Dfa" id="TSR-8K-Elu"/>
@@ -227,7 +252,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bee-ZG-s4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="tVh-CP-Dfa" customClass="OPSetCollectionViewDataSource"/>
             </objects>
-            <point key="canvasLocation" x="-1710" y="-116"/>
+            <point key="canvasLocation" x="-1686" y="-186"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -236,6 +261,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="fo9-x9-k8C"/>
         <segue reference="KFb-EQ-y1z"/>
     </inferredMetricsTieBreakers>
 </document>

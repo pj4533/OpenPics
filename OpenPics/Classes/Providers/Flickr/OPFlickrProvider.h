@@ -24,6 +24,9 @@
 
 @interface OPFlickrProvider : OPProvider
 
+- (void) getInstitutionsWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure;
+
 - (void) getItemsInSetWithId:(NSString*) setId
               withPageNumber:(NSNumber*) pageNumber
                      success:(void (^)(NSArray* items, BOOL canLoadMore))success

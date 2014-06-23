@@ -19,7 +19,6 @@ NSString * const OPProviderTypeFlickrCHS = @"com.saygoodnight.flickrchs";
         self.providerName = @"Cambridge Historical Society Flickr";
         self.providerShortName = @"CHS Flickr";
         self.supportsInitialSearching = YES;
-        self.supportsImageSets = YES;
     }
     return self;
 }
