@@ -41,31 +41,15 @@
 @interface OPContentCell : UICollectionViewCell
 
 // used for zooming of image
-@property (strong, nonatomic) IBOutlet OPScrollView *internalScrollView;
+@property (weak, nonatomic) IBOutlet OPScrollView *internalScrollView;
 
-@property (strong, nonatomic) OPImageItem* item;
-@property (strong, nonatomic) OPProvider* provider;
+@property (weak, nonatomic) OPImageItem* item;
+@property (weak, nonatomic) OPProvider* provider;
 
-@property (strong, nonatomic) IBOutlet UIView *backBackgroundView;
-@property (strong, nonatomic) IBOutlet UIView *shareBackgroundView;
-@property (strong, nonatomic) IBOutlet UIView *favoriteBackgroundView;
+@property (weak, nonatomic) NSIndexPath *indexPath;
 
-@property (strong, nonatomic) IBOutlet UIImageView *favoriteButtonImageView;
-@property (strong, nonatomic) IBOutlet UILabel *favoriteButtonLabel;
-
-@property (strong, nonatomic) NSIndexPath *indexPath;
-
-@property (strong, nonatomic) IBOutlet UIView *descriptionView;
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
-@property (strong, nonatomic) id delegate;
-
-//- (IBAction)backTapped:(id)sender;
-//- (IBAction)shareTapped:(id)sender;
-//- (IBAction)favoriteTapped:(id)sender;
+@property (weak, nonatomic) id delegate;
 
 - (void) setupForSingleImageLayoutAnimated:(BOOL) animated;
-//- (void) setupForGridLayout;
-
 
 @end

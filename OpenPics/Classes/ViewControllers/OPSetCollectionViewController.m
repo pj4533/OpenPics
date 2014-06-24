@@ -42,7 +42,6 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    NSLog(@"SET VC DISAPPEARED");
     OPSetCollectionViewDataSource* dataSource = (OPSetCollectionViewDataSource*) self.collectionView.dataSource;
     [dataSource removeCachedImageOperations];
 }

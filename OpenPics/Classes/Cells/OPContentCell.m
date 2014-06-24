@@ -46,16 +46,6 @@
 - (void) awakeFromNib {
     [super awakeFromNib];
     
-    self.backBackgroundView.alpha = 0.0f;
-    self.shareBackgroundView.alpha = 0.0f;
-    self.favoriteBackgroundView.alpha = 0.0f;
-    
-    self.descriptionView.alpha = 0.0f;
-
-    self.backBackgroundView.layer.cornerRadius = 7.0f;
-    self.shareBackgroundView.layer.cornerRadius = 7.0f;
-    self.favoriteBackgroundView.layer.cornerRadius = 7.0f;
-    
     UITapGestureRecognizer* doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
     doubleTapGesture.numberOfTapsRequired = 2;
     [self.internalScrollView addGestureRecognizer:doubleTapGesture];
@@ -97,14 +87,12 @@
         [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
-            self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
         [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
-            self.titleLabel.text = item.title;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     }

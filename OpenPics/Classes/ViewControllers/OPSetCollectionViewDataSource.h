@@ -11,6 +11,6 @@
 @class OPImageItem;
 @interface OPSetCollectionViewDataSource : OPCollectionViewDataSource
 
-@property (strong, nonatomic) OPImageItem* setItem;
+@property (weak, nonatomic) OPImageItem* setItem;
 
 @end

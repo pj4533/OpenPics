@@ -35,7 +35,7 @@
 
 @interface OPProviderListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *internalTableView;
-@property (strong, nonatomic) id delegate;
+@property (weak, nonatomic) IBOutlet UITableView *internalTableView;
+@property (weak, nonatomic) id delegate;
 
 @end
