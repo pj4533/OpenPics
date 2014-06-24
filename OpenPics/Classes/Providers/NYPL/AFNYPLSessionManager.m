@@ -48,7 +48,7 @@ static NSString * const kNYPLBaseURLString = @"http://api.repo.nypl.org/api/v1/"
     }
     
     [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-    [self.requestSerializer setAuthorizationHeaderFieldWithToken:token];
+    [self.requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", token] forHTTPHeaderField:@"Authorization"];
 
     return self;
 }

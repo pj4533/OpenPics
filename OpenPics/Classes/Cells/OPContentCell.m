@@ -134,7 +134,7 @@
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
     _upRezOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     _upRezOperation.responseSerializer = [AFImageResponseSerializer serializer];
-    [_upRezOperation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+    [_upRezOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(showProgressWithBytesRead:withTotalBytesRead:withTotalBytesExpectedToRead:)]) {
             [weakSelf.delegate showProgressWithBytesRead:bytesRead
                                       withTotalBytesRead:totalBytesRead
