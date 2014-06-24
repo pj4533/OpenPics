@@ -37,7 +37,6 @@
             withCompletion:(void (^)())completion;
 
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath;
-- (void) removeCachedImageOperations;
 
 @property (strong, nonatomic) id delegate;
 

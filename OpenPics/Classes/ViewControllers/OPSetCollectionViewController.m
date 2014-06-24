@@ -41,11 +41,6 @@
     [self doInitialSearch];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    OPSetCollectionViewDataSource* dataSource = (OPSetCollectionViewDataSource*) self.collectionView.dataSource;
-    [dataSource removeCachedImageOperations];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

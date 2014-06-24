@@ -27,10 +27,9 @@
 #import "OPImageManager.h"
 #import "UIImageView+Hourglass.h"
 #import "OPImageItem.h"
-#import "AFHTTPRequestOperation.h"
+#import "OPHTTPRequestOperation.h"
 
 @interface OPImageManager () {
-    NSCache* _imageOperations;
 }
 
 @end
@@ -40,7 +39,6 @@
 -(id) init {
     self = [super init];
     if (self) {
-        _imageOperations = [[NSCache alloc] init];
     }
     return self;
 }
@@ -56,21 +54,13 @@
     return _imageRequestOperationQueue;
 }
 
-- (void) removeCachedImageOperations {
-    [_imageOperations removeAllObjects];
-}
-
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath {
-    AFHTTPRequestOperation* operation = [_imageOperations objectForKey:indexPath];
-    if (operation && operation.isExecuting) {
-        [operation cancel];
-        
-        if (operation.isCancelled) {
-            [_imageOperations removeObjectForKey:indexPath];
+    
+    NSArray* operations = [[[self class] imageRequestOperationQueue] operations];
+    for (OPHTTPRequestOperation* operation in operations) {
+        if ([operation.indexPath isEqual:indexPath]) {
+            [operation cancel];
         }
-        
-    } else {
-        [_imageOperations removeObjectForKey:indexPath];
     }
 }
 
@@ -80,7 +70,8 @@
                         withFailure:(void (^)(void))failure {
     // if not found in cache, create request to download image
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    OPHTTPRequestOperation* operation = [[OPHTTPRequestOperation alloc] initWithRequest:request];
+    operation.indexPath = indexPath;
     operation.responseSerializer = [AFImageResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         UIImage* image = (UIImage*) responseObject;
@@ -99,7 +90,6 @@
             }
         }
     }];
-    [_imageOperations setObject:operation forKey:indexPath];
     [[[self class] imageRequestOperationQueue] addOperation:operation];
 }
 

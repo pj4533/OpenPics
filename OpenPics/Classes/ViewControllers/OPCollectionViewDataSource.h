@@ -29,7 +29,6 @@
 - (void) clearData;
 
 - (void) cancelRequestAtIndexPath:(NSIndexPath*)indexPath;
-- (void) removeCachedImageOperations;
 
 //- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 

@@ -142,10 +142,6 @@
     OPProvider* currentProvider = [[OPProviderController shared] getSelectedProvider];
     if (![provider.providerType isEqualToString:currentProvider.providerType]) {
         
-        // may not need to do this since I alloc/init a new one below?
-        OPCollectionViewDataSource* currentDataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-        [currentDataSource removeCachedImageOperations];
-        
         _sourceButton.title = [NSString stringWithFormat:@"Source: %@", provider.providerShortName];
         
         [[OPProviderController shared] selectProvider:provider];
