@@ -74,7 +74,7 @@
                                         @"nojsoncallback": @"1",
                                         @"method" : @"flickr.photosets.getlist",
                                         @"format" : @"json",
-                                        @"primary_photo_extras": @"url_l,o_dims,url_m,url_s",
+                                        @"primary_photo_extras": @"url_m,url_s",
                                         @"per_page": @"20"
                                         }.mutableCopy;
     

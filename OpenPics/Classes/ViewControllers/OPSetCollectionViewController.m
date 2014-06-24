@@ -41,6 +41,12 @@
     [self doInitialSearch];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"SET VC DISAPPEARED");
+    OPSetCollectionViewDataSource* dataSource = (OPSetCollectionViewDataSource*) self.collectionView.dataSource;
+    [dataSource removeCachedImageOperations];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
