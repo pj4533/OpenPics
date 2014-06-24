@@ -1,23 +1,25 @@
 PODS:
-  - AFNetworkActivityLogger (2.0.1):
-    - AFNetworking (~> 2.0)
-  - AFNetworking (2.2.0):
+  - AFNetworkActivityLogger (2.0.2):
+    - AFNetworking/NSURLSession (~> 2.0)
+  - AFNetworking (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.0):
+  - AFNetworking/NSURLConnection (2.3.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.0):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.0)
-  - AFNetworking/Security (2.2.0)
-  - AFNetworking/Serialization (2.2.0)
-  - AFNetworking/UIKit (2.2.0):
+  - AFNetworking/NSURLSession (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.3.1)
+  - AFNetworking/Security (2.3.1)
+  - AFNetworking/Serialization (2.3.1)
+  - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appsee (2.0.8)
@@ -38,7 +40,7 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.1.2)
   - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
-  - Reveal-iOS-SDK (1.0.3)
+  - Reveal-iOS-SDK (1.0.4)
   - SGNavigationProgress (1.2)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
@@ -64,13 +66,13 @@ EXTERNAL SOURCES:
     :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: 01dde83938bf509742ad4c21f25d43a0fa019dd6
-  AFNetworking: 5f2538aa2d150b71d4e6cca3a420d796e1e1c374
+  AFNetworkActivityLogger: 45ca411593444cbdc401b12924b4c17082ad512a
+  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   Appsee: 80082e036888fbc7c81ddd2a14ce190553eee2f4
   FormatterKit: a7d9076e2923f272d098028f086822c329fcb410
   FRDLivelyButton: 717c6907bd6bb588f775a50580e216fe83abcade
   KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
-  Reveal-iOS-SDK: 5f69f357d5a18a2f13db71730bc6b7973a21cf3e
+  Reveal-iOS-SDK: d3c8e109d42219daaa7a6e1ad2de34f0bdbb7a88
   SGNavigationProgress: 6c38006ca3c652618411c67d493b263343d5aece
   SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
