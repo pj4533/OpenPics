@@ -24,9 +24,6 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure {
-//    [self getItemsWithQuery:@"" withPageNumber:@1 withUserId:nil isCommons:YES success:success failure:failure];
-    
-    
     [self getInstitutionsWithSuccess:success failure:failure];
 }
 

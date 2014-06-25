@@ -43,25 +43,9 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     return self;
 }
 
-- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
-                            failure:(void (^)(NSError* error))failure {
-    
-    [self getItemsWithQuery:@"" withPageNumber:@1 success:success failure:failure];
-}
-
-- (void) getItemsWithQuery:(NSString*) queryString
-            withPageNumber:(NSNumber*) pageNumber
-                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
-                   failure:(void (^)(NSError* error))failure {
-    
-    NSDictionary* parameters = @{
-                             @"q" : queryString,
-                             @"sp" : pageNumber,
-                             @"fo" : @"json",
-                             @"c" : @"100"
-                             };
-
-    
+- (void) getItemsWithParameters:(NSDictionary*) parameters
+                        success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                        failure:(void (^)(NSError* error))failure {
     [[AFLOCSessionManager sharedClient] GET:@"search" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSArray* resultArray = responseObject[@"results"];
@@ -116,6 +100,75 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         }
         NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);
     }];
+}
+
+- (void) getItemsInSet:(OPImageItem*) setItem
+        withPageNumber:(NSNumber*) pageNumber
+               success:(void (^)(NSArray* items, BOOL canLoadMore))success
+               failure:(void (^)(NSError* error))failure {
+    NSDictionary* parameters = @{
+                                 @"co" : setItem.providerSpecific[@"code"],
+                                 @"sp" : pageNumber,
+                                 @"fo" : @"json",
+                                 @"c" : @"100"
+                                 };
+    
+    [self getItemsWithParameters:parameters success:success failure:failure];
+}
+
+- (void) doInitialSearchInSet:(OPImageItem*) setItem
+                  withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                      failure:(void (^)(NSError* error))failure {
+    [self getItemsInSet:setItem withPageNumber:@1 success:success failure:failure];
+}
+
+- (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
+                            failure:(void (^)(NSError* error))failure {
+    
+    NSDictionary* parameters = @{
+                                 @"fo" : @"json",
+                                 @"c" : @"100"
+                                 };
+    
+    [[AFLOCSessionManager sharedClient] GET:@"" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray* collectionsArray = responseObject[@"collections"];
+        NSMutableArray* retArray = @[].mutableCopy;
+        for (NSDictionary* dict in collectionsArray) {
+            NSMutableDictionary* opImageDict = [@{
+                                                  @"imageUrl": [NSURL URLWithString:dict[@"thumb_large"]],
+                                                  @"title" : dict[@"title"],
+                                                  @"providerType": self.providerType,
+                                                  @"providerSpecific": dict,
+                                                  @"isImageSet" : @YES
+                                                  } mutableCopy];
+            
+            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            [retArray addObject:item];
+        }
+        if (success) {
+            success(retArray, NO);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+        NSLog(@"ERROR: %@\n%@\n%@", error.localizedDescription,error.localizedFailureReason,error.localizedRecoverySuggestion);        
+    }];
+}
+
+- (void) getItemsWithQuery:(NSString*) queryString
+            withPageNumber:(NSNumber*) pageNumber
+                   success:(void (^)(NSArray* items, BOOL canLoadMore))success
+                   failure:(void (^)(NSError* error))failure {
+    
+    NSDictionary* parameters = @{
+                             @"q" : queryString,
+                             @"sp" : pageNumber,
+                             @"fo" : @"json",
+                             @"c" : @"100"
+                             };
+
+    [self getItemsWithParameters:parameters success:success failure:failure];
 }
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
