@@ -28,6 +28,7 @@ Each remote image source gets a OPProvider class.  Providers can be easily added
 * Boston Public Library Flickr Feed (https://www.flickr.com/photos/boston_public_library/)
 * Reddit: /r/HistoryPorn (http://www.reddit.com/r/historyporn)
 * Reddit: /r/OldSchoolCool (http://www.reddit.com/r/oldschoolcool)
+* Reddit: /r/TheWayWeWere (http://www.reddit.com/r/thewaywewere)
 
 For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:
 
