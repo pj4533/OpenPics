@@ -40,18 +40,14 @@
     if ([viewController isKindOfClass:[UICollectionViewController class]]) {
         UICollectionViewController* collectionViewController = (UICollectionViewController*) viewController;
 
-        CGFloat topInset = 0.0f;
         if ([viewController isMemberOfClass:[OPImageCollectionViewController class]]) {
             collectionViewController.collectionView.pagingEnabled = YES;
             viewController.automaticallyAdjustsScrollViewInsets = NO;
         } else if ([viewController isKindOfClass:[OPItemCollectionViewController class]]) {
             collectionViewController.collectionView.pagingEnabled = NO;
-            topInset = 64.0f;
             viewController.automaticallyAdjustsScrollViewInsets = YES;
         }
 
-        [collectionViewController.collectionView setContentInset:UIEdgeInsetsMake(topInset, 0.0f, 0.0f, 0.0f)];
-        [collectionViewController.collectionView setScrollIndicatorInsets: collectionViewController.collectionView.contentInset];
 //        NSLog(@"layout: %@", NSStringFromClass([collectionViewController.collectionViewLayout class]));
     }
     
@@ -84,5 +80,24 @@
     
 //    NSLog(@"didShowViewController: %@", NSStringFromClass([viewController class]));
 }
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    
+    if ([toVC isKindOfClass:[UICollectionViewController class]]) {
+        UICollectionViewController* collectionViewController = (UICollectionViewController*) toVC;
+
+        if ([toVC isMemberOfClass:[OPImageCollectionViewController class]]) {
+            [collectionViewController.collectionView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+            [collectionViewController.collectionView setScrollIndicatorInsets: collectionViewController.collectionView.contentInset];
+        } else if ([fromVC isMemberOfClass:[OPImageCollectionViewController class]]) {
+            [collectionViewController.collectionView setContentInset:UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f)];
+            [collectionViewController.collectionView setScrollIndicatorInsets: collectionViewController.collectionView.contentInset];
+        }
+    }
+
+
+    return nil;
+}
+
 
 @end

@@ -98,10 +98,10 @@
     }
     
     [[OPProviderController shared] addProvider:[[OPFlickrCommonsProvider alloc] initWithProviderType:OPProviderTypeFlickrCommons]];
-    [[OPProviderController shared] addProvider:[[OPFlickrBPLProvider alloc] initWithProviderType:OPProviderTypeFlickrBPL]];
-    [[OPProviderController shared] addProvider:[[OPFlickrCHSProvider alloc] initWithProviderType:OPProviderTypeFlickrCHS]];
     [[OPProviderController shared] addProvider:[[OPRedditHistoryPornProvider alloc] initWithProviderType:OPProviderTypeRedditHistoryPorn]];
     [[OPProviderController shared] addProvider:[[OPRedditOldSchoolCoolProvider alloc] initWithProviderType:OPProviderTypeRedditOldSchoolCool]];
+    [[OPProviderController shared] addProvider:[[OPFlickrBPLProvider alloc] initWithProviderType:OPProviderTypeFlickrBPL]];
+    [[OPProviderController shared] addProvider:[[OPFlickrCHSProvider alloc] initWithProviderType:OPProviderTypeFlickrCHS]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
     [[OPProviderController shared] addProvider:[[OPNYPLProvider alloc] initWithProviderType:OPProviderTypeNYPL]];
     [[OPProviderController shared] addProvider:[[OPLOCProvider alloc] initWithProviderType:OPProviderTypeLOC]];
