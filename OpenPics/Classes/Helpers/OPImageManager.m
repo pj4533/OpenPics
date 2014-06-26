@@ -28,6 +28,7 @@
 #import "UIImageView+Hourglass.h"
 #import "OPImageItem.h"
 #import "OPHTTPRequestOperation.h"
+#import "UIImage+Resize.h"
 
 @interface OPImageManager () {
 }
@@ -75,6 +76,11 @@
     operation.responseSerializer = [AFImageResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         UIImage* image = (UIImage*) responseObject;
+
+        // If we have a large image, resize it to
+        if ((image.size.width > 2000) || (image.size.height > 2000)) {
+            image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(2000.0, 2000.0) interpolationQuality:kCGInterpolationDefault];
+        }
         
         // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
         if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {

@@ -46,6 +46,7 @@ PODS:
   - SVProgressHUD (1.0)
   - TMCache (1.2.0)
   - TUSafariActivity (1.0.0)
+  - UIImage-Categories (0.0.1)
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - SVProgressHUD (~> 1.0)
   - TMCache
   - TUSafariActivity
+  - UIImage-Categories (~> 0.0)
 
 EXTERNAL SOURCES:
   SGSStaggeredFlowLayout:
@@ -78,5 +80,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   TMCache: ea1c509badaf9a1245422aabf3c975b3277ab138
   TUSafariActivity: afff9b1d2eacf7cbace752c5f2bf56db852714de
+  UIImage-Categories: 99245612a4725173db4f0a9ed8ba9dbe2a1e0b4f
 
 COCOAPODS: 0.33.1
