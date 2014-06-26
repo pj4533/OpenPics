@@ -8,9 +8,9 @@
 
 #import "OPCollectionViewDataSource.h"
 
-@class OPImageItem;
+@class OPItem;
 @interface OPSetCollectionViewDataSource : OPCollectionViewDataSource
 
-@property (weak, nonatomic) OPImageItem* setItem;
+@property (weak, nonatomic) OPItem* setItem;
 
 @end

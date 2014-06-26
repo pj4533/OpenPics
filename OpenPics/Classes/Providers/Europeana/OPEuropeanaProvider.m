@@ -29,7 +29,7 @@
 #import "OPProviderTokens.h"
 #import "AFEuropeanaSessionManager.h"
 #import "AFHTTPRequestOperation.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "NSDictionary+DefObject.h"
 #import "TTTURLRequestFormatter.h"
 
@@ -100,7 +100,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
     }];
 }
 
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) fullUpRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* europeanaItem = providerSpecific[@"europeanaItem"];
     NSURL* url = [NSURL URLWithString:europeanaItem];
@@ -385,7 +385,7 @@ NSString * const OPProviderTypeEuropeana = @"com.saygoodnight.europeana";
                 opImageDict[@"longitude"] = longitude;
             }
 
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }
     }

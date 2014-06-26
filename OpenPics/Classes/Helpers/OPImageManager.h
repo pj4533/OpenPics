@@ -26,10 +26,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class OPImageItem;
+@class OPItem;
 @interface OPImageManager : NSObject
 
-- (void) loadImageFromItem:(OPImageItem*) item
+- (void) loadImageFromItem:(OPItem*) item
                toImageView:(UIImageView*) imageView
                atIndexPath:(NSIndexPath*) indexPath
           onCollectionView:(UICollectionView*) cv

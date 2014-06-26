@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class OPImageItem;
+@class OPItem;
 @interface OPBackend : NSObject
 
 @property BOOL usingRemoteBackend;
@@ -30,8 +30,8 @@
 
 + (OPBackend *)shared;
 
-- (void) saveItem:(OPImageItem*) item;
-- (void) removeItem:(OPImageItem*) item;
+- (void) saveItem:(OPItem*) item;
+- (void) removeItem:(OPItem*) item;
 
 - (void) getItemsWithQuery:(NSString*) queryString
             withPageNumber:(NSNumber*) pageNumber
@@ -43,6 +43,6 @@
                                 success:(void (^)(NSArray* items, BOOL canLoadMore))success
                                 failure:(void (^)(NSError* error))failure;
 
-- (BOOL) didUserCreateItem:(OPImageItem*) item;
+- (BOOL) didUserCreateItem:(OPItem*) item;
 
 @end

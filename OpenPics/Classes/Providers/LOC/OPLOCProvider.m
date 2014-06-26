@@ -27,7 +27,7 @@
 
 #import "OPLOCProvider.h"
 #import "AFLOCSessionManager.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "AFHTTPRequestOperation.h"
 
 NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
@@ -78,7 +78,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                     opImageDict[@"providerUrl"] = providerUrl;
                 }
                 
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];
             }
         }
@@ -102,7 +102,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     }];
 }
 
-- (void) getItemsInSet:(OPImageItem*) setItem
+- (void) getItemsInSet:(OPItem*) setItem
         withPageNumber:(NSNumber*) pageNumber
                success:(void (^)(NSArray* items, BOOL canLoadMore))success
                failure:(void (^)(NSError* error))failure {
@@ -116,7 +116,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     [self getItemsWithParameters:parameters success:success failure:failure];
 }
 
-- (void) doInitialSearchInSet:(OPImageItem*) setItem
+- (void) doInitialSearchInSet:(OPItem*) setItem
                   withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure {
     [self getItemsInSet:setItem withPageNumber:@1 success:success failure:failure];
@@ -142,7 +142,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                                                   @"isImageSet" : @YES
                                                   } mutableCopy];
             
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }
         if (success) {
@@ -174,12 +174,12 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     [self getItemsWithParameters:parameters success:success failure:failure];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     [self fullUpRezItem:item withCompletion:completion];
 }
 
 // Nothing to see here....please move along
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) fullUpRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     NSDictionary* providerSpecific = item.providerSpecific;
     if (providerSpecific[@"links"]) {
         NSDictionary* linksDict = providerSpecific[@"links"];

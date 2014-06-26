@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "OPPopularProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPBackend.h"
 #import "TMCache.h"
 

@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "OPLIFEProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "TTTURLRequestFormatter.h"
 #import "AFHTTPRequestOperation.h"
 
@@ -95,7 +95,7 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
         
         for (NSString* thisKey in imageIds.allKeys) {
             NSDictionary* thisImage = imageIds[thisKey];
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:thisImage];
+            OPItem* item = [[OPItem alloc] initWithDictionary:thisImage];
             [retArray addObject:item];
         }
         
@@ -117,7 +117,7 @@ NSString * const OPProviderTypeLIFE = @"com.saygoodnight.LIFE";
     [httpOperation start];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     
     NSString* imageId = item.providerSpecific[@"imageId"];
     

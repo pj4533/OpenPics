@@ -22,7 +22,7 @@
 
 #import "OPFlickrProvider.h"
 #import "AFFlickrSessionManager.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPProviderTokens.h"
 
 
@@ -208,7 +208,7 @@
                 opImageDict[@"height"] = [itemDict valueForKeyPath:@"primary_photo_extras.height_o"];
             }
             
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }
         
@@ -255,7 +255,7 @@
             opImageDict[@"height"] = itemDict[@"height_o"];
         }
         
-        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+        OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
         [retArray addObject:item];
     }
     
@@ -306,7 +306,7 @@
                                                  @"isImageSet": @YES
                                                  }.mutableCopy;
             
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }
         
@@ -383,7 +383,7 @@
     }];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
 
     NSString* upRezzedUrlString = item.imageUrl.absoluteString;
     

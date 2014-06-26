@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "OPItemCollectionViewController.h"
 
-@class OPImageItem;
+@class OPItem;
 @interface OPSetCollectionViewController : OPItemCollectionViewController
 
-@property (strong, nonatomic) OPImageItem* setItem;
+@property (strong, nonatomic) OPItem* setItem;
 
 @end

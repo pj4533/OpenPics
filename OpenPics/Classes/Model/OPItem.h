@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OPImageItem : NSObject <NSCoding>
+@interface OPItem : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSURL* providerUrl;
 @property (strong, nonatomic) NSURL* imageUrl;

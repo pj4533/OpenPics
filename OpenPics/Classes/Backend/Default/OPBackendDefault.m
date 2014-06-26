@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "OPBackendDefault.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "AFDefaultBackendSessionManager.h"
 
 @implementation OPBackendDefault
@@ -38,7 +38,7 @@
 
 #pragma mark OPBackend Overrides
 
-- (void) saveItem:(OPImageItem*) item {
+- (void) saveItem:(OPItem*) item {
     [super saveItem:item];
     
     NSMutableDictionary* backendItem = [@{
@@ -87,7 +87,7 @@
         NSArray* images = responseObject[@"data"];
         NSMutableArray* returnItems = @[].mutableCopy;
         for (NSDictionary* image in images) {
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:image];
+            OPItem* item = [[OPItem alloc] initWithDictionary:image];
             [returnItems addObject:item];
         }
         

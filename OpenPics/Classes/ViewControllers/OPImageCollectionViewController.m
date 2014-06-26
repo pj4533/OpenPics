@@ -109,7 +109,7 @@
 */
 - (void)updateUIForIndexPath:(NSIndexPath*)indexPath {
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
-    OPImageItem* item = [dataSource itemAtIndexPath:indexPath];
+    OPItem* item = [dataSource itemAtIndexPath:indexPath];
     
     if (item) {
         self.navigationItem.title = item.title;
@@ -171,7 +171,7 @@
 - (IBAction)infoTapped:(id)sender {
     
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
-    OPImageItem* item = [dataSource itemAtIndexPath:self.collectionView.indexPathsForVisibleItems[0]];
+    OPItem* item = [dataSource itemAtIndexPath:self.collectionView.indexPathsForVisibleItems[0]];
 
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:item.title delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

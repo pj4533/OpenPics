@@ -24,9 +24,9 @@
 // THE SOFTWARE.
 
 
-#import "OPImageItem.h"
+#import "OPItem.h"
 
-@implementation OPImageItem
+@implementation OPItem
 
 - (id) initWithDictionary:(NSDictionary*) dict {
     self = [super init];
@@ -91,8 +91,8 @@
     [encoder encodeObject:self.isImageSet forKey:@"isImageSet"];
 }
 
-- (BOOL)isEqual:(OPImageItem *)item {
-    if (![item isKindOfClass:OPImageItem.class]) return NO;
+- (BOOL)isEqual:(OPItem *)item {
+    if (![item isKindOfClass:OPItem.class]) return NO;
     
     return [self.imageUrl isEqual:item.imageUrl] && [self.title isEqual:item.title];
 }

@@ -11,7 +11,7 @@
 #import "OPImageCollectionViewController.h"
 #import "SVProgressHUD.h"
 #import "OPNavigationControllerDelegate.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPContentCell.h"
 #import "OPProviderController.h"
 #import "OPProvider.h"

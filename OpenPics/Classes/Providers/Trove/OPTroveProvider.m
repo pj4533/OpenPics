@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "OPTroveProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "AFTroveSessionManager.h"
 #import "OPProviderTokens.h"
 #import "AFHTTPRequestOperation.h"
@@ -148,7 +148,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
                                                   @"providerType": self.providerType,
                                                   @"providerUrl": troveUrl
                                                   };
-                    OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                    OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
                     [retArray addObject:item];
                 }
             }
@@ -174,7 +174,7 @@ NSString * const OPProviderTypeTrove = @"com.saygoodnight.trove";
     }];
 }
 
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) fullUpRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;

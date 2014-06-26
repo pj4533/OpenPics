@@ -28,7 +28,7 @@
 #import "OPNYPLProvider.h"
 #import "OPProviderTokens.h"
 #import "AFNYPLSessionManager.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 
 NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
 
@@ -49,7 +49,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
     [self getItemsWithQuery:@"new york subway" withPageNumber:@1 success:success failure:failure];
 }
 
-- (OPImageItem*) getItemFromDict:(NSDictionary*) itemDict {
+- (OPItem*) getItemFromDict:(NSDictionary*) itemDict {
     NSString* imageId = itemDict[@"imageID"];
     if (imageId) {
         NSString* urlString = [NSString stringWithFormat:@"http://images.nypl.org/index.php?id=%@&t=w", imageId];
@@ -73,7 +73,7 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
             opImageDict[@"providerUrl"] = providerUrl;
         }
         
-        OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+        OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
         return item;
     }
     return nil;
@@ -108,13 +108,13 @@ NSString * const OPProviderTypeNYPL = @"com.saygoodnight.nypl";
         
         if ([result isKindOfClass:[NSArray class]]) {
             for (NSDictionary* itemDict in result) {
-                OPImageItem* newItem = [self getItemFromDict:itemDict];
+                OPItem* newItem = [self getItemFromDict:itemDict];
                 if (newItem) {
                     [retArray addObject:newItem];
                 }
             }
         } else if ([result isKindOfClass:[NSDictionary class]]){
-            OPImageItem* newItem = [self getItemFromDict:result];
+            OPItem* newItem = [self getItemFromDict:result];
             if (newItem) {
                 [retArray addObject:newItem];
             }

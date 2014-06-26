@@ -27,7 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class OPImageItem;
+@class OPItem;
 @interface OPProvider : NSObject
 
 @property (strong, nonatomic) NSString* providerType;
@@ -45,11 +45,11 @@
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                             failure:(void (^)(NSError* error))failure;
 
-- (void) doInitialSearchInSet:(OPImageItem*) setItem
+- (void) doInitialSearchInSet:(OPItem*) setItem
                   withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure;
 
-- (void) getItemsInSet:(OPImageItem*) setItem
+- (void) getItemsInSet:(OPItem*) setItem
         withPageNumber:(NSNumber*) pageNumber
                success:(void (^)(NSArray* items, BOOL canLoadMore))success
                failure:(void (^)(NSError* error))failure;
@@ -59,17 +59,17 @@
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure;
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion;
 
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
+- (void) fullUpRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion;
 
 
 - (void) contentDMImageInfoWithURL:(NSURL*) url
-                          withItem:(OPImageItem*) item
+                          withItem:(OPItem*) item
                       withHostName:(NSString*) hostName
                     withCollection:(NSString*) collectionString
                             withID:(NSString*) idString
                      withURLFormat:(NSString*) urlFormat
-                    withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion;
+                    withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion;
 
 @end

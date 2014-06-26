@@ -27,7 +27,7 @@
 
 #import "OPCDLProvider.h"
 #import "AFCDLSessionManager.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "DDXML.h"
 
 NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
@@ -124,7 +124,7 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
                                                   @"title" : titleString,
                                                   @"providerType": self.providerType
                                                   };
-                    OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                    OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
                     [retArray addObject:item];
                 }
                 if (endDoc.integerValue < totalDocs.integerValue) {
@@ -145,7 +145,7 @@ NSString * const OPProviderTypeCDL = @"com.saygoodnight.cdl";
     }];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     
     NSString* urlString = item.imageUrl.absoluteString;
     NSDictionary* providerSpecific = item.providerSpecific;

@@ -26,7 +26,7 @@
 
 #import "OPContentCell.h"
 #import "AFNetworking.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OPFavoritesProvider.h"
 #import "OPPopularProvider.h"
@@ -82,13 +82,13 @@
         // this is kind of weird cause in some cases the item is modified by the provider on uprezing
         // I should probably somehow change the main reference to the object so we don't have different
         // versions?
-        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider fullUpRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPItem* item) {
             NSLog(@"FULL UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     } else {
-        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPImageItem* item) {
+        [thisItemProvider upRezItem:self.item withCompletion:^(NSURL *uprezImageUrl, OPItem* item) {
             NSLog(@"UPREZ TO: %@", uprezImageUrl.absoluteString);
             self.item = item;
             [self upRezToImageWithUrl:uprezImageUrl];

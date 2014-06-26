@@ -25,7 +25,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPScrollView.h"
 
 @protocol OPContentCellDelegate <NSObject>
@@ -43,7 +43,7 @@
 // used for zooming of image
 @property (weak, nonatomic) IBOutlet OPScrollView *internalScrollView;
 
-@property (weak, nonatomic) OPImageItem* item;
+@property (weak, nonatomic) OPItem* item;
 @property (weak, nonatomic) OPProvider* provider;
 
 @property (weak, nonatomic) NSIndexPath *indexPath;

@@ -26,7 +26,7 @@
 		0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */; };
 		0A19000D190DA1AF00922EDD /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
 		0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169818D4D37B000DC0BE /* OPBackendDefault.m */; };
-		0A19000F190DA1AF00922EDD /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
+		0A19000F190DA1AF00922EDD /* OPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPItem.m */; };
 		0A190010190DA1AF00922EDD /* OPProviderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DCDEE18DDE720003F4418 /* OPProviderListViewController.m */; };
 		0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADFD8C118D4A29900EB75F6 /* OPCDLProvider.m */; };
 		0A190012190DA1AF00922EDD /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
@@ -79,7 +79,7 @@
 		0A445B0E190C05F300D31FC6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A445B0D190C05F300D31FC6 /* Crashlytics.framework */; };
 		0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */; };
 		0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */; };
-		0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */; };
+		0A44CC00171074EF00D7C1B6 /* OPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A44CBEB171074EF00D7C1B6 /* OPItem.m */; };
 		0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
 		0A49766018D2A35F009DCAEE /* AFLOCSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765D18D2A35F009DCAEE /* AFLOCSessionManager.m */; };
 		0A49766118D2A35F009DCAEE /* OPLOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765F18D2A35F009DCAEE /* OPLOCProvider.m */; };
@@ -179,8 +179,8 @@
 		0A44CBE2171074EF00D7C1B6 /* OPContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPContentCell.m; sourceTree = "<group>"; };
 		0A44CBE7171074EF00D7C1B6 /* OPScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPScrollView.h; sourceTree = "<group>"; };
 		0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPScrollView.m; sourceTree = "<group>"; };
-		0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageItem.h; sourceTree = "<group>"; };
-		0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageItem.m; sourceTree = "<group>"; };
+		0A44CBEA171074EF00D7C1B6 /* OPItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPItem.h; sourceTree = "<group>"; };
+		0A44CBEB171074EF00D7C1B6 /* OPItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPItem.m; sourceTree = "<group>"; };
 		0A49765818D2986C009DCAEE /* OPLIFEProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPLIFEProvider.h; sourceTree = "<group>"; };
 		0A49765918D2986C009DCAEE /* OPLIFEProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPLIFEProvider.m; sourceTree = "<group>"; };
 		0A49765C18D2A35F009DCAEE /* AFLOCSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLOCSessionManager.h; sourceTree = "<group>"; };
@@ -463,8 +463,8 @@
 		0A44CBE9171074EF00D7C1B6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A44CBEA171074EF00D7C1B6 /* OPImageItem.h */,
-				0A44CBEB171074EF00D7C1B6 /* OPImageItem.m */,
+				0A44CBEA171074EF00D7C1B6 /* OPItem.h */,
+				0A44CBEB171074EF00D7C1B6 /* OPItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -892,7 +892,7 @@
 				0A19000C190DA1AF00922EDD /* OPContentCell.m in Sources */,
 				0A19000D190DA1AF00922EDD /* OPScrollView.m in Sources */,
 				0A19000E190DA1AF00922EDD /* OPBackendDefault.m in Sources */,
-				0A19000F190DA1AF00922EDD /* OPImageItem.m in Sources */,
+				0A19000F190DA1AF00922EDD /* OPItem.m in Sources */,
 				0A190010190DA1AF00922EDD /* OPProviderListViewController.m in Sources */,
 				0ABA1294194FC511005FD417 /* OPNavigationController.m in Sources */,
 				0A190011190DA1AF00922EDD /* OPCDLProvider.m in Sources */,
@@ -946,7 +946,7 @@
 				0A44CBFC171074EF00D7C1B6 /* OPContentCell.m in Sources */,
 				0A44CBFF171074EF00D7C1B6 /* OPScrollView.m in Sources */,
 				0A9D169918D4D37B000DC0BE /* OPBackendDefault.m in Sources */,
-				0A44CC00171074EF00D7C1B6 /* OPImageItem.m in Sources */,
+				0A44CC00171074EF00D7C1B6 /* OPItem.m in Sources */,
 				0A1DCDF818DDE720003F4418 /* OPProviderListViewController.m in Sources */,
 				0ABA1293194FC511005FD417 /* OPNavigationController.m in Sources */,
 				0ADFD8C318D4A29900EB75F6 /* OPCDLProvider.m in Sources */,

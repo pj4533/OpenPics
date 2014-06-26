@@ -24,7 +24,7 @@
 - (void) getMoreItemsWithSuccess:(void (^)(NSArray* indexPaths))success
                          failure:(void (^)(NSError* error))failure;
 
-- (OPImageItem*)itemAtIndexPath:(NSIndexPath*)indexPath;
+- (OPItem*)itemAtIndexPath:(NSIndexPath*)indexPath;
 
 - (void) clearData;
 

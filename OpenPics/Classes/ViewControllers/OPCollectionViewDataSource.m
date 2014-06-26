@@ -107,7 +107,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    OPImageItem* item = _items[indexPath.item];
+    OPItem* item = _items[indexPath.item];
 
     OPContentCell *cell;
     
@@ -229,7 +229,7 @@
 //    //    return self.singleImageLayout.itemSize;
 //}
 
-- (OPImageItem*)itemAtIndexPath:(NSIndexPath*)indexPath {
+- (OPItem*)itemAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.item < _items.count) {
         return _items[indexPath.item];
     }

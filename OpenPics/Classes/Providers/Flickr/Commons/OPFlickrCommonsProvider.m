@@ -7,7 +7,7 @@
 //
 
 #import "OPFlickrCommonsProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 
 NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons";
 
@@ -27,7 +27,7 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
     [self getInstitutionsWithSuccess:success failure:failure];
 }
 
-- (void) doInitialSearchInSet:(OPImageItem*) setItem
+- (void) doInitialSearchInSet:(OPItem*) setItem
                   withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure {
     NSString* setId = setItem.providerSpecific[@"id"];
@@ -38,7 +38,7 @@ NSString * const OPProviderTypeFlickrCommons = @"com.saygoodnight.flickrcommons"
     }
 }
 
-- (void) getItemsInSet:(OPImageItem*) setItem
+- (void) getItemsInSet:(OPItem*) setItem
         withPageNumber:(NSNumber*) pageNumber
                success:(void (^)(NSArray* items, BOOL canLoadMore))success
                failure:(void (^)(NSError* error))failure {

@@ -23,7 +23,7 @@
 #import "OPBackend.h"
 #import "OPBackendTokens.h"
 #import "OPBackendDefault.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 
 @implementation OPBackend
 
@@ -38,6 +38,8 @@
         NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *cachesFolder    = [pathList  objectAtIndex:0];
         NSString* favoritesPath = [cachesFolder stringByAppendingPathComponent:@"favorites"];
+
+        [NSKeyedUnarchiver setClass:[OPItem class] forClassName:@"OPImageItem"];
         _shared.itemsCreatedByUser = [NSKeyedUnarchiver unarchiveObjectWithFile:favoritesPath];
         if (!_shared.itemsCreatedByUser) {
             _shared.itemsCreatedByUser = [NSMutableArray array];
@@ -47,14 +49,14 @@
     return _shared;
 }
 
-- (void) saveItem:(OPImageItem*) item {
+- (void) saveItem:(OPItem*) item {
     [self.itemsCreatedByUser addObject:item];
     [self saveFavoritesToDisk];
 }
 
-- (void) removeItem:(OPImageItem*) item {
+- (void) removeItem:(OPItem*) item {
     NSMutableArray* iterationArray = [self.itemsCreatedByUser mutableCopy];
-    for (OPImageItem* thisItem in iterationArray) {
+    for (OPItem* thisItem in iterationArray) {
         if ([thisItem.imageUrl.absoluteString isEqualToString:item.imageUrl.absoluteString]) {
             [self.itemsCreatedByUser removeObjectIdenticalTo:thisItem];
         }
@@ -78,7 +80,7 @@
             success(self.itemsCreatedByUser,NO);
         } else {
             NSMutableArray* returnItems = [NSMutableArray array];
-            for (OPImageItem* item in self.itemsCreatedByUser) {
+            for (OPItem* item in self.itemsCreatedByUser) {
                 NSRange textRange;
                 textRange =[item.title rangeOfString:queryString options:NSCaseInsensitiveSearch];
                 if(textRange.location != NSNotFound) {
@@ -90,8 +92,8 @@
     }
 }
 
-- (BOOL) didUserCreateItem:(OPImageItem*) item {
-    for (OPImageItem* thisItem in self.itemsCreatedByUser) {
+- (BOOL) didUserCreateItem:(OPItem*) item {
+    for (OPItem* thisItem in self.itemsCreatedByUser) {
         if ([item.imageUrl.absoluteString isEqualToString:thisItem.imageUrl.absoluteString]) {
             return YES;
         }

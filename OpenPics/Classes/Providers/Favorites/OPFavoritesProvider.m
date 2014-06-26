@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "OPFavoritesProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPBackend.h"
 
 NSString * const OPProviderTypeFavorites = @"com.saygoodnight.Favorites";

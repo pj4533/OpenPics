@@ -7,7 +7,7 @@
 //
 
 #import "OPRedditProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPProviderTokens.h"
 #import "AFHTTPSessionManager.h"
 #import "NSString+ContainsSubstring.h"
@@ -116,7 +116,7 @@
                                                      @"providerSpecific": itemDataDict,
                                                      }.mutableCopy;
                 
-                OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+                OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
                 [retArray addObject:item];                
             }
         }
@@ -137,7 +137,7 @@
     }];
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     
     NSString* upRezzedUrlString = item.imageUrl.absoluteString;
     

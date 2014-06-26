@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 #import "OPImageManager.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "OPHTTPRequestOperation.h"
 #import "UIImage+Resize.h"
 
@@ -64,7 +64,7 @@
     }
 }
 
-- (void) getImageWithRequestForItem:(OPImageItem*) item
+- (void) getImageWithRequestForItem:(OPItem*) item
                       withIndexPath:(NSIndexPath*) indexPath
                         withSuccess:(void (^)(UIImage* image))success
                         withFailure:(void (^)(void))failure {
@@ -108,7 +108,7 @@
     return NO;
 }
 
-- (void) loadImageFromItem:(OPImageItem*) item
+- (void) loadImageFromItem:(OPItem*) item
                toImageView:(UIImageView*) imageView
                atIndexPath:(NSIndexPath*) indexPath
           onCollectionView:(UICollectionView*) cv

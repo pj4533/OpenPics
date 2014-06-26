@@ -7,7 +7,7 @@
 //
 
 #import "OPFlickrCHSProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 
 NSString * const OPProviderTypeFlickrCHS = @"com.saygoodnight.flickrchs";
 
@@ -29,14 +29,14 @@ NSString * const OPProviderTypeFlickrCHS = @"com.saygoodnight.flickrchs";
     [self getImageSetsWithPageNumber:@1 withUserId:@"38861678@N03" success:success failure:failure];
 }
 
-- (void) doInitialSearchInSet:(OPImageItem*) setItem
+- (void) doInitialSearchInSet:(OPItem*) setItem
                   withSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
                       failure:(void (^)(NSError* error))failure {
     NSString* setId = setItem.providerSpecific[@"id"];
     [self getItemsInSetWithId:setId withPageNumber:@1 success:success failure:failure];
 }
 
-- (void) getItemsInSet:(OPImageItem*) setItem
+- (void) getItemsInSet:(OPItem*) setItem
         withPageNumber:(NSNumber*) pageNumber
                success:(void (^)(NSArray* items, BOOL canLoadMore))success
                failure:(void (^)(NSError* error))failure {

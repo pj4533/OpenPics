@@ -26,7 +26,7 @@
 
 
 #import "OPDPLAProvider.h"
-#import "OPImageItem.h"
+#import "OPItem.h"
 #import "AFDPLASessionManager.h"
 #import "TTTURLRequestFormatter.h"
 #import "OPProviderTokens.h"
@@ -100,7 +100,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
 
 // Nothing to see here....please move along
-- (void) fullUpRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) fullUpRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
 
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
@@ -210,7 +210,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
 
 }
 
-- (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+- (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
     
     NSDictionary* providerSpecific = item.providerSpecific;
     NSString* urlString = item.imageUrl.absoluteString;
@@ -320,7 +320,7 @@ NSString * const OPProviderTypeDPLA = @"com.saygoodnight.dpla";
                 opImageDict[@"providerUrl"] = providerUrl;
             }
             
-            OPImageItem* item = [[OPImageItem alloc] initWithDictionary:opImageDict];
+            OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
             [retArray addObject:item];
         }
     }
