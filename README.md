@@ -65,6 +65,11 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 
 ## Versions
 
+* 2.5.0
+	* Added support for sets of images for easier browsing 
+	* Added /r/TheWayWeWere image source
+	* Added Cambridge Historical Society Flickr
+	* More memory fixes: weak vs strong FTW, durrrrr
 * 2.2.3
 	* Fixed HUGE memory leak
 	* Fixed orientation issues
