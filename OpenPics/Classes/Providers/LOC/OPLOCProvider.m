@@ -161,12 +161,15 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                    success:(void (^)(NSArray* items, BOOL canLoadMore))success
                    failure:(void (^)(NSError* error))failure {
     
-    NSDictionary* parameters = @{
-                             @"q" : queryString,
+    NSMutableDictionary* parameters = @{
                              @"sp" : pageNumber,
                              @"fo" : @"json",
                              @"c" : @"100"
-                             };
+                             }.mutableCopy;
+    
+    if (queryString) {
+        parameters[@"q"] = queryString;
+    }
 
     [self getItemsWithParameters:parameters success:success failure:failure];
 }

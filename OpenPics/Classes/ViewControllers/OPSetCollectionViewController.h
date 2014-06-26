@@ -12,6 +12,6 @@
 @class OPImageItem;
 @interface OPSetCollectionViewController : OPItemCollectionViewController
 
-@property (weak, nonatomic) OPImageItem* setItem;
+@property (strong, nonatomic) OPImageItem* setItem;
 
 @end

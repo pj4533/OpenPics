@@ -28,7 +28,7 @@
     self = [super init];
     if (self) {
         _items = [NSMutableArray array];
-        _currentQueryString = @"";
+        self.currentQueryString = @"";
 
         _imageManager = [[OPImageManager alloc] init];
         _imageManager.delegate = self;

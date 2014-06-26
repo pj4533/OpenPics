@@ -15,7 +15,7 @@
     NSMutableArray* _items;
 }
 
-@property (weak, nonatomic) NSString* currentQueryString;
+@property (strong, nonatomic) NSString* currentQueryString;
 @property (weak, nonatomic) id<OPContentCellDelegate> delegate;
 
 - (void) doInitialSearchWithSuccess:(void (^)(NSArray* items, BOOL canLoadMore))success
