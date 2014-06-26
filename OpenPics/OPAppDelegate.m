@@ -45,6 +45,7 @@
 #import "OPFlickrCHSProvider.h"
 #import "OPRedditHistoryPornProvider.h"
 #import "OPRedditOldSchoolCoolProvider.h"
+#import "OPRedditTheWayWeWereProvider.h"
 
 #import "OPAppearance.h"
 #import "OPBackend.h"
@@ -100,6 +101,7 @@
     [[OPProviderController shared] addProvider:[[OPFlickrCommonsProvider alloc] initWithProviderType:OPProviderTypeFlickrCommons]];
     [[OPProviderController shared] addProvider:[[OPRedditHistoryPornProvider alloc] initWithProviderType:OPProviderTypeRedditHistoryPorn]];
     [[OPProviderController shared] addProvider:[[OPRedditOldSchoolCoolProvider alloc] initWithProviderType:OPProviderTypeRedditOldSchoolCool]];
+    [[OPProviderController shared] addProvider:[[OPRedditTheWayWeWereProvider alloc] initWithProviderType:OPProviderTypeRedditTheWayWeWere]];
     [[OPProviderController shared] addProvider:[[OPFlickrBPLProvider alloc] initWithProviderType:OPProviderTypeFlickrBPL]];
     [[OPProviderController shared] addProvider:[[OPFlickrCHSProvider alloc] initWithProviderType:OPProviderTypeFlickrCHS]];
     [[OPProviderController shared] addProvider:[[OPLIFEProvider alloc] initWithProviderType:OPProviderTypeLIFE]];
