@@ -16,7 +16,6 @@
 		0A0E2F4B1946950F00B82B86 /* OPFlickrCommonsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */; };
 		0A0E2F4F1946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */; };
 		0A0E2F501946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */; };
-		0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
 		0A190003190DA1AF00922EDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A609EC5171072BD0084735B /* main.m */; };
 		0A190006190DA1AF00922EDD /* AFDefaultBackendSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D169B18D4D631000DC0BE /* AFDefaultBackendSessionManager.m */; };
 		0A190007190DA1AF00922EDD /* OPNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4CB2718DF779000B10441 /* OPNavigationControllerDelegate.m */; };
@@ -45,9 +44,7 @@
 		0A190020190DA1AF00922EDD /* OPDPLAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF518D2962300CF2C08 /* OPDPLAProvider.m */; };
 		0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BEEF318D2962300CF2C08 /* AFDPLASessionManager.m */; };
 		0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766418D2A745009DCAEE /* AFTroveSessionManager.m */; };
-		0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49765918D2986C009DCAEE /* OPLIFEProvider.m */; };
-		0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A127BF5172D98FE00F6966A /* OPAppearance.m */; };
 		0A190028190DA1AF00922EDD /* OPBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF141745A79000814F0B /* OPBackend.m */; };
 		0A19002A190DA1AF00922EDD /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
 		0A19002D190DA1AF00922EDD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8A81FC18CCBDEE001AED56 /* Social.framework */; };
@@ -90,7 +87,6 @@
 		0A49766818D2A745009DCAEE /* OPTroveProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49766618D2A745009DCAEE /* OPTroveProvider.m */; };
 		0A49A40E195A3715007E6D5A /* OPHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49A40D195A3715007E6D5A /* OPHTTPRequestOperation.m */; };
 		0A49A40F195A3715007E6D5A /* OPHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49A40D195A3715007E6D5A /* OPHTTPRequestOperation.m */; };
-		0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */; };
 		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
 		0A4D3838195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D3837195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m */; };
 		0A4D3839195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D3837195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m */; };
@@ -159,8 +155,6 @@
 		0A0E2F491946950F00B82B86 /* OPFlickrCommonsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrCommonsProvider.m; sourceTree = "<group>"; };
 		0A0E2F4D1946983A00B82B86 /* OPFlickrBPLProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPFlickrBPLProvider.h; sourceTree = "<group>"; };
 		0A0E2F4E1946983A00B82B86 /* OPFlickrBPLProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPFlickrBPLProvider.m; sourceTree = "<group>"; };
-		0A127BF4172D98FE00F6966A /* OPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppearance.h; sourceTree = "<group>"; };
-		0A127BF5172D98FE00F6966A /* OPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPAppearance.m; sourceTree = "<group>"; };
 		0A19004D190DA1AF00922EDD /* OpenPicsReveal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPicsReveal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A1DCDE818DDE6F0003F4418 /* Main_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone.storyboard; sourceTree = "<group>"; };
 		0A1DCDEB18DDE720003F4418 /* OPImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageCollectionViewController.h; sourceTree = "<group>"; };
@@ -199,8 +193,6 @@
 		0A49766618D2A745009DCAEE /* OPTroveProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPTroveProvider.m; sourceTree = "<group>"; };
 		0A49A40C195A3715007E6D5A /* OPHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPHTTPRequestOperation.h; sourceTree = "<group>"; };
 		0A49A40D195A3715007E6D5A /* OPHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPHTTPRequestOperation.m; sourceTree = "<group>"; };
-		0A4A0CCE18DA8A3B0002E8E8 /* UIImageView+Hourglass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Hourglass.h"; sourceTree = "<group>"; };
-		0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Hourglass.m"; sourceTree = "<group>"; };
 		0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPImageManager.h; sourceTree = "<group>"; };
 		0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPImageManager.m; sourceTree = "<group>"; };
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
@@ -460,10 +452,6 @@
 				0A81125F194FB6FD008B56A9 /* NSString+ContainsSubstring.m */,
 				0A44CBE7171074EF00D7C1B6 /* OPScrollView.h */,
 				0A44CBE8171074EF00D7C1B6 /* OPScrollView.m */,
-				0A127BF4172D98FE00F6966A /* OPAppearance.h */,
-				0A127BF5172D98FE00F6966A /* OPAppearance.m */,
-				0A4A0CCE18DA8A3B0002E8E8 /* UIImageView+Hourglass.h */,
-				0A4A0CCF18DA8A3B0002E8E8 /* UIImageView+Hourglass.m */,
 				0A4A0CD118DA8CAD0002E8E8 /* OPImageManager.h */,
 				0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */,
 				0A49A40C195A3715007E6D5A /* OPHTTPRequestOperation.h */,
@@ -929,13 +917,11 @@
 				0A8E911E19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m in Sources */,
 				0A190021190DA1AF00922EDD /* AFDPLASessionManager.m in Sources */,
 				0A190023190DA1AF00922EDD /* AFTroveSessionManager.m in Sources */,
-				0A190024190DA1AF00922EDD /* UIImageView+Hourglass.m in Sources */,
 				0A8E9122195747930074CAB8 /* OPItemCollectionViewController.m in Sources */,
 				0AB49E5719493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A190025190DA1AF00922EDD /* OPLIFEProvider.m in Sources */,
 				0A811261194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F47194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
-				0A190027190DA1AF00922EDD /* OPAppearance.m in Sources */,
 				0A190028190DA1AF00922EDD /* OPBackend.m in Sources */,
 				0A0E2F501946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A8E911A195716ED0074CAB8 /* OPSetCollectionViewController.m in Sources */,
@@ -985,13 +971,11 @@
 				0A8E911D19571DEB0074CAB8 /* OPSetCollectionViewDataSource.m in Sources */,
 				0A9BEEF618D2962300CF2C08 /* AFDPLASessionManager.m in Sources */,
 				0A49766718D2A745009DCAEE /* AFTroveSessionManager.m in Sources */,
-				0A4A0CD018DA8A3B0002E8E8 /* UIImageView+Hourglass.m in Sources */,
 				0A8E9121195747930074CAB8 /* OPItemCollectionViewController.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
 				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
-				0A127BF6172D98FE00F6966A /* OPAppearance.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
 				0A0E2F4F1946983A00B82B86 /* OPFlickrBPLProvider.m in Sources */,
 				0A8E9119195716ED0074CAB8 /* OPSetCollectionViewController.m in Sources */,

@@ -47,7 +47,6 @@
 #import "OPRedditOldSchoolCoolProvider.h"
 #import "OPRedditTheWayWeWereProvider.h"
 
-#import "OPAppearance.h"
 #import "OPBackend.h"
 
 #import "TMCache.h"
@@ -88,8 +87,6 @@
 
     // disk limit 100mb
     sharedCache.diskCache.byteLimit = 104857600;
-    
-    [OPAppearance setupGlobalAppearance];
     
     if ([[OPBackend shared] usingRemoteBackend]) {
         NSLog(@"Using Remote Backend");

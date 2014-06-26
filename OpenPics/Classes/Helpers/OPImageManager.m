@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 #import "OPImageManager.h"
-#import "UIImageView+Hourglass.h"
 #import "OPImageItem.h"
 #import "OPHTTPRequestOperation.h"
 #import "UIImage+Resize.h"
@@ -116,50 +115,48 @@
            withContentMode:(UIViewContentMode)contentMode
             withCompletion:(void (^)())completion
 {
-    [imageView fadeInHourglassWithCompletion:^{
-        [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
-            // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
-            if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
-                // then dispatch back to the main thread to set the image
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    // fade out the hourglass image
-                    [UIView animateWithDuration:0.25 animations:^{
-                        imageView.alpha = 0.0;
-                    } completion:^(BOOL finished) {
-                        imageView.contentMode = contentMode;
-                        imageView.image = image;
-                        
-                        // fade in image
-                        [UIView animateWithDuration:0.5 animations:^{
-                            imageView.alpha = 1.0;
-                        } completion:^(BOOL finished) {
-                            //if we have no size information yet, save the information in item, and force a re-layout
-                            if (!item.size.height) {
-                                item.size = image.size;
-                                [cv.collectionViewLayout invalidateLayout];
-                            }
-                            
-                            if (completion) {
-                                completion();
-                            }
-                        }];
-                        
-                    }];
-                });
-            }
-        } withFailure:^{
+    [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
+        // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
+        if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
+            // then dispatch back to the main thread to set the image
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // fade out the hourglass image
                 [UIView animateWithDuration:0.25 animations:^{
                     imageView.alpha = 0.0;
                 } completion:^(BOOL finished) {
-                    imageView.image = [UIImage imageNamed:@"image_cancel"];
+                    imageView.contentMode = contentMode;
+                    imageView.image = image;
+                    
+                    // fade in image
                     [UIView animateWithDuration:0.5 animations:^{
                         imageView.alpha = 1.0;
+                    } completion:^(BOOL finished) {
+                        //if we have no size information yet, save the information in item, and force a re-layout
+                        if (!item.size.height) {
+                            item.size = image.size;
+                            [cv.collectionViewLayout invalidateLayout];
+                        }
+                        
+                        if (completion) {
+                            completion();
+                        }
                     }];
+                    
                 }];
             });
-        }];
+        }
+    } withFailure:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.25 animations:^{
+                imageView.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                imageView.image = [UIImage imageNamed:@"image_cancel"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    imageView.alpha = 1.0;
+                }];
+            }];
+        });
     }];
 }
 

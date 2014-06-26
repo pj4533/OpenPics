@@ -69,9 +69,7 @@
 
 #pragma mark - Utility Functions
 
-- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
-//    [self setupLabels];
-    
+- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {    
     self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.internalScrollView.userInteractionEnabled = YES;
@@ -96,19 +94,6 @@
             [self upRezToImageWithUrl:uprezImageUrl];
         }];
     }
-//
-//    if ([[OPBackend shared] didUserCreateItem:self.item]) {
-//        [self setButtonToRemoveFavorite];
-//    } else {
-//        [self setButtonToFavorite];
-//    }
-//    
-//    [self fadeInUIWithCompletion:nil];
-//    
-//    if (animated) {
-//    } else {
-//        self.showingUI = YES;
-//    }
 }
 
 - (void) upRezToImageWithUrl:(NSURL*) url {
