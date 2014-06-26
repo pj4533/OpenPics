@@ -172,6 +172,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
 }
 
 - (void) upRezItem:(OPImageItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPImageItem* item))completion {
+    [self fullUpRezItem:item withCompletion:completion];
 }
 
 // Nothing to see here....please move along
