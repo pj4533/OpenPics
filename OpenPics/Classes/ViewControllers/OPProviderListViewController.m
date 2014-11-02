@@ -28,6 +28,7 @@
 #import "OPProviderListViewController.h"
 #import "OPProviderController.h"
 #import "OPProvider.h"
+#import "OPRedditGenericProvider.h"
 
 @interface OPProviderListViewController ()
 
@@ -129,6 +130,31 @@
 
     if (self.delegate) {
         [self.delegate tappedProvider:provider];
+    }
+}
+
+#pragma mark - more derps
+
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake ) {
+        __block UITextField* localTextField;
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:@"Choose Subreddit"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            localTextField = textField;
+        }];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            OPRedditGenericProvider* genericProvider = [[OPRedditGenericProvider alloc] initWithProviderType:OPProviderTypeRedditGeneric subredditName:localTextField.text];
+            if (self.delegate) {
+                [self.delegate tappedProvider:genericProvider];
+            }
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

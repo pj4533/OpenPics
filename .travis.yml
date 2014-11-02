@@ -1,5 +1,6 @@
 language: objective-c
 before_install: 
  - "gem install cocoapods"
+ - "gem install xcpretty"
 script: 
  - set -o pipefail && xcodebuild build  -workspace OpenPics.xcworkspace -scheme "OpenPics" -destination "platform=iOS Simulator,name=iPhone 6" | xcpretty -c

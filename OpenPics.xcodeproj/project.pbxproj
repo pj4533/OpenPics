@@ -74,6 +74,7 @@
 		0A1EF47F17108B5400AB8B62 /* OPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF47E17108B5400AB8B62 /* OPProvider.m */; };
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A25C00118D9251000123D04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A25C00018D9251000123D04 /* Images.xcassets */; };
+		0A26C11D1A06C41E00DE4198 /* OPRedditGenericProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26C11C1A06C41E00DE4198 /* OPRedditGenericProvider.m */; };
 		0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
 		0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
 		0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
@@ -170,6 +171,8 @@
 		0A1EF48317108D6D00AB8B62 /* OPProviderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPProviderController.h; sourceTree = "<group>"; };
 		0A1EF48417108D6D00AB8B62 /* OPProviderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPProviderController.m; sourceTree = "<group>"; };
 		0A25C00018D9251000123D04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0A26C11B1A06C41E00DE4198 /* OPRedditGenericProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditGenericProvider.h; sourceTree = "<group>"; };
+		0A26C11C1A06C41E00DE4198 /* OPRedditGenericProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditGenericProvider.m; sourceTree = "<group>"; };
 		0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaSessionManager.h; sourceTree = "<group>"; };
 		0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaSessionManager.m; sourceTree = "<group>"; };
 		0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -639,6 +642,8 @@
 				0AB49E5819493EC800A9F9BD /* HistoryPorn */,
 				0AB49E5419493ADD00A9F9BD /* OPRedditProvider.h */,
 				0AB49E5519493ADD00A9F9BD /* OPRedditProvider.m */,
+				0A26C11B1A06C41E00DE4198 /* OPRedditGenericProvider.h */,
+				0A26C11C1A06C41E00DE4198 /* OPRedditGenericProvider.m */,
 			);
 			path = Reddit;
 			sourceTree = "<group>";
@@ -978,6 +983,7 @@
 				0A8E9121195747930074CAB8 /* OPItemCollectionViewController.m in Sources */,
 				0AB49E5619493ADD00A9F9BD /* OPRedditProvider.m in Sources */,
 				0A49765A18D2986C009DCAEE /* OPLIFEProvider.m in Sources */,
+				0A26C11D1A06C41E00DE4198 /* OPRedditGenericProvider.m in Sources */,
 				0A811260194FB6FD008B56A9 /* NSString+ContainsSubstring.m in Sources */,
 				0A0E2F46194694DD00B82B86 /* OPFlickrProvider.m in Sources */,
 				0A05EF151745A79000814F0B /* OPBackend.m in Sources */,
