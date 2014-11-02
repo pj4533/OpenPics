@@ -2,4 +2,4 @@ language: objective-c
 before_install: 
  - "gem install cocoapods"
 script: 
- - set -o pipefail && xcodebuild build test -workspace OpenPics.xcworkspace -scheme "OpenPics" -destination "platform=iOS Simulator,name=iPhone 6" | xcpretty -c
+ - set -o pipefail && xcodebuild build  -workspace OpenPics.xcworkspace -scheme "OpenPics" -destination "platform=iOS Simulator,name=iPhone 6" | xcpretty -c
