@@ -1,5 +1,5 @@
 language: objective-c
-rvm: 1.9.3
 before_install: 
- - "gem update cocoapods"
-script: xctool -workspace OpenPics.xcworkspace -scheme "OpenPics" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+ - "gem install cocoapods"
+script: 
+ - set -o pipefail && xcodebuild build test -workspace OpenPics.xcworkspace -scheme "OpenPics" -destination "platform=iOS Simulator,name=iPhone 6" | xcpretty -c
