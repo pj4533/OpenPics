@@ -28,6 +28,7 @@
 #import "OPItem.h"
 #import "OPHTTPRequestOperation.h"
 #import "UIImage+Resize.h"
+#import "FLAnimatedImage.h"
 
 @interface OPImageManager () {
 }
@@ -98,6 +99,37 @@
     [[[self class] imageRequestOperationQueue] addOperation:operation];
 }
 
+
+
+- (void) getDataWithRequestForItem:(OPItem*) item
+                      withIndexPath:(NSIndexPath*) indexPath
+                        withSuccess:(void (^)(NSData* data))success
+                        withFailure:(void (^)(void))failure {
+    // if not found in cache, create request to download image
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
+    OPHTTPRequestOperation* operation = [[OPHTTPRequestOperation alloc] initWithRequest:request];
+    operation.indexPath = indexPath;
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
+        if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
+            if (success) {
+                success(responseObject);
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (!operation.isCancelled) {
+            NSLog(@"error getting data: %@", operation.request.URL);
+            if (failure) {
+                failure();
+            }
+        }
+    }];
+    [[[self class] imageRequestOperationQueue] addOperation:operation];
+}
+
+
+
+
 - (BOOL) isCellVisibleAtIndexPath:(NSIndexPath*) indexPath forCollectionView:(UICollectionView*) collectionView {
     for (NSIndexPath* thisIndexPath in collectionView.indexPathsForVisibleItems) {
         if (indexPath.item == thisIndexPath.item) {
@@ -108,14 +140,14 @@
     return NO;
 }
 
-- (void) loadImageFromItem:(OPItem*) item
-               toImageView:(UIImageView*) imageView
-               atIndexPath:(NSIndexPath*) indexPath
-          onCollectionView:(UICollectionView*) cv
-           withContentMode:(UIViewContentMode)contentMode
-            withCompletion:(void (^)())completion
+- (void) loadAnimatedImageFromItem:(OPItem*) item
+                       toImageView:(UIImageView*) imageView
+                       atIndexPath:(NSIndexPath*) indexPath
+                  onCollectionView:(UICollectionView*) cv
+                   withContentMode:(UIViewContentMode)contentMode
+                    withCompletion:(void (^)())completion
 {
-    [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
+    [self getDataWithRequestForItem:item withIndexPath:indexPath withSuccess:^(NSData *data) {
         // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
         if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
             // then dispatch back to the main thread to set the image
@@ -125,8 +157,17 @@
                 [UIView animateWithDuration:0.25 animations:^{
                     imageView.alpha = 0.0;
                 } completion:^(BOOL finished) {
-                    imageView.contentMode = contentMode;
-                    imageView.image = image;
+                    
+                    
+                    FLAnimatedImage *animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
+                    FLAnimatedImageView *animatedImageView = [[FLAnimatedImageView alloc] init];
+                    animatedImageView.contentMode = contentMode;//UIViewContentModeScaleAspectFit;
+
+                    animatedImageView.autoresizingMask  = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+                    animatedImageView.animatedImage = animatedImage;
+                    animatedImageView.frame = imageView.frame;
+                    [imageView addSubview:animatedImageView];
                     
                     // fade in image
                     [UIView animateWithDuration:0.5 animations:^{
@@ -134,8 +175,8 @@
                     } completion:^(BOOL finished) {
                         //if we have no size information yet, save the information in item, and force a re-layout
                         if (!item.size.height) {
-                            item.size = image.size;
-                            [cv.collectionViewLayout invalidateLayout];
+//                            item.size = image.size;
+//                            [cv.collectionViewLayout invalidateLayout];
                         }
                         
                         if (completion) {
@@ -158,6 +199,67 @@
             }];
         });
     }];
+}
+
+- (void) loadImageFromItem:(OPItem*) item
+               toImageView:(UIImageView*) imageView
+               atIndexPath:(NSIndexPath*) indexPath
+          onCollectionView:(UICollectionView*) cv
+           withContentMode:(UIViewContentMode)contentMode
+            withCompletion:(void (^)())completion
+{
+    for (UIView* subview in imageView.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+
+    if ([item.imageUrl.absoluteString hasSuffix:@".gif"]) {
+        [self loadAnimatedImageFromItem:item toImageView:imageView atIndexPath:indexPath onCollectionView:cv withContentMode:contentMode withCompletion:completion];
+    } else {
+        [self getImageWithRequestForItem:item withIndexPath:indexPath withSuccess:^(UIImage *image) {
+            // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
+            if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
+                // then dispatch back to the main thread to set the image
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // fade out the hourglass image
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageView.alpha = 0.0;
+                    } completion:^(BOOL finished) {
+                        imageView.contentMode = contentMode;
+                        imageView.image = image;
+                        
+                        // fade in image
+                        [UIView animateWithDuration:0.5 animations:^{
+                            imageView.alpha = 1.0;
+                        } completion:^(BOOL finished) {
+                            //if we have no size information yet, save the information in item, and force a re-layout
+                            if (!item.size.height) {
+                                item.size = image.size;
+                                [cv.collectionViewLayout invalidateLayout];
+                            }
+                            
+                            if (completion) {
+                                completion();
+                            }
+                        }];
+                        
+                    }];
+                });
+            }
+        } withFailure:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:0.25 animations:^{
+                    imageView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    imageView.image = [UIImage imageNamed:@"image_cancel"];
+                    [UIView animateWithDuration:0.5 animations:^{
+                        imageView.alpha = 1.0;
+                    }];
+                }];
+            });
+        }];        
+    }
 }
 
 @end

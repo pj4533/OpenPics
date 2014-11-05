@@ -98,17 +98,17 @@
             // Only use imgur photos that aren't an album
             if (![urlString containsSubstring:@"imgur.com/a/"] && ![urlString containsSubstring:@"imgur.com/gallery"]) {
                 if (domain && [domain containsSubstring:@"imgur.com"]) {
-                    if (![urlString hasSuffix:@".jpg"]) {
+                    if (![urlString hasSuffix:@".jpg"] && ![urlString hasSuffix:@".gif"]) {
                         urlString = [urlString stringByAppendingString:@"l.jpg"];
                     } else {
-                        if (![urlString hasSuffix:@"l.jpg"]) {
+                        if (![urlString hasSuffix:@"l.jpg"] && ![urlString hasSuffix:@".gif"]) {
                             urlString = [urlString stringByReplacingOccurrencesOfString:@".jpg" withString:@"l.jpg"];
                         }
                     }
                 }
             }
             
-            if ([urlString hasSuffix:@".jpg"]) {
+            if ([urlString hasSuffix:@".jpg"] || [urlString hasSuffix:@".gif"]) {
                 NSMutableDictionary* opImageDict = @{
                                                      @"imageUrl":[NSURL URLWithString:urlString],
                                                      @"title" : itemDataDict[@"title"],

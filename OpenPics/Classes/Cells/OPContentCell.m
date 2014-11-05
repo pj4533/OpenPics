@@ -69,7 +69,13 @@
 
 #pragma mark - Utility Functions
 
-- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {    
+- (void) setupForSingleImageLayoutAnimated:(BOOL) animated {
+    
+#warning hack
+    for (UIImageView* imageView in self.internalScrollView.imageView.subviews) {
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
     self.internalScrollView.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.internalScrollView.userInteractionEnabled = YES;

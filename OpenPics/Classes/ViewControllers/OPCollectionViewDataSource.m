@@ -159,6 +159,8 @@
     cell.delegate = self;
     
     if ((cell.frame.size.width > 250) && ![[OPNavigationControllerDelegate shared] transitioning]) {
+        
+        NSLog(@"greater than 250");
         [_imageManager loadImageFromItem:item
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath
@@ -168,6 +170,8 @@
                               [cell setupForSingleImageLayoutAnimated:NO];
                           }];
     } else {
+        NSLog(@"less than 250");
+        
         [_imageManager loadImageFromItem:item
                              toImageView:cell.internalScrollView.imageView
                              atIndexPath:indexPath

@@ -23,6 +23,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appsee (2.0.8)
+  - FLAnimatedImage (1.0.4)
   - FormatterKit (1.1.2):
     - FormatterKit/AddressFormatter
     - FormatterKit/ArrayFormatter
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
   - Appsee (~> 2.0.8)
+  - FLAnimatedImage (~> 1.0)
   - FormatterKit (~> 1.1.1)
   - FRDLivelyButton (~> 1.1.2)
   - KissXML
@@ -70,7 +72,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 45ca411593444cbdc401b12924b4c17082ad512a
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  Appsee: 80082e036888fbc7c81ddd2a14ce190553eee2f4
+  Appsee: e037b685cbd4f521e40b1f1d403726b2bbadcba6
+  FLAnimatedImage: b778ff1222a5d6902fa5016fb870aeeb5ba23e28
   FormatterKit: a7d9076e2923f272d098028f086822c329fcb410
   FRDLivelyButton: 717c6907bd6bb588f775a50580e216fe83abcade
   KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
@@ -82,4 +85,4 @@ SPEC CHECKSUMS:
   TUSafariActivity: afff9b1d2eacf7cbace752c5f2bf56db852714de
   UIImage-Categories: 99245612a4725173db4f0a9ed8ba9dbe2a1e0b4f
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.4

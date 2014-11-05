@@ -13,6 +13,7 @@ pod 'Appsee', '~> 2.0.8'
 pod 'FRDLivelyButton', '~> 1.1.2'
 pod 'SGNavigationProgress'
 pod 'UIImage-Categories', '~> 0.0'
+pod 'FLAnimatedImage', '~> 1.0'
 
 target :OpenPicsReveal do
       pod 'Reveal-iOS-SDK'
