@@ -109,9 +109,13 @@
             }
             
             if ([urlString hasSuffix:@".jpg"] || [urlString hasSuffix:@".gif"]) {
+                NSString* titleString = itemDataDict[@"title"];
+                if (!titleString) {
+                    titleString = @"";
+                }
                 NSMutableDictionary* opImageDict = @{
                                                      @"imageUrl":[NSURL URLWithString:urlString],
-                                                     @"title" : itemDataDict[@"title"],
+                                                     @"title" : titleString,
                                                      @"providerType": self.providerType,
                                                      @"providerSpecific": itemDataDict,
                                                      }.mutableCopy;
