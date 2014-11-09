@@ -43,10 +43,8 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>Main_ipad</string>
-	<key>UIMainStoryboardFile~iphone</key>
-	<string>Main_iphone</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
