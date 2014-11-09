@@ -140,6 +140,7 @@
     return NO;
 }
 
+// This is pretty gross...I should really clean up how I load animated gifs.
 - (void) loadAnimatedImageFromItem:(OPItem*) item
                        toImageView:(UIImageView*) imageView
                        atIndexPath:(NSIndexPath*) indexPath
