@@ -7,7 +7,7 @@ An open source iOS application for viewing images from multiple remote sources. 
 
 ## Goals
 
-* Always use the latest iOS technology.  (Target only latest OS version)
+* Always use the latest iOS technology.  (Target only latest iOS major version: iOS8)
 * Keep all image source knowledge inside corresponding 'Provider' class
 * Make it flippin sweet with awesome animations and stuff.
 
@@ -44,7 +44,7 @@ Popular images (recently favorited) are stored using a flexible backend based on
 
 ## Sharing
 
-Sharing (Twitter & Facebook) uses UIActivitys from iOS6.
+Sharing (Twitter & Facebook) uses UIActivitys from iOS6, also in iOS8 supports all sharing extensions.
 
 ## Dependencies
 
@@ -65,6 +65,9 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 
 ## Versions
 
+* 2.5.5 **IN BETA TESTING**
+	* iPhone6/6+ support
+	* Targeting iOS8
 * 2.5.0
 	* Added support for sets of images for easier browsing 
 	* Added /r/TheWayWeWere image source
