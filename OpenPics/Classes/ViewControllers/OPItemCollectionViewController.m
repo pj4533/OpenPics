@@ -15,7 +15,9 @@
 #import "OPCollectionViewDataSource.h"
 #import "OPSetCollectionViewController.h"
 
-@interface OPItemCollectionViewController ()
+@interface OPItemCollectionViewController () <UICollectionViewDelegateFlowLayout> {
+    CGSize _cellSize;
+}
 
 @end
 
@@ -133,6 +135,32 @@
 - (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
     [dataSource cancelRequestAtIndexPath:indexPath];
+}
+
+#pragma mark flow delegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return _cellSize;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    
+    // iPhones in portrait
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact
+        && self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        CGFloat size = ((self.view.frame.size.width-20) / 3);
+        _cellSize = CGSizeMake(size,size);
+    } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
+               && self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
+        CGFloat size = ((self.view.frame.size.height-20) / 3);
+        _cellSize = CGSizeMake(size,size);
+    } else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
+               && self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        _cellSize = CGSizeMake(246.0f,246.0f);
+    }
+    
+    [self.collectionView reloadItemsAtIndexPaths:self.collectionView.indexPathsForVisibleItems];
 }
 
 

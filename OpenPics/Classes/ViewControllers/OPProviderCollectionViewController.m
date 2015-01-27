@@ -21,7 +21,7 @@
 #import "OPPopularProvider.h"
 #import "OPSetCollectionViewController.h"
 
-@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate,UICollectionViewDelegateFlowLayout> {
+@interface OPProviderCollectionViewController () <UINavigationControllerDelegate,OPProviderListDelegate,UISearchBarDelegate> {
     UISearchBar* _searchBar;
     UIBarButtonItem* _sourceButton;
     UIBarButtonItem* _sourceCaret;
@@ -31,12 +31,14 @@
 
 @end
 
+#define CELL_SIZE_ANY  100.0f
+#define CELL_SIZE_LARGE  300.0f
 @implementation OPProviderCollectionViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
     dataSource.delegate = self;
 
