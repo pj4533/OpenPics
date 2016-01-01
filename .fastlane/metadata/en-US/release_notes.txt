@@ -1,0 +1,4 @@
+* Added support for sets of images for easier browsing 
+* Added /r/TheWayWeWere image source
+* Added Cambridge Historical Society Flickr
+* More memory fixes: weak vs strong FTW, durrrrr

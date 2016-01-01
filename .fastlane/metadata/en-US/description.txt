@@ -1,0 +1,25 @@
+Search for images from multiple online image collections!
+
+Currently supporting:
+
+● New York Public Library
+● Library of Congress
+● California Digital Library
+● Digital Public Library of America
+● Europeana
+● LIFE Magazine photo archive
+● National Library of Australia (Trove) 
+● Flickr: Commons Project
+● Flickr: Boston Public Library
+● Flickr: Cambridge Historical Society
+● Reddit: /r/HistoryPorn
+● Reddit: /r/OldSchoolCool
+● Reddit: /r/TheWayWeWere
+
+OpenPics is open source.  
+
+Wish it had more features?  Download the source code, and add it!   I'll update the app as new features are added.  
+
+Get the source code here:
+
+https://github.com/pj4533/OpenPics

@@ -20,3 +20,21 @@ OPActivityTokens.h
 OPAppTokens.h
 OPBackendTokens.h
 crashlytics.sh
+
+.gym
+.sigh
+
+# fastlane specific
+.fastlane/report.xml
+
+# deliver temporary files
+.fastlane/Preview.html
+
+# snapshot generated screenshots
+.fastlane/screenshots/**/*.png
+.fastlane/screenshots/screenshots.html
+
+# scan temporary files
+.fastlane/test_output
+
+Preview.html
