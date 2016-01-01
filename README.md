@@ -65,8 +65,8 @@ If you wish to contribute, send some pull requests!  I'll update the app in the 
 
 ## Versions
 
-* 2.5.5 **DEV NOW**
-	* Clean Up & Update release only (no major feature changes)
+* 2.5.5
+	* No major changes, finally updating to new device types etc.
 	* Targeting iOS9
 * 2.5.0
 	* Added support for sets of images for easier browsing 
