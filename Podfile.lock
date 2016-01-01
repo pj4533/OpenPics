@@ -2,12 +2,12 @@ PODS:
   - AFNetworkActivityLogger (2.0.2):
     - AFNetworking/NSURLSession (~> 2.0)
   - AFNetworking (2.3.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
+    - AFNetworking/NSURLConnection (= 2.3.1)
+    - AFNetworking/NSURLSession (= 2.3.1)
+    - AFNetworking/Reachability (= 2.3.1)
+    - AFNetworking/Security (= 2.3.1)
+    - AFNetworking/Serialization (= 2.3.1)
+    - AFNetworking/UIKit (= 2.3.1)
   - AFNetworking/NSURLConnection (2.3.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -23,15 +23,15 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appsee (2.0.8)
-  - FLAnimatedImage (1.0.4)
+  - FLAnimatedImage (1.0.10)
   - FormatterKit (1.1.2):
-    - FormatterKit/AddressFormatter
-    - FormatterKit/ArrayFormatter
-    - FormatterKit/LocationFormatter
-    - FormatterKit/OrdinalNumberFormatter
-    - FormatterKit/TimeIntervalFormatter
-    - FormatterKit/UnitOfInformationFormatter
-    - FormatterKit/URLRequestFormatter
+    - FormatterKit/AddressFormatter (= 1.1.2)
+    - FormatterKit/ArrayFormatter (= 1.1.2)
+    - FormatterKit/LocationFormatter (= 1.1.2)
+    - FormatterKit/OrdinalNumberFormatter (= 1.1.2)
+    - FormatterKit/TimeIntervalFormatter (= 1.1.2)
+    - FormatterKit/UnitOfInformationFormatter (= 1.1.2)
+    - FormatterKit/URLRequestFormatter (= 1.1.2)
   - FormatterKit/AddressFormatter (1.1.2)
   - FormatterKit/ArrayFormatter (1.1.2)
   - FormatterKit/LocationFormatter (1.1.2)
@@ -41,7 +41,6 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.1.2)
   - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
-  - Reveal-iOS-SDK (1.0.4)
   - SGNavigationProgress (1.2)
   - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
@@ -53,11 +52,10 @@ DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
   - Appsee (~> 2.0.8)
-  - FLAnimatedImage (~> 1.0)
+  - FLAnimatedImage (~> 1.0.10)
   - FormatterKit (~> 1.1.1)
   - FRDLivelyButton (~> 1.1.2)
   - KissXML
-  - Reveal-iOS-SDK
   - SGNavigationProgress
   - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD (~> 1.0)
@@ -69,20 +67,24 @@ EXTERNAL SOURCES:
   SGSStaggeredFlowLayout:
     :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
-SPEC CHECKSUMS:
-  AFNetworkActivityLogger: 45ca411593444cbdc401b12924b4c17082ad512a
-  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  Appsee: e037b685cbd4f521e40b1f1d403726b2bbadcba6
-  FLAnimatedImage: b778ff1222a5d6902fa5016fb870aeeb5ba23e28
-  FormatterKit: a7d9076e2923f272d098028f086822c329fcb410
-  FRDLivelyButton: 717c6907bd6bb588f775a50580e216fe83abcade
-  KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
-  Reveal-iOS-SDK: d3c8e109d42219daaa7a6e1ad2de34f0bdbb7a88
-  SGNavigationProgress: 6c38006ca3c652618411c67d493b263343d5aece
-  SGSStaggeredFlowLayout: a5c8fe0db07cbd440a6c12118633ed015622123a
-  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
-  TMCache: ea1c509badaf9a1245422aabf3c975b3277ab138
-  TUSafariActivity: afff9b1d2eacf7cbace752c5f2bf56db852714de
-  UIImage-Categories: 99245612a4725173db4f0a9ed8ba9dbe2a1e0b4f
+CHECKOUT OPTIONS:
+  SGSStaggeredFlowLayout:
+    :commit: e7c399e96f4e1a7a1b6cfba30a13058972813286
+    :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
-COCOAPODS: 0.34.4
+SPEC CHECKSUMS:
+  AFNetworkActivityLogger: 26a5f90d3f89d6a8b44f4eb535e8759b8e2b2c30
+  AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
+  Appsee: 4722f18e4baffd0c16fd92fac3596b77dba17431
+  FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
+  FormatterKit: a7a0d7959085085ce0f893ba8ff740967ee63d1d
+  FRDLivelyButton: d3bc38e952611c85040bcea97b860603b2f5dcdf
+  KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
+  SGNavigationProgress: f04e3bd0058c53e1172ee020b5239f22aa9e4a0f
+  SGSStaggeredFlowLayout: 7b20a3b7ac88a0db063ce9c4ac71c5fc95e165c2
+  SVProgressHUD: 46088807596a795cbcb4affd92cf3f13b6ab3dda
+  TMCache: d51f182dfb7a29328cf5148ccad033415bb2b2e2
+  TUSafariActivity: dd346df54a8f1cbb4fd05d504c76d47225fac99e
+  UIImage-Categories: 5103b772ae91894f4d650eb696b006f4a2487ec3
+
+COCOAPODS: 0.39.0

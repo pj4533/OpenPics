@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '9.0'
 inhibit_all_warnings!
 
 pod 'AFNetworking'
@@ -13,8 +13,4 @@ pod 'Appsee', '~> 2.0.8'
 pod 'FRDLivelyButton', '~> 1.1.2'
 pod 'SGNavigationProgress'
 pod 'UIImage-Categories', '~> 0.0'
-pod 'FLAnimatedImage', '~> 1.0'
-
-target :OpenPicsReveal do
-      pod 'Reveal-iOS-SDK'
-end
+pod 'FLAnimatedImage', '~> 1.0.10'

@@ -98,17 +98,24 @@
             // Only use imgur photos that aren't an album
             if (![urlString containsSubstring:@"imgur.com/a/"] && ![urlString containsSubstring:@"imgur.com/gallery"]) {
                 if (domain && [domain containsSubstring:@"imgur.com"]) {
-                    if (![urlString hasSuffix:@".jpg"] && ![urlString hasSuffix:@".gif"]) {
-                        urlString = [urlString stringByAppendingString:@"l.jpg"];
-                    } else {
-                        if (![urlString hasSuffix:@"l.jpg"] && ![urlString hasSuffix:@".gif"]) {
-                            urlString = [urlString stringByReplacingOccurrencesOfString:@".jpg" withString:@"l.jpg"];
+                    if (![urlString hasSuffix:@".jpg"] && ![urlString hasSuffix:@".gif"] && ![urlString hasSuffix:@".gifv"]) {
+                        if ([self.providerName containsString:@"gif"]) {
+                            urlString = [urlString stringByAppendingString:@".gif"];
+                        } else {
+                            urlString = [urlString stringByAppendingString:@".jpg"];
                         }
                     }
+                } else if (domain && [domain containsSubstring:@"gfycat"]){
+                    urlString = [urlString stringByReplacingOccurrencesOfString:@"gfycat.com" withString:@"giant.gfycat.com"];
+                    urlString = [urlString stringByAppendingString:@".gif"];
                 }
             }
             
-            if ([urlString hasSuffix:@".jpg"] || [urlString hasSuffix:@".gif"]) {
+            if ([urlString hasSuffix:@".gifv"]) {
+                urlString = [urlString stringByReplacingOccurrencesOfString:@".gifv" withString:@".gif"];
+            }
+            
+            if ([urlString hasSuffix:@".jpg"] || [urlString hasSuffix:@".gif"] || [urlString hasSuffix:@"=GIF"]) {
                 NSString* titleString = itemDataDict[@"title"];
                 if (!titleString) {
                     titleString = @"";
