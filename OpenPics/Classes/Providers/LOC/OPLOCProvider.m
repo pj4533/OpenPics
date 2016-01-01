@@ -53,7 +53,8 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         for (NSDictionary* itemDict in resultArray) {
             NSDictionary* imageDict = itemDict[@"image"];
             if (imageDict) {
-                NSURL* imageUrl = [NSURL URLWithString:imageDict[@"full"]];
+                NSString* urlString = [NSString stringWithFormat:@"http:%@", imageDict[@"full"]];
+                NSURL* imageUrl = [NSURL URLWithString:urlString];
                 NSString* titleString = @"";
                 if (itemDict[@"title"]) {
                     titleString = itemDict[@"title"];
@@ -134,8 +135,10 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
         NSArray* collectionsArray = responseObject[@"collections"];
         NSMutableArray* retArray = @[].mutableCopy;
         for (NSDictionary* dict in collectionsArray) {
+            NSString* urlString = [NSString stringWithFormat:@"http:%@", dict[@"thumb_large"]];
+
             NSMutableDictionary* opImageDict = [@{
-                                                  @"imageUrl": [NSURL URLWithString:dict[@"thumb_large"]],
+                                                  @"imageUrl": [NSURL URLWithString:urlString],
                                                   @"title" : dict[@"title"],
                                                   @"providerType": self.providerType,
                                                   @"providerSpecific": dict,
