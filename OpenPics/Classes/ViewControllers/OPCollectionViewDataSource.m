@@ -168,7 +168,9 @@
                         onCollectionView:cv
                          withContentMode:UIViewContentModeScaleAspectFit
                           withCompletion:^{
-                              [cell setupForSingleImageLayoutAnimated:NO];
+                              if (item.providerType != OPProviderTypeRedditGeneric) {
+                                  [cell setupForSingleImageLayoutAnimated:NO];
+                              }
                           }];
     } else {
         NSLog(@"less than 250");
