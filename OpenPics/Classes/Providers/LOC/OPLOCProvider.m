@@ -187,7 +187,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
     if (providerSpecific[@"links"]) {
         NSDictionary* linksDict = providerSpecific[@"links"];
         if (linksDict[@"resource"]) {
-            NSString* resourceUrlString = [NSString stringWithFormat:@"%@?fo=json",linksDict[@"resource"]];
+            NSString* resourceUrlString = [NSString stringWithFormat:@"http:%@?fo=json",linksDict[@"resource"]];
             NSURL* url = [NSURL URLWithString:resourceUrlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             
@@ -214,6 +214,7 @@ NSString * const OPProviderTypeLOC = @"com.saygoodnight.loc";
                 }
                 
                 if (![urlString isEqualToString:item.imageUrl.absoluteString]) {
+                    urlString = [NSString stringWithFormat:@"http:%@", urlString];
                     if (completion) {
                         completion([NSURL URLWithString:urlString],item);
                     }
