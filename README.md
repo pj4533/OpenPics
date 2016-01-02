@@ -44,10 +44,13 @@ Popular images (recently favorited) are stored using a flexible backend based on
 
 ## Future
 
-I have stopped and started on this project several times over the past few years.  The bulk of the code was written during iOS6 timeframe.  I have a swift port I toy with [here](https://github.com/pj4533/OpenPicsSwift), but as the blogposts show, I haven't got far.  Ideally a future version of OpenPics would:
+I have stopped and started on this project several times over the past few years.  The bulk of the code was written during iOS6 timeframe.  I have an in-progress swift port [here](https://github.com/pj4533/OpenPicsSwift), but as the blog posts show, I haven't got far!  Ideally a future version of OpenPics would:
 
-* Simplify everything, especially any code for displaying images.  Find 3rd party code for that & only focus on the specifics of getting the images.
+* Simplify everything
+* Only focus on code for getting image URLs from remote sources
+* Use 3rd party code for displaying images similar to photos app
 * Rewrite in swift
+* Add tvOS app?
 
 ## Contact
 
