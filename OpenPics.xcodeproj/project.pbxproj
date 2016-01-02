@@ -21,6 +21,7 @@
 		0A1EF48517108D6D00AB8B62 /* OPProviderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EF48417108D6D00AB8B62 /* OPProviderController.m */; };
 		0A25C00118D9251000123D04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A25C00018D9251000123D04 /* Images.xcassets */; };
 		0A26C11D1A06C41E00DE4198 /* OPRedditGenericProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26C11C1A06C41E00DE4198 /* OPRedditGenericProvider.m */; };
+		0A27B6081C3744130088F767 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27B6071C3744130088F767 /* SnapshotHelper.swift */; };
 		0A36FA8918D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */; };
 		0A36FA8A18D49EAB00BCA5C1 /* NSDictionary+DefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8618D49EAB00BCA5C1 /* NSDictionary+DefObject.m */; };
 		0A36FA8B18D49EAB00BCA5C1 /* OPEuropeanaProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A36FA8818D49EAB00BCA5C1 /* OPEuropeanaProvider.m */; };
@@ -36,6 +37,7 @@
 		0A49A40E195A3715007E6D5A /* OPHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A49A40D195A3715007E6D5A /* OPHTTPRequestOperation.m */; };
 		0A4A0CD318DA8CAD0002E8E8 /* OPImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A0CD218DA8CAD0002E8E8 /* OPImageManager.m */; };
 		0A4D3838195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D3837195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m */; };
+		0A56BD391C37437800D7513A /* OpenPicsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56BD381C37437800D7513A /* OpenPicsUITests.swift */; };
 		0A609EBA171072BD0084735B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EB9171072BD0084735B /* UIKit.framework */; };
 		0A609EBC171072BD0084735B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBB171072BD0084735B /* Foundation.framework */; };
 		0A609EBE171072BD0084735B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A609EBD171072BD0084735B /* CoreGraphics.framework */; };
@@ -78,6 +80,16 @@
 		396F3F854DE14ED09163A40D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE70FF37354750A3E9054B /* libPods.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0A56BD3B1C37437800D7513A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A609EAE171072BD0084735B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A609EB5171072BD0084735B;
+			remoteInfo = OpenPics;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0A05EF131745A79000814F0B /* OPBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPBackend.h; sourceTree = "<group>"; };
 		0A05EF141745A79000814F0B /* OPBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPBackend.m; sourceTree = "<group>"; };
@@ -105,6 +117,7 @@
 		0A25C00018D9251000123D04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A26C11B1A06C41E00DE4198 /* OPRedditGenericProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditGenericProvider.h; sourceTree = "<group>"; };
 		0A26C11C1A06C41E00DE4198 /* OPRedditGenericProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditGenericProvider.m; sourceTree = "<group>"; };
+		0A27B6071C3744130088F767 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		0A36FA8318D49EAB00BCA5C1 /* AFEuropeanaSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEuropeanaSessionManager.h; sourceTree = "<group>"; };
 		0A36FA8418D49EAB00BCA5C1 /* AFEuropeanaSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEuropeanaSessionManager.m; sourceTree = "<group>"; };
 		0A36FA8518D49EAB00BCA5C1 /* NSDictionary+DefObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DefObject.h"; sourceTree = "<group>"; };
@@ -135,6 +148,9 @@
 		0A4ADA27173B284000F08A86 /* OPAppTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPAppTokens.h; sourceTree = "<group>"; };
 		0A4D3836195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPRedditTheWayWeWereProvider.h; sourceTree = "<group>"; };
 		0A4D3837195BB4CA00DA427A /* OPRedditTheWayWeWereProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPRedditTheWayWeWereProvider.m; sourceTree = "<group>"; };
+		0A56BD361C37437800D7513A /* OpenPicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenPicsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A56BD381C37437800D7513A /* OpenPicsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPicsUITests.swift; sourceTree = "<group>"; };
+		0A56BD3A1C37437800D7513A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A609EB6171072BD0084735B /* OpenPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A609EB9171072BD0084735B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A609EBB171072BD0084735B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -210,6 +226,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A56BD331C37437800D7513A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB3171072BD0084735B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,10 +449,21 @@
 			path = TheWayWeWere;
 			sourceTree = "<group>";
 		};
+		0A56BD371C37437800D7513A /* OpenPicsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0A27B6071C3744130088F767 /* SnapshotHelper.swift */,
+				0A56BD381C37437800D7513A /* OpenPicsUITests.swift */,
+				0A56BD3A1C37437800D7513A /* Info.plist */,
+			);
+			path = OpenPicsUITests;
+			sourceTree = "<group>";
+		};
 		0A609EAD171072BD0084735B = {
 			isa = PBXGroup;
 			children = (
 				0A609EBF171072BD0084735B /* OpenPics */,
+				0A56BD371C37437800D7513A /* OpenPicsUITests */,
 				0A609EB8171072BD0084735B /* Frameworks */,
 				0A609EB7171072BD0084735B /* Products */,
 				D97341FB1DB6A4DF0CA6F235 /* Pods */,
@@ -440,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				0A609EB6171072BD0084735B /* OpenPics.app */,
+				0A56BD361C37437800D7513A /* OpenPicsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -613,6 +648,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A56BD351C37437800D7513A /* OpenPicsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A56BD3F1C37437800D7513A /* Build configuration list for PBXNativeTarget "OpenPicsUITests" */;
+			buildPhases = (
+				0A56BD321C37437800D7513A /* Sources */,
+				0A56BD331C37437800D7513A /* Frameworks */,
+				0A56BD341C37437800D7513A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A56BD3C1C37437800D7513A /* PBXTargetDependency */,
+			);
+			name = OpenPicsUITests;
+			productName = OpenPicsUITests;
+			productReference = 0A56BD361C37437800D7513A /* OpenPicsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		0A609EB5171072BD0084735B /* OpenPics */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A609ED9171072BE0084735B /* Build configuration list for PBXNativeTarget "OpenPics" */;
@@ -641,9 +694,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OP;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Say Goodnight Software";
 				TargetAttributes = {
+					0A56BD351C37437800D7513A = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 0A609EB5171072BD0084735B;
+					};
 					0A609EB5171072BD0084735B = {
 						DevelopmentTeam = U3FNBSFU75;
 						SystemCapabilities = {
@@ -667,11 +725,19 @@
 			projectRoot = "";
 			targets = (
 				0A609EB5171072BD0084735B /* OpenPics */,
+				0A56BD351C37437800D7513A /* OpenPicsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A56BD341C37437800D7513A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB4171072BD0084735B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -745,6 +811,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A56BD321C37437800D7513A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A56BD391C37437800D7513A /* OpenPicsUITests.swift in Sources */,
+				0A27B6081C3744130088F767 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A609EB2171072BD0084735B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -802,6 +877,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0A56BD3C1C37437800D7513A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A609EB5171072BD0084735B /* OpenPics */;
+			targetProxy = 0A56BD3B1C37437800D7513A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		0A609EC2171072BD0084735B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -814,6 +897,67 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A56BD3D1C37437800D7513A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = OpenPicsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saygoodnight.OpenPicsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "26c9ace6-5bc9-4bda-92f6-8821b34a0eee";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = OpenPics;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		0A56BD3E1C37437800D7513A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = OpenPicsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saygoodnight.OpenPicsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "26c9ace6-5bc9-4bda-92f6-8821b34a0eee";
+				TEST_TARGET_NAME = OpenPics;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		0A609ED7171072BE0084735B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -939,6 +1083,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A56BD3F1C37437800D7513A /* Build configuration list for PBXNativeTarget "OpenPicsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A56BD3D1C37437800D7513A /* Debug */,
+				0A56BD3E1C37437800D7513A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0A609EB1171072BD0084735B /* Build configuration list for PBXProject "OpenPics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -3,6 +3,11 @@ fastlane_version "1.49.0"
 default_platform :ios
 
 
+desc "Update Screenshots"
+lane :screens do |options|
+  snapshot
+end
+
 desc "Submit a new Release Candidate Build to Apple TestFlight"
 desc "This will also make sure the profile is up to date"
 lane :appstore do |options|
