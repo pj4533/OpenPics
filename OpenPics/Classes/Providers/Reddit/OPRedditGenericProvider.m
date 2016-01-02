@@ -44,7 +44,12 @@ NSString * const OPProviderTypeRedditGeneric = @"com.saygoodnight.redditgeneric"
                     failure:failure];
 }
 
+- (void) fullUpRezItem:(OPItem *)item withCompletion:(void (^)(NSURL *, OPItem *))completion {
+    NSLog(@"HERE FULL");
+}
+
 - (void) upRezItem:(OPItem *) item withCompletion:(void (^)(NSURL *uprezImageUrl, OPItem* item))completion {
+    NSLog(@"HERE");
 }
 
 @end

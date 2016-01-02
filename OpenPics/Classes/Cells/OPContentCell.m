@@ -83,7 +83,11 @@
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber* uprezMode = [currentDefaults objectForKey:@"uprezMode"];
     
+    // this seems unnecessary cause the cell has a provider on it?  :notsureif: #smelly
     OPProvider* thisItemProvider = [[OPProviderController shared] getProviderWithType:self.item.providerType];
+    if (!thisItemProvider) {
+        thisItemProvider = self.provider;
+    }
     if (uprezMode && uprezMode.boolValue) {
         // this is kind of weird cause in some cases the item is modified by the provider on uprezing
         // I should probably somehow change the main reference to the object so we don't have different

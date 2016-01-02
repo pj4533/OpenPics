@@ -127,6 +127,10 @@
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
+
+    OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
+    [dataSource cancelAllExceptItem:cell.item];
+    
     [cell setupForSingleImageLayoutAnimated:YES];
 }
 

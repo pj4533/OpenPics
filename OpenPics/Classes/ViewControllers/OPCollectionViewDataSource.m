@@ -210,4 +210,8 @@
     [_imageManager cancelImageOperationAtIndexPath:indexPath];
 }
 
+- (void) cancelAllExceptItem:(OPItem*)item {
+    [_imageManager cancelAllExceptItem:item];
+}
+
 @end

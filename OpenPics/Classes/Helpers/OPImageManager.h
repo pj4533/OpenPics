@@ -37,6 +37,7 @@
             withCompletion:(void (^)())completion;
 
 - (void) cancelImageOperationAtIndexPath:(NSIndexPath*)indexPath;
+- (void) cancelAllExceptItem:(OPItem*)item;
 
 @property (strong, nonatomic) id delegate;
 

@@ -34,6 +34,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface OPImageManager () {
+    AFURLSessionManager* _dataManager;
 }
 
 @end
@@ -43,6 +44,13 @@
 -(id) init {
     self = [super init];
     if (self) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _dataManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        AFHTTPResponseSerializer* responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+        responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"image/gif"];
+        [_dataManager setResponseSerializer:responseSerializer];
+
     }
     return self;
 }
@@ -64,6 +72,16 @@
     for (OPHTTPRequestOperation* operation in operations) {
         if ([operation.indexPath isEqual:indexPath]) {
             [operation cancel];
+        }
+    }
+}
+
+// The idea is that when you choose an image, it cancels everything but the one you are currently viewing.
+- (void) cancelAllExceptItem:(OPItem*)item {
+    for (NSURLSessionDataTask* task in _dataManager.dataTasks) {
+        if (![task.currentRequest.URL.absoluteString isEqualToString:item.imageUrl.absoluteString]) {
+            [task cancel];
+        } else {
         }
     }
 }
@@ -108,19 +126,9 @@
                       withIndexPath:(NSIndexPath*) indexPath
                         withSuccess:(void (^)(NSData* data))success
                         withFailure:(void (^)(void))failure {
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    AFHTTPResponseSerializer* responseSerializer = [[AFHTTPResponseSerializer alloc] init];
-    responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"image/gif"];
-    [manager setResponseSerializer:responseSerializer];
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:item.imageUrl];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    NSURLSessionDataTask *dataTask = [_dataManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
-            NSLog(@"Error: %@", error);
             if (failure) {
                 failure();
             }
@@ -177,11 +185,10 @@
                 [UIView animateWithDuration:0.25 animations:^{
                     imageView.alpha = 0.0;
                 } completion:^(BOOL finished) {
-                    
-                    
                     FLAnimatedImage *animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
                     FLAnimatedImageView *animatedImageView = [[FLAnimatedImageView alloc] init];
-                    animatedImageView.contentMode = contentMode;//UIViewContentModeScaleAspectFit;
+                    animatedImageView.backgroundColor = [UIColor whiteColor];
+                    animatedImageView.contentMode = UIViewContentModeScaleAspectFit;
                     
                     animatedImageView.autoresizingMask  = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
                     
