@@ -41,7 +41,6 @@ PODS:
   - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
   - SGNavigationProgress (1.2)
-  - SGSStaggeredFlowLayout (0.0.1)
   - SVProgressHUD (1.0)
   - TMCache (1.2.0)
   - TUSafariActivity (1.0.0)
@@ -55,20 +54,10 @@ DEPENDENCIES:
   - FRDLivelyButton (~> 1.1.2)
   - KissXML
   - SGNavigationProgress
-  - SGSStaggeredFlowLayout (from `https://github.com/pj4533/SGSStaggeredFlowLayout`)
   - SVProgressHUD (~> 1.0)
   - TMCache
   - TUSafariActivity
   - UIImage-Categories (~> 0.0)
-
-EXTERNAL SOURCES:
-  SGSStaggeredFlowLayout:
-    :git: https://github.com/pj4533/SGSStaggeredFlowLayout
-
-CHECKOUT OPTIONS:
-  SGSStaggeredFlowLayout:
-    :commit: e7c399e96f4e1a7a1b6cfba30a13058972813286
-    :git: https://github.com/pj4533/SGSStaggeredFlowLayout
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 26a5f90d3f89d6a8b44f4eb535e8759b8e2b2c30
@@ -78,7 +67,6 @@ SPEC CHECKSUMS:
   FRDLivelyButton: d3bc38e952611c85040bcea97b860603b2f5dcdf
   KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
   SGNavigationProgress: f04e3bd0058c53e1172ee020b5239f22aa9e4a0f
-  SGSStaggeredFlowLayout: 7b20a3b7ac88a0db063ce9c4ac71c5fc95e165c2
   SVProgressHUD: 46088807596a795cbcb4affd92cf3f13b6ab3dda
   TMCache: d51f182dfb7a29328cf5148ccad033415bb2b2e2
   TUSafariActivity: dd346df54a8f1cbb4fd05d504c76d47225fac99e
