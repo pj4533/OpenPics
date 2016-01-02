@@ -14,6 +14,7 @@
 #import "OPImageCollectionViewController.h"
 #import "OPNavigationControllerDelegate.h"
 #import "OPSetCollectionViewDataSource.h"
+#import "OPRedditGenericProvider.h"
 
 @interface OPCollectionViewDataSource () <OPContentCellDelegate> {
     OPImageManager* _imageManager;
@@ -157,7 +158,8 @@
     cell.internalScrollView.userInteractionEnabled = NO;
     cell.delegate = self;
     
-    if ((cell.frame.size.width > 250) && ![[OPNavigationControllerDelegate shared] transitioning]) {
+    // HAAAACK
+    if ((cell.frame.size.width > 250) && (![[OPNavigationControllerDelegate shared] transitioning] || (item.providerType == OPProviderTypeRedditGeneric))) {
         
         NSLog(@"greater than 250");
         [_imageManager loadImageFromItem:item
@@ -210,8 +212,8 @@
     [_imageManager cancelImageOperationAtIndexPath:indexPath];
 }
 
-- (void) cancelAllExceptItem:(OPItem*)item {
-    [_imageManager cancelAllExceptItem:item];
+- (void) cancelAll {
+    [_imageManager cancelAllDataTasks];
 }
 
 @end

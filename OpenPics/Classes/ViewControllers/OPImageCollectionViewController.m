@@ -14,6 +14,8 @@
 #import "math.h"
 #import "OPCollectionViewDataSource.h"
 
+#import "OPRedditGenericProvider.h"
+
 @interface OPImageCollectionViewController () <UIActivityItemSource,UIScrollViewDelegate>  {
     NSString* _completedString;
     UIToolbar* _toolbar;
@@ -108,10 +110,17 @@
 }
 */
 - (void)updateUIForIndexPath:(NSIndexPath*)indexPath {
+    
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*)self.collectionView.dataSource;
     OPItem* item = [dataSource itemAtIndexPath:indexPath];
     
     if (item) {
+    
+        // HAAAAACK
+        if (item.providerType == OPProviderTypeRedditGeneric) {
+            [self.collectionView reloadItemsAtIndexPaths:@[ indexPath ]];
+        }
+
         self.navigationItem.title = item.title;
         if ([[OPBackend shared] didUserCreateItem:item]) {
             _favoriteButton.title = @"Remove Favorite";

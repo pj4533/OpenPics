@@ -76,13 +76,9 @@
     }
 }
 
-// The idea is that when you choose an image, it cancels everything but the one you are currently viewing.
-- (void) cancelAllExceptItem:(OPItem*)item {
+- (void) cancelAllDataTasks {
     for (NSURLSessionDataTask* task in _dataManager.dataTasks) {
-        if (![task.currentRequest.URL.absoluteString isEqualToString:item.imageUrl.absoluteString]) {
             [task cancel];
-        } else {
-        }
     }
 }
 
@@ -167,6 +163,7 @@
 {
     NSString* thumbnailUrlString = item.providerSpecific[@"thumbnail"];
     if (thumbnailUrlString) {
+        imageView.contentMode = contentMode;
         [imageView setImageWithURL:[NSURL URLWithString:thumbnailUrlString]];
         UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         indicator.tag = 1;

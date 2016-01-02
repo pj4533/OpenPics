@@ -129,7 +129,7 @@
     OPContentCell* cell = (OPContentCell*) [collectionView cellForItemAtIndexPath:indexPath];
 
     OPCollectionViewDataSource* dataSource = (OPCollectionViewDataSource*) self.collectionView.dataSource;
-    [dataSource cancelAllExceptItem:cell.item];
+    [dataSource cancelAll];
     
     [cell setupForSingleImageLayoutAnimated:YES];
 }
