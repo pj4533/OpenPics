@@ -120,11 +120,22 @@
                 if (!titleString) {
                     titleString = @"";
                 }
+                
+                NSMutableDictionary* mutableItemDataDict = itemDataDict.mutableCopy;
+                
+                NSDictionary* preview = itemDataDict[@"preview"];
+                if (preview) {
+                    if (preview[@"images"]) {
+                        NSArray* images = preview[@"images"];
+                        NSDictionary* image = images.firstObject;
+                        mutableItemDataDict[@"thumbnail"] = image[@"source"][@"url"];
+                    }
+                }
                 NSMutableDictionary* opImageDict = @{
                                                      @"imageUrl":[NSURL URLWithString:urlString],
                                                      @"title" : titleString,
                                                      @"providerType": self.providerType,
-                                                     @"providerSpecific": itemDataDict,
+                                                     @"providerSpecific": mutableItemDataDict,
                                                      }.mutableCopy;
                 
                 OPItem* item = [[OPItem alloc] initWithDictionary:opImageDict];
