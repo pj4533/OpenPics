@@ -22,6 +22,9 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Crashlytics (3.4.1):
+    - Fabric (~> 1.6.0)
+  - Fabric (1.6.1)
   - FLAnimatedImage (1.0.10)
   - FormatterKit (1.1.2):
     - FormatterKit/AddressFormatter (= 1.1.2)
@@ -49,6 +52,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
+  - Crashlytics
+  - Fabric
   - FLAnimatedImage (~> 1.0.10)
   - FormatterKit (~> 1.1.1)
   - FRDLivelyButton (~> 1.1.2)
@@ -62,6 +67,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 26a5f90d3f89d6a8b44f4eb535e8759b8e2b2c30
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
   FormatterKit: a7a0d7959085085ce0f893ba8ff740967ee63d1d
   FRDLivelyButton: d3bc38e952611c85040bcea97b860603b2f5dcdf

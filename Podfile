@@ -12,3 +12,6 @@ pod 'FRDLivelyButton', '~> 1.1.2'
 pod 'SGNavigationProgress'
 pod 'UIImage-Categories', '~> 0.0'
 pod 'FLAnimatedImage', '~> 1.0.10'
+
+pod 'Fabric'
+pod 'Crashlytics'

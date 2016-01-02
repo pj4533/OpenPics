@@ -672,6 +672,7 @@
 				0A609EB4171072BD0084735B /* Resources */,
 				811ED3184DA5491EA4541985 /* Copy Pods Resources */,
 				A542C4F3A76EC6123447C76A /* Embed Pods Frameworks */,
+				0AF040FB1C38392800BC89B2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -759,7 +760,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\n";
+			shellScript = "touch OpenPics/Classes/Providers/OPProviderTokens.h\ntouch OpenPics/OPAppTokens.h\ntouch OpenPics/Classes/Backend/OPBackendTokens.h\ntouch fabric.sh\nchmod +x fabric.sh\n";
+		};
+		0AF040FB1C38392800BC89B2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./fabric.sh ${PODS_ROOT}";
 		};
 		811ED3184DA5491EA4541985 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
