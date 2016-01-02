@@ -30,6 +30,9 @@
 #import "UIImage+Resize.h"
 #import "FLAnimatedImage.h"
 
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
+
 @interface OPImageManager () {
 }
 
@@ -105,26 +108,32 @@
                       withIndexPath:(NSIndexPath*) indexPath
                         withSuccess:(void (^)(NSData* data))success
                         withFailure:(void (^)(void))failure {
-    // if not found in cache, create request to download image
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:item.imageUrl];
-    OPHTTPRequestOperation* operation = [[OPHTTPRequestOperation alloc] initWithRequest:request];
-    operation.indexPath = indexPath;
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
-        if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
-            if (success) {
-                success(responseObject);
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (!operation.isCancelled) {
-            NSLog(@"error getting data: %@", operation.request.URL);
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    AFHTTPResponseSerializer* responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+    responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"image/gif"];
+    [manager setResponseSerializer:responseSerializer];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:item.imageUrl];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
             if (failure) {
                 failure();
             }
+        } else {
+            // if this item url is equal to the request one - continue (avoids flashyness on fast scrolling)
+            if ([item.imageUrl.absoluteString isEqualToString:request.URL.absoluteString]) {
+                if (success) {
+                    success(responseObject);
+                }
+            }
         }
     }];
-    [[[self class] imageRequestOperationQueue] addOperation:operation];
+    [dataTask resume];
 }
 
 
@@ -148,9 +157,19 @@
                    withContentMode:(UIViewContentMode)contentMode
                     withCompletion:(void (^)())completion
 {
+    NSString* thumbnailUrlString = item.providerSpecific[@"thumbnail"];
+    if (thumbnailUrlString) {
+        [imageView setImageWithURL:[NSURL URLWithString:thumbnailUrlString]];
+        UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        indicator.tag = 1;
+        [indicator startAnimating];
+        [imageView addSubview:indicator];
+    }
+    
     [self getDataWithRequestForItem:item withIndexPath:indexPath withSuccess:^(NSData *data) {
         // if this cell is currently visible, continue drawing - this is for when scrolling fast (avoids flashyness)
         if ([self isCellVisibleAtIndexPath:indexPath forCollectionView:cv]) {
+
             // then dispatch back to the main thread to set the image
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -163,9 +182,9 @@
                     FLAnimatedImage *animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
                     FLAnimatedImageView *animatedImageView = [[FLAnimatedImageView alloc] init];
                     animatedImageView.contentMode = contentMode;//UIViewContentModeScaleAspectFit;
-
+                    
                     animatedImageView.autoresizingMask  = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
+                    
                     animatedImageView.animatedImage = animatedImage;
                     animatedImageView.frame = imageView.frame;
                     [imageView addSubview:animatedImageView];
