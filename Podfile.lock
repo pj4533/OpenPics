@@ -1,0 +1,13 @@
+PODS:
+  - SKPhotoBrowser (1.0.1)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - SKPhotoBrowser
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  SKPhotoBrowser: de1a81662d701bebae25647bcdf5d377c9e6f0a8
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0

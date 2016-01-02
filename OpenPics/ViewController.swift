@@ -14,7 +14,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let provider = PopularProvider()
+        provider.getItemsWithQuery("derp") { (data, response, error) -> Void in
+            
+            print("OK FINISHED")
+        }
     }
 
     override func didReceiveMemoryWarning() {
