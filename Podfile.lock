@@ -22,7 +22,6 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Appsee (2.0.8)
   - FLAnimatedImage (1.0.10)
   - FormatterKit (1.1.2):
     - FormatterKit/AddressFormatter (= 1.1.2)
@@ -51,7 +50,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
-  - Appsee (~> 2.0.8)
   - FLAnimatedImage (~> 1.0.10)
   - FormatterKit (~> 1.1.1)
   - FRDLivelyButton (~> 1.1.2)
@@ -75,7 +73,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 26a5f90d3f89d6a8b44f4eb535e8759b8e2b2c30
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
-  Appsee: 4722f18e4baffd0c16fd92fac3596b77dba17431
   FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
   FormatterKit: a7a0d7959085085ce0f893ba8ff740967ee63d1d
   FRDLivelyButton: d3bc38e952611c85040bcea97b860603b2f5dcdf
