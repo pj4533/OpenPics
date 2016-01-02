@@ -42,62 +42,6 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 Popular images (recently favorited) are stored using a flexible backend based on the OPBackend class.  The current implementation uses a simple Ruby Sinatra app running on Heroku with a PostgresSQL store.  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
 
-## Sharing
-
-Sharing (Twitter & Facebook) uses UIActivitys from iOS6, also in iOS8 supports all sharing extensions.
-
-## Dependencies
-
-* AFNetworking 2.x
-* CocoaPods
-
-## How To Run
-
-1. Clone the repo:    git clone git@github.com:pj4533/OpenPics.git
-2. Init CocoaPods:    pod install
-3. Open OpenPics.xcworkspace
-4. Run in simulator:  CMD-R
-5. Search for sweet old timey pics.
-
-## Contribute
-
-If you wish to contribute, send some pull requests!  I'll update the app in the App Store whenever we get awesome pull requests merged in.
-
-## Versions
-
-* 2.5.5
-	* No major changes, finally updating to new device types etc.
-	* Targeting iOS9
-* 2.5.0
-	* Added support for sets of images for easier browsing 
-	* Added /r/TheWayWeWere image source
-	* Added Cambridge Historical Society Flickr
-	* More memory fixes: weak vs strong FTW, durrrrr
-* 2.2.3
-	* Fixed HUGE memory leak
-	* Fixed orientation issues
-	* Flickr requires SSL
-* 2.2.2
-	* Fixed memory issues on Reddit provider
-* 2.2.1
-	* Fixed buttery scrolling
-	* Fixed some memory issues
-* 2.2
-	* Added Reddit providers
-	* Added BPL provider
-	* Crash fixes
-* 2.1
-	* Redesigned for more iOS7 look
-	* Using layout-to-layout collectionview transitions
-	* Preparing to add new iOS8 features after WWDC
-	* Removed SGSStaggeredLayout for animation debugging...  :unamused:
-
-* 2.0
-	* Support for iOS7
-
-* 1.x
-	* Original version(s)
-
 ## Contact
 
 PJ Gray
