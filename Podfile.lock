@@ -41,7 +41,7 @@ PODS:
   - FRDLivelyButton (1.1.2)
   - KissXML (5.0)
   - SGNavigationProgress (1.2)
-  - SVProgressHUD (1.0)
+  - SVProgressHUD (2.0-beta)
   - TMCache (1.2.0)
   - TUSafariActivity (1.0.0)
   - UIImage-Categories (0.0.1)
@@ -54,7 +54,7 @@ DEPENDENCIES:
   - FRDLivelyButton (~> 1.1.2)
   - KissXML
   - SGNavigationProgress
-  - SVProgressHUD (~> 1.0)
+  - SVProgressHUD (~> 2.0-beta)
   - TMCache
   - TUSafariActivity
   - UIImage-Categories (~> 0.0)
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   FRDLivelyButton: d3bc38e952611c85040bcea97b860603b2f5dcdf
   KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
   SGNavigationProgress: f04e3bd0058c53e1172ee020b5239f22aa9e4a0f
-  SVProgressHUD: 46088807596a795cbcb4affd92cf3f13b6ab3dda
+  SVProgressHUD: c83337f10ed32d701c423d519059a249973c8662
   TMCache: d51f182dfb7a29328cf5148ccad033415bb2b2e2
   TUSafariActivity: dd346df54a8f1cbb4fd05d504c76d47225fac99e
   UIImage-Categories: 5103b772ae91894f4d650eb696b006f4a2487ec3

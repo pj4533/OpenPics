@@ -3,7 +3,7 @@ inhibit_all_warnings!
 
 pod 'AFNetworking'
 pod 'FormatterKit','~> 1.1.1'
-pod 'SVProgressHUD', '~> 1.0'
+pod 'SVProgressHUD', '~> 2.0-beta'
 pod 'TMCache'
 pod 'TUSafariActivity'
 pod 'KissXML'
