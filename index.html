@@ -1,36 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Openpics by pj4533</title>
+    <meta name="description" content="Openpics : An open source iOS application for viewing images from multiple remote sources.">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Openpics</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Openpics</h1>
-        <p class="header">An open source iOS application for viewing images from multiple remote sources.</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/pj4533/OpenPics/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/pj4533/OpenPics/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/pj4533/OpenPics">View On GitHub</a></li>
-        </ul>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/pj4533/OpenPics">View on GitHub</a>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/pj4533">pj4533</a></p>
+          <h1 id="project_title">Openpics</h1>
+          <h2 id="project_tagline">An open source iOS application for viewing images from multiple remote sources.</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/pj4533/OpenPics/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/pj4533/OpenPics/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      </header>
-      <section>
-        <h1>OpenPics</h1>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="openpics" class="anchor" href="#openpics" aria-hidden="true"><span class="octicon octicon-link"></span></a>OpenPics</h1>
 
 <p>An open source iOS application for viewing images from multiple remote sources. Get it on the <a href="https://itunes.apple.com/us/app/openpics/id633423505?ls=1&amp;mt=8">app store</a>.</p>
 
@@ -38,13 +40,17 @@
 
 <p><img src="Screenshots/openpics_map.png" alt="Screenshot" title="Screenshot"></p>
 
-<h2>Goals</h2>
+<h2>
+<a id="goals" class="anchor" href="#goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals</h2>
 
 <ul>
 <li>Always use the latest iOS technology.  (Target only latest OS version)</li>
 <li>Keep all image source knowledge inside corresponding 'Provider' class</li>
 <li>Make it flippin sweet with awesome animations and stuff.</li>
-</ul><h2>Providers</h2>
+</ul>
+
+<h2>
+<a id="providers" class="anchor" href="#providers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Providers</h2>
 
 <p>Each remote image source gets a OPProvider class.  Providers can be easily added provided they conform to the OPProvider base class.  Currently supported providers:</p>
 
@@ -54,30 +60,39 @@
 <li>California Digital Library - XTF (<a href="http://www.cdlib.org/services/publishing/tools/xtf/">http://www.cdlib.org/services/publishing/tools/xtf/</a>)</li>
 <li>Digital Public Library of America (<a href="https://github.com/dpla/platform">https://github.com/dpla/platform</a>)</li>
 <li>Europeana (<a href="http://www.europeana.eu/portal/api-introduction.html">http://www.europeana.eu/portal/api-introduction.html</a>)</li>
-</ul><p>For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:</p>
+</ul>
 
-<div class="highlight"><pre><span class="cp">#define kOPPROVIDERTOKEN_NYPL @"&lt;your token here&gt;"</span>
-</pre></div>
+<p>For APIs like NYPL, which require a token, it should go into the file OPProviderTokens.h as a define.   For example:</p>
+
+<div class="highlight highlight-source-objc"><pre>#<span class="pl-k">define</span> <span class="pl-en">kOPPROVIDERTOKEN_NYPL</span> <span class="pl-s"><span class="pl-pds">@"</span>&lt;your token here&gt;<span class="pl-pds">"</span></span></pre></div>
 
 <p>This header file is in the .gitignore, so as to not add tokens to the GitHub repository.  So either only use non-token providers (like Library of Congress), or create the above file in your local repository.   If anyone has a better way of managing this, I am all ears!</p>
 
-<h2>Sharing</h2>
+<h2>
+<a id="sharing" class="anchor" href="#sharing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sharing</h2>
 
 <p>Sharing (Tumblr, Twitter &amp; Facebook) uses UIActivitys from iOS6.  The Twitter and Facebook are the built in implementations, however the Tumblr is custom.  The tokens for Tumblr are handled the same way as Providers above.  The tokens go in the OPActivityTokens.h file as a define.  I have ifdef'd out that stuff, so you should still be able to run without Tumblr tokens.  (Tumblr just won't show up as a Activity choice)</p>
 
-<h2>Dependencies</h2>
+<h2>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h2>
 
 <ul>
 <li>AFNetworking</li>
 <li>CocoaPods</li>
 <li>Heavy use of UICollectionView (currently using unmodified UICollectionViewFlowLayout)</li>
-</ul><h2>To do</h2>
+</ul>
+
+<h2>
+<a id="to-do" class="anchor" href="#to-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>To do</h2>
 
 <ul>
 <li>Make Default screen</li>
 <li>Support showing more metadata (Date, notes, etc)</li>
 <li>Support showing information about results (current page, total pages)</li>
-</ul><h2>How To Run</h2>
+</ul>
+
+<h2>
+<a id="how-to-run" class="anchor" href="#how-to-run" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Run</h2>
 
 <ol>
 <li>Clone the repo:    git clone <a href="mailto:git@github.com">git@github.com</a>:pj4533/OpenPics.git</li>
@@ -85,15 +100,20 @@
 <li>Open OpenPics.xcworkspace</li>
 <li>Run in simulator:  CMD-R</li>
 <li>Search for sweet old timey pics.</li>
-</ol><h2>Contribute</h2>
+</ol>
+
+<h2>
+<a id="contribute" class="anchor" href="#contribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contribute</h2>
 
 <p>If you wish to contribute, send some pull requests!  I'll update the app in the App Store whenever we get awesome pull requests merged in.</p>
 
-<h2>Build Status</h2>
+<h2>
+<a id="build-status" class="anchor" href="#build-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build Status</h2>
 
 <p><a href="https://travis-ci.org/pj4533/OpenPics?branch=master"><img src="https://travis-ci.org/pj4533/OpenPics.png?branch=master" alt="Build Status"></a></p>
 
-<h2>Contact</h2>
+<h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>PJ Gray</p>
 
@@ -101,17 +121,26 @@
 <li><a href="http://github.com/pj4533">http://github.com/pj4533</a></li>
 <li><a href="http://twitter.com/pj4533">http://twitter.com/pj4533</a></li>
 <li><a href="mailto:pj@pj4533.com">pj@pj4533.com</a></li>
-</ul><h2>License</h2>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>OpenPics is available under the GPLv3 license.  You can modify it and release it, but its gotta be free.</p>
 
 <p>See the LICENSE file for more info.</p>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Openpics maintained by <a href="https://github.com/pj4533">pj4533</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    
+
   </body>
 </html>
