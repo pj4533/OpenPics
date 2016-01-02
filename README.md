@@ -5,12 +5,6 @@ An open source iOS application for viewing images from multiple remote sources. 
 
 ![Screenshot](openpics.png "Screenshot")
 
-## Goals
-
-* Always attempt to use the latest iOS technology.
-* Keep all image source knowledge inside corresponding 'Provider' class
-* Make it flippin sweet with awesome animations and stuff.
-
 ## Providers
 
 Each remote image source gets a OPProvider class.  Providers can be easily added provided they conform to the OPProvider base class.  Currently supported providers:
