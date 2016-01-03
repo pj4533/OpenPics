@@ -1,15 +1,27 @@
 PODS:
+  - Alamofire (3.1.4)
   - HanekeSwift (0.10.1)
+  - Moya (5.3.0):
+    - Moya/Core (= 5.3.0)
+  - Moya/Core (5.3.0):
+    - Alamofire (~> 3.0)
+    - Result (~> 1.0)
+  - Result (1.0.1)
   - SKPhotoBrowser (1.0.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.0)
   - HanekeSwift
+  - Moya
   - SKPhotoBrowser
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  Moya: dfd9310f3dfb198927976dad445ead477ca6c2a3
+  Result: caef80340451e1f07492fa1e89117f83613bce24
   SKPhotoBrowser: de1a81662d701bebae25647bcdf5d377c9e6f0a8
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

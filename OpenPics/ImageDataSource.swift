@@ -14,11 +14,11 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
     // why does this have to be an NSArray vs. a [Image]() which is more stongly typed?
     var images: NSArray?
     
-    func loadImagesWithProvider(provider: Provider, completionHandler: (NSError?) -> Void) {
-        provider.getImagesWithQuery("", pageNumber: 0) { (images, canLoadMore, error) -> Void in
+    func loadImagesWithProvider(provider: ImageProvider, completionHandler: () -> Void) {
+        provider.getImagesWithQuery("", pageNumber: 0) { (images, canLoadMore) -> Void in
             self.images = images
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                completionHandler(error)
+                completionHandler()
             })
         }
     }

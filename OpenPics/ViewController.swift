@@ -20,8 +20,8 @@ class ViewController: UIViewController {
 
         self.collectionView.dataSource = self.dataSource
         
-        let provider = PopularProvider()
-        self.dataSource.loadImagesWithProvider(provider) { (error) -> Void in
+        let popularProvider = PopularProvider()
+        self.dataSource.loadImagesWithProvider(popularProvider) { () -> Void in
             self.collectionView.reloadData()
         }
         
