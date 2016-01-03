@@ -16,9 +16,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let provider = PopularProvider()
-        provider.getItemsWithQuery("derp") { (data, response, error) -> Void in
-            
-            print("OK FINISHED")
+        provider.getItemsWithQuery("", pageNumber: 0) { (items, canLoadMore, error) -> Void in
+            if let itemsArray = items {
+                let urlArray = itemsArray.valueForKey("url")
+                print("URLs: \(urlArray)")
+                
+            }
         }
     }
 

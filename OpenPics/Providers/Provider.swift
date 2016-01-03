@@ -15,5 +15,5 @@ protocol Provider {
     var providerName: String { get }
     var providerShortName: String { get }
     
-    func getItemsWithQuery(query: String, completionHandler: (NSData?, NSURLResponse?, NSError?) -> Void)
+    func getItemsWithQuery(query: String, pageNumber: Int, completionHandler: (NSArray?, Bool?, NSError?) -> Void)
 }
