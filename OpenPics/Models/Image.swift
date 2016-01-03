@@ -12,11 +12,13 @@ import UIKit
 // i can then use things like valueForKey on properties.
 class Image: NSObject {
     
-    var url: NSURL?
+    var url: NSURL
     
     init(jsonDictionary: NSDictionary) {
-        if let urlString = jsonDictionary["imageUrl"] as? String {
-            self.url = NSURL(string: urlString)
-        }
+        
+        // this unwrapping seems strange   :notsureif:
+        // will crash is not a string?
+        let urlString = jsonDictionary["imageUrl"] as! String
+        self.url = NSURL(string: urlString)!
     }
 }

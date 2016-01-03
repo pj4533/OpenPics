@@ -16,7 +16,7 @@ class PopularProvider: Provider {
     
     // - should the parameters on the completion handler be optional?
     // - how can i specify the name of the variable for the paramters on completion handler?
-    func getItemsWithQuery(query: String, pageNumber: Int, completionHandler: (NSArray?, Bool?, NSError?) -> Void) {
+    func getImagesWithQuery(query: String, pageNumber: Int, completionHandler: (NSArray?, Bool?, NSError?) -> Void) {
         
         let urlPath = "http://openpics.herokuapp.com/images"
         

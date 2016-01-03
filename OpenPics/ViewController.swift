@@ -12,17 +12,19 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let dataSource = ImageDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        self.collectionView.dataSource = self.dataSource
+        
         let provider = PopularProvider()
-        provider.getItemsWithQuery("", pageNumber: 0) { (items, canLoadMore, error) -> Void in
-            if let itemsArray = items {
-                let urlArray = itemsArray.valueForKey("url")
-                print("URLs: \(urlArray)")
-                
-            }
+        self.dataSource.loadImagesWithProvider(provider) { (error) -> Void in
+            self.collectionView.reloadData()
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

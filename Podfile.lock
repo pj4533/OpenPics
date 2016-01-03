@@ -1,12 +1,15 @@
 PODS:
+  - HanekeSwift (0.10.1)
   - SKPhotoBrowser (1.0.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - HanekeSwift
   - SKPhotoBrowser
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   SKPhotoBrowser: de1a81662d701bebae25647bcdf5d377c9e6f0a8
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

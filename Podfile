@@ -3,3 +3,4 @@ use_frameworks!
 
 pod 'SKPhotoBrowser'
 pod 'SwiftyJSON'
+pod 'HanekeSwift'
