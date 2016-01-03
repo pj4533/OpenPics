@@ -6,19 +6,26 @@
 //  Copyright © 2016 Say Goodnight Software. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import SwiftyJSON
 
-// Not necessary to derive from NSObject here, but I like to cause
-// i can then use things like valueForKey on properties.
-class Image: NSObject {
+// Largely copied from the Artsy model setup: https://github.com/artsy/eidolon/blob/cb31168fa29dcc7815fd4a2e30e7c000bd1820ce/Kiosk/App/Models/Artwork.swift
+final class Image: NSObject, JSONAbleType {
     
-    var url: NSURL
+    let url: String
     
-    init(jsonDictionary: NSDictionary) {
+    init(url: String) {
+        self.url = url
+    }
+    
+    static func fromJSON(json:[String: AnyObject]) -> Image {
+        let json = JSON(json)
+        let url = json["imageUrl"].stringValue
         
-        // this unwrapping seems strange   :notsureif:
-        // will crash is not a string?
-        let urlString = jsonDictionary["imageUrl"] as! String
-        self.url = NSURL(string: urlString)!
+        return Image(url: url)
+    }
+    
+    func imageURL() -> NSURL? {
+        return NSURL(string: self.url)
     }
 }

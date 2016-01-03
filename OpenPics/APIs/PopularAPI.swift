@@ -67,9 +67,10 @@ public class PopularProvider: MoyaProvider<PopularAPI>, ImageProvider {
                 let json = JSON(data: response.data)
                 var images = [Image]()
                 for dict in json["data"].arrayValue {
-                    // I feel like this data unwrapping is wrong...?
-                    let image = Image(jsonDictionary: dict.dictionaryObject!)
-                    images.append(image)
+                    if let imageDict = dict.object as? [String: AnyObject] {
+                        let image = Image.fromJSON(imageDict)
+                        images.append(image)
+                    }
                 }
                 
                 completionHandler(images,true)

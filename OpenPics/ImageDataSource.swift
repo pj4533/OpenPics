@@ -51,7 +51,9 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
         let image = self.images![indexPath.item] as! Image
 
         cell.imageView.contentMode = .ScaleAspectFill
-        cell.imageView.hnk_setImageFromURL(image.url)
+        if let url = image.imageURL() {
+            cell.imageView.hnk_setImageFromURL(url)
+        }
         
         return cell
     }
