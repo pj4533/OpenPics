@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SKPhotoBrowser
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
         
 
         self.collectionView.dataSource = self.dataSource
+        self.collectionView.delegate = self
         
         let popularProvider = PopularProvider()
         self.dataSource.loadImagesWithProvider(popularProvider) { () -> Void in
@@ -32,6 +34,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {        
+        if let images = self.dataSource.images {
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ImageCollectionViewCell
+            let originImage = cell.imageView.image! // some image for baseImage
+            let browser = SKPhotoBrowser(originImage: originImage, photos: images, animatedFromView: cell)
+            browser.initializePageIndex(indexPath.row)
+            self.presentViewController(browser, animated: true, completion: nil)
+        }
+    }
 }
 

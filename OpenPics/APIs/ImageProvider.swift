@@ -12,5 +12,7 @@ import Moya
 protocol ImageProvider {
     var name: String { get }
     var shortName: String { get }
-    func getImagesWithQuery(query: String, pageNumber: Int, completionHandler: (NSArray?, Bool?) -> Void)
+    var providerType: String { get }
+    
+    func getImagesWithQuery(query: String, pageNumber: Int, completionHandler: ([Image], Bool?) -> Void)
 }
