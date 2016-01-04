@@ -9,7 +9,7 @@ PODS:
     - Alamofire (~> 3.0)
     - Result (~> 1.0)
   - Result (1.0.1)
-  - SKPhotoBrowser (1.0.1)
+  - SKPhotoBrowser (1.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -26,7 +26,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SKPhotoBrowser:
-    :commit: dfc9bf29747bc4d992f9fc3ced8941284cef7f78
+    :commit: 8a700d0b0cb670ac75f253943ba6b241bbdb884d
     :git: git@github.com:pj4533/SKPhotoBrowser.git
 
 SPEC CHECKSUMS:
@@ -35,7 +35,7 @@ SPEC CHECKSUMS:
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   Moya: dfd9310f3dfb198927976dad445ead477ca6c2a3
   Result: caef80340451e1f07492fa1e89117f83613bce24
-  SKPhotoBrowser: de1a81662d701bebae25647bcdf5d377c9e6f0a8
+  SKPhotoBrowser: 6a0520158db0cff7913e899975706cbe561ec9e5
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
