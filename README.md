@@ -36,16 +36,6 @@ This header file is in the .gitignore, so as to not add tokens to the GitHub rep
 
 Popular images (recently favorited) are stored using a flexible backend based on the OPBackend class.  The current implementation uses a simple Ruby Sinatra app running on Heroku with a PostgresSQL store.  Keeping in the spirit of this being an Open Source project, you can add your own backend using any system that conforms to the OPBackend base class.   Similar to OPProvider and OPActivities, there is an OPBackendTokens.h file in the .gitignore, to hold private tokens for backend services.
 
-## Future
-
-I have stopped and started on this project several times over the past few years.  The bulk of the code was written during iOS6 timeframe.  I have an in-progress swift port [here](https://github.com/pj4533/OpenPicsSwift), but as the blog posts show, I haven't got far!  Ideally a future version of OpenPics would:
-
-* Simplify everything
-* Only focus on code for getting image URLs from remote sources
-* Use 3rd party code for displaying images similar to photos app
-* Rewrite in swift
-* Add tvOS app?
-
 ## Contact
 
 PJ Gray
