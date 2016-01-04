@@ -71,7 +71,7 @@ public class PopularProvider: MoyaProvider<PopularAPI>, ImageProvider {
 
                 let json = JSON(data: response.data)
                 var images = [Image]()
-                
+                                
                 // what if json["data"] is nil?   does SwiftyJSON handle that?
                 for dict in json["data"].arrayValue {
                     if let imageDict = dict.object as? [String: AnyObject] {
@@ -90,6 +90,10 @@ public class PopularProvider: MoyaProvider<PopularAPI>, ImageProvider {
             }
         }
     }
+    
+    func getHiRezURLForImage(image: Image, completionHandler: (NSURL?) -> Void) {
+    }
+
 
     override init(endpointClosure: EndpointClosure = MoyaProvider.DefaultEndpointMapping,
         requestClosure: RequestClosure = MoyaProvider.DefaultRequestMapping,
