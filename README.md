@@ -38,5 +38,3 @@ PJ Gray
 OpenPics is available under the GPLv3 license.  You can modify it and release it, but its gotta be free.
 
 See the LICENSE file for more info.
-
-![OSI](OpenPics/Images/OSI/OSI-logo-100x117.png "OSI")
