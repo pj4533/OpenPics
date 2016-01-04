@@ -1,17 +1,13 @@
 platform :ios, '9.0'
-inhibit_all_warnings!
+use_frameworks!
 
-pod 'AFNetworking'
-pod 'FormatterKit','~> 1.1.1'
-pod 'SVProgressHUD', '~> 2.0-beta'
-pod 'TMCache'
-pod 'TUSafariActivity'
-pod 'KissXML'
-pod 'AFNetworkActivityLogger'
-pod 'FRDLivelyButton', '~> 1.1.2'
-pod 'SGNavigationProgress'
-pod 'UIImage-Categories', '~> 0.0'
-pod 'FLAnimatedImage', '~> 1.0.10'
+pod 'SKPhotoBrowser', :git => 'git@github.com:pj4533/SKPhotoBrowser.git'
+pod 'SwiftyJSON'
 
-pod 'Fabric'
-pod 'Crashlytics'
+# this is for cacheing, specifically for UIImageView on the cells
+pod 'HanekeSwift'
+
+pod 'Alamofire', '~> 3.0'
+pod 'AlamofireImage', '~> 2.0'
+
+pod 'Moya'
