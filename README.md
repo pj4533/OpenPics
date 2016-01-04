@@ -24,7 +24,7 @@ I changed the underlying networking code to use Alamofire & Moya.  Building on t
 
 ## Before Shipping
 * how does the data model transfer between versions?
-* 
+
 ## Contact
 
 PJ Gray
