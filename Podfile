@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'SKPhotoBrowser', :git => 'git@github.com:pj4533/SKPhotoBrowser.git', :branch => 'all_fixes'
+pod 'SKPhotoBrowser', '~> 1.2.1'
 pod 'SwiftyJSON'
 
 # this is for cacheing, specifically for UIImageView on the cells
