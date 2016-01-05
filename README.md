@@ -20,7 +20,10 @@ I changed the underlying networking code to use Alamofire & Moya.  Building on t
 
 ### TODO
 
+- [ ] Basic collectionview
+- [ ] Simple provider
 - [ ] Provider table view
+- [ ] Set collectionview
 - [ ] Search
 - [ ] All providers (break out to list if necessary)
 - [ ] Favoriting (local storage)
