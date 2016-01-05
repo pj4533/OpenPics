@@ -7,6 +7,7 @@ An open source iOS application for viewing images from multiple remote sources. 
 
 This is the in-progress swift rewrite. The shipped version (in all its old & busted glory) is on the [latest_shipped](https://github.com/pj4533/OpenPics/tree/latest_shipped) branch.
 
+![](openpics.gif)
 
 ## Changes
 ### Backend
