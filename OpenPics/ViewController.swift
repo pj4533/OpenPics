@@ -34,8 +34,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Dispose of any resources that can be recreated.
     }
 
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        self.collectionView.collectionViewLayout.invalidateLayout()
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            }, completion: nil)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
