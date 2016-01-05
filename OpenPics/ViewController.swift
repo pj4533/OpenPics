@@ -9,7 +9,7 @@
 import UIKit
 import SKPhotoBrowser
 
-class ViewController: UIViewController, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -34,6 +34,19 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        let side = floor((collectionView.frame.size.width / 3) - (layout.minimumInteritemSpacing * (2/3)))
+    
+        return CGSizeMake(side, side)
+    }
+    
     // MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {        
