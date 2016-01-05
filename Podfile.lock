@@ -17,16 +17,17 @@ DEPENDENCIES:
   - AlamofireImage (~> 2.0)
   - HanekeSwift
   - Moya
-  - SKPhotoBrowser (from `git@github.com:pj4533/SKPhotoBrowser.git`)
+  - SKPhotoBrowser (from `git@github.com:pj4533/SKPhotoBrowser.git`, branch `all_fixes`)
   - SwiftyJSON
 
 EXTERNAL SOURCES:
   SKPhotoBrowser:
+    :branch: all_fixes
     :git: git@github.com:pj4533/SKPhotoBrowser.git
 
 CHECKOUT OPTIONS:
   SKPhotoBrowser:
-    :commit: 8a700d0b0cb670ac75f253943ba6b241bbdb884d
+    :commit: a649735ad30800fdae99216f8db0ff7e8d9cfa43
     :git: git@github.com:pj4533/SKPhotoBrowser.git
 
 SPEC CHECKSUMS:
