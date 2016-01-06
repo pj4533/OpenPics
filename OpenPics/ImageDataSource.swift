@@ -11,11 +11,10 @@ import Haneke
 
 class ImageDataSource: NSObject, UICollectionViewDataSource {
 
-    // why does this have to be an NSArray vs. a [Image]() which is more stongly typed?
     var images: [Image]?
     
-    func loadImagesWithProvider(provider: ImageProvider, completionHandler: () -> Void) {
-        provider.getImagesWithQuery("", pageNumber: 0) { (images, canLoadMore) -> Void in
+    func loadImagesWithSource(source: Source, completionHandler: () -> Void) {
+        source.getImagesWithQuery("", pageNumber: 0) { (images, canLoadMore) -> Void in
             self.images = images
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 completionHandler()
@@ -47,8 +46,7 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
         // this should just create the cell, there is an Apple example that
         // shows more about it too.
 
-        // cause self.images is just a nsarray, we don't know the type here?
-        let image = self.images![indexPath.item] 
+        let image = self.images![indexPath.item]
 
         cell.imageView.contentMode = .ScaleAspectFill
         if let url = image.imageURL() {

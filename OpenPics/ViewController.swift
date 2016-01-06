@@ -9,9 +9,10 @@
 import UIKit
 import SKPhotoBrowser
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SourceTableViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var sourcesButton: UIBarButtonItem!
     
     let dataSource = ImageDataSource()
     
@@ -19,14 +20,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         
 
+        self.sourcesButton.title = "Source: \(CurrentSource.sourceShortName)"
+        
         self.collectionView.dataSource = self.dataSource
         self.collectionView.delegate = self
         
-        let popularProvider = PopularProvider()
-        self.dataSource.loadImagesWithProvider(popularProvider) { () -> Void in
-            self.collectionView.reloadData()
-        }
-        
+        self.updateCurrentSourceData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +38,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         coordinator.animateAlongsideTransition({ (context) -> Void in
             self.collectionView.collectionViewLayout.invalidateLayout()
             }, completion: nil)
+    }
+    
+    // MARK: Helpers
+    
+    func updateCurrentSourceData() {
+        self.dataSource.loadImagesWithSource(CurrentSource) { () -> Void in
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -60,6 +67,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             browser.initializePageIndex(indexPath.row)
             self.presentViewController(browser, animated: true, completion: nil)
         }
+    }
+    
+    // MARK: Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "sourcesTable" {
+            if let destinationNavigationController = segue.destinationViewController as? UINavigationController {                
+                if let sourceViewController = destinationNavigationController.topViewController as? SourceTableViewController {
+                    sourceViewController.delegate = self
+                }
+            }
+        }
+    }
+
+    // MARK: Sources Table View 
+    func tappedSource(source: Source) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        CurrentSource = source
+        self.sourcesButton.title = "Source: \(CurrentSource.sourceShortName)"
+        self.updateCurrentSourceData()
     }
 }
 

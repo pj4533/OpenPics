@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 // This is courtesy of Artsy: https://github.com/artsy/eidolon/blob/master/Kiosk/App/Models/JSONAble.swift
 protocol JSONAbleType {
     static func fromJSON(_: [String: AnyObject]) -> Self
+    
+    // I added this bit, cause i wanted to not have to convert the json blob twice
+    // (once on getting request, then to string:any then back to json)
+    static func fromJSON(_: SwiftyJSON.JSON) -> Self
 }

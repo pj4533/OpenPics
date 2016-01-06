@@ -17,16 +17,17 @@ The backend system is a bit over-engineered.  They are really just providers wit
 Calling this _Image_ now.
 
 ### Providers/Networking
-I changed the underlying networking code to use Alamofire & Moya.  Building on top of the Moya provider architecture, I now have APIs that include the Moya code and custom provider class that should do everything the older provider class did (naming etc).
+I changed the underlying networking code to use Alamofire & Moya.  Building on top of the Moya provider architecture, I now have APIs that include the Moya code and custom provider class that should do everything the older provider class did (naming etc).  However, in order to not confuse naming, now the OpenPics specific functionality will be in a protocol called _Source_, not Provider.
 
 ### TODO
 
 - [x] Basic collectionview
-- [x] Simple provider
-- [ ] Provider table view
+- [x] Simple source working
+- [x] Sources table view
+- [ ] Get fastlane (re)setup, use version v3.0.0
 - [ ] Set collectionview
 - [ ] Search
-- [ ] All providers (break out to list if necessary)
+- [ ] All image sources from old version (break out to list if necessary)
 - [ ] Favoriting (local storage)
 - [ ] Hi-rez downloading (**new**)
 

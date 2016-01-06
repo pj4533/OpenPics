@@ -18,25 +18,40 @@ final class Image: NSObject, JSONAbleType, SKPhotoProtocol {
     
     let url: String
     let title: String
-    let providerType: String
-    let providerSpecific: SwiftyJSON.JSON
+    let sourceType: String
+    let sourceSpecific: SwiftyJSON.JSON
     
-    init(url: String, title: String, providerSpecific: SwiftyJSON.JSON, providerType: String) {
-        self.url = url
-        self.title = title
-        self.caption = title
-        self.providerSpecific = providerSpecific
-        self.providerType = providerType
+    init(url: String?, title: String?, sourceSpecific: SwiftyJSON.JSON, sourceType: String) {
+        if let url = url {
+            self.url = url
+        } else {
+            self.url = ""
+        }
+        if let title = title {
+            self.title = title
+            self.caption = title
+        } else {
+            self.title = ""
+            self.caption = title
+        }
+        self.sourceSpecific = sourceSpecific
+        self.sourceType = sourceType
     }
     
     static func fromJSON(json:[String: AnyObject]) -> Image {
         let jsonObject = JSON(json)
-        let url = jsonObject["imageUrl"].stringValue
-        let title = jsonObject["title"].stringValue
-        let providerSpecific = jsonObject["providerSpecific"]
-        let providerType = jsonObject["providerType"].stringValue
-
-        return Image(url: url, title: title, providerSpecific: providerSpecific, providerType: providerType)
+        return Image.fromJSON(jsonObject)
+    }
+    
+    static func fromJSON(json: SwiftyJSON.JSON) -> Image {
+        let url = json["imageUrl"].stringValue
+        let title = json["title"].stringValue
+        
+        // these are throwbacks to pre-3.0 days when they were called providers
+        let sourceSpecific = json["providerSpecific"]
+        let sourceType = json["providerType"].stringValue
+        
+        return Image(url: url, title: title, sourceSpecific: sourceSpecific, sourceType: sourceType)
     }
     
     func imageURL() -> NSURL? {
@@ -52,9 +67,9 @@ final class Image: NSObject, JSONAbleType, SKPhotoProtocol {
     func loadUnderlyingImageAndNotify() {
         
         // This is a hack obviously, just until i have a more permanent solution i hardcode hirezzing to LibraryOfCongress
-        if self.providerType == "com.saygoodnight.loc" {
-            let provider = LOCProvider()
-            provider.getHiRezURLForImage(self, completionHandler: { (url) -> Void in
+        if self.sourceType == LOCSource.sourceType {
+            let source = Sources[LOCSource.sourceType]
+            source!.getHiRezURLForImage(self, completionHandler: { (url) -> Void in
                 if let hiRezURL = url {
                     Alamofire.request(.GET, hiRezURL)
                         .responseImage { response in

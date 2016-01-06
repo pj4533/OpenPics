@@ -48,19 +48,15 @@ extension PopularAPI: TargetType {
     }
 }
 
-public func url(route: TargetType) -> String {
-    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
-}
-
 // MARK: - Provider definition
 
-public class PopularProvider: MoyaProvider<PopularAPI>, ImageProvider {
+public class PopularSource: MoyaProvider<PopularAPI>, Source {
 
-    let name = "Currently Popular Images"
-    let shortName = "Currently Popular Images"
+    let sourceName = "Currently Popular Images"
+    let sourceShortName = "Currently Popular Images"
     
     // this was originally meant to work like UIActivityType's, not sure how to do this properly in swift
-    let providerType = "com.saygoodnight.Popular"
+    static let sourceType = "com.saygoodnight.Popular"
 
     // - should the parameters on the completion handler be optional?
     // - how can i specify the name of the variable for the paramters on completion handler?
@@ -72,12 +68,9 @@ public class PopularProvider: MoyaProvider<PopularAPI>, ImageProvider {
                 let json = JSON(data: response.data)
                 var images = [Image]()
                                 
-                // what if json["data"] is nil?   does SwiftyJSON handle that?
                 for dict in json["data"].arrayValue {
-                    if let imageDict = dict.object as? [String: AnyObject] {
-                        let image = Image.fromJSON(imageDict)
-                        images.append(image)
-                    }
+                    let image = Image.fromJSON(dict)
+                    images.append(image)
                 }
                 
                 completionHandler(images,true)
