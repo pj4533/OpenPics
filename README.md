@@ -30,6 +30,7 @@ I changed the underlying networking code to use Alamofire & Moya.  Building on t
 - [ ] All image sources from old version (break out to list if necessary)
 - [ ] Favoriting (local storage)
 - [ ] Hi-rez downloading (**new**)
+- [ ] NYPL allows hi rez now, verify using it.
 
 ## Before Shipping
 * how does the data model transfer between versions?
