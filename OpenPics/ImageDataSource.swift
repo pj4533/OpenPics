@@ -13,8 +13,8 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
 
     var images: [Image]?
     
-    func loadImagesWithSource(source: Source, completionHandler: () -> Void) {
-        source.getImagesWithQuery("", pageNumber: 0) { (images, canLoadMore) -> Void in
+    func loadImagesWithSource(source: Source, query: String, completionHandler: () -> Void) {
+        source.getImagesWithQuery(query, pageNumber: 0) { (images, canLoadMore) -> Void in
             self.images = images
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 completionHandler()

@@ -9,16 +9,20 @@
 import UIKit
 import SKPhotoBrowser
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SourceTableViewDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SourceTableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sourcesButton: UIBarButtonItem!
+    
+    let searchBar = UISearchBar(frame: CGRectMake(0.0,0.0,1024.0,44.0))
     
     let dataSource = ImageDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.titleView = self.searchBar
+        self.searchBar.delegate = self;
 
         self.sourcesButton.title = "Source: \(CurrentSource.sourceShortName)"
         
@@ -43,7 +47,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // MARK: Helpers
     
     func updateCurrentSourceData() {
-        self.dataSource.loadImagesWithSource(CurrentSource) { () -> Void in
+        self.dataSource.loadImagesWithSource(CurrentSource, query: self.searchBar.text!) { () -> Void in
             self.collectionView.reloadData()
         }
     }
@@ -85,6 +89,32 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.dismissViewControllerAnimated(true, completion: nil)
         CurrentSource = source
         self.sourcesButton.title = "Source: \(CurrentSource.sourceShortName)"
+        self.updateCurrentSourceData()
+    }
+    
+    // MARK: Search Bar Delegate
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.updateCurrentSourceData()
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
         self.updateCurrentSourceData()
     }
 }

@@ -62,7 +62,7 @@ public class LOCSource: MoyaProvider<LibraryOfCongressAPI>, Source {
     // - should the parameters on the completion handler be optional?
     // - how can i specify the name of the variable for the paramters on completion handler?
     func getImagesWithQuery(query: String, pageNumber: Int, completionHandler: ([Image], Bool?) -> Void) {
-        self.request(.Search(query: "",page: 1)) { result in
+        self.request(.Search(query: query,page: 1)) { result in
             switch result {
             case let .Success(response):
                 
