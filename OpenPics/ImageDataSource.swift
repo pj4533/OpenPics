@@ -21,7 +21,7 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
             })
         }
     }
-    
+        
     // MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -48,9 +48,13 @@ class ImageDataSource: NSObject, UICollectionViewDataSource {
 
         let image = self.images![indexPath.item]
 
+        cell.imageView.alpha = 0.0
         cell.imageView.contentMode = .ScaleAspectFill
         if let url = image.imageURL() {
             cell.imageView.hnk_setImageFromURL(url)
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                cell.imageView.alpha = 1.0
+            })
         }
         
         return cell

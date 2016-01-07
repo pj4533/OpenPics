@@ -47,6 +47,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // MARK: Helpers
     
     func updateCurrentSourceData() {
+        self.dataSource.images = []
+        self.collectionView.reloadData()
         self.dataSource.loadImagesWithSource(CurrentSource, query: self.searchBar.text!) { () -> Void in
             self.collectionView.reloadData()
         }
