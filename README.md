@@ -27,7 +27,7 @@ I changed the underlying networking code to use Alamofire & Moya.  Building on t
 - [ ] Get fastlane (re)setup, use version v3.0.0
 - [ ] Set collectionview
 - [x] Search
-- [ ] Paging
+- [x] Basic Paging
 - [ ] iPad layout
 - [ ] All image sources from old version (break out to list if necessary)
 - [ ] Favoriting (local storage)

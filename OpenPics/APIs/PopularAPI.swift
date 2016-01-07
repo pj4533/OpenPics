@@ -61,7 +61,7 @@ public class PopularSource: MoyaProvider<PopularAPI>, Source {
     // - should the parameters on the completion handler be optional?
     // - how can i specify the name of the variable for the paramters on completion handler?
     func getImagesWithQuery(query: String, pageNumber: Int, completionHandler: ([Image], Bool?) -> Void) {
-        self.request(.Images(query: query,page: 0)) { result in
+        self.request(.Images(query: query,page: pageNumber)) { result in
             switch result {
             case let .Success(response):
 

@@ -49,7 +49,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func updateCurrentSourceData() {
         self.dataSource.images = []
         self.collectionView.reloadData()
-        self.dataSource.loadImagesWithSource(CurrentSource, query: self.searchBar.text!) { () -> Void in
+        self.dataSource.currentPage = 0
+        self.dataSource.loadImagesWithQuery(self.searchBar.text!) { () -> Void in
             self.collectionView.reloadData()
         }
     }
@@ -90,6 +91,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func tappedSource(source: Source) {
         self.dismissViewControllerAnimated(true, completion: nil)
         CurrentSource = source
+        self.dataSource.currentPage = 0
         self.sourcesButton.title = "Source: \(CurrentSource.sourceShortName)"
         self.updateCurrentSourceData()
     }
@@ -116,7 +118,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
         self.updateCurrentSourceData()
     }
 }
